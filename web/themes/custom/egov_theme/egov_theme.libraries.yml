@@ -23,3 +23,8 @@ menu-pro:
   css:
     theme:
       css/menu-pro.css: {}
+
+presentation-page:
+  css:
+    theme:
+      css/presentation-only.css: {}

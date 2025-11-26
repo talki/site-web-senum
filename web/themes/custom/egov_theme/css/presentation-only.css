@@ -1,0 +1,31 @@
+/* === TEST CSS SIMPLE === */
+
+/* Cibler par l'URL de la page */
+body.path-node.page-node-type-page .node,
+body[class*="presentation"] .node,
+.node--type-page .node {
+  background: white !important;
+  border-radius: 15px !important;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1) !important;
+  margin: 2rem auto !important;
+  max-width: 1200px !important;
+}
+
+/* Titre - très générique */
+.node h1,
+.page-title,
+.node__title {
+  background: linear-gradient(135deg, #00853F 0%, #00A859 100%) !important;
+  color: white !important;
+  padding: 2rem !important;
+  text-align: center !important;
+  font-weight: 700 !important;
+}
+
+/* Test visible pour être sûr que ça marche */
+.node__content,
+.node .content {
+  background: #f0f8f0 !important;
+  padding: 2rem !important;
+  border: 2px dashed #00853F !important;
+}
