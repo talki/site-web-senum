@@ -19,6 +19,7 @@ regions:
   page_bottom: 'Page bottom'
 
 libraries:
+  - egov_theme/menu-pro
   - egov_theme/menu-styling
   - egov_theme/global-styling
   - egov_theme/global-scripts

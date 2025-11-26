@@ -17,3 +17,9 @@ menu-styling:
   css:
     theme:
       css/menu-styles.css: {}
+
+menu-pro:
+  version: 1.0
+  css:
+    theme:
+      css/menu-pro.css: {}
