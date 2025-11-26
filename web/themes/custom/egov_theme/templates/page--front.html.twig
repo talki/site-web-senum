@@ -1,0 +1,688 @@
+{#
+/**
+ * @file
+ * Theme override - Page d'accueil COMPLÈTE avec tous les éléments
+ */
+#}
+{# Top Bar #}
+<div class="top-bar">
+  <div class="top-bar-left">
+    <div class="top-bar-item">
+      <span>📧</span>
+      <span>contact@interop.sn</span>
+    </div>
+    <div class="top-bar-item">
+      <span>📞</span>
+      <span>+221 33 XXX XX XX</span>
+    </div>
+  </div>
+  <div class="top-bar-right">
+    <a href="#" class="social-link"></a>
+    <a href="#" class="social-link"></a>
+    <a href="#" class="social-link"></a>
+    <a href="#" class="social-link"></a>
+  </div>
+</div>
+
+{# Navigation #}
+<nav>
+  <div class="logo-container">
+    <a href="/" style="text-decoration: none; display: flex; align-items: center; gap: 1rem;">
+      <div class="logo-flag">
+        <div class="flag-stripe flag-green"></div>
+        <div class="flag-stripe flag-yellow">⭐</div>
+        <div class="flag-stripe flag-red"></div>
+      </div>
+      <div class="logo-text-container">
+        <h1 style="margin: 0; color: var(--senegal-green);">Interopérabilité</h1>
+        <div class="logo-subtitle">République du Sénégal</div>
+      </div>
+    </a>
+  </div>
+  
+  {# Menu Drupal #}
+  {% if page.primary_menu %}
+    {{ page.primary_menu }}
+  {% else %}
+    <ul>
+      <li><a href="#accueil">Accueil</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#cas-usage">Cas d'Usage</a></li>
+      <li><a href="#benefices">Bénéfices</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  {% endif %}
+</nav>
+
+{# Hero Section #}
+<section class="hero" id="accueil">
+  <div class="hero-decorations">
+    <div class="hero-circle circle-1"></div>
+    <div class="hero-circle circle-2"></div>
+    <div class="hero-circle circle-3"></div>
+  </div>
+  
+  <div class="hero-content fade-in-up">
+    <div class="hero-badge">
+      <span>🇸🇳</span>
+      <span>Plateforme Nationale d'Interopérabilité</span>
+    </div>
+    
+    <h2>
+      Bienvenue sur la Plateforme<br>
+      <span class="hero-highlight">d'Interopérabilité du Sénégal</span>
+    </h2>
+    
+    <p>
+      Notre plateforme constitue l'épine dorsale de la transformation digitale 
+      des services publics sénégalais. Nous connectons les administrations, 
+      harmonisons les systèmes et accélérons l'innovation pour un Sénégal numérique 
+      moderne, efficace et inclusif.
+    </p>
+
+    <div class="hero-features">
+      <div class="hero-feature">
+        <span class="hero-feature-icon">🏛️</span>
+        <span class="hero-feature-text">45+ Administrations</span>
+      </div>
+      <div class="hero-feature">
+        <span class="hero-feature-icon">🔗</span>
+        <span class="hero-feature-text">127 API Actives</span>
+      </div>
+      <div class="hero-feature">
+        <span class="hero-feature-icon">⚡</span>
+        <span class="hero-feature-text">2.3M Transactions/mois</span>
+      </div>
+      <div class="hero-feature">
+        <span class="hero-feature-icon">✅</span>
+        <span class="hero-feature-text">99.7% Disponibilité</span>
+      </div>
+    </div>
+
+    <div class="hero-cta">
+      <a href="#services" class="btn btn-primary">
+        <span>🚀</span>
+        <span>Découvrir les Services</span>
+      </a>
+      <a href="#contact" class="btn btn-outline">
+        <span>📞</span>
+        <span>Nous Contacter</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+{# Stats Section - Full Width #}
+<section class="stats-section-fullwidth" id="metriques">
+  <div class="stats-container">
+    <div class="section-header">
+      <div class="section-subtitle">📊 DONNÉES EN TEMPS RÉEL</div>
+      <h2 class="section-title">L'Interopérabilité en Chiffres</h2>
+      <p class="section-description">
+        Des statistiques qui témoignent de l'impact et de la portée de notre plateforme
+      </p>
+    </div>
+
+    <div class="stats-grid">
+      <div class="stat-card highlight-green">
+        <div class="stat-icon">🏛️</div>
+        <div class="stat-number">45</div>
+        <div class="stat-label">Administrations Connectées</div>
+      </div>
+      <div class="stat-card highlight-yellow">
+        <div class="stat-icon">🔗</div>
+        <div class="stat-number yellow">127</div>
+        <div class="stat-label">API Actives Référencées</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">⚡</div>
+        <div class="stat-number">2.3M</div>
+        <div class="stat-label">Transactions ce Mois</div>
+      </div>
+      <div class="stat-card highlight-blue">
+        <div class="stat-icon">✅</div>
+        <div class="stat-number">99.7%</div>
+        <div class="stat-label">Disponibilité Système</div>
+      </div>
+      <div class="stat-card highlight-yellow">
+        <div class="stat-icon">📈</div>
+        <div class="stat-number">+45%</div>
+        <div class="stat-label">Croissance 2024</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-icon">👥</div>
+        <div class="stat-number">850K</div>
+        <div class="stat-label">Utilisateurs Actifs</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{# Main Layout with Sidebar #}
+<div class="page-layout">
+  {# Main Content #}
+  <div class="main-content">
+    
+    {# Drupal Content #}
+    {% if page.content %}
+      {{ page.content }}
+    {% endif %}
+
+    {# Services Section #}
+    <section class="services-section" id="services">
+      <div class="section-header">
+        <div class="section-subtitle">💼 NOS SERVICES</div>
+        <h2 class="section-title">Services d'Interopérabilité</h2>
+        <p class="section-description">
+          Des solutions complètes pour connecter et moderniser vos systèmes
+        </p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card">
+          <div class="service-icon-container">🔌</div>
+          <div class="service-content">
+            <h3>Connexion API</h3>
+            <p>
+              Connectez vos systèmes à notre plateforme d'interopérabilité 
+              avec des API standardisées, sécurisées et documentées.
+            </p>
+            <a href="#" class="service-link">
+              <span>En savoir plus</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon-container">📚</div>
+          <div class="service-content">
+            <h3>Catalogue d'API</h3>
+            <p>
+              Accédez à notre catalogue exhaustif d'API gouvernementales. 
+              Découvrez les services disponibles et testez en temps réel.
+            </p>
+            <a href="#" class="service-link">
+              <span>Explorer le catalogue</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon-container">🎓</div>
+          <div class="service-content">
+            <h3>Formation & Support</h3>
+            <p>
+              Programmes de formation pour développeurs et administrateurs. 
+              Documentation complète et support technique dédié.
+            </p>
+            <a href="#" class="service-link">
+              <span>Accéder aux formations</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon-container">🔐</div>
+          <div class="service-content">
+            <h3>Sécurité & Conformité</h3>
+            <p>
+              Authentification OAuth 2.0, chiffrement end-to-end, conformité RGPD. 
+              Certifications internationales garanties.
+            </p>
+            <a href="#" class="service-link">
+              <span>Découvrir nos normes</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon-container">📊</div>
+          <div class="service-content">
+            <h3>Analytics & Monitoring</h3>
+            <p>
+              Tableaux de bord en temps réel pour suivre vos métriques. 
+              Alertes automatiques et rapports personnalisables.
+            </p>
+            <a href="#" class="service-link">
+              <span>Voir les analytics</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-icon-container">🤝</div>
+          <div class="service-content">
+            <h3>Consulting & Expertise</h3>
+            <p>
+              Nos experts vous accompagnent dans votre projet d'intégration. 
+              Conseil stratégique et assistance technique sur-mesure.
+            </p>
+            <a href="#" class="service-link">
+              <span>Contacter un expert</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="service-card featured">
+          <div class="service-icon-container">🚀</div>
+          <div class="service-content">
+            <h3>Programme d'Accélération Digitale</h3>
+            <p>
+              Accompagnement personnalisé pour les administrations souhaitant accélérer leur 
+              transformation numérique. Consultants experts, roadmap sur-mesure, formations 
+              dédiées et suivi continu pour garantir le succès de votre projet d'interopérabilité.
+            </p>
+            <a href="#" class="service-link">
+              <span>Rejoindre le programme</span>
+              <span>→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {# Use Cases Section #}
+    <section class="use-cases-section" id="cas-usage">
+      <div class="section-header">
+        <div class="section-subtitle">✨ CAS D'USAGE</div>
+        <h2 class="section-title">L'Interopérabilité en Action</h2>
+        <p class="section-description">
+          Découvrez comment notre plateforme transforme les services publics
+        </p>
+      </div>
+
+      <div class="use-cases-grid">
+        <div class="use-case-card">
+          <div class="use-case-image">🏥</div>
+          <div class="use-case-content">
+            <h3>Dossier Patient Partagé</h3>
+            <p>
+              Accès sécurisé et instantané aux données médicales entre hôpitaux, 
+              cliniques et centres de santé. Amélioration du suivi patient et 
+              réduction des risques médicaux.
+            </p>
+            <span class="impact-badge">Impact: -40% délais de traitement</span>
+          </div>
+        </div>
+
+        <div class="use-case-card">
+          <div class="use-case-image">💳</div>
+          <div class="use-case-content">
+            <h3>Paiement Électronique Unifié</h3>
+            <p>
+              Système de paiement intégré entre services fiscaux, douanes et 
+              institutions financières. Transactions sécurisées et traçabilité 
+              complète des opérations.
+            </p>
+            <span class="impact-badge">Impact: +60% d'efficacité</span>
+          </div>
+        </div>
+
+        <div class="use-case-card">
+          <div class="use-case-image"></div>
+          <div class="use-case-content">
+            <h3>Plateforme Éducation Nationale</h3>
+            <p>
+              Interconnexion des systèmes éducatifs pour faciliter les inscriptions, 
+              orientations et le suivi des élèves. Digitalisation complète des 
+              processus administratifs.
+            </p>
+            <span class="impact-badge">Impact: -50% de paperasse</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    {# Benefits Section #}
+    <section class="benefits-section" id="benefices">
+      <div class="section-header">
+        <div class="section-subtitle">🎯 AVANTAGES</div>
+        <h2 class="section-title">Pourquoi l'Interopérabilité ?</h2>
+        <p class="section-description">
+          Les bénéfices concrets pour les citoyens et les administrations
+        </p>
+      </div>
+
+      <div class="benefits-grid">
+        <div class="benefit-card">
+          <div class="benefit-icon">✅</div>
+          <h3>Simplifier</h3>
+          <p>
+            Fini les documents en double et les démarches répétitives. 
+            Une seule source de vérité pour toutes vos interactions 
+            avec l'administration.
+          </p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">⚡</div>
+          <h3>Accélérer</h3>
+          <p>
+            Traitements en temps réel entre administrations pour des 
+            services publics plus rapides. Réduction drastique des 
+            délais de traitement.
+          </p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">🔒</div>
+          <h3>Sécuriser</h3>
+          <p>
+            Conformité aux standards internationaux de sécurité. 
+            Protection optimale de vos données personnelles et 
+            professionnelles.
+          </p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">💰</div>
+          <h3>Économiser</h3>
+          <p>
+            Réduction des coûts opérationnels grâce à l'automatisation 
+            et à l'élimination des processus redondants.
+          </p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">🌐</div>
+          <h3>Innover</h3>
+          <p>
+            Plateforme ouverte favorisant l'innovation et le développement 
+            de nouveaux services numériques pour les citoyens.
+          </p>
+        </div>
+
+        <div class="benefit-card">
+          <div class="benefit-icon">📊</div>
+          <h3>Mesurer</h3>
+          <p>
+            Tableaux de bord en temps réel et analytics avancés pour 
+            un pilotage efficace des services publics.
+          </p>
+        </div>
+      </div>
+    </section>
+  </div>
+  {# End Main Content #}
+
+  {# Sidebar #}
+  <aside class="sidebar">
+    <div class="sidebar-sticky">
+      {# News Feed #}
+      <div class="news-feed">
+        <div class="news-feed-header">
+          <span class="news-feed-icon">📰</span>
+          <h3>Fil d'Actualités</h3>
+        </div>
+
+        <div class="news-item">
+          <div class="news-date">
+            <span>📅</span>
+            <span>16 Nov 2025</span>
+            <span class="news-badge nouveau">Nouveau</span>
+          </div>
+          <div class="news-title">
+            Lancement de 15 nouvelles API gouvernementales
+          </div>
+          <div class="news-excerpt">
+            Le MCTN annonce la mise en ligne de 15 nouvelles API pour faciliter l'accès aux données publiques.
+          </div>
+        </div>
+
+        <div class="news-item">
+          <div class="news-date">
+            <span>📅</span>
+            <span>14 Nov 2025</span>
+            <span class="news-badge urgent">Urgent</span>
+          </div>
+          <div class="news-title">
+            Maintenance programmée ce week-end
+          </div>
+          <div class="news-excerpt">
+            Interruption prévue dimanche de 2h à 6h pour mise à jour système.
+          </div>
+        </div>
+
+        <div class="news-item">
+          <div class="news-date">
+            <span>📅</span>
+            <span>12 Nov 2025</span>
+            <span class="news-badge info">Info</span>
+          </div>
+          <div class="news-title">
+            Webinaire : Intégration API Santé
+          </div>
+          <div class="news-excerpt">
+            Formation gratuite sur l'utilisation des API du secteur santé, inscription ouverte.
+          </div>
+        </div>
+
+        <a href="#" class="view-all-news">
+          Voir toutes les actualités →
+        </a>
+      </div>
+
+      {# Quick Links Widget #}
+      <div class="quick-links-widget">
+        <h4>🔗 Accès Rapide</h4>
+        <a href="#" class="quick-link">
+          <span class="quick-link-icon">📚</span>
+          <span class="quick-link-text">Documentation API</span>
+        </a>
+        <a href="#" class="quick-link">
+          <span class="quick-link-icon">🎫</span>
+          <span class="quick-link-text">Demander un Token</span>
+        </a>
+        <a href="#" class="quick-link">
+          <span class="quick-link-icon">💬</span>
+          <span class="quick-link-text">Support Technique</span>
+        </a>
+        <a href="#" class="quick-link">
+          <span class="quick-link-icon">📊</span>
+          <span class="quick-link-text">Tableau de Bord</span>
+        </a>
+      </div>
+
+      {# Podcast Video Widget #}
+      <div class="podcast-widget">
+        <div class="podcast-header">
+          <span class="podcast-icon">🎬</span>
+          <h4>Vidéos Podcast</h4>
+        </div>
+
+        <div class="podcast-featured">
+          <div class="podcast-video-container">
+            <div class="podcast-video-thumbnail" style="background: linear-gradient(135deg, var(--senegal-green), var(--senegal-green-light)); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+              🎥
+            </div>
+            <div class="podcast-play-overlay">
+              <div class="podcast-play-button">▶</div>
+            </div>
+            <div class="podcast-live-badge">
+              <span style="width: 8px; height: 8px; background: white; border-radius: 50%; display: inline-block;"></span>
+              <span>NOUVEAU</span>
+            </div>
+            <div class="podcast-duration-badge">32:15</div>
+          </div>
+          <div class="podcast-info">
+            <div class="podcast-title">
+              L'Interopérabilité au Service du Citoyen Sénégalais
+            </div>
+            <div class="podcast-meta">
+              <span>📅 14 Nov 2025</span>
+              <span>👁️ 12.5K vues</span>
+            </div>
+            <div class="podcast-description">
+              Interview exclusive avec le Directeur du MCTN sur la transformation 
+              digitale et l'impact de la plateforme d'interopérabilité.
+            </div>
+          </div>
+        </div>
+
+        <div class="podcast-list">
+          <div class="podcast-item">
+            <div class="podcast-item-thumbnail" style="background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+              🔐
+            </div>
+            <div class="podcast-item-content">
+              <div class="podcast-item-title">
+                Sécurité des API : Bonnes Pratiques et Normes
+              </div>
+              <div class="podcast-item-meta">
+                <span>⏱️ 28:45</span>
+                <span class="podcast-item-views">👁️ 8.2K</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="podcast-item">
+            <div class="podcast-item-thumbnail" style="background: linear-gradient(135deg, #f093fb, #f5576c); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+              🏥
+            </div>
+            <div class="podcast-item-content">
+              <div class="podcast-item-title">
+                Digitalisation du Secteur Santé : Témoignage
+              </div>
+              <div class="podcast-item-meta">
+                <span>⏱️ 35:20</span>
+                <span class="podcast-item-views">👁️ 15.7K</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="podcast-item">
+            <div class="podcast-item-thumbnail" style="background: linear-gradient(135deg, #4facfe, #00f2fe); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+              📊
+            </div>
+            <div class="podcast-item-content">
+              <div class="podcast-item-title">
+                Open Data et Transparence Gouvernementale
+              </div>
+              <div class="podcast-item-meta">
+                <span>⏱️ 25:30</span>
+                <span class="podcast-item-views">👁️ 6.9K</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="podcast-item">
+            <div class="podcast-item-thumbnail" style="background: linear-gradient(135deg, #fa709a, #fee140); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+              🚀
+            </div>
+            <div class="podcast-item-content">
+              <div class="podcast-item-title">
+                Innovation Digitale : Les Startups Tech au Sénégal
+              </div>
+              <div class="podcast-item-meta">
+                <span>⏱️ 42:10</span>
+                <span class="podcast-item-views">👁️ 11.3K</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <a href="#" class="all-podcasts-link">
+          📺 Voir toutes les vidéos →
+        </a>
+      </div>
+
+      {# Stats Widget #}
+      <div class="stats-widget">
+        <h4>⚡ Statut Système</h4>
+        <div class="stats-widget-number">99.7%</div>
+        <div class="stats-widget-label">Disponibilité en temps réel</div>
+      </div>
+    </div>
+  </aside>
+</div>
+
+{# CTA Section #}
+<section class="cta-section" id="contact">
+  <div class="cta-content">
+    <h2>Rejoignez l'Écosystème d'Interopérabilité</h2>
+    <p>
+      Administrations, développeurs, partenaires techniques : Ensemble, 
+      construisons le Sénégal numérique de demain. Connectez-vous à notre 
+      plateforme et participez à la transformation digitale nationale.
+    </p>
+    <div class="cta-buttons">
+      <a href="#" class="btn btn-primary">
+        <span>🔌</span>
+        <span>Demander une Connexion API</span>
+      </a>
+      <a href="#" class="btn btn-outline">
+        <span>📚</span>
+        <span>Consulter la Documentation</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+{# Footer #}
+<footer>
+  <div class="footer-grid">
+    <div class="footer-section footer-about">
+      <h3>À PROPOS</h3>
+      <p>
+        La Plateforme Nationale d'Interopérabilité du Sénégal est une 
+        initiative du Ministère de la Communication, des Télécommunications 
+        et du Numérique (MCTN) dans le cadre du New Deal Technologique.
+      </p>
+      <div class="social-icons">
+        <div class="social-icon"></div>
+        <div class="social-icon"></div>
+        <div class="social-icon"></div>
+        <div class="social-icon"></div>
+      </div>
+    </div>
+
+    <div class="footer-section">
+      <h3>LIENS RAPIDES</h3>
+      <ul>
+        <li><a href="#">Vision & Mission</a></li>
+        <li><a href="#">Gouvernance</a></li>
+        <li><a href="#">Équipe</a></li>
+        <li><a href="#">Partenaires</a></li>
+        <li><a href="#">Actualités</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h3>RESSOURCES</h3>
+      <ul>
+        <li><a href="#">Documentation Technique</a></li>
+        <li><a href="#">Catalogue d'API</a></li>
+        <li><a href="#">Guides d'Intégration</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Support Développeurs</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h3>CONTACT</h3>
+      <div class="footer-contact-item">
+        <span>📍</span>
+        <span>Dakar, Sénégal</span>
+      </div>
+      <div class="footer-contact-item">
+        <span>📧</span>
+        <span>contact@interop.sn</span>
+      </div>
+      <div class="footer-contact-item">
+        <span>📞</span>
+        <span>+221 33 XXX XX XX</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 MCTN/SENUM - République du Sénégal</p>
+    <p>Plateforme développée dans le cadre du New Deal Technologique</p>
+  </div>
+</footer>

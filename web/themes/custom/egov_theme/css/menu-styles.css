@@ -1,0 +1,172 @@
+/* ============================================
+   MENU NAVIGATION PRINCIPAL
+   ============================================ */
+
+/* Wrapper du menu */
+.main-menu-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+/* Menu UL principal */
+.main-menu-wrapper > ul {
+    display: flex;
+    list-style: none;
+    gap: 0.5rem;
+    margin: 0;
+    padding: 0;
+    align-items: center;
+}
+
+/* Items de menu niveau 1 */
+.main-menu-wrapper > ul > li {
+    position: relative;
+    margin: 0;
+    padding: 0;
+}
+
+/* Liens niveau 1 */
+.main-menu-wrapper > ul > li > a {
+    display: block;
+    padding: 0.7rem 1.2rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.95rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.main-menu-wrapper > ul > li > a:hover {
+    color: var(--senegal-green);
+    background: var(--bg-light);
+}
+
+/* Sous-menu UL */
+.main-menu-wrapper > ul > li > ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background: white;
+    min-width: 280px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    border-radius: 10px;
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+    z-index: 1000;
+    list-style: none;
+    border-top: 3px solid var(--senegal-green);
+}
+
+/* Afficher sous-menu au hover */
+.main-menu-wrapper > ul > li:hover > ul {
+    display: block;
+    animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Items sous-menu */
+.main-menu-wrapper > ul > li > ul > li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Liens sous-menu */
+.main-menu-wrapper > ul > li > ul > li > a {
+    display: block;
+    padding: 0.8rem 1.5rem;
+    color: var(--text-dark);
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+    border-left: 3px solid transparent;
+}
+
+.main-menu-wrapper > ul > li > ul > li > a:hover {
+    background: var(--bg-light);
+    color: var(--senegal-green);
+    border-left-color: var(--senegal-green);
+    padding-left: 2rem;
+}
+
+/* Flèche pour items avec sous-menu */
+.main-menu-wrapper > ul > li:has(> ul) > a::after {
+    content: ' ▼';
+    font-size: 0.65rem;
+    margin-left: 0.4rem;
+    transition: transform 0.3s;
+}
+
+.main-menu-wrapper > ul > li:hover:has(> ul) > a::after {
+    transform: rotate(180deg);
+}
+
+/* Active trail */
+.main-menu-wrapper > ul > li.active-trail > a,
+.main-menu-wrapper > ul > li.is-active > a {
+    color: var(--senegal-green);
+    font-weight: 700;
+}
+
+/* Responsive */
+@media (max-width: 1200px) {
+    .main-menu-wrapper > ul {
+        gap: 0.3rem;
+    }
+    
+    .main-menu-wrapper > ul > li > a {
+        padding: 0.6rem 1rem;
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 968px) {
+    nav {
+        flex-wrap: wrap;
+    }
+    
+    .main-menu-wrapper {
+        width: 100%;
+        margin-top: 1rem;
+    }
+    
+    .main-menu-wrapper > ul {
+        flex-direction: column;
+        width: 100%;
+        gap: 0;
+        background: var(--bg-light);
+        border-radius: 10px;
+        padding: 0.5rem;
+    }
+    
+    .main-menu-wrapper > ul > li {
+        width: 100%;
+    }
+    
+    .main-menu-wrapper > ul > li > a {
+        width: 100%;
+    }
+    
+    .main-menu-wrapper > ul > li > ul {
+        position: static;
+        box-shadow: none;
+        border-radius: 0;
+        border-top: none;
+        border-left: 3px solid var(--senegal-green);
+        margin: 0;
+        background: white;
+    }
+}

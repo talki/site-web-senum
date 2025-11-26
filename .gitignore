@@ -1,0 +1,81 @@
+# ============================================
+# GITIGNORE - PLATEFORME INTEROPÉRABILITÉ SÉNÉGAL
+# ============================================
+
+# Ignorer les fichiers sensibles
+/web/sites/*/settings.php
+/web/sites/*/settings.local.php
+/web/sites/*/services*.yml
+
+# Ignorer les fichiers uploadés par les utilisateurs
+/web/sites/*/files/
+
+# Ignorer les fichiers privés
+/web/sites/*/private/
+
+# Ignorer les fichiers temporaires
+/web/sites/*/files/tmp/
+/web/sites/*/files/php/
+
+# Ignorer la configuration exportée (optionnel selon workflow)
+# /web/sites/*/files/config_*/
+
+# Ignorer Composer
+/vendor/
+/composer.lock
+
+# Ignorer les dépendances Node.js (si utilisées)
+/node_modules/
+npm-debug.log
+yarn-error.log
+
+# Ignorer les fichiers de développement
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Ignorer les sauvegardes
+*.sql
+*.sql.gz
+*.tar.gz
+*.zip
+/backups/
+drupal-complete/
+egov_theme.tar.gz
+
+# Ignorer les logs
+*.log
+/web/sites/*/files/logs/
+drupal-check-log.sh
+
+# Ignorer les fichiers Drush
+drush
+
+# Ignorer les fichiers de cache
+/web/sites/*/files/css/
+/web/sites/*/files/js/
+/web/sites/*/files/styles/
+/web/sites/*/files/php/
+
+# Garder les répertoires vides importants
+!web/sites/*/files/.htaccess
+!web/sites/*/files/config_*/.htaccess
+!web/modules/custom/.gitkeep
+!web/themes/custom/.gitkeep
+
+# Core Drupal - on garde le core via Composer
+/web/core/
+/web/modules/contrib/
+/web/themes/contrib/
+/web/profiles/contrib/
+
+# GARDER ces éléments personnalisés
+# !/web/themes/custom/egov_theme/
+# !/web/modules/custom/
+

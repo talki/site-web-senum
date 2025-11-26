@@ -1,0 +1,26 @@
+name: 'E-Gov Theme'
+type: theme
+description: 'Thème personnalisé pour la plateforme d''interopérabilité du Sénégal'
+core_version_requirement: ^10 || ^11
+base theme: false
+
+regions:
+  header: 'Header'
+  primary_menu: 'Primary menu'
+  secondary_menu: 'Secondary menu'
+  breadcrumb: 'Breadcrumb'
+  highlighted: 'Highlighted'
+  help: 'Help'
+  content: 'Content'
+  sidebar_first: 'Sidebar first'
+  sidebar_second: 'Sidebar second'
+  footer: 'Footer'
+  page_top: 'Page top'
+  page_bottom: 'Page bottom'
+
+libraries:
+  - egov_theme/global-styling
+  - egov_theme/global-scripts
+
+ckeditor5-stylesheets:
+  - css/style.css

@@ -1,0 +1,165 @@
+{#
+/**
+ * @file
+ * Theme override to display a single page.
+ */
+#}
+<!DOCTYPE html>
+<html{{ html_attributes }}>
+  <head>
+    <head-placeholder token="{{ placeholder_token }}">
+    <title>{{ head_title|safe_join(' | ') }}</title>
+    <css-placeholder token="{{ placeholder_token }}">
+    <js-placeholder token="{{ placeholder_token }}">
+  </head>
+  <body{{ attributes }}>
+    <a href="#main-content" class="visually-hidden focusable">
+      {{ 'Skip to main content'|t }}
+    </a>
+    {{ page_top }}
+    
+    {# Top Bar #}
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <div class="top-bar-item">
+          <span>📧</span>
+          <span>contact@interop.sn</span>
+        </div>
+        <div class="top-bar-item">
+          <span>📞</span>
+          <span>+221 33 XXX XX XX</span>
+        </div>
+      </div>
+      <div class="top-bar-right">
+        <a href="#" class="social-link">📘</a>
+        <a href="#" class="social-link">🐦</a>
+        <a href="#" class="social-link">💼</a>
+        <a href="#" class="social-link">📸</a>
+      </div>
+    </div>
+
+    {# Navigation #}
+    <nav>
+      <div class="logo-container">
+        <div class="logo-flag">
+          <div class="flag-stripe flag-green"></div>
+          <div class="flag-stripe flag-yellow">⭐</div>
+          <div class="flag-stripe flag-red"></div>
+        </div>
+        <div class="logo-text-container">
+          <h1>Interopérabilité</h1>
+          <div class="logo-subtitle">République du Sénégal</div>
+        </div>
+      </div>
+      {% if page.primary_menu %}
+        {{ page.primary_menu }}
+      {% else %}
+        <ul>
+          <li><a href="#accueil">Accueil</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#cas-usage">Cas d'Usage</a></li>
+          <li><a href="#benefices">Bénéfices</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      {% endif %}
+    </nav>
+
+    {# Page Content #}
+    <div class="page-wrapper">
+      {% if page.highlighted %}
+        <div class="highlighted">
+          {{ page.highlighted }}
+        </div>
+      {% endif %}
+
+      {% if page.help %}
+        <div class="help">
+          {{ page.help }}
+        </div>
+      {% endif %}
+
+      <main role="main">
+        <a id="main-content" tabindex="-1"></a>
+        
+        {{ page.content }}
+        
+      </main>
+    </div>
+
+    {# Footer #}
+    {% if page.footer %}
+      <footer>
+        {{ page.footer }}
+      </footer>
+    {% else %}
+      <footer>
+        <div class="footer-grid">
+          <div class="footer-section footer-about">
+            <h3>À PROPOS</h3>
+            <p>
+              La Plateforme Nationale d'Interopérabilité du Sénégal est une 
+              initiative du Ministère de la Communication, des Télécommunications 
+              et du Numérique (MCTN) dans le cadre du New Deal Technologique.
+            </p>
+            <div class="social-icons">
+              <div class="social-icon">📘</div>
+              <div class="social-icon">🐦</div>
+              <div class="social-icon">💼</div>
+              <div class="social-icon">📸</div>
+            </div>
+          </div>
+
+          <div class="footer-section">
+            <h3>LIENS RAPIDES</h3>
+            <ul>
+              <li><a href="#">Vision & Mission</a></li>
+              <li><a href="#">Gouvernance</a></li>
+              <li><a href="#">Équipe</a></li>
+              <li><a href="#">Partenaires</a></li>
+              <li><a href="#">Actualités</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h3>RESSOURCES</h3>
+            <ul>
+              <li><a href="#">Documentation Technique</a></li>
+              <li><a href="#">Catalogue d'API</a></li>
+              <li><a href="#">Guides d'Intégration</a></li>
+              <li><a href="#">FAQ</a></li>
+              <li><a href="#">Support Développeurs</a></li>
+            </ul>
+          </div>
+
+          <div class="footer-section">
+            <h3>CONTACT</h3>
+            <div class="footer-contact-item">
+              <span>📍</span>
+              <span>Dakar, Sénégal</span>
+            </div>
+            <div class="footer-contact-item">
+              <span>📧</span>
+              <span>contact@interop.sn</span>
+            </div>
+            <div class="footer-contact-item">
+              <span>📞</span>
+              <span>+221 33 XXX XX XX</span>
+            </div>
+            <div class="footer-contact-item">
+              <span>💬</span>
+              <span>Chatbot Assistant 24/7</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2025 MCTN/SENUM - République du Sénégal</p>
+          <p>Plateforme développée dans le cadre du New Deal Technologique</p>
+        </div>
+      </footer>
+    {% endif %}
+
+    {{ page_bottom }}
+    <js-bottom-placeholder token="{{ placeholder_token }}">
+  </body>
+</html>

@@ -1,0 +1,19 @@
+global-styling:
+  version: 1.0
+  css:
+    theme:
+      css/style.css: {}
+
+global-scripts:
+  version: 1.0
+  js:
+    js/script.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+
+menu-styling:
+  version: 1.0
+  css:
+    theme:
+      css/menu-styles.css: {}
