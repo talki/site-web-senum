@@ -1899,3 +1899,56 @@ nav ul > li:hover:has(> ul) > a::before {
     }
 }
 
+
+/* ============================================
+   AMÉLIORATION SOUS-MENUS - DÉLAI AVANT FERMETURE
+   ============================================ */
+
+/* Garder le sous-menu ouvert avec un délai */
+nav ul > li {
+    position: relative;
+}
+
+nav ul > li > ul {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+}
+
+/* Afficher le sous-menu au hover du parent */
+nav ul > li:hover > ul {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition-delay: 0s;
+}
+
+/* Garder le sous-menu visible quand on survole le sous-menu lui-même */
+nav ul > li > ul:hover {
+    display: block;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Délai avant de fermer le sous-menu (600ms) */
+nav ul > li:not(:hover) > ul {
+    transition-delay: 0.6s;
+}
+
+/* Zone de survol étendue pour faciliter l'accès au sous-menu */
+nav ul > li::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    height: 20px;
+    display: block;
+}
+
