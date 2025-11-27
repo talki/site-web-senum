@@ -1,0 +1,643 @@
+{#
+/**
+ * @file
+ * Template page.html.twig - VERSION CORRIGÉE ALIGNEMENT PARFAIT
+ * Plateforme d'Interopérabilité du Sénégal - Structure HTML optimisée
+ */
+#}
+
+{# Top Bar - Structure alignée #}
+<div class="top-bar">
+    <div class="container">
+        <div class="top-bar-content">
+            <div class="top-bar-left">
+                <div class="top-bar-item">
+                    <span>📧</span>
+                    <span>contact@interop.sn</span>
+                </div>
+                <div class="top-bar-item">
+                    <span>📞</span>
+                    <span>+221 33 XXX XX XX</span>
+                </div>
+            </div>
+            <div class="top-bar-right">
+                <a href="#" class="social-link"></a>
+                <a href="#" class="social-link"></a>
+                <a href="#" class="social-link"></a>
+                <a href="#" class="social-link"></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+{# Navigation - Structure alignée #}
+<nav class="main-navigation">
+    <div class="container">
+        <div class="nav-content">
+            <div class="logo-container">
+                <a href="/" style="text-decoration: none; display: flex; align-items: center; gap: 1rem;">
+                    <div class="logo-flag">
+                        <div class="flag-stripe flag-green"></div>
+                        <div class="flag-stripe flag-yellow">⭐</div>
+                        <div class="flag-stripe flag-red"></div>
+                    </div>
+                    <div class="logo-text-container">
+                        <h1 style="margin: 0; color: var(--senegal-green);">Interopérabilité</h1>
+                        <div class="logo-subtitle">République du Sénégal</div>
+                    </div>
+                </a>
+            </div>
+
+            {# Menu Drupal #}
+            {% if page.primary_menu %}
+                {{ page.primary_menu }}
+            {% else %}
+                <ul class="main-menu">
+                    <li><a href="#accueil">Accueil</a></li>
+                    <li><a href="#services">Services</a></li>
+                    <li><a href="#cas-usage">Cas d'Usage</a></li>
+                    <li><a href="#benefices">Bénéfices</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                </ul>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+
+{# Hero Section - Structure alignée #}
+<section class="hero" id="accueil">
+    <div class="container">
+        <div class="hero-decorations">
+            <div class="hero-circle circle-1"></div>
+            <div class="hero-circle circle-2"></div>
+            <div class="hero-circle circle-3"></div>
+        </div>
+
+        <div class="hero-content fade-in-up">
+            <div class="hero-badge">
+                <span></span>
+                <span>Plateforme Nationale d'Interopérabilité</span>
+            </div>
+
+            <h2>
+                Bienvenue sur la Plateforme<br>
+                <span class="hero-highlight">d'Interopérabilité du Sénégal</span>
+            </h2>
+
+            <p>
+                Notre plateforme constitue l'épine dorsale de la transformation digitale 
+                des services publics sénégalais. Nous connectons les administrations, 
+                harmonisons les systèmes et accélérons l'innovation pour un Sénégal numérique 
+                moderne, efficace et inclusif.
+            </p>
+
+
+            <h3 class="hero-stats-title">L’Interopérabilité en Chiffres</h3fhero-stats-title>
+            <div class="hero-features-cards">
+
+                <div class="hero-card">
+                    <img src="/themes/custom/egov_theme/icon/api-doc.png" alt="API" style="width: 48px; height: 48px;">
+
+                    <div class="hero-card-number">45+</div>
+                    <div class="hero-card-label">Administrations</div>
+                </div>
+
+                <div class="hero-card">
+                    <img src="/themes/custom/egov_theme/icon/api-doc.png" alt="API" style="width: 48px; height: 48px;">
+                    <div class="hero-card-number">127</div>
+                    <div class="hero-card-label">API Actives</div>
+                </div>
+
+                <div class="hero-card">
+                    <img src="/themes/custom/egov_theme/icon/api-doc.png" alt="API" style="width: 48px; height: 48px;">
+
+                    <div class="hero-card-number">2.3M</div>
+                    <div class="hero-card-label">Transactions/mois</div>
+                </div>
+
+               
+
+            </div>
+
+
+        </div>
+    </div>
+</section>
+
+
+{# Main Layout with Sidebar - Structure alignée #}
+<div class="page-layout">
+    <div class="container">
+        <div class="layout-content">
+            {# Main Content #}
+            <div class="main-content">
+
+                {# Drupal Content #}
+                {% if page.content %}
+                    {{ page.content }}
+                {% endif %}
+
+
+                <section class="services-modern-section" id="services">
+
+                    <div class="services-modern-header">
+                        <h2>Services</h2>
+                    </div>
+
+                    <!-- Grand cadre enveloppant -->
+                    <div class="services-modern-container">
+
+                        <!-- Onglets (chevauchent le haut du cadre) -->
+                        <div class="services-tabs-wrapper">
+                            <div class="services-tabs">
+                                <button class="services-tab active">Services Populaires</button>
+                                <button class="services-tab">Tous les Services</button>
+                            </div>
+                        </div>
+
+                        <!-- Grille des services -->
+                        <div class="services-modern-grid">
+
+                            <div class="service-modern-card">
+                                <img src="/themes/custom/egov_theme/icon/api-doc.png" alt="API" style="width: 48px; height: 48px;">
+                                <div class="service-modern-title">Familles</div>
+                            </div>
+
+                            <div class="service-modern-card">
+                                <img src="/themes/custom/egov_theme/icon/api-doc.png" alt="API" style="width: 48px; height: 48px;">
+                                <div class="service-modern-title">Protection Sociale</div>
+                            </div>
+
+                            <div class="service-modern-card">
+                                <img src="/themes/custom/egov_theme/icon/api-doc.png" alt="API" style="width: 48px; height: 48px;">
+                                <div class="service-modern-title">Éducation</div>
+                            </div>
+
+                            <div class="service-modern-card">
+                                <img src="/themes/custom/egov_theme/icon/api-doc.png" alt="API" style="width: 48px; height: 48px;">
+                                <div class="service-modern-title">Citoyenneté</div>
+                            </div>
+
+                            <div class="service-modern-card">
+                                <img src="/themes/custom/egov_theme/icon/api-doc.png" alt="API" style="width: 48px; height: 48px;">
+                                <div class="service-modern-title">Taxes</div>
+                            </div>
+
+                            <div class="service-modern-card">
+                                <img src="/themes/custom/egov_theme/icon/api-doc.png" alt="API" style="width: 48px; height: 48px;">
+                                <div class="service-modern-title">Troisième âge</div>
+                            </div>
+
+                        </div>
+
+                        <div class="services-modern-button-wrapper">
+                            <a href="#" class="services-modern-button">Tous les Services</a>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+
+
+            </div>
+            {# End Main Content #}
+
+            {# Sidebar #}
+            <aside class="sidebar">
+                <div class="sidebar-sticky">
+                    {# News Feed #}
+                    <div class="news-feed">
+                        <div class="news-feed-header">
+                            <span class="news-feed-icon"></span>
+                            <h3>Fil d'Actualités</h3>
+                        </div>
+
+                        <div class="news-item">
+                            <div class="news-date">
+                                <span>📅</span>
+                                <span>16 Nov 2025</span>
+                                <span class="news-badge nouveau">Nouveau</span>
+                            </div>
+                            <div class="news-title">
+                                Lancement de 15 nouvelles API gouvernementales
+                            </div>
+                            <div class="news-excerpt">
+                                Le MCTN annonce la mise en ligne de 15 nouvelles API pour faciliter l'accès aux données publiques.
+                            </div>
+                        </div>
+
+                        <div class="news-item">
+                            <div class="news-date">
+                                <span>📅</span>
+                                <span>14 Nov 2025</span>
+                                <span class="news-badge urgent">Urgent</span>
+                            </div>
+                            <div class="news-title">
+                                Maintenance programmée ce week-end
+                            </div>
+                            <div class="news-excerpt">
+                                Interruption prévue dimanche de 2h à 6h pour mise à jour système.
+                            </div>
+                        </div>
+
+                        <div class="news-item">
+                            <div class="news-date">
+                                <span>📅</span>
+                                <span>12 Nov 2025</span>
+                                <span class="news-badge info">Info</span>
+                            </div>
+                            <div class="news-title">
+                                Webinaire : Intégration API Santé
+                            </div>
+                            <div class="news-excerpt">
+                                Formation gratuite sur l'utilisation des API du secteur santé, inscription ouverte.
+                            </div>
+                        </div>
+
+                        <a href="#" class="view-all-news">
+                            Voir toutes les actualités →
+                        </a>
+                    </div>
+
+                    {# Quick Links Widget #}
+                    <div class="quick-links-widget">
+                        <h4>🔗 Accès Rapide</h4>
+                        <a href="#" class="quick-link">
+                            <span class="quick-link-icon"></span>
+                            <span class="quick-link-text">Documentation API</span>
+                        </a>
+                        <a href="#" class="quick-link">
+                            <span class="quick-link-icon"></span>
+                            <span class="quick-link-text">Demander un Token</span>
+                        </a>
+                        <a href="#" class="quick-link">
+                            <span class="quick-link-icon"></span>
+                            <span class="quick-link-text">Support Technique</span>
+                        </a>
+                        <a href="#" class="quick-link">
+                            <span class="quick-link-icon"></span>
+                            <span class="quick-link-text">Tableau de Bord</span>
+                        </a>
+                    </div>
+
+
+                    {# Podcast Video Widget #}
+
+      {# Widget Statistiques Clés #}
+      <div class="stats-live-widget" style="background: linear-gradient(135deg, #3B82F6, #60A5FA); border-radius: 20px; padding: 2rem; margin-top: 2rem; color: white; box-shadow: 0 5px 20px rgba(59,130,246,0.2);">
+        <h4 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">📊 Cette Semaine</h4>
+        <div style="display: grid; gap: 1rem;">
+          <div style="background: rgba(255,255,255,0.15); padding: 1rem; border-radius: 12px; backdrop-filter: blur(10px);">
+            <div style="font-size: 2rem; font-weight: 900; margin-bottom: 0.3rem;">1,247</div>
+            <div style="font-size: 0.9rem; opacity: 0.95;">Transactions/min</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.15); padding: 1rem; border-radius: 12px; backdrop-filter: blur(10px);">
+            <div style="font-size: 2rem; font-weight: 900; margin-bottom: 0.3rem;">187ms</div>
+            <div style="font-size: 0.9rem; opacity: 0.95;">Temps de réponse</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.15); padding: 1rem; border-radius: 12px; backdrop-filter: blur(10px);">
+            <div style="font-size: 2rem; font-weight: 900; margin-bottom: 0.3rem;">0.3%</div>
+            <div style="font-size: 0.9rem; opacity: 0.95;">Taux d'erreur</div>
+          </div>
+        </div>
+      </div>
+
+      {# Widget Partenaires #}
+      <div class="partners-widget" style="background: white; border-radius: 20px; padding: 2rem; margin-top: 2rem; box-shadow: 0 5px 20px rgba(0,0,0,0.08);">
+        <h4 style="font-size: 1.1rem; font-weight: 800; color: #2C3E50; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">🤝 Partenaires Connectés</h4>
+        <div style="display: grid; gap: 1rem;">
+          <div style="display: flex; align-items: center; gap: 1rem; padding: 0.8rem; background: #F9FAFB; border-radius: 10px;">
+            <div style="width: 45px; height: 45px; background: linear-gradient(135deg, #00853F, #00A859); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;">🏥</div>
+            <div style="flex: 1; min-width: 0;"><div style="font-weight: 700; color: #2C3E50; font-size: 0.9rem;">Ministère Santé</div><div style="font-size: 0.75rem; color: #7F8C8D;">12 API actives</div></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1rem; padding: 0.8rem; background: #F9FAFB; border-radius: 10px;">
+            <div style="width: 45px; height: 45px; background: linear-gradient(135deg, #3B82F6, #60A5FA); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;">🎓</div>
+            <div style="flex: 1; min-width: 0;"><div style="font-weight: 700; color: #2C3E50; font-size: 0.9rem;">Éducation Nationale</div><div style="font-size: 0.75rem; color: #7F8C8D;">8 API actives</div></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1rem; padding: 0.8rem; background: #F9FAFB; border-radius: 10px;">
+            <div style="width: 45px; height: 45px; background: linear-gradient(135deg, #FCD116, #FDE68A); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;">💼</div>
+            <div style="flex: 1; min-width: 0;"><div style="font-weight: 700; color: #2C3E50; font-size: 0.9rem;">Impôts & Domaines</div><div style="font-size: 0.75rem; color: #7F8C8D;">15 API actives</div></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1rem; padding: 0.8rem; background: #F9FAFB; border-radius: 10px;">
+            <div style="width: 45px; height: 45px; background: linear-gradient(135deg, #E31B23, #FCA5A5); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;">🏛️</div>
+            <div style="flex: 1; min-width: 0;"><div style="font-weight: 700; color: #2C3E50; font-size: 0.9rem;">État Civil</div><div style="font-size: 0.75rem; color: #7F8C8D;">9 API actives</div></div>
+          </div>
+        </div>
+        <a href="#" style="display: block; text-align: center; margin-top: 1.5rem; padding: 0.8rem; background: #F9FAFB; color: #00853F; font-weight: 700; border-radius: 10px; text-decoration: none; transition: all 0.3s;">Voir tous les partenaires →</a>
+      </div>
+
+      {# Widget Événements #}
+      <div class="events-widget" style="background: linear-gradient(135deg, #FCD116, #FDE68A); border-radius: 20px; padding: 2rem; margin-top: 2rem; box-shadow: 0 5px 20px rgba(252,209,22,0.2);">
+        <h4 style="font-size: 1.1rem; font-weight: 800; color: #2C3E50; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">📅 Événements à Venir</h4>
+        <div style="display: grid; gap: 1rem;">
+          <div style="background: white; padding: 1rem; border-radius: 12px;">
+            <div style="font-weight: 700; color: #2C3E50; margin-bottom: 0.5rem; font-size: 0.95rem;">Webinaire API Santé</div>
+            <div style="font-size: 0.85rem; color: #7F8C8D; margin-bottom: 0.5rem;">📅 2 Déc 2025 • 14h00</div>
+            <div style="display: inline-block; background: #E8F5E9; color: #00853F; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.75rem; font-weight: 700;">Places disponibles</div>
+          </div>
+          <div style="background: white; padding: 1rem; border-radius: 12px;">
+            <div style="font-weight: 700; color: #2C3E50; margin-bottom: 0.5rem; font-size: 0.95rem;">Formation OAuth 2.0</div>
+            <div style="font-size: 0.85rem; color: #7F8C8D; margin-bottom: 0.5rem;">📅 5 Déc 2025 • 10h00</div>
+            <div style="display: inline-block; background: #FFEBEE; color: #E31B23; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.75rem; font-weight: 700;">Bientôt complet</div>
+          </div>
+        </div>
+        <a href="#" style="display: block; text-align: center; margin-top: 1.5rem; padding: 0.8rem; background: white; color: #2C3E50; font-weight: 700; border-radius: 10px; text-decoration: none; transition: all 0.3s;">📆 Voir le calendrier complet</a>
+      </div>
+
+      {# Widget Statistiques Clés #}
+      <div class="stats-live-widget" style="background: linear-gradient(135deg, #3B82F6, #60A5FA); border-radius: 20px; padding: 2rem; margin-top: 2rem; color: white; box-shadow: 0 5px 20px rgba(59,130,246,0.2);">
+        <h4 style="font-size: 1.1rem; font-weight: 800; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">📊 Cette Semaine</h4>
+        <div style="display: grid; gap: 1rem;">
+          <div style="background: rgba(255,255,255,0.15); padding: 1rem; border-radius: 12px; backdrop-filter: blur(10px);">
+            <div style="font-size: 2rem; font-weight: 900; margin-bottom: 0.3rem;">1,247</div>
+            <div style="font-size: 0.9rem; opacity: 0.95;">Transactions/min</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.15); padding: 1rem; border-radius: 12px; backdrop-filter: blur(10px);">
+            <div style="font-size: 2rem; font-weight: 900; margin-bottom: 0.3rem;">187ms</div>
+            <div style="font-size: 0.9rem; opacity: 0.95;">Temps de réponse</div>
+          </div>
+          <div style="background: rgba(255,255,255,0.15); padding: 1rem; border-radius: 12px; backdrop-filter: blur(10px);">
+            <div style="font-size: 2rem; font-weight: 900; margin-bottom: 0.3rem;">0.3%</div>
+            <div style="font-size: 0.9rem; opacity: 0.95;">Taux d'erreur</div>
+          </div>
+        </div>
+      </div>
+
+      {# Widget Partenaires #}
+      <div class="partners-widget" style="background: white; border-radius: 20px; padding: 2rem; margin-top: 2rem; box-shadow: 0 5px 20px rgba(0,0,0,0.08);">
+        <h4 style="font-size: 1.1rem; font-weight: 800; color: #2C3E50; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">🤝 Partenaires Connectés</h4>
+        <div style="display: grid; gap: 1rem;">
+          <div style="display: flex; align-items: center; gap: 1rem; padding: 0.8rem; background: #F9FAFB; border-radius: 10px;">
+            <div style="width: 45px; height: 45px; background: linear-gradient(135deg, #00853F, #00A859); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;">🏥</div>
+            <div style="flex: 1; min-width: 0;"><div style="font-weight: 700; color: #2C3E50; font-size: 0.9rem;">Ministère Santé</div><div style="font-size: 0.75rem; color: #7F8C8D;">12 API actives</div></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1rem; padding: 0.8rem; background: #F9FAFB; border-radius: 10px;">
+            <div style="width: 45px; height: 45px; background: linear-gradient(135deg, #3B82F6, #60A5FA); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;">🎓</div>
+            <div style="flex: 1; min-width: 0;"><div style="font-weight: 700; color: #2C3E50; font-size: 0.9rem;">Éducation Nationale</div><div style="font-size: 0.75rem; color: #7F8C8D;">8 API actives</div></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1rem; padding: 0.8rem; background: #F9FAFB; border-radius: 10px;">
+            <div style="width: 45px; height: 45px; background: linear-gradient(135deg, #FCD116, #FDE68A); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;">💼</div>
+            <div style="flex: 1; min-width: 0;"><div style="font-weight: 700; color: #2C3E50; font-size: 0.9rem;">Impôts & Domaines</div><div style="font-size: 0.75rem; color: #7F8C8D;">15 API actives</div></div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 1rem; padding: 0.8rem; background: #F9FAFB; border-radius: 10px;">
+            <div style="width: 45px; height: 45px; background: linear-gradient(135deg, #E31B23, #FCA5A5); border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 1.5rem; flex-shrink: 0;">🏛️</div>
+            <div style="flex: 1; min-width: 0;"><div style="font-weight: 700; color: #2C3E50; font-size: 0.9rem;">État Civil</div><div style="font-size: 0.75rem; color: #7F8C8D;">9 API actives</div></div>
+          </div>
+        </div>
+        <a href="#" style="display: block; text-align: center; margin-top: 1.5rem; padding: 0.8rem; background: #F9FAFB; color: #00853F; font-weight: 700; border-radius: 10px; text-decoration: none; transition: all 0.3s;">Voir tous les partenaires →</a>
+      </div>
+
+      {# Widget Événements #}
+      <div class="events-widget" style="background: linear-gradient(135deg, #FCD116, #FDE68A); border-radius: 20px; padding: 2rem; margin-top: 2rem; box-shadow: 0 5px 20px rgba(252,209,22,0.2);">
+        <h4 style="font-size: 1.1rem; font-weight: 800; color: #2C3E50; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">📅 Événements à Venir</h4>
+        <div style="display: grid; gap: 1rem;">
+          <div style="background: white; padding: 1rem; border-radius: 12px;">
+            <div style="font-weight: 700; color: #2C3E50; margin-bottom: 0.5rem; font-size: 0.95rem;">Webinaire API Santé</div>
+            <div style="font-size: 0.85rem; color: #7F8C8D; margin-bottom: 0.5rem;">📅 2 Déc 2025 • 14h00</div>
+            <div style="display: inline-block; background: #E8F5E9; color: #00853F; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.75rem; font-weight: 700;">Places disponibles</div>
+          </div>
+          <div style="background: white; padding: 1rem; border-radius: 12px;">
+            <div style="font-weight: 700; color: #2C3E50; margin-bottom: 0.5rem; font-size: 0.95rem;">Formation OAuth 2.0</div>
+            <div style="font-size: 0.85rem; color: #7F8C8D; margin-bottom: 0.5rem;">📅 5 Déc 2025 • 10h00</div>
+            <div style="display: inline-block; background: #FFEBEE; color: #E31B23; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.75rem; font-weight: 700;">Bientôt complet</div>
+          </div>
+        </div>
+        <a href="#" style="display: block; text-align: center; margin-top: 1.5rem; padding: 0.8rem; background: white; color: #2C3E50; font-weight: 700; border-radius: 10px; text-decoration: none; transition: all 0.3s;">📆 Voir le calendrier complet</a>
+      </div>
+                    <div class="podcast-widget">
+                        <div class="podcast-header">
+                            <span class="podcast-icon"></span>
+                            <h4>Vidéos Podcast</h4>
+                        </div>
+
+                        <div class="podcast-featured">
+                            <div class="podcast-video-container">
+                                <div class="podcast-video-thumbnail" style="background: linear-gradient(135deg, var(--senegal-green), var(--senegal-green-light)); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
+
+                                </div>
+                                <div class="podcast-play-overlay">
+                                    <div class="podcast-play-button">▶</div>
+                                </div>
+                                <div class="podcast-live-badge">
+                                    <span style="width: 8px; height: 8px; background: white; border-radius: 50%; display: inline-block;"></span>
+                                    <span>NOUVEAU</span>
+                                </div>
+                                <div class="podcast-duration-badge">32:15</div>
+                            </div>
+                            <div class="podcast-info">
+                                <div class="podcast-title">
+                                    L'Interopérabilité au Service du Citoyen Sénégalais
+                                </div>
+                                <div class="podcast-meta">
+                                    <span>📅 14 Nov 2025</span>
+                                    <span>12.5K vues</span>
+                                </div>
+                                <div class="podcast-description">
+                                    Interview exclusive avec le Directeur du MCTN sur la transformation 
+                                    digitale et l'impact de la plateforme d'interopérabilité.
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="podcast-list">
+                            <div class="podcast-item">
+                                <div class="podcast-item-thumbnail" style="background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+
+                                </div>
+                                <div class="podcast-item-content">
+                                    <div class="podcast-item-title">
+                                        Sécurité des API : Bonnes Pratiques et Normes
+                                    </div>
+                                    <div class="podcast-item-meta">
+                                        <span>⏱️ 28:45</span>
+                                        <span class="podcast-item-views">👁️ 8.2K</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="podcast-item">
+                                <div class="podcast-item-thumbnail" style="background: linear-gradient(135deg, #f093fb, #f5576c); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+                                    🏥
+                                </div>
+                                <div class="podcast-item-content">
+                                    <div class="podcast-item-title">
+                                        Digitalisation du Secteur Santé : Témoignage
+                                    </div>
+                                    <div class="podcast-item-meta">
+                                        <span>⏱️ 35:20</span>
+                                        <span class="podcast-item-views">👁️ 15.7K</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="podcast-item">
+                                <div class="podcast-item-thumbnail" style="background: linear-gradient(135deg, #4facfe, #00f2fe); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+                                    📊
+                                </div>
+                                <div class="podcast-item-content">
+                                    <div class="podcast-item-title">
+                                        Open Data et Transparence Gouvernementale
+                                    </div>
+                                    <div class="podcast-item-meta">
+                                        <span>⏱️ 25:30</span>
+                                        <span class="podcast-item-views">👁️ 6.9K</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="podcast-item">
+                                <div class="podcast-item-thumbnail" style="background: linear-gradient(135deg, #fa709a, #fee140); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
+                                    🚀
+                                </div>
+                                <div class="podcast-item-content">
+                                    <div class="podcast-item-title">
+                                        Innovation Digitale : Les Startups Tech au Sénégal
+                                    </div>
+                                    <div class="podcast-item-meta">
+                                        <span>⏱️ 42:10</span>
+                                        <span class="podcast-item-views">👁️ 11.3K</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <a href="#" class="all-podcasts-link">
+                            Voir toutes les vidéos →
+                        </a>
+                    </div>
+
+                    {# Stats Widget #}
+                    <div class="stats-widget">
+                        <h4>⚡ Statut Système</h4>
+                        <div class="stats-widget-number">99.7%</div>
+                        <div class="stats-widget-label">Disponibilité en temps réel</div>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+</div>
+
+                    
+                    
+            
+            <section class="help-section">
+    <div class="help-container">
+
+        <h2 class="help-title">Avez-vous une question ?</h2>
+
+        <div class="help-grid">
+
+            <div class="help-item">
+                <img src="/themes/custom/egov_theme/icon/building.png" alt="" class="help-icon">
+                <div class="help-text">Appelez et parlez à un agent</div>
+            </div>
+
+            <div class="help-item">
+                <img src="/themes/custom/egov_theme/icon/building.png" alt="" class="help-icon">
+                <div class="help-text">Contactez notre équipe support</div>
+            </div>
+
+            <div class="help-item">
+                <img src="/themes/custom/egov_theme/icon/building.png" alt="" class="help-icon">
+                <div class="help-text">Consultez la foire aux questions</div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+                    
+                    
+{# CTA Section - Structure alignée #}
+<section class="cta-section" id="contact">
+    <div class="container">
+        <div class="cta-content">
+            <h2>Rejoignez l'Écosystème d'Interopérabilité</h2>
+            <p>
+                Administrations, développeurs, partenaires techniques : Ensemble, 
+                construisons le Sénégal numérique de demain. Connectez-vous à notre 
+                plateforme et participez à la transformation digitale nationale.
+            </p>
+            <div class="cta-buttons">
+                <a href="#" class="btn btn-primary">
+                    <span></span>
+                    <span>Demander une Connexion API</span>
+                </a>
+                <a href="#" class="btn btn-outline">
+                    <span></span>
+                    <span>Consulter la Documentation</span>
+                </a>
+            </div>
+        </div>
+    </div>
+</section>
+
+{# Footer - Structure alignée #}
+<footer>
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-grid">
+                <div class="footer-section footer-about">
+                    <h3>À PROPOS</h3>
+                    <p>
+                        La Plateforme Nationale d'Interopérabilité du Sénégal est une 
+                        initiative du Ministère de la Communication, des Télécommunications 
+                        et du Numérique (MCTN) dans le cadre du New Deal Technologique.
+                    </p>
+                    <div class="social-icons">
+                        <div class="social-icon"></div>
+                        <div class="social-icon"></div>
+                        <div class="social-icon"></div>
+                        <div class="social-icon"></div>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h3>LIENS RAPIDES</h3>
+                    <ul>
+                        <li><a href="#">Vision & Mission</a></li>
+                        <li><a href="#">Gouvernance</a></li>
+                        <li><a href="#">Équipe</a></li>
+                        <li><a href="#">Partenaires</a></li>
+                        <li><a href="#">Actualités</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>RESSOURCES</h3>
+                    <ul>
+                        <li><a href="#">Documentation Technique</a></li>
+                        <li><a href="#">Catalogue d'API</a></li>
+                        <li><a href="#">Guides d'Intégration</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Support Développeurs</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>CONTACT</h3>
+                    <div class="footer-contact-item">
+                        <span>📍</span>
+                        <span>Dakar, Sénégal</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <span>📧</span>
+                        <span>contact@interop.sn</span>
+                    </div>
+                    <div class="footer-contact-item">
+                        <span>📞</span>
+                        <span>+221 33 XXX XX XX</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>© 2025 MCTN/SENUM - République du Sénégal</p>
+                <p>Plateforme développée dans le cadre du New Deal Technologique</p>
+            </div>
+        </div>
+    </div>
+</footer>
