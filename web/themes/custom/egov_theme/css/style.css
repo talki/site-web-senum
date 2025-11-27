@@ -1812,8 +1812,7 @@ nav .main-menu,
 ============================================ */
 
 .services-modern-section {
-    padding: 3rem 0;
-    background: var(--bg-gray);
+    padding: 0rem 0;
 }
 
 .services-modern-header h2 {
@@ -1845,8 +1844,12 @@ nav .main-menu,
 }
 
 .services-tab.active {
-    background: var(--text-dark);
+  background: #00853F;
+  color: #fff !important;
+  border-color: #004c22;
+  opacity: 1;
 }
+
 
 /* Conteneur blanc arrondi */
 .services-modern-container {
@@ -1929,41 +1932,6 @@ nav .main-menu,
 }
 
 
-/* ===============================
-   ONGLET STYLE FIXED (détachés du cadre)
-================================== */
-
-.services-tabs-wrapper {
-    position: relative;
-    height: 0; /* permet au wrapper de ne pas créer d'espace */
-    margin-bottom: 1.5rem;
-}
-
-.services-tabs {
-    position: absolute;
-    top: -45px; /* remonte les onglets au-dessus du cadre */
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    gap: 1rem;
-}
-
-.services-tab {
-    background: #3d3a39;
-    color: white;
-    padding: 1rem 2.5rem;
-    border-radius: 12px 12px 0 0;
-    border: none;
-    cursor: pointer;
-    font-weight: 700;
-    font-size: 1rem;
-    transition: 0.3s;
-    box-shadow: 0 -4px 12px rgba(0,0,0,0.05);
-}
-
-.services-tab.active {
-    background: var(--text-dark);
-}
 
 
 .hero-stats-title {
@@ -2096,3 +2064,345 @@ nav ul > li:not(:hover) > ul {
   transition-delay: 0.6s;
 }
 
+
+/* Onglets Services */
+.services-tab {
+  padding: 1rem 2rem;
+  background: #F5F7FA;
+  border: 2px solid transparent;
+  border-radius: 12px 12px 0 0;
+  font-weight: 700;
+  color: #7F8C8D;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.services-tab:hover {
+  background: #E8F5E9;
+  color: #00853F;
+}
+
+.services-tab.active {
+  background: white;
+  color: #00853F;
+  border-color: #00853F;
+  border-bottom-color: white;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+  animation: fadeIn 0.3s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.service-modern-desc {
+  font-size: 0.85rem;
+  color: #7F8C8D;
+  margin-top: 0.5rem;
+}
+
+
+
+/* ============================================
+   ONGLETS SERVICES
+   ============================================ */
+
+.services-tabs {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: -2px;
+}
+
+.services-tab {
+  padding: 1rem 2.5rem;
+  background: #F5F7FA;
+  border: 2px solid #E5E7EB;
+  border-bottom: none;
+  border-radius: 12px 12px 0 0;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #7F8C8D;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-family: inherit;
+}
+
+.services-tab:hover {
+  background: #E8F5E9;
+  color: #00853F;
+  border-color: #00853F;
+}
+
+.services-tab.active {
+  background: white;
+  color: #00853F;
+  border-color: #00853F;
+  border-bottom: 2px solid white;
+  position: relative;
+  z-index: 2;
+}
+
+.tab-content {
+  display: none;
+  animation: fadeIn 0.4s ease;
+}
+
+.tab-content.active {
+  display: block;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.service-modern-desc {
+  font-size: 0.85rem;
+  color: #7F8C8D;
+  margin-top: 0.5rem;
+  line-height: 1.5;
+}
+
+
+
+
+/* ============================================
+   FOOTER
+   ============================================ */
+
+footer {
+    background: var(--text-dark);
+    color: var(--white);
+    padding: var(--section-spacing) 0 2rem;
+}
+
+.footer-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 3rem;
+    margin-bottom: 3rem;
+}
+
+.footer-section h3 {
+    color: var(--senegal-yellow);
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    font-weight: 700;
+}
+
+.footer-section ul {
+    list-style: none;
+}
+
+.footer-section li {
+    margin-bottom: 0.8rem;
+}
+
+.footer-section a {
+    color: rgba(255, 255, 255, 0.8);
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.footer-section a:hover {
+    color: var(--senegal-yellow);
+    padding-left: 5px;
+}
+
+.footer-about p {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.8;
+    margin-bottom: 1.5rem;
+}
+
+.footer-contact-item {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+
+
+/* ============================================
+   ONGLETS SERVICES - DESIGN PROPRE
+   ============================================ */
+
+.services-modern-section {
+  padding: 3rem 0;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.services-modern-header h2 {
+  text-align: center;
+  font-size: 2.5rem;
+  font-weight: 800;
+  color: #2C3E50;
+  margin-bottom: 5rem;
+}
+
+/* CONTAINER */
+.services-modern-container {
+  background: #F9FAFB;
+  border-radius: 30px;
+  padding: 5rem 3rem 3rem 3rem;
+  position: relative;
+}
+
+/* ====== ONGLET WRAPPER ====== */
+.services-tabs-wrapper {
+  position: absolute;
+  top: -45px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 10;
+}
+
+.services-tabs {
+  display: flex;
+  gap: 1rem;
+}
+
+.services-tab {
+  padding: 1.2rem 3.2rem;
+  background: #4A5568;
+  color: white;
+  border-radius: 15px 15px 0 0;
+  font-weight: 700;
+  font-size: 1.1rem;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: 0.25s;
+}
+
+.services-tab:hover {
+  background: #2D3748;
+}
+
+.services-tab.active {
+  background: #00853F;
+  border-color: #004c22;
+}
+
+/* ====== CONTENU ONGLET ====== */
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* ===== GRID ===== */
+.services-modern-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.7rem;
+  margin-bottom: 2rem;
+}
+
+/* ===== CARDS ===== */
+.service-modern-card {
+  background: white;
+  padding: 1.8rem;
+  border-radius: 20px;
+  border: 2px solid #E5E7EB;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  transition: all 0.3s;
+}
+
+.service-modern-card:hover {
+  border-color: #00853F;
+  transform: translateY(-3px);
+  box-shadow: 0 5px 15px rgba(0,133,63,0.1);
+}
+
+/* Correction structure titre + description */
+.service-modern-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.service-modern-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2C3E50;
+  margin-bottom: 0.2rem;
+}
+
+.service-modern-desc {
+  font-size: 0.85rem;
+  color: #7F8C8D;
+  line-height: 1.4;
+}
+
+/* ========= BOUTON ========== */
+.services-modern-button-wrapper {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.services-modern-button {
+  display: inline-block;
+  padding: 1.2rem 3rem;
+  background: #4A5568;
+  color: white;
+  border-radius: 50px;
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: 0.3s;
+}
+
+.services-modern-button:hover {
+  background: #2D3748;
+  transform: translateY(-2px);
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 968px) {
+  .services-modern-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 640px) {
+  .services-modern-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .services-tabs {
+    flex-direction: column;
+  }
+
+  .services-tab {
+    border-radius: 12px;
+  }
+}

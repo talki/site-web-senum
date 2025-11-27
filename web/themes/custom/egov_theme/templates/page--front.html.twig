@@ -20,10 +20,10 @@
                 </div>
             </div>
             <div class="top-bar-right">
-                <a href="#" class="social-link">🔗</a>
-                <a href="#" class="social-link">🔗</a>
-                <a href="#" class="social-link">🔗</a>
-                <a href="#" class="social-link">🔗</a>
+                <a href="#" class="social-link"></a>
+                <a href="#" class="social-link"></a>
+                <a href="#" class="social-link"></a>
+                <a href="#" class="social-link"></a>
             </div>
         </div>
     </div>
@@ -116,57 +116,155 @@
                     {{ page.content }}
                 {% endif %}
 
-                {# Section Services #}
-                <section class="services-modern-section" id="services">
-                    <div class="services-modern-header">
-                        <h2>Services</h2>
+<section class="services-modern-section" id="services">
+
+    <div class="services-modern-header">
+        <h2>Services</h2>
+    </div>
+
+    <div class="services-modern-container">
+
+        <!-- ONGLET -->
+        <div class="services-tabs-wrapper">
+            <div class="services-tabs">
+                <button class="services-tab active" data-tab="populaires">Services Populaires</button>
+                <button class="services-tab" data-tab="techniques">Services Techniques</button>
+            </div>
+        </div>
+
+        <!-- ONGLET 1 : POPULAIRES -->
+        <div id="populaires" class="tab-content active">
+
+            <div class="services-modern-grid">
+
+                <!-- CARD 1 -->
+                <div class="service-modern-card">
+                    <img src="/themes/custom/egov_theme/icon/building.png" width="48">
+                    <div class="service-modern-info">
+                        <div class="service-modern-title">Familles</div>
+                        <div class="service-modern-desc">État civil, allocations familiales</div>
                     </div>
+                </div>
 
-                    <div class="services-modern-container">
-                        <div class="services-tabs-wrapper">
-                            <div class="services-tabs">
-                                <button class="services-tab active">Services Populaires</button>
-                                <button class="services-tab">Tous les Services</button>
-                            </div>
-                        </div>
-
-                        <div class="services-modern-grid">
-                            <div class="service-modern-card">
-                                <img src="/themes/custom/egov_theme/icon/api-doc.png" alt="Familles" style="width: 48px; height: 48px;">
-                                <div class="service-modern-title">Familles</div>
-                            </div>
-
-                            <div class="service-modern-card">
-                                <img src="/themes/custom/egov_theme/icon/api-doc.png" alt="Protection Sociale" style="width: 48px; height: 48px;">
-                                <div class="service-modern-title">Protection Sociale</div>
-                            </div>
-
-                            <div class="service-modern-card">
-                                <img src="/themes/custom/egov_theme/icon/api-doc.png" alt="Éducation" style="width: 48px; height: 48px;">
-                                <div class="service-modern-title">Éducation</div>
-                            </div>
-
-                            <div class="service-modern-card">
-                                <img src="/themes/custom/egov_theme/icon/api-doc.png" alt="Citoyenneté" style="width: 48px; height: 48px;">
-                                <div class="service-modern-title">Citoyenneté</div>
-                            </div>
-
-                            <div class="service-modern-card">
-                                <img src="/themes/custom/egov_theme/icon/api-doc.png" alt="Taxes" style="width: 48px; height: 48px;">
-                                <div class="service-modern-title">Taxes</div>
-                            </div>
-
-                            <div class="service-modern-card">
-                                <img src="/themes/custom/egov_theme/icon/api-doc.png" alt="Troisième âge" style="width: 48px; height: 48px;">
-                                <div class="service-modern-title">Troisième âge</div>
-                            </div>
-                        </div>
-
-                        <div class="services-modern-button-wrapper">
-                            <a href="#" class="services-modern-button">Tous les Services</a>
-                        </div>
+                <!-- CARD 2 -->
+                <div class="service-modern-card">
+                    <img src="/themes/custom/egov_theme/icon/integration.png" width="48">
+                    <div class="service-modern-info">
+                        <div class="service-modern-title">Protection Sociale</div>
+                        <div class="service-modern-desc">Sécurité sociale, retraite</div>
                     </div>
-                </section>
+                </div>
+
+                <!-- CARD 3 -->
+                <div class="service-modern-card">
+                    <img src="/themes/custom/egov_theme/icon/data-exchange.png" width="48">
+                    <div class="service-modern-info">
+                        <div class="service-modern-title">Éducation</div>
+                        <div class="service-modern-desc">Inscription scolaire, bourses</div>
+                    </div>
+                </div>
+
+                <!-- CARD 4 -->
+                <div class="service-modern-card">
+                    <img src="/themes/custom/egov_theme/icon/secret-file.png" width="48">
+                    <div class="service-modern-info">
+                        <div class="service-modern-title">Citoyenneté</div>
+                        <div class="service-modern-desc">Passeport, CNI, carte électeur</div>
+                    </div>
+                </div>
+
+                <!-- CARD 5 -->
+                <div class="service-modern-card">
+                    <img src="/themes/custom/egov_theme/icon/transaction.png" width="48">
+                    <div class="service-modern-info">
+                        <div class="service-modern-title">Taxes</div>
+                        <div class="service-modern-desc">Impôts, taxes foncières</div>
+                    </div>
+                </div>
+
+                <!-- CARD 6 -->
+                <div class="service-modern-card">
+                    <img src="/themes/custom/egov_theme/icon/self-service.png" width="48">
+                    <div class="service-modern-info">
+                        <div class="service-modern-title">Troisième âge</div>
+                        <div class="service-modern-desc">Pension, aide à domicile</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ONGLET 2 : TECHNIQUES -->
+        <div id="techniques" class="tab-content">
+
+            <div class="services-modern-grid">
+
+                <!-- CARD 1 -->
+                <div class="service-modern-card">
+                    <img src="/themes/custom/egov_theme/icon/api-doc.png" width="48">
+                    <div class="service-modern-info">
+                        <div class="service-modern-title">API Gateway</div>
+                        <div class="service-modern-desc">Gestion centralisée</div>
+                    </div>
+                </div>
+
+                <!-- CARD 2 -->
+                <div class="service-modern-card">
+                    <img src="/themes/custom/egov_theme/icon/secret-file.png" width="48">
+                    <div class="service-modern-info">
+                        <div class="service-modern-title">OAuth 2.0</div>
+                        <div class="service-modern-desc">Authentification sécurisée</div>
+                    </div>
+                </div>
+
+                <!-- CARD 3 -->
+                <div class="service-modern-card">
+                    <img src="/themes/custom/egov_theme/icon/data-exchange.png" width="48">
+                    <div class="service-modern-info">
+                        <div class="service-modern-title">Bus ESB</div>
+                        <div class="service-modern-desc">Messages temps réel</div>
+                    </div>
+                </div>
+
+                <!-- CARD 4 -->
+                <div class="service-modern-card">
+                    <img src="/themes/custom/egov_theme/icon/graph.png" width="48">
+                    <div class="service-modern-info">
+                        <div class="service-modern-title">Analytics</div>
+                        <div class="service-modern-desc">Tableaux de bord</div>
+                    </div>
+                </div>
+
+                <!-- CARD 5 -->
+                <div class="service-modern-card">
+                    <img src="/themes/custom/egov_theme/icon/integration.png" width="48">
+                    <div class="service-modern-info">
+                        <div class="service-modern-title">WebHooks</div>
+                        <div class="service-modern-desc">Notifications automatisées</div>
+                    </div>
+                </div>
+
+                <!-- CARD 6 -->
+                <div class="service-modern-card">
+                    <img src="/themes/custom/egov_theme/icon/transaction.png" width="48">
+                    <div class="service-modern-info">
+                        <div class="service-modern-title">Monitoring</div>
+                        <div class="service-modern-desc">Surveillance 24/7</div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="services-modern-button-wrapper">
+            <a href="#" class="services-modern-button">Tous les Services</a>
+        </div>
+
+    </div>
+
+</section>
+
+
 
                 {# NOUVEAU : Fil d'Actualités DÉPLACÉ ICI #}
                 <section class="news-section-main" style="margin-top: 3rem;">
@@ -233,27 +331,6 @@
             {# Sidebar - SIMPLIFIÉ #}
             <aside class="sidebar">
                 <div class="sidebar-sticky">
-                    
-                    {# Quick Links Widget #}
-                    <div class="quick-links-widget">
-                        <h4>🔗 Accès Rapide</h4>
-                        <a href="#" class="quick-link">
-                            <span class="quick-link-icon">📖</span>
-                            <span class="quick-link-text">Documentation API</span>
-                        </a>
-                        <a href="#" class="quick-link">
-                            <span class="quick-link-icon">🔑</span>
-                            <span class="quick-link-text">Demander un Token</span>
-                        </a>
-                        <a href="#" class="quick-link">
-                            <span class="quick-link-icon">🆘</span>
-                            <span class="quick-link-text">Support Technique</span>
-                        </a>
-                        <a href="#" class="quick-link">
-                            <span class="quick-link-icon">📊</span>
-                            <span class="quick-link-text">Tableau de Bord</span>
-                        </a>
-                    </div>
 
       {# Podcast Video Widget #}
       <div class="podcast-widget">
@@ -409,26 +486,76 @@
     </div>
 </section>
 
+
+<script>
+document.querySelectorAll(".services-tab").forEach(tab => {
+    tab.addEventListener("click", () => {
+        
+        document.querySelectorAll(".services-tab").forEach(t => t.classList.remove("active"));
+        tab.classList.add("active");
+
+        document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
+
+        document.getElementById(tab.dataset.tab).classList.add("active");
+    });
+});
+</script>
+
+
 {# Footer #}
 <footer>
-    <div class="container">
-        <div class="footer-content">
-            <div class="footer-grid">
-                <div class="footer-section">
-                    <h3>À PROPOS</h3>
-                    <p>Initiative du MCTN dans le cadre du New Deal Technologique.</p>
-                </div>
-                <div class="footer-section">
-                    <h3>CONTACT</h3>
-                    <div class="footer-contact-item">
-                        <span>📧</span>
-                        <span>contact@interop.sn</span>
-                    </div>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2025 MCTN/SENUM - République du Sénégal</p>
-            </div>
-        </div>
+  <div class="footer-grid">
+    <div class="footer-section footer-about">
+   
+      <div class="social-icons">
+        <div class="social-icon"></div>
+        <div class="social-icon"></div>
+        <div class="social-icon"></div>
+        <div class="social-icon"></div>
+      </div>
     </div>
+
+    <div class="footer-section">
+      <h3>LIENS RAPIDES</h3>
+      <ul>
+        <li><a href="#">Vision & Mission</a></li>
+        <li><a href="#">Gouvernance</a></li>
+        <li><a href="#">Équipe</a></li>
+        <li><a href="#">Partenaires</a></li>
+        <li><a href="#">Actualités</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h3>RESSOURCES</h3>
+      <ul>
+        <li><a href="#">Documentation Technique</a></li>
+        <li><a href="#">Catalogue d'API</a></li>
+        <li><a href="#">Guides d'Intégration</a></li>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Support Développeurs</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-section">
+      <h3>CONTACT</h3>
+      <div class="footer-contact-item">
+        <span>📍</span>
+        <span>Dakar, Sénégal</span>
+      </div>
+      <div class="footer-contact-item">
+        <span>📧</span>
+        <span>contact@interop.sn</span>
+      </div>
+      <div class="footer-contact-item">
+        <span>📞</span>
+        <span>+221 33 XXX XX XX</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>© 2025 MCTN/SENUM - République du Sénégal</p>
+    <p>Plateforme développée dans le cadre du New Deal Technologique</p>
+  </div>
 </footer>
