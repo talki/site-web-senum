@@ -61,17 +61,17 @@ nav ul > li > a::before {
 /* Icône Accueil */
 nav ul > li:has(a[href="/"]) > a::before,
 nav ul > li:has(a[href*="accueil"]) > a::before {
-    content: '🏠';
+    content: '';
 }
 
 /* Icône Cadres et Standards */
 nav ul > li:has(a[href*="cadres"]) > a::before {
-    content: '📋';
+    content: '';
 }
 
 /* Icône Tableau de Bord */
 nav ul > li:has(a[href*="tableau"]) > a::before {
-    content: '📊';
+    content: '';
 }
 
 /* Effet hover sur les boutons principaux */
@@ -180,35 +180,35 @@ nav ul > li > ul > li > a::before {
 
 /* Icônes spécifiques pour Accueil */
 nav ul > li:has(a[href*="accueil"]) > ul > li:nth-child(1) > a::before {
-    content: '📄'; /* Présentation */
+    content: ''; /* Présentation */
 }
 nav ul > li:has(a[href*="accueil"]) > ul > li:nth-child(2) > a::before {
-    content: '📈'; /* Chiffres */
+    content: ''; /* Chiffres */
 }
 nav ul > li:has(a[href*="accueil"]) > ul > li:nth-child(3) > a::before {
-    content: '🎬'; /* Vidéo */
+    content: ''; /* Vidéo */
 }
 
 /* Icônes spécifiques pour Cadres et Standards */
 nav ul > li:has(a[href*="cadres"]) > ul > li:nth-child(1) > a::before {
-    content: '📜'; /* Cadre national */
+    content: ''; /* Cadre national */
 }
 nav ul > li:has(a[href*="cadres"]) > ul > li:nth-child(2) > a::before {
-    content: '⚙️'; /* Normes */
+    content: ''; /* Normes */
 }
 nav ul > li:has(a[href*="cadres"]) > ul > li:nth-child(3) > a::before {
-    content: '🔐'; /* Sécurité */
+    content: ''; /* Sécurité */
 }
 
 /* Icônes spécifiques pour Tableau de Bord */
 nav ul > li:has(a[href*="tableau"]) > ul > li:nth-child(1) > a::before {
-    content: '⚡'; /* Temps réel */
+    content: ''; /* Temps réel */
 }
 nav ul > li:has(a[href*="tableau"]) > ul > li:nth-child(2) > a::before {
-    content: '📅'; /* Historique */
+    content: ''; /* Historique */
 }
 nav ul > li:has(a[href*="tableau"]) > ul > li:nth-child(3) > a::before {
-    content: '📊'; /* Visualisations */
+    content: ''; /* Visualisations */
 }
 
 /* Hover sur sous-menu */
@@ -293,4 +293,7 @@ nav ul > li > ul > li:not(:last-child) {
 nav ul > li:hover > ul {
     animation: slideDown 0.3s ease-out;
 }
+
+
+
 

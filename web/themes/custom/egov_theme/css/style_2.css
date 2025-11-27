@@ -169,50 +169,41 @@ body {
     letter-spacing: 1px;
 }
 
-/* ========================================
-   MENU PRINCIPAL SANS ICÔNES — PREMIUM
-======================================== */
-
 .main-menu {
     display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    gap: 1rem;
-}
-
-.main-menu ul {
     list-style: none;
-    display: flex;
-    gap: 1.5rem;
+    gap: 2.5rem;
     margin: 0;
     padding: 0;
 }
 
-.main-menu li {
-    display: flex;
-}
-
-.main-menu a {
-    display: block;
-    background: #ffffff;
-    padding: 0.9rem 1.8rem;
-    border-radius: 14px;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--text-dark);
+.main-menu li a {
     text-decoration: none;
-    border: 1px solid #f0f0f0;
-    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-    transition: all 0.25s ease;
+    color: var(--text-dark);
+    font-weight: 600;
+    transition: all 0.3s;
+    position: relative;
+    padding: 0.5rem 0;
 }
 
-.main-menu a:hover {
+.main-menu li a:hover {
+    color: var(--senegal-green);
+}
+
+.main-menu li a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 3px;
     background: var(--senegal-green);
-    color: white;
-    border-color: var(--senegal-green);
-    transform: translateY(-2px);
+    transition: width 0.3s;
 }
 
+.main-menu li a:hover::after {
+    width: 100%;
+}
 
 /* ============================================
    HERO SECTION
@@ -1976,6 +1967,17 @@ nav .main-menu,
 }
 
 
+/* Réduction de l'espace vide avant la section services */
+.page-layout {
+    padding-top: 1.5rem !important;
+}
+
+/* Évite l'espace supplémentaire autour de la première section */
+.services-modern-section {
+    margin-top: 0 !important;
+    padding-top: 1rem; /* léger espace propre */
+}
+
 
 /*    juste avant footer */
 /* ===============================
@@ -2039,6 +2041,3 @@ nav .main-menu,
         gap: 2.5rem;
     }
 }
-
-
-
