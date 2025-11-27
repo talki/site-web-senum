@@ -1,0 +1,374 @@
+{#
+/**
+ * @file
+ * Theme override for the login page.
+ */
+#}
+<!DOCTYPE html>
+<html{{ html_attributes }}>
+  <head>
+    <head-placeholder token="{{ placeholder_token }}">
+    <title>{{ head_title|safe_join(' | ') }}</title>
+    <css-placeholder token="{{ placeholder_token }}">
+    <js-placeholder token="{{ placeholder_token }}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        background: linear-gradient(135deg, #00853F 0%, #00A859 50%, #FCD116 100%);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+      }
+      
+      .login-container {
+        width: 100%;
+        max-width: 1100px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        background: white;
+        border-radius: 24px;
+        overflow: hidden;
+        box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+      }
+      
+      /* Partie gauche - Branding */
+      .login-brand {
+        background: linear-gradient(135deg, #00853F 0%, #00A859 100%);
+        padding: 4rem 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        color: white;
+        position: relative;
+        overflow: hidden;
+      }
+      
+      .login-brand::before {
+        content: '';
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+        animation: pulse 15s infinite;
+      }
+      
+      @keyframes pulse {
+        0%, 100% { transform: scale(1); opacity: 0.3; }
+        50% { transform: scale(1.1); opacity: 0.5; }
+      }
+      
+      .brand-content {
+        position: relative;
+        z-index: 1;
+      }
+      
+      .brand-logo {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+      
+      .brand-flag {
+        width: 60px;
+        height: 60px;
+        background: white;
+        border-radius: 12px;
+        display: flex;
+        overflow: hidden;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+      }
+      
+      .flag-green { flex: 1; background: #00853F; }
+      .flag-yellow { flex: 1; background: #FCD116; }
+      .flag-red { flex: 1; background: #E31B23; }
+      
+      .brand-title {
+        font-size: 2rem;
+        font-weight: 900;
+        margin-bottom: 0.5rem;
+        line-height: 1.2;
+      }
+      
+      .brand-subtitle {
+        font-size: 0.95rem;
+        opacity: 0.9;
+        font-weight: 600;
+        letter-spacing: 0.5px;
+      }
+      
+      .brand-description {
+        margin-top: 2rem;
+        font-size: 1.05rem;
+        line-height: 1.7;
+        opacity: 0.95;
+      }
+      
+      .brand-features {
+        margin-top: 3rem;
+        display: grid;
+        gap: 1.5rem;
+      }
+      
+      .feature-item {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+      }
+      
+      .feature-icon {
+        width: 45px;
+        height: 45px;
+        background: rgba(255,255,255,0.2);
+        border-radius: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.5rem;
+        flex-shrink: 0;
+      }
+      
+      .feature-text {
+        font-size: 0.95rem;
+        line-height: 1.5;
+        opacity: 0.95;
+      }
+      
+      /* Partie droite - Formulaire */
+      .login-form-wrapper {
+        padding: 4rem 3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+      }
+      
+      .form-header {
+        margin-bottom: 2.5rem;
+      }
+      
+      .form-title {
+        font-size: 1.8rem;
+        font-weight: 900;
+        color: #2C3E50;
+        margin-bottom: 0.5rem;
+      }
+      
+      .form-subtitle {
+        color: #7F8C8D;
+        font-size: 0.95rem;
+      }
+      
+      .messages {
+        margin-bottom: 1.5rem;
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        font-size: 0.9rem;
+      }
+      
+      .messages.error {
+        background: #FFEBEE;
+        color: #E31B23;
+        border-left: 4px solid #E31B23;
+      }
+      
+      .messages.status {
+        background: #E8F5E9;
+        color: #00853F;
+        border-left: 4px solid #00853F;
+      }
+      
+      .form-item {
+        margin-bottom: 1.5rem;
+      }
+      
+      .form-item label {
+        display: block;
+        font-weight: 700;
+        color: #2C3E50;
+        margin-bottom: 0.5rem;
+        font-size: 0.9rem;
+      }
+      
+      .form-item input[type="text"],
+      .form-item input[type="password"] {
+        width: 100%;
+        padding: 0.9rem 1.2rem;
+        border: 2px solid #E5E7EB;
+        border-radius: 12px;
+        font-size: 1rem;
+        font-family: inherit;
+        transition: all 0.3s;
+        background: #F9FAFB;
+      }
+      
+      .form-item input:focus {
+        outline: none;
+        border-color: #00853F;
+        background: white;
+        box-shadow: 0 0 0 4px rgba(0,133,63,0.1);
+      }
+      
+      .form-item .description {
+        font-size: 0.85rem;
+        color: #7F8C8D;
+        margin-top: 0.5rem;
+      }
+      
+      .form-actions {
+        margin-top: 2rem;
+      }
+      
+      .form-submit {
+        width: 100%;
+        padding: 1rem 2rem;
+        background: linear-gradient(135deg, #00853F, #00A859);
+        color: white;
+        border: none;
+        border-radius: 12px;
+        font-size: 1.05rem;
+        font-weight: 700;
+        cursor: pointer;
+        transition: all 0.3s;
+        box-shadow: 0 4px 12px rgba(0,133,63,0.3);
+      }
+      
+      .form-submit:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(0,133,63,0.4);
+      }
+      
+      .form-submit:active {
+        transform: translateY(0);
+      }
+      
+      .password-reset {
+        margin-top: 1.5rem;
+        text-align: center;
+      }
+      
+      .password-reset a {
+        color: #00853F;
+        text-decoration: none;
+        font-weight: 600;
+        font-size: 0.9rem;
+      }
+      
+      .password-reset a:hover {
+        text-decoration: underline;
+      }
+      
+      .login-footer {
+        margin-top: 2rem;
+        padding-top: 2rem;
+        border-top: 2px solid #F5F7FA;
+        text-align: center;
+        color: #7F8C8D;
+        font-size: 0.85rem;
+      }
+      
+      .login-footer a {
+        color: #00853F;
+        text-decoration: none;
+        font-weight: 600;
+      }
+      
+      /* Responsive */
+      @media (max-width: 968px) {
+        .login-container {
+          grid-template-columns: 1fr;
+        }
+        
+        .login-brand {
+          padding: 3rem 2rem;
+        }
+        
+        .brand-features {
+          display: none;
+        }
+      }
+      
+      /* Masquer les éléments Drupal non nécessaires */
+      .tabs, .region-breadcrumb, #toolbar-administration {
+        display: none !important;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="login-container">
+      <!-- Partie gauche - Branding -->
+      <div class="login-brand">
+        <div class="brand-content">
+          <div class="brand-logo">
+            <div class="brand-flag">
+              <div class="flag-green"></div>
+              <div class="flag-yellow"></div>
+              <div class="flag-red"></div>
+            </div>
+            <div>
+              <div class="brand-title">Interopérabilité</div>
+              <div class="brand-subtitle">RÉPUBLIQUE DU SÉNÉGAL</div>
+            </div>
+          </div>
+          
+          <div class="brand-description">
+            Plateforme Nationale d'Interopérabilité - Connectons les services publics pour un Sénégal numérique moderne et efficace.
+          </div>
+          
+          <div class="brand-features">
+            <div class="feature-item">
+              <div class="feature-icon"></div>
+              <div class="feature-text">
+                <strong>Sécurité renforcée</strong><br>
+                Authentification à deux facteurs et chiffrement end-to-end
+              </div>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon"></div>
+              <div class="feature-text">
+                <strong>Performance optimale</strong><br>
+                Temps de réponse < 200ms pour 99% des requêtes
+              </div>
+            </div>
+            
+            <div class="feature-item">
+              <div class="feature-icon"></div>
+              <div class="feature-text">
+                <strong>127 API actives</strong><br>
+                Connectez-vous à l'écosystème d'interopérabilité
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Partie droite - Formulaire -->
+      <div class="login-form-wrapper">
+        <div class="form-header">
+          <h1 class="form-title">Connexion</h1>
+          <p class="form-subtitle">Accédez à votre espace d'administration</p>
+        </div>
+        
+        {{ page.content }}
+        
+        <div class="login-footer">
+          Besoin d'aide ? <a href="mailto:contact@interop.sn">Contactez le support</a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
