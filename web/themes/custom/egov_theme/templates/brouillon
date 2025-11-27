@@ -1,0 +1,41 @@
+
+        {# Use Cases Section #}
+        <section class="use-cases-section" id="cas-usage">
+          <div class="section-header">
+            <div class="section-subtitle">CAS D'USAGE</div>
+            <h2 class="section-title">L'Interopérabilité en Action</h2>
+            <p class="section-description">
+              Découvrez comment notre plateforme transforme les services publics
+            </p>
+          </div>
+
+          <div class="use-cases-grid">
+            <div class="use-case-card">
+              <div class="use-case-image"></div>
+              <div class="use-case-content">
+                <h3>Dossier Patient Partagé</h3>
+                <p>
+                  Accès sécurisé et instantané aux données médicales entre hôpitaux, 
+                  cliniques et centres de santé. Amélioration du suivi patient et 
+                  réduction des risques médicaux.
+                </p>
+                <span class="impact-badge">Impact: -40% délais de traitement</span>
+              </div>
+            </div>
+
+            <div class="use-case-card">
+              <div class="use-case-image">💳</div>
+              <div class="use-case-content">
+                <h3>Paiement Électronique Unifié</h3>
+                <p>
+                  Système de paiement intégré entre services fiscaux, douanes et 
+                  institutions financières. Transactions sécurisées et traçabilité 
+                  complète des opérations.
+                </p>
+                <span class="impact-badge">Impact: +60% d'efficacité</span>
+              </div>
+            </div>
+
+        
+          </div>
+        </section>
