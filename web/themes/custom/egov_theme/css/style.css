@@ -2013,3 +2013,96 @@ nav ul > li::after {
     display: block;
 }
 
+
+/* ============================================
+   USER PROFILE & ADMIN PAGES
+   ============================================ */
+
+/* Masquer la toolbar admin par défaut sur les pages profil */
+body.path-user #toolbar-administration {
+  background: #2C3E50;
+}
+
+/* Messages Drupal stylisés */
+.messages {
+  padding: 1rem 1.5rem;
+  border-radius: 12px;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.messages.error {
+  background: #FFEBEE;
+  color: #E31B23;
+  border-left: 4px solid #E31B23;
+}
+
+.messages.status {
+  background: #E8F5E9;
+  color: #00853F;
+  border-left: 4px solid #00853F;
+}
+
+.messages.warning {
+  background: #FFF9C4;
+  color: #F57C00;
+  border-left: 4px solid #FCD116;
+}
+
+/* Tabs Drupal */
+.tabs {
+  background: white;
+  border-radius: 12px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+.tabs a {
+  padding: 0.7rem 1.5rem;
+  background: #F9FAFB;
+  color: #2C3E50;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  transition: all 0.3s;
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+.tabs a:hover,
+.tabs a.is-active {
+  background: #00853F;
+  color: white;
+}
+
+/* Amélioration des tableaux admin */
+.layout-content table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.layout-content table thead {
+  background: #F9FAFB;
+}
+
+.layout-content table th {
+  padding: 1rem;
+  font-weight: 700;
+  color: #2C3E50;
+  text-align: left;
+  border-bottom: 2px solid #E5E7EB;
+}
+
+.layout-content table td {
+  padding: 1rem;
+  border-bottom: 1px solid #F5F7FA;
+}
+
+.layout-content table tr:hover {
+  background: #F9FAFB;
+}
+
