@@ -2408,36 +2408,376 @@ footer {
 }
 
 /* ============================================
-   FIX ESPACE ENTRE HERO ET SERVICES
+   ESPACE ÉQUILIBRÉ HERO → SERVICES
    ============================================ */
 
-/* Réduire le padding du hero en bas */
 .hero {
-  padding-bottom: 1rem !important;
+  padding-bottom: 2rem !important;
 }
 
-/* Réduire l'espace après les cartes stats */
 .hero-features-cards {
-  margin-bottom: 0 !important;
+  margin-bottom: 1rem !important;
 }
 
-/* Réduire le padding de page-layout en haut */
 .page-layout {
-  padding-top: 1rem !important;
-}
-
-/* Réduire l'espace avant Services */
-.services-modern-section {
-  padding-top: 0 !important;
+  padding-top: 2rem !important;
   margin-top: 0 !important;
 }
 
-/* Réduire l'espace sous le titre Services */
-.services-modern-header {
-  margin-bottom: 1.5rem !important;
+.services-modern-section {
+  padding-top: 1rem !important;
 }
 
 .services-modern-header h2 {
-  margin-bottom: 1.5rem !important;
+  margin-bottom: 2.5rem !important;
+}
+/* ============================================
+   FIX SECTION AIDE - ALIGNEMENT ET ESPACEMENT
+   ============================================ */
+
+.help-section {
+  padding: 2rem 0;  /* Réduit l'espace vertical */
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.help-container {
+  background: white;
+  border-radius: 20px;  /* Même style que actualités */
+  padding: 2.5rem 3rem;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+  border: none;
+  max-width: 100%;  /* Alignement avec actualités */
+}
+
+.help-title {
+  font-size: 1.8rem;
+  font-weight: 800;
+  text-align: center;
+  margin-bottom: 2.5rem;
+  color: #2C3E50;
+}
+
+/* Grille - espacement réduit */
+.help-grid {
+  display: flex;
+  justify-content: space-between;  /* Distribution égale */
+  align-items: flex-start;
+  gap: 3rem;  /* Espace entre les items */
+  max-width: 1000px;  /* Largeur maximale */
+  margin: 0 auto;
+}
+
+/* Item */
+.help-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex: 1;  /* Largeur égale */
+}
+
+.help-icon {
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1rem;
+}
+
+.help-text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2C3E50;
+  line-height: 1.4;
+}
+
+/* Alignement avec news-section-main */
+.news-section-main,
+.help-section {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .help-grid {
+    flex-direction: column;
+    gap: 2rem;
+  }
+  
+  .help-container {
+    padding: 2rem 1.5rem;
+  }
+}
+
+
+/* ============================================
+   ALIGNEMENT GLOBAL SECTIONS
+   ============================================ */
+
+/* Forcer le même conteneur pour toutes les sections */
+.services-modern-section,
+.news-section-main,
+.help-section {
+  max-width: 1400px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 3% !important;
+  padding-right: 3% !important;
+}
+
+/* Container des services */
+.services-modern-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
+/* Container actualités */
+.news-feed {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
+/* Container aide */
+.help-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
+/* Main content doit aussi respecter la largeur */
+.main-content {
+  width: 100% !important;
+}
+
+
+/* ============================================
+   ALIGNEMENT PARFAIT - CORRECTION GLOBALE
+   ============================================ */
+
+/* Reset du layout principal */
+.page-layout {
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  padding: 2rem 0 !important;
+}
+
+.page-layout .container {
+  max-width: 100% !important;
+  padding: 0 !important;
+}
+
+.layout-content {
+  max-width: 100% !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.main-content {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Toutes les sections doivent avoir le même padding */
+.services-modern-section,
+.news-section-main,
+.help-section {
+  max-width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Les containers internes s'alignent naturellement */
+.services-modern-container,
+.news-feed,
+.help-container {
+  width: 100% !important;
+  max-width: 100% !important;
+}
+
+/* Les grids internes aussi */
+.services-modern-grid,
+.news-feed > div[style*="grid"],
+.help-grid {
+  width: 100% !important;
+}
+
+
+/* ============================================
+   SOLUTION FINALE - ALIGNEMENT PARFAIT
+   ============================================ */
+
+/* 1. Hero reste avec son container normal */
+.hero .container {
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  padding: 0 3% !important;
+}
+
+/* 2. Page-layout : SANS container interne */
+.page-layout {
+  max-width: 1400px !important;
+  margin: 0 auto !important;
+  padding: 2rem 3% !important;  /* Padding direct ici */
+}
+
+.page-layout > .container {
+  max-width: 100% !important;
+  padding: 0 !important;  /* Annule le padding du container */
+  margin: 0 !important;
+}
+
+.layout-content {
+  gap: 2.5rem;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.main-content {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* 3. Toutes les sections INTERNES : padding 0 */
+.services-modern-section,
+.news-section-main,
+.help-section {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  max-width: 100% !important;
+}
+
+/* 4. Les containers de sections : 100% */
+.services-modern-container,
+.news-feed,
+.help-container {
+  width: 100% !important;
+  max-width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* 5. Help Section et CTA : même alignement */
+.help-section,
+.cta-section {
+  max-width: 1400px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 3% !important;
+  padding-right: 3% !important;
+}
+
+.help-section .help-container,
+.cta-section .container {
+  max-width: 100% !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+
+/* ============================================
+   FIX CONTRASTE - SECTION AIDE + SERVICES
+   ============================================ */
+
+/* Section Aide : fond gris plus visible */
+.help-section {
+  background: #F9FAFB !important;  /* Fond gris léger pour toute la section */
+  padding: 3rem 0 !important;
+}
+
+.help-container {
+  background: white !important;  /* Container blanc bien visible */
+  border-radius: 20px !important;
+  padding: 2.5rem 3rem !important;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08) !important;
+  border: 1px solid #E5E7EB !important;  /* Bordure subtile */
+}
+
+/* Cartes Services : bordure plus visible */
+.service-modern-card {
+  background: white !important;
+  border: 2px solid #E5E7EB !important;  /* Bordure plus épaisse */
+  padding: 1.8rem !important;
+  border-radius: 20px !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04) !important;  /* Ombre légère */
+  transition: all 0.3s !important;
+}
+
+.service-modern-card:hover {
+  border-color: #00853F !important;
+  transform: translateY(-4px) !important;
+  box-shadow: 0 8px 25px rgba(0,133,63,0.15) !important;  /* Ombre verte au hover */
+}
+
+/* Container Services : fond gris clair */
+.services-modern-container {
+  background: #F9FAFB !important;  /* Même ton que Help */
+  border-radius: 30px !important;
+  padding: 5rem 3rem 3rem 3rem !important;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05) !important;
+}
+
+
+/* ============================================
+   FIX LARGEUR SECTION AIDE - ALIGNEMENT
+   ============================================ */
+
+/* La section Help doit rester dans page-layout comme les autres */
+.help-section {
+  background: transparent !important;  /* Pas de fond ici */
+  padding: 2rem 0 !important;
+  max-width: 100% !important;
+  margin: 0 !important;
+}
+
+.help-container {
+  background: white !important;
+  border-radius: 20px !important;
+  padding: 2.5rem 3rem !important;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08) !important;
+  border: 1px solid #E5E7EB !important;
+  max-width: 100% !important;  /* Prend 100% de son parent */
+  margin: 0 !important;
+}
+
+/* Help grid - espace réduit */
+.help-grid {
+  display: flex;
+  justify-content: space-between !important;
+  align-items: flex-start;
+  gap: 3rem !important;
+  max-width: 900px !important;  /* Largeur réduite */
+  margin: 0 auto !important;
+}
+
+
+/* ============================================
+   FIX LARGEUR - RÉDUCTION SECTION AIDE
+   ============================================ */
+
+/* Help section doit être dans page-layout */
+.help-section {
+  background: transparent !important;
+  padding: 2rem 0 !important;
+  max-width: 100% !important;
+  margin: 3rem 0 0 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.help-container {
+  background: white !important;
+  border-radius: 20px !important;
+  padding: 2.5rem 3rem !important;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.08) !important;
+  border: 1px solid #E5E7EB !important;
+  width: 100% !important;  /* Même largeur que news-feed */
+  max-width: 100% !important;
+  margin: 0 !important;
 }
 
