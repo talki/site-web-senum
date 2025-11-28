@@ -79,3 +79,5 @@ drush
 # !/web/themes/custom/egov_theme/
 # !/web/modules/custom/
 
+backups/*.sql*
+backups/*.sql*
