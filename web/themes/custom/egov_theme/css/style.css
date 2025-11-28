@@ -1812,7 +1812,7 @@ nav .main-menu,
 ============================================ */
 
 .services-modern-section {
-    padding: 0rem 0;
+    padding: 3rem 0;
 }
 
 .services-modern-header h2 {
@@ -2406,3 +2406,38 @@ footer {
     border-radius: 12px;
   }
 }
+
+/* ============================================
+   FIX ESPACE ENTRE HERO ET SERVICES
+   ============================================ */
+
+/* Réduire le padding du hero en bas */
+.hero {
+  padding-bottom: 1rem !important;
+}
+
+/* Réduire l'espace après les cartes stats */
+.hero-features-cards {
+  margin-bottom: 0 !important;
+}
+
+/* Réduire le padding de page-layout en haut */
+.page-layout {
+  padding-top: 1rem !important;
+}
+
+/* Réduire l'espace avant Services */
+.services-modern-section {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* Réduire l'espace sous le titre Services */
+.services-modern-header {
+  margin-bottom: 1.5rem !important;
+}
+
+.services-modern-header h2 {
+  margin-bottom: 1.5rem !important;
+}
+
