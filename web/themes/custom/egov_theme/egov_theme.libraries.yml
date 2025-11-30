@@ -12,19 +12,16 @@ global-scripts:
     - core/drupal
     - core/jquery
 
-menu-styling:
-  version: 1.0
-  css:
-    theme:
-      css/menu-styles.css: {}
+# DÉSACTIVÉ - Conflit CSS menu
+# menu-styling:
+#   version: 1.0
+#   css:
+#     theme:
+#       css/menu-styles.css: {}
 
-menu-pro:
-  version: 1.0
-  css:
-    theme:
-      css/menu-pro.css: {}
-
-presentation-page:
-  css:
-    theme:
-      css/presentation-only.css: {}
+# DÉSACTIVÉ - Conflit CSS menu  
+# menu-pro:
+#   version: 1.0
+#   css:
+#     theme:
+#       css/menu-pro.css: {}

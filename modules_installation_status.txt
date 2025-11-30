@@ -1,0 +1,14 @@
+# eGov Homepage - Installation Modules
+Date: Fri Nov 28 12:42:55 CET 2025
+Modules installés: 0/6 (0%)
+Status: ❌ Problèmes
+
+Modules vérifiés:
+- paragraphs: ❌
+- field_group: ❌
+- admin_toolbar: ❌
+- pathauto: ❌
+- token: ❌
+- entity_reference_revisions: ❌
+
+Prochaine étape: Corriger l'installation

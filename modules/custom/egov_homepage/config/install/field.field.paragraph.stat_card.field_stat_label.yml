@@ -1,0 +1,18 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_stat_label
+    - paragraphs.paragraphs_type.stat_card
+id: paragraph.stat_card.field_stat_label
+field_name: field_stat_label
+entity_type: paragraph
+bundle: stat_card
+label: 'Libellé'
+description: 'Le libellé de la statistique (ex: "Administrations", "API Actives")'
+required: true
+translatable: true
+default_value: []
+default_value_callback: ''
+settings: {}
+field_type: string

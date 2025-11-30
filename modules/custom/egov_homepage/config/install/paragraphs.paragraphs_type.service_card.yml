@@ -1,0 +1,9 @@
+langcode: fr
+status: true
+dependencies: {}
+id: service_card
+label: 'Carte Service'
+icon_uuid: null
+icon_default: null
+description: 'Carte pour afficher un service (icône + titre + description)'
+behavior_plugins: []

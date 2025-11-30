@@ -1,0 +1,11 @@
+name: 'eGov Homepage'
+description: 'Module pour gérer la page d''accueil administrable'
+type: module
+core_version_requirement: ^9 || ^10
+package: 'eGov Senegal'
+dependencies:
+  - drupal:node
+  - paragraphs:paragraphs
+  - drupal:field
+  - drupal:text
+  - entity_reference_revisions:entity_reference_revisions

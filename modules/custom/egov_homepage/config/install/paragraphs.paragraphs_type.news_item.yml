@@ -1,0 +1,9 @@
+langcode: fr
+status: true
+dependencies: {}
+id: news_item
+label: 'Article Actualité'
+icon_uuid: null
+icon_default: null
+description: 'Article pour le fil d''actualités'
+behavior_plugins: []

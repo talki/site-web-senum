@@ -87,3 +87,18 @@
   };
 
 })(Drupal, once);
+
+
+
+// Menu hamburger toggle
+document.addEventListener('DOMContentLoaded', function() {
+    const menuToggle = document.getElementById('menuToggle');
+    const menu = document.querySelector('#block-egov-theme-main-menu ul');
+    
+    if (menuToggle && menu) {
+        menuToggle.addEventListener('click', function() {
+            menu.classList.toggle('open');
+            menuToggle.classList.toggle('active');
+        });
+    }
+});

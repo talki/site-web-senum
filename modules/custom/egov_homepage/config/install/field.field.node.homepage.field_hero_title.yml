@@ -1,0 +1,18 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_hero_title
+    - node.type.homepage
+id: node.homepage.field_hero_title
+field_name: field_hero_title
+entity_type: node
+bundle: homepage
+label: 'Titre Hero'
+description: 'Titre principal de la section hero (ex: "Bienvenue sur la Plateforme")'
+required: true
+translatable: true
+default_value: []
+default_value_callback: ''
+settings: {}
+field_type: string

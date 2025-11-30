@@ -1,0 +1,13 @@
+langcode: fr
+status: true
+dependencies: 
+  module:
+    - node
+third_party_settings: {  }
+name: 'Page d''accueil'
+type: homepage
+description: 'Type de contenu pour la page d''accueil du site. Une seule page de ce type doit exister.'
+help: 'Utilisez ce type de contenu pour gérer le contenu de la page d''accueil. Vous pouvez modifier les différentes sections : Hero, Services, Actualités, etc.'
+new_revision: true
+preview_mode: 1
+display_submitted: false

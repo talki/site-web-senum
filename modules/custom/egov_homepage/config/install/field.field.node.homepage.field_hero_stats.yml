@@ -1,0 +1,30 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_hero_stats
+    - node.type.homepage
+    - paragraphs.paragraphs_type.stat_card
+  module:
+    - entity_reference_revisions
+id: node.homepage.field_hero_stats
+field_name: field_hero_stats
+entity_type: node
+bundle: homepage
+label: 'Statistiques Hero'
+description: 'Cartes de statistiques affichées dans la section hero (ex: "45+ Administrations")'
+required: false
+translatable: true
+default_value: []
+default_value_callback: ''
+settings:
+  handler: 'default:paragraph'
+  handler_settings:
+    negate: 0
+    target_bundles:
+      stat_card: stat_card
+    target_bundles_drag_drop:
+      stat_card:
+        enabled: true
+        weight: 2
+field_type: entity_reference_revisions

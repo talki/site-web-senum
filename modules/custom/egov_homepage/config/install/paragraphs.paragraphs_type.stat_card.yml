@@ -1,0 +1,9 @@
+langcode: fr
+status: true
+dependencies: {}
+id: stat_card
+label: 'Carte Statistique'
+icon_uuid: null
+icon_default: null
+description: 'Carte pour afficher une statistique (nombre + libellé)'
+behavior_plugins: []

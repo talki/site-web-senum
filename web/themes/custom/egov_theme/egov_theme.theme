@@ -1,0 +1,15 @@
+<?php
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function egov_theme_preprocess_page(&$variables) {
+  // Pour la page d'accueil uniquement
+  if (\Drupal::service('path.matcher')->isFrontPage()) {
+    // Charger le node 22 directement
+    $node = \Drupal\node\Entity\Node::load(22);
+    if ($node && $node->bundle() == 'page_d_accueil') {
+      $variables['homepage_node'] = $node;
+    }
+  }
+}

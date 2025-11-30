@@ -1,0 +1,18 @@
+langcode: fr
+status: true
+dependencies:
+  config:
+    - field.storage.paragraph.field_stat_number
+    - paragraphs.paragraphs_type.stat_card
+id: paragraph.stat_card.field_stat_number
+field_name: field_stat_number
+entity_type: paragraph
+bundle: stat_card
+label: 'Nombre'
+description: 'Le chiffre à afficher (ex: "45+", "127", "2.3M")'
+required: true
+translatable: true
+default_value: []
+default_value_callback: ''
+settings: {}
+field_type: string
