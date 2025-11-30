@@ -1,0 +1,63 @@
+{# Template pour afficher une actualité en détail #}
+<article class="actualite-detail">
+  
+  {# Bandeau catégorie #}
+  <div class="actualite-header">
+    <div class="container">
+      {% set categorie = node.field_categorie.value %}
+      <span class="actualite-badge badge-{{ categorie }}">
+        {% if categorie == 'nouveau' %}📢 NOUVEAU
+        {% elseif categorie == 'urgent' %}⚠️ URGENT
+        {% elseif categorie == 'info' %}ℹ️ INFO
+        {% endif %}
+      </span>
+    </div>
+  </div>
+  
+  {# Contenu principal #}
+  <div class="actualite-content">
+    <div class="container">
+      
+      {# Métadonnées #}
+      <div class="actualite-meta">
+        <span class="actualite-date">
+          📅 {{ node.created.value|date('d F Y') }}
+        </span>
+        <span class="actualite-author">
+          👤 {{ node.getOwner.getDisplayName }}
+        </span>
+      </div>
+      
+      {# Titre #}
+      <h1 class="actualite-title">{{ node.title.value }}</h1>
+      
+      {# Extrait #}
+      {% if node.field_extrait.value %}
+        <div class="actualite-extrait">
+          {{ node.field_extrait.value }}
+        </div>
+      {% endif %}
+      
+      {# Image si présente #}
+      {% if node.field_image_actualite.entity %}
+        <div class="actualite-image">
+          {{ content.field_image_actualite }}
+        </div>
+      {% endif %}
+      
+      {# Contenu complet #}
+      <div class="actualite-body">
+        {{ content.body }}
+      </div>
+      
+      {# Bouton retour #}
+      <div class="actualite-actions">
+        <a href="/actualites" class="btn-back">
+          ← Retour aux actualités
+        </a>
+      </div>
+      
+    </div>
+  </div>
+  
+</article>
