@@ -134,216 +134,302 @@
                 {% if page.content %}
                     {{ page.content }}
                 {% endif %}
-
-<section class="services-modern-section" id="services">
-
-    <div class="services-modern-header">
-        <h2>Services</h2>
+{# Section Services #}
+<section class="services-section">
+  <div class="container">
+    <h2 class="section-title">Services</h2>
+    
+    {# Tabs Navigation - AU-DESSUS de la box #}
+    <div class="services-tabs">
+      <button class="service-tab active" data-tab="populaires">Services Populaires</button>
+      <button class="service-tab" data-tab="tous">Tous les Services</button>
     </div>
-
-    <div class="services-modern-container">
-
-        <!-- ONGLET -->
-        <div class="services-tabs-wrapper">
-            <div class="services-tabs">
-                <button class="services-tab active" data-tab="populaires">Services Populaires</button>
-                <button class="services-tab" data-tab="techniques">Services Techniques</button>
+    
+    {# Services Container avec bordure arrondie #}
+    <div class="services-container">
+      
+      {# Tab Content - Services Populaires #}
+      <div class="services-content active" id="tab-populaires">
+        <div class="services-grid">
+          
+          <a href="/services/familles" class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
             </div>
-        </div>
-
-        <!-- ONGLET 1 : POPULAIRES -->
-        <div id="populaires" class="tab-content active">
-
-            <div class="services-modern-grid">
-
-                <!-- CARD 1 -->
-                <div class="service-modern-card">
-                    <img src="/themes/custom/egov_theme/icon/building.png" width="48">
-                    <div class="service-modern-info">
-                        <div class="service-modern-title">Familles</div>
-                        <div class="service-modern-desc">État civil, allocations familiales</div>
-                    </div>
-                </div>
-
-                <!-- CARD 2 -->
-                <div class="service-modern-card">
-                    <img src="/themes/custom/egov_theme/icon/integration.png" width="48">
-                    <div class="service-modern-info">
-                        <div class="service-modern-title">Protection Sociale</div>
-                        <div class="service-modern-desc">Sécurité sociale, retraite</div>
-                    </div>
-                </div>
-
-                <!-- CARD 3 -->
-                <div class="service-modern-card">
-                    <img src="/themes/custom/egov_theme/icon/data-exchange.png" width="48">
-                    <div class="service-modern-info">
-                        <div class="service-modern-title">Éducation</div>
-                        <div class="service-modern-desc">Inscription scolaire, bourses</div>
-                    </div>
-                </div>
-
-                <!-- CARD 4 -->
-                <div class="service-modern-card">
-                    <img src="/themes/custom/egov_theme/icon/secret-file.png" width="48">
-                    <div class="service-modern-info">
-                        <div class="service-modern-title">Citoyenneté</div>
-                        <div class="service-modern-desc">Passeport, CNI, carte électeur</div>
-                    </div>
-                </div>
-
-                <!-- CARD 5 -->
-                <div class="service-modern-card">
-                    <img src="/themes/custom/egov_theme/icon/transaction.png" width="48">
-                    <div class="service-modern-info">
-                        <div class="service-modern-title">Taxes</div>
-                        <div class="service-modern-desc">Impôts, taxes foncières</div>
-                    </div>
-                </div>
-
-                <!-- CARD 6 -->
-                <div class="service-modern-card">
-                    <img src="/themes/custom/egov_theme/icon/self-service.png" width="48">
-                    <div class="service-modern-info">
-                        <div class="service-modern-title">Troisième âge</div>
-                        <div class="service-modern-desc">Pension, aide à domicile</div>
-                    </div>
-                </div>
-
+            <h3>Familles</h3>
+          </a>
+          
+          <a href="/services/protection-sociale" class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
             </div>
-        </div>
-
-        <!-- ONGLET 2 : TECHNIQUES -->
-        <div id="techniques" class="tab-content">
-
-            <div class="services-modern-grid">
-
-                <!-- CARD 1 -->
-                <div class="service-modern-card">
-                    <img src="/themes/custom/egov_theme/icon/api-doc.png" width="48">
-                    <div class="service-modern-info">
-                        <div class="service-modern-title">API Gateway</div>
-                        <div class="service-modern-desc">Gestion centralisée</div>
-                    </div>
-                </div>
-
-                <!-- CARD 2 -->
-                <div class="service-modern-card">
-                    <img src="/themes/custom/egov_theme/icon/secret-file.png" width="48">
-                    <div class="service-modern-info">
-                        <div class="service-modern-title">OAuth 2.0</div>
-                        <div class="service-modern-desc">Authentification sécurisée</div>
-                    </div>
-                </div>
-
-                <!-- CARD 3 -->
-                <div class="service-modern-card">
-                    <img src="/themes/custom/egov_theme/icon/data-exchange.png" width="48">
-                    <div class="service-modern-info">
-                        <div class="service-modern-title">Bus ESB</div>
-                        <div class="service-modern-desc">Messages temps réel</div>
-                    </div>
-                </div>
-
-                <!-- CARD 4 -->
-                <div class="service-modern-card">
-                    <img src="/themes/custom/egov_theme/icon/graph.png" width="48">
-                    <div class="service-modern-info">
-                        <div class="service-modern-title">Analytics</div>
-                        <div class="service-modern-desc">Tableaux de bord</div>
-                    </div>
-                </div>
-
-                <!-- CARD 5 -->
-                <div class="service-modern-card">
-                    <img src="/themes/custom/egov_theme/icon/integration.png" width="48">
-                    <div class="service-modern-info">
-                        <div class="service-modern-title">WebHooks</div>
-                        <div class="service-modern-desc">Notifications automatisées</div>
-                    </div>
-                </div>
-
-                <!-- CARD 6 -->
-                <div class="service-modern-card">
-                    <img src="/themes/custom/egov_theme/icon/transaction.png" width="48">
-                    <div class="service-modern-info">
-                        <div class="service-modern-title">Monitoring</div>
-                        <div class="service-modern-desc">Surveillance 24/7</div>
-                    </div>
-                </div>
-
+            <h3>Protection Sociale</h3>
+          </a>
+          
+          <a href="/services/education" class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+              </svg>
             </div>
+            <h3>Éducation</h3>
+          </a>
+          
+          <a href="/services/citoyennete" class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <h3>Citoyenneté</h3>
+          </a>
+          
+          <a href="/services/taxes" class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <h3>Taxes</h3>
+          </a>
+          
+          <a href="/services/troisieme-age" class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="8" r="7"></circle>
+                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+              </svg>
+            </div>
+            <h3>Troisième Âge</h3>
+          </a>
+          
         </div>
-
-        <div class="services-modern-button-wrapper">
-            <a href="#" class="services-modern-button">Tous les Services</a>
+        
+        {# Bouton "Tous les Services" en bas à droite #}
+        <div class="services-footer">
+          <a href="/services/tous" class="btn-all-services">
+            Tous les Services
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
         </div>
-
+      </div>
+      
+      {# Tab Content - Tous les Services #}
+      <div class="services-content" id="tab-tous">
+        <div class="services-grid">
+          
+          <a href="/services/familles" class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+            </div>
+            <h3>Familles</h3>
+          </a>
+          
+          <a href="/services/protection-sociale" class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+              </svg>
+            </div>
+            <h3>Protection Sociale</h3>
+          </a>
+          
+          <a href="/services/education" class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
+                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
+              </svg>
+            </div>
+            <h3>Éducation</h3>
+          </a>
+          
+          <a href="/services/citoyennete" class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+              </svg>
+            </div>
+            <h3>Citoyenneté</h3>
+          </a>
+          
+          <a href="/services/taxes" class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="1" x2="12" y2="23"></line>
+                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+              </svg>
+            </div>
+            <h3>Taxes</h3>
+          </a>
+          
+          <a href="/services/troisieme-age" class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="12" cy="8" r="7"></circle>
+                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
+              </svg>
+            </div>
+            <h3>Troisième Âge</h3>
+          </a>
+          
+          <a href="/services/sante" class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+              </svg>
+            </div>
+            <h3>Santé</h3>
+          </a>
+          
+          <a href="/services/emploi" class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+              </svg>
+            </div>
+            <h3>Emploi</h3>
+          </a>
+          
+          <a href="/services/justice" class="service-card">
+            <div class="service-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
+                <path d="M2 17l10 5 10-5"></path>
+                <path d="M2 12l10 5 10-5"></path>
+              </svg>
+            </div>
+            <h3>Justice</h3>
+          </a>
+          
+        </div>
+        
+        <div class="services-footer">
+          <a href="/services/catalogue" class="btn-all-services">
+            Catalogue Complet
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </a>
+        </div>
+      </div>
+      
     </div>
-
+  </div>
 </section>
 
+{# JavaScript pour les tabs #}
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  const tabs = document.querySelectorAll('.service-tab');
+  const contents = document.querySelectorAll('.services-content');
+  
+  tabs.forEach(tab => {
+    tab.addEventListener('click', function() {
+      // Retirer active de tous
+      tabs.forEach(t => t.classList.remove('active'));
+      contents.forEach(c => c.classList.remove('active'));
+      
+      // Ajouter active au tab cliqué
+      this.classList.add('active');
+      
+      // Afficher le bon contenu
+      const tabId = this.getAttribute('data-tab');
+      document.getElementById('tab-' + tabId).classList.add('active');
+    });
+  });
+});
+</script>
 
 
-                {# NOUVEAU : Fil d'Actualités DÉPLACÉ ICI #}
-                <section class="news-section-main" style="margin-top: 3rem;">
-                    <div class="news-feed" style="background: white; border-radius: 20px; padding: 2.5rem; box-shadow: 0 5px 20px rgba(0,0,0,0.08); border-top: 4px solid #3B82F6;">
-                        <div class="news-feed-header">
-                            <span class="news-feed-icon" style="font-size: 2rem;">📰</span>
-                            <h3 style="font-size: 1.8rem; font-weight: 800; color: #2C3E50;">Fil d'Actualités</h3>
-                        </div>
+         {# Section Fil d'Actualités - Responsive #}
+<section class="news-section-main">
+  <div class="container">
+    <div class="news-feed">
+      <div class="news-feed-header">
+        <span class="news-feed-icon">📰</span>
+        <h3>Fil d'Actualités</h3>
+      </div>
 
-                        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; margin-top: 2rem;">
-                            <div class="news-item" style="background: #F9FAFB; padding: 1.5rem; border-radius: 15px; border-left: 4px solid #00853F;">
-                                <div class="news-date" style="margin-bottom: 1rem;">
-                                    <span>📅</span>
-                                    <span style="color: #7F8C8D; font-size: 0.9rem;">16 Nov 2025</span>
-                                    <span class="news-badge nouveau" style="background: #E8F5E9; color: #00853F; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.75rem; font-weight: 700; margin-left: 0.5rem;">Nouveau</span>
-                                </div>
-                                <div class="news-title" style="font-size: 1.1rem; font-weight: 700; color: #2C3E50; margin-bottom: 0.8rem;">
-                                    Lancement de 15 nouvelles API gouvernementales
-                                </div>
-                                <div class="news-excerpt" style="color: #7F8C8D; line-height: 1.6; font-size: 0.9rem;">
-                                    Le MCTN annonce la mise en ligne de 15 nouvelles API pour faciliter l'accès aux données publiques.
-                                </div>
-                            </div>
+      <div class="news-grid">
+        
+        {# Article 1 - Nouveau #}
+        <article class="news-item news-item-nouveau">
+          <div class="news-date">
+            <span class="date-icon">📅</span>
+            <span class="date-text">16 Nov 2025</span>
+            <span class="news-badge badge-nouveau">Nouveau</span>
+          </div>
+          <h4 class="news-title">Lancement de 15 nouvelles API gouvernementales</h4>
+          <p class="news-excerpt">
+            Le MCTN annonce la mise en ligne de 15 nouvelles API pour faciliter l'accès aux données publiques.
+          </p>
+          <a href="#" class="news-link">Lire plus →</a>
+        </article>
 
-                            <div class="news-item" style="background: #F9FAFB; padding: 1.5rem; border-radius: 15px; border-left: 4px solid #E31B23;">
-                                <div class="news-date" style="margin-bottom: 1rem;">
-                                    <span>📅</span>
-                                    <span style="color: #7F8C8D; font-size: 0.9rem;">14 Nov 2025</span>
-                                    <span class="news-badge urgent" style="background: #FFEBEE; color: #E31B23; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.75rem; font-weight: 700; margin-left: 0.5rem;">Urgent</span>
-                                </div>
-                                <div class="news-title" style="font-size: 1.1rem; font-weight: 700; color: #2C3E50; margin-bottom: 0.8rem;">
-                                    Maintenance programmée ce week-end
-                                </div>
-                                <div class="news-excerpt" style="color: #7F8C8D; line-height: 1.6; font-size: 0.9rem;">
-                                    Interruption prévue dimanche de 2h à 6h pour mise à jour système.
-                                </div>
-                            </div>
+        {# Article 2 - Urgent #}
+        <article class="news-item news-item-urgent">
+          <div class="news-date">
+            <span class="date-icon">📅</span>
+            <span class="date-text">14 Nov 2025</span>
+            <span class="news-badge badge-urgent">Urgent</span>
+          </div>
+          <h4 class="news-title">Maintenance programmée ce week-end</h4>
+          <p class="news-excerpt">
+            Interruption prévue dimanche de 2h à 6h pour mise à jour système.
+          </p>
+          <a href="#" class="news-link">Lire plus →</a>
+        </article>
 
-                            <div class="news-item" style="background: #F9FAFB; padding: 1.5rem; border-radius: 15px; border-left: 4px solid #3B82F6;">
-                                <div class="news-date" style="margin-bottom: 1rem;">
-                                    <span>📅</span>
-                                    <span style="color: #7F8C8D; font-size: 0.9rem;">12 Nov 2025</span>
-                                    <span class="news-badge info" style="background: #E3F2FD; color: #3B82F6; padding: 0.3rem 0.8rem; border-radius: 15px; font-size: 0.75rem; font-weight: 700; margin-left: 0.5rem;">Info</span>
-                                </div>
-                                <div class="news-title" style="font-size: 1.1rem; font-weight: 700; color: #2C3E50; margin-bottom: 0.8rem;">
-                                    Webinaire : Intégration API Santé
-                                </div>
-                                <div class="news-excerpt" style="color: #7F8C8D; line-height: 1.6; font-size: 0.9rem;">
-                                    Formation gratuite sur l'utilisation des API du secteur santé, inscription ouverte.
-                                </div>
-                            </div>
-                        </div>
+        {# Article 3 - Info #}
+        <article class="news-item news-item-info">
+          <div class="news-date">
+            <span class="date-icon">📅</span>
+            <span class="date-text">12 Nov 2025</span>
+            <span class="news-badge badge-info">Info</span>
+          </div>
+          <h4 class="news-title">Webinaire : Intégration API Santé</h4>
+          <p class="news-excerpt">
+            Formation gratuite sur l'utilisation des API du secteur santé, inscription ouverte.
+          </p>
+          <a href="#" class="news-link">Lire plus →</a>
+        </article>
 
-                        <div style="text-align: center; margin-top: 2rem;">
-                            <a href="#" class="view-all-news" style="display: inline-block; padding: 1rem 2.5rem; background: #00853F; color: white; text-decoration: none; border-radius: 12px; font-weight: 700; transition: all 0.3s;">
-                                Voir toutes les actualités →
-                            </a>
-                        </div>
-                    </div>
-               </section>
+      </div>
+
+  <div class="news-footer">
+  <a href="/actualites" class="view-all-news">
+    Voir toutes les actualités
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <line x1="5" y1="12" x2="19" y2="12"></line>
+      <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+  </a>
+</div>
+    </div>
+  </div>
+</section>
 
                 {# Section Aide - DÉPLACÉE ICI #}
                 <section class="help-section">
