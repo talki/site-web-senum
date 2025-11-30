@@ -1,0 +1,28 @@
+{# Template pour la page Actualités #}
+<div class="actualites-page news-section-main">
+  <div class="container">
+    
+    {% if title %}
+      <h1 class="page-title section-title">{{ title }}</h1>
+    {% endif %}
+    
+    <div class="news-feed">
+      {% if rows %}
+        <div class="news-grid">
+          {{ rows }}
+        </div>
+      {% else %}
+        <div class="view-empty">
+          <p>Aucune actualité disponible pour le moment.</p>
+        </div>
+      {% endif %}
+      
+      {% if pager %}
+        <div class="view-pager">
+          {{ pager }}
+        </div>
+      {% endif %}
+    </div>
+    
+  </div>
+</div>

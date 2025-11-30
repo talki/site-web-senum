@@ -1,0 +1,25 @@
+{# Template pour chaque actualité - VERSION SIMPLE #}
+{% set categorie = fields.field_categorie.content|render|striptags|trim|lower %}
+
+<article class="news-item news-item-{{ categorie }}">
+  
+  <div class="news-date">
+    <span class="date-icon">📅</span>
+    <span class="date-text">{{ fields.created.content }}</span>
+    <span class="news-badge badge-{{ categorie }}">
+      {% if categorie == 'nouveau' %}NOUVEAU
+      {% elseif categorie == 'urgent' %}URGENT
+      {% elseif categorie == 'info' %}INFO
+      {% endif %}
+    </span>
+  </div>
+  
+  <h4 class="news-title">
+    {{ fields.title.content|striptags }}
+  </h4>
+  
+  <p class="news-excerpt">
+    {{ fields.field_extrait.content|striptags }}
+  </p>
+  
+</article>
