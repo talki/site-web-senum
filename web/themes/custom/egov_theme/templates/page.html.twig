@@ -59,25 +59,19 @@
           </div>
 
           {# Menu avec Hamburger #}
-          <div class="menu-container">
-            <button class="menu-toggle" id="menuToggle">
-              <span></span>
-              <span></span>
-              <span></span>
-            </button>
-            
-            {% if page.primary_menu %}
-              {{ page.primary_menu }}
-            {% else %}
-              <nav role="navigation">
-                <ul>
-                  <li><a href="/">Accueil</a></li>
-                  <li><a href="/cadres-et-standards">Cadres et Standards</a></li>
-                  <li><a href="/tableau-de-bord">Tableau de Bord</a></li>
-                </ul>
-              </nav>
-            {% endif %}
-          </div>
+      <div class="menu-container">
+                <!-- Bouton hamburger -->
+                <button class="menu-toggle" id="menuToggle">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <!-- Menu existant -->
+                {% if page.primary_menu %}
+                    {{ page.primary_menu }}
+                {% endif %}
+            </div>
         </div>
       </div>
     </nav>
@@ -86,7 +80,6 @@
     {% if page.breadcrumb %}
       <div class="breadcrumb-wrapper">
         <div class="container">
-          {{ page.breadcrumb }}
         </div>
       </div>
     {% endif %}
@@ -216,26 +209,5 @@
     <js-bottom-placeholder token="{{ placeholder_token }}">
 
     {# JavaScript pour Menu Hamburger #}
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const menuToggle = document.getElementById('menuToggle');
-        const menu = document.querySelector('#block-egov-theme-main-menu ul');
-        
-        if (menuToggle && menu) {
-            menuToggle.addEventListener('click', function() {
-                menu.classList.toggle('open');
-                menuToggle.classList.toggle('active');
-            });
-            
-            // Fermer le menu en cliquant ailleurs
-            document.addEventListener('click', function(e) {
-                if (!menuToggle.contains(e.target) && !menu.contains(e.target)) {
-                    menu.classList.remove('open');
-                    menuToggle.classList.remove('active');
-                }
-            });
-        }
-    });
-    </script>
   </body>
 </html>
