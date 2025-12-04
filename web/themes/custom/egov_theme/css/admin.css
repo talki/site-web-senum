@@ -1,0 +1,157 @@
+/* Styles pour l'administration des services eGov */
+
+/* Amélioration des formulaires de création/édition de contenu */
+.node-service-category-form,
+.node-service-item-form,
+.node-services-page-form {
+  max-width: none;
+}
+
+/* Groupement visuel des champs */
+.field--name-field-category-icon,
+.field--name-field-category-color {
+  display: inline-block;
+  width: 48%;
+  margin-right: 2%;
+  vertical-align: top;
+}
+
+.field--name-field-service-icon,
+.field--name-field-service-badge {
+  display: inline-block;
+  width: 48%;
+  margin-right: 2%;
+  vertical-align: top;
+}
+
+/* Amélioration de la prévisualisation des icônes */
+.field--name-field-category-icon input,
+.field--name-field-service-icon input {
+  font-size: 2rem;
+  text-align: center;
+  width: 80px;
+}
+
+/* Styles pour les champs de couleur */
+.field--name-field-category-color input {
+  font-family: monospace;
+  font-size: 0.85rem;
+}
+
+/* Aide visuelle pour les gradients */
+.field--name-field-category-color .form-item::after {
+  content: "Exemple: linear-gradient(135deg, #64748b, #94a3b8)";
+  display: block;
+  font-size: 0.75rem;
+  color: #666;
+  margin-top: 0.25rem;
+}
+
+/* Amélioration du champ d'ordre */
+.field--name-field-service-order input {
+  width: 100px;
+}
+
+/* Styles pour la liste des contenus */
+.view-frontpage table,
+.admin-list table {
+  width: 100%;
+}
+
+.views-field-field-category-icon,
+.views-field-field-service-icon {
+  text-align: center;
+  font-size: 1.5rem;
+  width: 60px;
+}
+
+.views-field-field-service-badge .service-badge {
+  display: inline-block;
+  padding: 0.2rem 0.6rem;
+  background: #e2e8f0;
+  color: #475569;
+  border-radius: 8px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+/* Styles pour les statistiques dans le tableau de bord */
+.egov-services-stats {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.egov-stat-card {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  flex: 1;
+}
+
+.egov-stat-number {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #475569;
+  margin-bottom: 0.5rem;
+}
+
+.egov-stat-label {
+  font-size: 0.9rem;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+/* Amélioration des messages d'aide */
+.field-group-fieldset {
+  border: 1px solid #e1e5e9;
+  border-radius: 4px;
+  padding: 1rem;
+  margin-bottom: 1rem;
+}
+
+.field-group-fieldset legend {
+  font-weight: 600;
+  color: #495057;
+  padding: 0 0.5rem;
+}
+
+/* Messages d'aide contextuelle */
+.egov-help-text {
+  background: #e3f2fd;
+  border-left: 4px solid #2196f3;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 0 4px 4px 0;
+}
+
+.egov-help-text h4 {
+  margin: 0 0 0.5rem 0;
+  color: #1565c0;
+}
+
+.egov-help-text p {
+  margin: 0;
+  color: #424242;
+  line-height: 1.5;
+}
+
+/* Responsive pour l'administration */
+@media (max-width: 768px) {
+  .field--name-field-category-icon,
+  .field--name-field-category-color,
+  .field--name-field-service-icon,
+  .field--name-field-service-badge {
+    display: block;
+    width: 100%;
+    margin-right: 0;
+  }
+  
+  .egov-services-stats {
+    flex-direction: column;
+    gap: 1rem;
+  }
+}

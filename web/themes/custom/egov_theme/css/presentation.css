@@ -1,13 +1,22 @@
-/* === TEST CSS === */
-body {
-  background-color: red !important;
+
+/* TEST CSS PRÉSENTATION */
+.page-wrapper {
 }
 
-* {
-  border: 2px solid blue !important;
+.dashboard-hero {
+  background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+  padding: 4rem 5%;
+  text-align: center;
 }
 
-h1, h2, h3 {
-  color: green !important;
-  font-size: 50px !important;
+.dashboard-hero h1 {
+  font-size: 3rem;
+  font-weight: 900;
+  color: #1F2937;
+  margin-bottom: 1rem;
+}
+
+.dashboard-main {
+  padding: 3rem 5%;
+  background: #F9FAFB;
 }

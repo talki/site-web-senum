@@ -185,12 +185,13 @@
    RESPONSIVE - MOBILE
    ============================================ */
 
-/* ============================================
-   RESPONSIVE - MOBILE
-   ============================================ */
-
 @media (max-width: 968px) {
-    /* Afficher hamburger et actions mobile */
+    /* Cacher le menu desktop sur mobile */
+    .nav-menu-desktop {
+        display: none !important;
+    }
+    
+    /* Afficher les actions mobile (hamburger) */
     .nav-actions-mobile {
         display: flex !important;
     }
@@ -198,111 +199,6 @@
     .hamburger-btn {
         display: flex !important;
     }
-    
-    /* Menu mobile - POSITIONNÉ HORS ÉCRAN */
-    .nav-menu-desktop {
-        display: flex !important; /* ← CHANGÉ DE none À flex */
-        position: fixed !important;
-        top: 70px !important;
-        right: -100% !important; /* ← Caché à droite */
-        width: 300px !important;
-        height: calc(100vh - 70px) !important;
-        background: white !important;
-        box-shadow: -4px 0 20px rgba(0,0,0,0.15) !important;
-        transition: right 0.3s ease !important;
-        overflow-y: auto !important;
-        z-index: 9999 !important;
-        padding: 2rem 0 !important;
-    }
-    
-    /* Menu ouvert - GLISSE VERS LA GAUCHE */
-    .nav-menu-desktop.open {
-        right: 0 !important;
-    }
-    
-    /* Liste principale en colonne */
-    .nav-menu-desktop ul.menu-main {
-        flex-direction: column !important;
-        gap: 0 !important;
-        align-items: stretch !important;
-    }
-    
-    /* Items du menu mobile */
-    .nav-menu-desktop ul.menu-main > li {
-        width: 100% !important;
-        border-bottom: 1px solid #f0f0f0 !important;
-    }
-    
-    /* Links du menu mobile */
-    .nav-menu-desktop ul.menu-main > li > a {
-        display: block !important;
-        padding: 1rem 1.5rem !important;
-        font-size: 1rem !important;
-    }
-    
-    /* Sous-menus en mobile */
-    .nav-menu-desktop ul.submenu {
-        position: static !important;
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: none !important;
-        box-shadow: none !important;
-        border: none !important;
-        border-radius: 0 !important;
-        background: #f9fafb !important;
-        padding: 0 !important;
-        max-height: 0 !important;
-        overflow: hidden !important;
-        transition: max-height 0.3s ease !important;
-    }
-    
-    /* Sous-menu ouvert en mobile */
-    .nav-menu-desktop li.submenu-open > ul.submenu {
-        max-height: 500px !important;
-        padding: 0.5rem 0 !important;
-    }
-    
-    /* Links de sous-menu mobile */
-    .nav-menu-desktop ul.submenu a {
-        padding: 0.75rem 2.5rem !important;
-        font-size: 0.9rem !important;
-    }
-    
-    /* Flèche en mobile */
-    .nav-menu-desktop li.menu-item--expanded > a::after {
-        content: '▶' !important;
-        float: right !important;
-        transform: none !important;
-    }
-    
-    .nav-menu-desktop li.submenu-open > a::after {
-        content: '▼' !important;
-    }
-    
-    /* Overlay sombre */
-    .nav-menu-desktop.open::before {
-        content: '';
-        position: fixed;
-        top: 70px;
-        left: 0;
-        width: 100vw;
-        height: calc(100vh - 70px);
-        background: rgba(0,0,0,0.5);
-        z-index: -1;
-    }
-}
-
-/* Animation hamburger */
-.hamburger-btn.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
-
-.hamburger-btn.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger-btn.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -6px);
 }
 
 /* ============================================
@@ -349,37 +245,24 @@
 
 
 /* ============================================
-   MENU MOBILE - HAMBURGER
+   AMÉLIORATION DESIGN MENU MOBILE
    ============================================ */
 
-/* Animation du bouton hamburger */
-.hamburger-btn.active span:nth-child(1) {
-    transform: rotate(45deg) translate(5px, 5px);
-}
-
-.hamburger-btn.active span:nth-child(2) {
-    opacity: 0;
-}
-
-.hamburger-btn.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(7px, -6px);
-}
-
-/* Menu mobile */
 @media (max-width: 968px) {
-    /* Menu caché par défaut */
+    /* Menu mobile - Design amélioré */
     .nav-menu-desktop {
+        display: flex !important;
         position: fixed !important;
-        top: 70px !important;
+        top: 0 !important; /* ← Commence en haut */
         right: -100% !important;
-        width: 300px !important;
-        height: calc(100vh - 70px) !important;
+        width: 320px !important; /* ← Plus large */
+        height: 100vh !important; /* ← Pleine hauteur */
         background: white !important;
-        box-shadow: -4px 0 20px rgba(0,0,0,0.15) !important;
-        transition: right 0.3s ease !important;
+        box-shadow: -4px 0 30px rgba(0,0,0,0.2) !important;
+        transition: right 0.3s ease-in-out !important;
         overflow-y: auto !important;
         z-index: 9999 !important;
-        padding: 2rem 0 !important;
+        padding: 0 !important;
     }
     
     /* Menu ouvert */
@@ -387,24 +270,59 @@
         right: 0 !important;
     }
     
-    /* Liste principale en colonne */
+    /* Header du menu mobile */
+    .nav-menu-desktop::after {
+        content: 'Menu';
+        display: block;
+        padding: 1.5rem;
+        background: var(--senegal-green);
+        color: white;
+        font-size: 1.3rem;
+        font-weight: 800;
+        text-align: center;
+        border-bottom: 3px solid var(--senegal-yellow);
+    }
+    
+    /* Liste principale */
     .nav-menu-desktop ul.menu-main {
         flex-direction: column !important;
         gap: 0 !important;
         align-items: stretch !important;
+        padding: 1rem 0 !important;
+        margin-top: 70px !important; /* Espace pour le header */
     }
     
     /* Items du menu mobile */
     .nav-menu-desktop ul.menu-main > li {
         width: 100% !important;
-        border-bottom: 1px solid #f0f0f0 !important;
+        border-bottom: 1px solid #e5e7eb !important;
     }
     
-    /* Links du menu mobile */
+    /* Links du menu mobile - Plus espacés */
     .nav-menu-desktop ul.menu-main > li > a {
-        display: block !important;
-        padding: 1rem 1.5rem !important;
-        font-size: 1rem !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 1.2rem 1.5rem !important;
+        font-size: 1.05rem !important;
+        font-weight: 600 !important;
+        color: var(--text-dark) !important;
+        transition: all 0.2s ease !important;
+    }
+    
+    /* Hover sur les items */
+    .nav-menu-desktop ul.menu-main > li > a:hover {
+        background: var(--bg-light) !important;
+        padding-left: 2rem !important;
+        color: var(--senegal-green) !important;
+    }
+    
+    /* Item actif */
+    .nav-menu-desktop ul.menu-main > li > a.is-active {
+        background: #e8f5e9 !important;
+        color: var(--senegal-green) !important;
+        font-weight: 700 !important;
+        border-left: 4px solid var(--senegal-green) !important;
     }
     
     /* Sous-menus en mobile */
@@ -416,51 +334,102 @@
         box-shadow: none !important;
         border: none !important;
         border-radius: 0 !important;
-        background: #f9fafb !important;
+        background: #f8fafc !important;
         padding: 0 !important;
         max-height: 0 !important;
         overflow: hidden !important;
-        transition: max-height 0.3s ease !important;
+        transition: max-height 0.4s ease !important;
     }
     
-    /* Sous-menu ouvert en mobile */
+    /* Sous-menu ouvert */
     .nav-menu-desktop li.submenu-open > ul.submenu {
-        max-height: 500px !important;
+        max-height: 600px !important;
         padding: 0.5rem 0 !important;
+        border-left: 3px solid var(--senegal-green) !important;
     }
     
-    /* Items de sous-menu mobile */
+    /* Items de sous-menu */
     .nav-menu-desktop ul.submenu > li {
+        border-bottom: 1px solid #e5e7eb !important;
+    }
+    
+    .nav-menu-desktop ul.submenu > li:last-child {
         border-bottom: none !important;
     }
     
-    /* Links de sous-menu mobile */
+    /* Links de sous-menu */
     .nav-menu-desktop ul.submenu a {
-        padding: 0.75rem 2.5rem !important;
-        font-size: 0.9rem !important;
+        display: block !important;
+        padding: 1rem 1.5rem 1rem 3rem !important;
+        font-size: 0.95rem !important;
+        color: #475569 !important;
+        font-weight: 500 !important;
+        transition: all 0.2s ease !important;
     }
     
-    /* Flèche en mobile */
+    .nav-menu-desktop ul.submenu a:hover {
+        background: white !important;
+        color: var(--senegal-green) !important;
+        padding-left: 3.5rem !important;
+    }
+    
+    .nav-menu-desktop ul.submenu a.is-active {
+        background: white !important;
+        color: var(--senegal-green) !important;
+        font-weight: 700 !important;
+    }
+    
+    /* Flèches plus jolies */
     .nav-menu-desktop li.menu-item--expanded > a::after {
         content: '▶' !important;
-        float: right !important;
+        font-size: 0.8rem !important;
+        color: #94a3b8 !important;
+        transition: all 0.3s ease !important;
         transform: none !important;
     }
     
     .nav-menu-desktop li.submenu-open > a::after {
         content: '▼' !important;
+        color: var(--senegal-green) !important;
         transform: none !important;
     }
     
-    /* Overlay sombre derrière le menu */
+    /* Overlay sombre amélioré */
     .nav-menu-desktop.open::before {
         content: '';
         position: fixed;
-        top: 70px;
+        top: 0;
         left: 0;
         width: 100vw;
-        height: calc(100vh - 70px);
-        background: rgba(0,0,0,0.5);
+        height: 100vh;
+        background: rgba(0,0,0,0.6);
         z-index: -1;
+        animation: fadeIn 0.3s ease;
     }
+    
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+}
+
+/* Animation hamburger - Plus fluide */
+.hamburger-btn {
+    transition: transform 0.3s ease !important;
+}
+
+.hamburger-btn:active {
+    transform: scale(0.9);
+}
+
+.hamburger-btn.active span:nth-child(1) {
+    transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger-btn.active span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger-btn.active span:nth-child(3) {
+    transform: rotate(-45deg) translate(6px, -6px);
 }

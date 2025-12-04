@@ -1,731 +1,588 @@
-{#
-/**
- * @file
- * Page d'accueil - Structure réorganisée
- */
-#}
 
-{# Top Bar #}
-<div class="top-bar">
-    <div class="container">
-        <div class="top-bar-content">
-            <div class="top-bar-left">
-                <div class="top-bar-item">
-                    <span>📧</span>
-                    <span>contact@interop.sn</span>
-                </div>
-                <div class="top-bar-item">
-                    <span>📞</span>
-                    <span>+221 33 XXX XX XX</span>
-                </div>
-            </div>
-            <div class="top-bar-right">
-                <a href="#" class="social-link"></a>
-                <a href="#" class="social-link"></a>
-                <a href="#" class="social-link"></a>
-                <a href="#" class="social-link"></a>
-            </div>
+<!-- Navigation -->
+<nav>
+    <div class="logo">
+        <div class="logo-flag">
+            <div class="flag-stripe flag-green"></div>
+            <div class="flag-stripe flag-yellow"></div>
+            <div class="flag-stripe flag-red"></div>
+        </div>
+        <div class="logo-text">
+            <h1>Jokkoo</h1>
+            <div class="logo-subtitle">Plateforme d'Interopérabilité</div>
         </div>
     </div>
-</div>
-
-{# Navigation #}
-<nav class="main-navigation">
-    <div class="container">
-        <div class="nav-content">
-            <div class="logo-container">
-                <a href="/" style="text-decoration: none; display: flex; align-items: center; gap: 1rem;">
-                    <div class="logo-flag">
-                        <div class="flag-stripe flag-green"></div>
-                        <div class="flag-stripe flag-yellow">⭐</div>
-                        <div class="flag-stripe flag-red"></div>
-                    </div>
-                    <div class="logo-text-container">
-                        <h1 style="margin: 0; color: var(--senegal-green);">Interopérabilité</h1>
-                        <div class="logo-subtitle">République du Sénégal</div>
-                    </div>
-                </a>
-            </div>
-            
-            
-            <div class="menu-container">
-    <!-- Bouton hamburger -->
-    <button class="menu-toggle" id="menuToggle">
-        <span></span>
-        <span></span>
-        <span></span>
-    </button>
-    
-    <!-- Menu existant -->
-    {% if page.primary_menu %}
-        {{ page.primary_menu }}
-    {% endif %}
-</div>
 
 
-        </div>
+
+    {# Menu Desktop #}
+    <div class="nav-menu-desktop">
+        {% if page.primary_menu %}
+            {{ page.primary_menu }}
+        {% endif %}
+    </div>
+
+    {# Actions Mobile #}
+    <div class="nav-actions-mobile">
+        <button class="search-btn">🔍</button>
+        <button class="hamburger-btn" id="hamburgerBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
     </div>
 </nav>
 
-{# Hero Section #}
-<section class="hero" id="accueil">
-    <div class="container">
-        <div class="hero-decorations">
-            <div class="hero-circle circle-1"></div>
-            <div class="hero-circle circle-2"></div>
-            <div class="hero-circle circle-3"></div>
-        </div>
-
-        <div class="hero-content fade-in-up">
-            <div class="hero-badge">
-                <span>🇸🇳</span>
-                <span>Plateforme Nationale d'Interopérabilité</span>
+<!-- Sidebar -->
+<div class="sidebar-overlay" id="sidebarOverlay"></div>
+<div class="sidebar-menu" id="sidebarMenu">
+    <div class="sidebar-header">
+        <div class="sidebar-logo">
+            <div class="logo-flag">
+                <div class="flag-stripe flag-green"></div>
+                <div class="flag-stripe flag-yellow"></div>
+                <div class="flag-stripe flag-red"></div>
             </div>
-
-            <h2>
-                Bienvenue sur la Plateforme<br>
-                <span class="hero-highlight">d'Interopérabilité du Sénégal</span>
-            </h2>
-
-            <p>
-                Notre plateforme constitue l'épine dorsale de la transformation digitale 
-                des services publics sénégalais. Nous connectons les administrations, 
-                harmonisons les systèmes et accélérons l'innovation pour un Sénégal numérique 
-                moderne, efficace et inclusif.
-            </p>
-
-            <h3 class="hero-stats-title">L'Interopérabilité en Chiffres</h3>
-            <div class="hero-features-cards">
-                <div class="hero-card">
-                    <img src="/themes/custom/egov_theme/icon/building.png" alt="Administrations" style="width: 48px; height: 48px;">
-                    <div class="hero-card-number">45+</div>
-                    <div class="hero-card-label">Administrations</div>
-                </div>
-
-                <div class="hero-card">
-                    <img src="/themes/custom/egov_theme/icon/api-doc.png" alt="API" style="width: 48px; height: 48px;">
-                    <div class="hero-card-number">127</div>
-                    <div class="hero-card-label">API Actives</div>
-                </div>
-
-                <div class="hero-card">
-                    <img src="/themes/custom/egov_theme/icon/transaction.png" alt="Transactions" style="width: 48px; height: 48px;">
-                    <div class="hero-card-number">2.3M</div>
-                    <div class="hero-card-label">Transactions/mois</div>
-                </div>
-            </div>
-            
-
-            
-    
-
-
+            <h2>eGov Sénégal</h2>
         </div>
+        <button class="close-btn" id="closeBtn">✕</button>
     </div>
-</section>
 
-{# Main Layout with Sidebar #}
-<div class="page-layout">
-    <div class="container">
-        <div class="layout-content">
-            {# Main Content #}
-            <div class="main-content">
-
-                {% if page.content %}
-                    {{ page.content }}
-                {% endif %}
-{# Section Services #}
-<section class="services-section">
-  <div class="container">
-    <h2 class="section-title">Services</h2>
-    
-    {# Tabs Navigation - AU-DESSUS de la box #}
-    <div class="services-tabs">
-      <button class="service-tab active" data-tab="populaires">Services Populaires</button>
-      <button class="service-tab" data-tab="tous">Tous les Services</button>
-    </div>
-    
-    {# Services Container avec bordure arrondie #}
-    <div class="services-container">
-      
-      {# Tab Content - Services Populaires #}
-      <div class="services-content active" id="tab-populaires">
-        <div class="services-grid">
-          
-          <a href="/services/familles" class="service-card">
-            <div class="service-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                <polyline points="9 22 9 12 15 12 15 22"></polyline>
-              </svg>
-            </div>
-            <h3>Familles</h3>
-          </a>
-          
-          <a href="/services/protection-sociale" class="service-card">
-            <div class="service-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-              </svg>
-            </div>
-            <h3>Protection Sociale</h3>
-          </a>
-          
-          <a href="/services/education" class="service-card">
-            <div class="service-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-              </svg>
-            </div>
-            <h3>Éducation</h3>
-          </a>
-          
-          <a href="/services/citoyennete" class="service-card">
-            <div class="service-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-              </svg>
-            </div>
-            <h3>Citoyenneté</h3>
-          </a>
-          
-          <a href="/services/taxes" class="service-card">
-            <div class="service-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="12" y1="1" x2="12" y2="23"></line>
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-              </svg>
-            </div>
-            <h3>Taxes</h3>
-          </a>
-          
-          <a href="/services/troisieme-age" class="service-card">
-            <div class="service-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="8" r="7"></circle>
-                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
-              </svg>
-            </div>
-            <h3>Troisième Âge</h3>
-          </a>
-          
-        </div>
-        
-        {# Bouton "Tous les Services" en bas à droite #}
-  
-      </div>
-      
-      {# Tab Content - Tous les Services #}
-      <div class="services-content" id="tab-tous">
-        <div class="services-grid">
-          
-          <a href="/services/familles" class="service-card">
-            <div class="service-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                <polyline points="9 22 9 12 15 12 15 22"></polyline>
-              </svg>
-            </div>
-            <h3>Familles</h3>
-          </a>
-          
-          <a href="/services/protection-sociale" class="service-card">
-            <div class="service-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
-              </svg>
-            </div>
-            <h3>Protection Sociale</h3>
-          </a>
-          
-          <a href="/services/education" class="service-card">
-            <div class="service-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"></path>
-                <path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"></path>
-              </svg>
-            </div>
-            <h3>Éducation</h3>
-          </a>
-          
-          <a href="/services/citoyennete" class="service-card">
-            <div class="service-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                <circle cx="9" cy="7" r="4"></circle>
-                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-              </svg>
-            </div>
-            <h3>Citoyenneté</h3>
-          </a>
-          
-          <a href="/services/taxes" class="service-card">
-            <div class="service-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="12" y1="1" x2="12" y2="23"></line>
-                <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
-              </svg>
-            </div>
-            <h3>Taxes</h3>
-          </a>
-          
-          <a href="/services/troisieme-age" class="service-card">
-            <div class="service-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <circle cx="12" cy="8" r="7"></circle>
-                <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"></polyline>
-              </svg>
-            </div>
-            <h3>Troisième Âge</h3>
-          </a>
-          
-          <a href="/services/sante" class="service-card">
-            <div class="service-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
-              </svg>
-            </div>
-            <h3>Santé</h3>
-          </a>
-          
-          <a href="/services/emploi" class="service-card">
-            <div class="service-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
-                <path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
-              </svg>
-            </div>
-            <h3>Emploi</h3>
-          </a>
-          
-          <a href="/services/justice" class="service-card">
-            <div class="service-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M12 2L2 7l10 5 10-5-10-5z"></path>
-                <path d="M2 17l10 5 10-5"></path>
-                <path d="M2 12l10 5 10-5"></path>
-              </svg>
-            </div>
-            <h3>Justice</h3>
-          </a>
-          
-        </div>
-        
-    
-      </div>
-      
-    </div>
-  </div>
-</section>
-
-{# JavaScript pour les tabs #}
-<script>
-document.addEventListener('DOMContentLoaded', function() {
-  const tabs = document.querySelectorAll('.service-tab');
-  const contents = document.querySelectorAll('.services-content');
-  
-  tabs.forEach(tab => {
-    tab.addEventListener('click', function() {
-      // Retirer active de tous
-      tabs.forEach(t => t.classList.remove('active'));
-      contents.forEach(c => c.classList.remove('active'));
-      
-      // Ajouter active au tab cliqué
-      this.classList.add('active');
-      
-      // Afficher le bon contenu
-      const tabId = this.getAttribute('data-tab');
-      document.getElementById('tab-' + tabId).classList.add('active');
-    });
-  });
-});
-</script>
-
-
-         {# Section Fil d'Actualités - Responsive #}
-<section class="news-section-main">
-  <div class="container">
-    <div class="news-feed">
-      <div class="news-feed-header">
-        <span class="news-feed-icon">📰</span>
-        <h3>Fil d'Actualités</h3>
-      </div>
-
-      <div class="news-grid">
-        
-        {# Article 1 - Nouveau #}
-        <article class="news-item news-item-nouveau">
-          <div class="news-date">
-            <span class="date-icon">📅</span>
-            <span class="date-text">16 Nov 2025</span>
-            <span class="news-badge badge-nouveau">Nouveau</span>
-          </div>
-          <h4 class="news-title">Lancement de 15 nouvelles API gouvernementales</h4>
-          <p class="news-excerpt">
-            Le MCTN annonce la mise en ligne de 15 nouvelles API pour faciliter l'accès aux données publiques.
-          </p>
-          <a href="#" class="news-link">Lire plus →</a>
-        </article>
-
-        {# Article 2 - Urgent #}
-        <article class="news-item news-item-urgent">
-          <div class="news-date">
-            <span class="date-icon">📅</span>
-            <span class="date-text">14 Nov 2025</span>
-            <span class="news-badge badge-urgent">Urgent</span>
-          </div>
-          <h4 class="news-title">Maintenance programmée ce week-end</h4>
-          <p class="news-excerpt">
-            Interruption prévue dimanche de 2h à 6h pour mise à jour système.
-          </p>
-          <a href="#" class="news-link">Lire plus →</a>
-        </article>
-
-        {# Article 3 - Info #}
-        <article class="news-item news-item-info">
-          <div class="news-date">
-            <span class="date-icon">📅</span>
-            <span class="date-text">12 Nov 2025</span>
-            <span class="news-badge badge-info">Info</span>
-          </div>
-          <h4 class="news-title">Webinaire : Intégration API Santé</h4>
-          <p class="news-excerpt">
-            Formation gratuite sur l'utilisation des API du secteur santé, inscription ouverte.
-          </p>
-          <a href="#" class="news-link">Lire plus →</a>
-        </article>
-
-      </div>
-
-  <div class="news-footer">
-  <a href="/actualites" class="view-all-news">
-    Voir toutes les actualités
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-      <line x1="5" y1="12" x2="19" y2="12"></line>
-      <polyline points="12 5 19 12 12 19"></polyline>
-    </svg>
-  </a>
+    <ul class="sidebar-nav">
+        <li class="sidebar-section">
+            <a href="#accueil" class="sidebar-link">Accueil</a>
+        </li>
+        <li class="sidebar-section">
+            <button class="sidebar-link has-submenu" data-submenu="services">
+                <span>Services</span>
+                <span class="arrow">›</span>
+            </button>
+            <ul class="submenu" id="submenu-services">
+                <li><a href="#api">API Gateway</a></li>
+                <li><a href="#identite">Identité Numérique</a></li>
+                <li><a href="#data">Data Exchange</a></li>
+            </ul>
+        </li>
+        <li class="sidebar-section">
+            <a href="#standards" class="sidebar-link">Cadres & Standards</a>
+        </li>
+        <li class="sidebar-section">
+            <a href="#dashboard" class="sidebar-link">Tableau de bord</a>
+        </li>
+        <li class="sidebar-section">
+            <a href="#contact" class="sidebar-link">Contact</a>
+        </li>
+    </ul>
 </div>
-    </div>
-  </div>
+
+<!-- Hero -->
+<section class="hero" id="accueil">
+    <h2>
+        Bienvenue sur la Plateforme<br>
+        <span class="hero-highlight">d'Interopérabilité du Sénégal</span>
+    </h2>
+    <p>
+        Notre plateforme constitue l'épine dorsale de la transformation digitale 
+        des services publics sénégalais. Nous connectons les administrations, 
+        harmonisons les systèmes et accélérons l'innovation.
+    </p>
 </section>
 
-                {# Section Aide - DÉPLACÉE ICI #}
-                <section class="help-section">
-                    <div class="help-container">
-                        <h2 class="help-title">Avez-vous une question ?</h2>
-                        <div class="help-grid">
-                            <div class="help-item">
-                                <img src="/themes/custom/egov_theme/icon/building.png" alt="" class="help-icon">
-                                <div class="help-text">Appelez et parlez à un agent</div>
-                            </div>
-                            <div class="help-item">
-                                <img src="/themes/custom/egov_theme/icon/building.png" alt="" class="help-icon">
-                                <div class="help-text">Contactez notre équipe support</div>
-                            </div>
-                            <div class="help-item">
-                                <img src="/themes/custom/egov_theme/icon/building.png" alt="" class="help-icon">
-                                <div class="help-text">Consultez la foire aux questions</div>
-                            </div>
+<!-- Stats Bar -->
+<section class="stats-bar">
+    <div class="stats-bar-container">
+        <div class="stat-item">
+            <div class="stat-value">45</div>
+            <div class="stat-description">Administrations Connectées</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+            <div class="stat-value">127</div>
+            <div class="stat-description">API Actives</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+            <div class="stat-value">2.3M</div>
+            <div class="stat-description">Transactions/Mois</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+            <div class="stat-value">99.7%</div>
+            <div class="stat-description">Disponibilité</div>
+        </div>
+    </div>
+</section>
+
+<!-- Services Catalog Section -->
+<section class="services-catalog-section" id="catalogue-services">
+    <div class="services-catalog-container">
+        <div class="catalog-header">
+            <h2>Nos Services</h2>
+            <p>Accédez à l'ensemble des services publics numériques du Sénégal</p>
+        </div>
+
+        <div class="services-catalog-grid">
+            <div class="catalog-card protection-sociale">
+                <div class="catalog-card-icon">
+                    <div class="icon-circle">🛡️</div>
+                </div>
+                <h3>Protection Sociale</h3>
+                <p>Allocations, aides familiales et couverture sociale</p>
+                <a href="#protection" class="catalog-link">
+                    <span>Accéder</span>
+                    <span class="arrow-icon">→</span>
+                </a>
+            </div>
+
+            <div class="catalog-card troisieme-age">
+                <div class="catalog-card-icon">
+                    <div class="icon-circle">👴</div>
+                </div>
+                <h3>Troisième Âge</h3>
+                <p>Services dédiés aux seniors et retraités</p>
+                <a href="#seniors" class="catalog-link">
+                    <span>Accéder</span>
+                    <span class="arrow-icon">→</span>
+                </a>
+            </div>
+
+            <div class="catalog-card education">
+                <div class="catalog-card-icon">
+                    <div class="icon-circle">🎓</div>
+                </div>
+                <h3>Éducation</h3>
+                <p>Inscriptions, bourses et orientation scolaire</p>
+                <a href="#education" class="catalog-link">
+                    <span>Accéder</span>
+                    <span class="arrow-icon">→</span>
+                </a>
+            </div>
+
+            <div class="catalog-card citoyennete">
+                <div class="catalog-card-icon">
+                    <div class="icon-circle">🆔</div>
+                </div>
+                <h3>Citoyenneté</h3>
+                <p>Documents d'identité et actes d'état civil</p>
+                <a href="#citoyennete" class="catalog-link">
+                    <span>Accéder</span>
+                    <span class="arrow-icon">→</span>
+                </a>
+            </div>
+
+            <div class="catalog-card taxes">
+                <div class="catalog-card-icon">
+                    <div class="icon-circle">💰</div>
+                </div>
+                <h3>Taxes</h3>
+                <p>Déclarations fiscales et paiement en ligne</p>
+                <a href="#taxes" class="catalog-link">
+                    <span>Accéder</span>
+                    <span class="arrow-icon">→</span>
+                </a>
+            </div>
+
+            <div class="catalog-card sante">
+                <div class="catalog-card-icon">
+                    <div class="icon-circle">🏥</div>
+                </div>
+                <h3>Santé</h3>
+                <p>Dossier médical et rendez-vous en ligne</p>
+                <a href="#sante" class="catalog-link">
+                    <span>Accéder</span>
+                    <span class="arrow-icon">→</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="catalog-cta">
+            <a href="/services" class="btn-all-services">
+                <span>📋</span>
+                <span>Tous les Services</span>
+                <span class="btn-arrow">→</span>
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- Latest News Section -->
+<section class="latest-news-section">
+    <div class="latest-news-container">
+        <div class="latest-news-header">
+            <h2>Actualités</h2>
+            <a href="#" class="explore-more-news">
+                Voir Plus d'Actualités
+                <span>→</span>
+            </a>
+        </div>
+
+        <div class="latest-news-grid">
+            <!-- Large Featured News -->
+            <div class="news-card news-card-large">
+                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop" alt="MWC25" class="news-card-image">
+                <div class="news-card-content">
+                    <h3 class="news-card-title">MCIT Signe un Mémorandum d'Entente avec Alchemist au MWC25 Doha</h3>
+                </div>
+            </div>
+
+            <!-- Small News Cards -->
+            <div class="news-card">
+                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&h=300&fit=crop" alt="Ministry of Justice" class="news-card-image">
+                <div class="news-card-content">
+                    <h3 class="news-card-title">Ministère de la Justice Reçoit la Certification ISO 22301 pour...</h3>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=400&h=300&fit=crop" alt="State Budget" class="news-card-image">
+                <div class="news-card-content">
+                    <h3 class="news-card-title">Projet de Budget Général de l'État pour l'Exercice Fiscal 2026 Approuvé</h3>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <img src="https://images.unsplash.com/photo-1560523159-4a9692d222ef?w=400&h=300&fit=crop" alt="FIFA Arab Cup" class="news-card-image">
+                <div class="news-card-content">
+                    <h3 class="news-card-title">S.A. l'Émir Inaugure la Coupe Arabe de la FIFA Qatar 2025...</h3>
+                </div>
+            </div>
+
+            <div class="news-card">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop" alt="GRSIA Daman" class="news-card-image">
+                <div class="news-card-content">
+                    <h3 class="news-card-title">GRSIA Lance une Nouvelle Identité d'Entreprise "Daman"</h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Combined Media & News -->
+<section class="combined-section">
+    <div class="combined-container">
+        <!-- News Feed -->
+        <div class="news-feed-widget">
+            <div class="widget-header">
+                <span class="widget-icon">📝</span>
+                <h3>Publications</h3>
+            </div>
+
+            <div class="news-timeline">
+                <!-- Publication 1 -->
+                <div class="news-timeline-item">
+                    <div class="news-post-header">
+                        <div class="news-post-avatar">🏛️</div>
+                        <div class="news-post-author-info">
+                            <div class="news-post-author">Ministère du Numérique - MCTN</div>
+                            <div class="news-post-date">16 Nov 2025 · 10:30</div>
+                        </div>
+                        <div class="news-badge-type nouveau">NOUVEAU</div>
+                    </div>
+                    <div class="news-timeline-content">
+                        <h4>Lancement de 15 nouvelles API gouvernementales</h4>
+                        <p>Le MCTN annonce la mise en ligne de 15 nouvelles API pour faciliter l'accès aux données publiques. Ces nouvelles interfaces permettront aux développeurs et administrations de créer des applications innovantes au service des citoyens.</p>
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop" alt="API Launch" class="news-post-image">
+                    </div>
+                    <div class="news-post-actions">
+                        <button class="news-action-btn">
+                            <span>👍</span>
+                            <span>245</span>
+                        </button>
+                        <button class="news-action-btn">
+                            <span>💬</span>
+                            <span>38 commentaires</span>
+                        </button>
+                        <button class="news-action-btn">
+                            <span>📤</span>
+                            <span>Partager</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Publication 2 -->
+                <div class="news-timeline-item">
+                    <div class="news-post-header">
+                        <div class="news-post-avatar">⚙️</div>
+                        <div class="news-post-author-info">
+                            <div class="news-post-author">eGov Sénégal - Service Technique</div>
+                            <div class="news-post-date">14 Nov 2025 · 15:45</div>
+                        </div>
+                        <div class="news-badge-type urgent">URGENT</div>
+                    </div>
+                    <div class="news-timeline-content">
+                        <h4>Maintenance programmée ce week-end</h4>
+                        <p>Interruption prévue dimanche de 2h à 6h pour mise à jour majeure du système. Veuillez planifier vos activités en conséquence.</p>
+                    </div>
+                    <div class="news-post-actions">
+                        <button class="news-action-btn">
+                            <span>👍</span>
+                            <span>89</span>
+                        </button>
+                        <button class="news-action-btn">
+                            <span>💬</span>
+                            <span>12 commentaires</span>
+                        </button>
+                        <button class="news-action-btn">
+                            <span>📤</span>
+                            <span>Partager</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Publication 3 -->
+                <div class="news-timeline-item">
+                    <div class="news-post-header">
+                        <div class="news-post-avatar">🎓</div>
+                        <div class="news-post-author-info">
+                            <div class="news-post-author">Centre de Formation eGov</div>
+                            <div class="news-post-date">12 Nov 2025 · 09:00</div>
+                        </div>
+                        <div class="news-badge-type info">INFO</div>
+                    </div>
+                    <div class="news-timeline-content">
+                        <h4>Webinaire : Intégration API Santé</h4>
+                        <p>Formation gratuite sur l'utilisation des API du secteur santé. Inscriptions ouvertes pour les développeurs et administrateurs système.</p>
+                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=400&fit=crop" alt="Webinar" class="news-post-image">
+                    </div>
+                    <div class="news-post-actions">
+                        <button class="news-action-btn">
+                            <span>👍</span>
+                            <span>156</span>
+                        </button>
+                        <button class="news-action-btn">
+                            <span>💬</span>
+                            <span>27 commentaires</span>
+                        </button>
+                        <button class="news-action-btn">
+                            <span>📤</span>
+                            <span>Partager</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Video Podcast -->
+        <div class="video-podcast-widget">
+            <div class="widget-header">
+                <span class="widget-icon">📹</span>
+                <h3>Vidéos Podcast</h3>
+            </div>
+
+            <div class="featured-video-card">
+                <div class="featured-video-thumbnail">
+                    <span class="new-video-badge">🔴 NOUVEAU</span>
+                    <div class="featured-play-btn">▶</div>
+                    <span class="video-time">32:15</span>
+                </div>
+                <div class="featured-video-details">
+                    <h4>L'Interopérabilité au Service du Citoyen Sénégalais</h4>
+                    <div class="video-stats">
+                        <span>📅 14 Nov 2025</span>
+                        <span>👁️ 12.5K vues</span>
+                    </div>
+                    <p>Interview exclusive avec le Directeur du MCTN sur la transformation digitale.</p>
+                </div>
+            </div>
+
+            <div class="video-playlist">
+                <div class="playlist-item">
+                    <div class="playlist-thumbnail gradient-purple">
+                        <div class="playlist-play">▶</div>
+                    </div>
+                    <div class="playlist-info">
+                        <h5>Sécurité des API : Bonnes Pratiques et...</h5>
+                        <div class="playlist-meta">
+                            <span>⏱️ 28:45</span>
+                            <span>👁️ 8.2K</span>
                         </div>
                     </div>
-                </section>
-
-            </div>
-
-            {# Sidebar - SIMPLIFIÉ #}
-            <aside class="sidebar">
-                <div class="sidebar-sticky">
-
-      {# Podcast Video Widget #}
-      <div class="podcast-widget">
-        <div class="podcast-header">
-          <span class="podcast-icon"></span>
-          <h4>Vidéos Podcast</h4>
-        </div>
-
-        <div class="podcast-featured">
-          <div class="podcast-video-container">
-            <div class="podcast-video-thumbnail" style="background: linear-gradient(135deg, var(--senegal-green), var(--senegal-green-light)); display: flex; align-items: center; justify-content: center; font-size: 4rem;">
-              
-            </div>
-            <div class="podcast-play-overlay">
-              <div class="podcast-play-button">▶</div>
-            </div>
-            <div class="podcast-live-badge">
-              <span style="width: 8px; height: 8px; background: white; border-radius: 50%; display: inline-block;"></span>
-              <span>NOUVEAU</span>
-            </div>
-            <div class="podcast-duration-badge">32:15</div>
-          </div>
-          <div class="podcast-info">
-            <div class="podcast-title">
-              L'Interopérabilité au Service du Citoyen Sénégalais
-            </div>
-            <div class="podcast-meta">
-              <span>📅 14 Nov 2025</span>
-              <span>12.5K vues</span>
-            </div>
-            <div class="podcast-description">
-              Interview exclusive avec le Directeur du MCTN sur la transformation 
-              digitale et l'impact de la plateforme d'interopérabilité.
-            </div>
-          </div>
-        </div>
-
-        <div class="podcast-list">
-          <div class="podcast-item">
-            <div class="podcast-item-thumbnail" style="background: linear-gradient(135deg, #667eea, #764ba2); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
-              
-            </div>
-            <div class="podcast-item-content">
-              <div class="podcast-item-title">
-                Sécurité des API : Bonnes Pratiques et Normes
-              </div>
-              <div class="podcast-item-meta">
-                <span>⏱️ 28:45</span>
-                <span class="podcast-item-views">👁️ 8.2K</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="podcast-item">
-            <div class="podcast-item-thumbnail" style="background: linear-gradient(135deg, #f093fb, #f5576c); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
-              🏥
-            </div>
-            <div class="podcast-item-content">
-              <div class="podcast-item-title">
-                Digitalisation du Secteur Santé : Témoignage
-              </div>
-              <div class="podcast-item-meta">
-                <span>⏱️ 35:20</span>
-                <span class="podcast-item-views">👁️ 15.7K</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="podcast-item">
-            <div class="podcast-item-thumbnail" style="background: linear-gradient(135deg, #4facfe, #00f2fe); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
-              📊
-            </div>
-            <div class="podcast-item-content">
-              <div class="podcast-item-title">
-                Open Data et Transparence Gouvernementale
-              </div>
-              <div class="podcast-item-meta">
-                <span>⏱️ 25:30</span>
-                <span class="podcast-item-views">👁️ 6.9K</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="podcast-item">
-            <div class="podcast-item-thumbnail" style="background: linear-gradient(135deg, #fa709a, #fee140); display: flex; align-items: center; justify-content: center; color: white; font-size: 1.5rem;">
-              🚀
-            </div>
-            <div class="podcast-item-content">
-              <div class="podcast-item-title">
-                Innovation Digitale : Les Startups Tech au Sénégal
-              </div>
-              <div class="podcast-item-meta">
-                <span>⏱️ 42:10</span>
-                <span class="podcast-item-views">👁️ 11.3K</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <a href="#" class="all-podcasts-link">
-           Voir toutes les vidéos →
-        </a>
-      </div>
-
-     
                 </div>
-            </aside>
-        </div>
-    </div>
-</div>
 
+                <div class="playlist-item">
+                    <div class="playlist-thumbnail gradient-pink">
+                        <div class="playlist-play">▶</div>
+                    </div>
+                    <div class="playlist-info">
+                        <h5>Digitalisation du Secteur Santé :...</h5>
+                        <div class="playlist-meta">
+                            <span>⏱️ 35:20</span>
+                            <span>👁️ 15.7K</span>
+                        </div>
+                    </div>
+                </div>
 
+                <div class="playlist-item">
+                    <div class="playlist-thumbnail gradient-cyan">
+                        <div class="playlist-play">▶</div>
+                    </div>
+                    <div class="playlist-info">
+                        <h5>Open Data et Transparence...</h5>
+                        <div class="playlist-meta">
+                            <span>⏱️ 25:30</span>
+                            <span>👁️ 6.9K</span>
+                        </div>
+                    </div>
+                </div>
 
-{# CTA Section #}
-{# CTA Section - Version Simple #}
-<section class="cta-section" id="contact">
-    <div class="container">
-        <div class="cta-content">
-            <h2>Rejoignez l'Écosystème d'Interopérabilité</h2>
-            <p>
-                Administrations, développeurs, partenaires techniques : Ensemble, 
-                construisons le Sénégal numérique de demain.
-            </p>
-            <div class="cta-buttons-simple">
-                <a href="#" class="btn-simple btn-simple-primary">
-                    Demander une Connexion API
-                </a>
-                <a href="#" class="btn-simple btn-simple-outline">
-                    Contact
-                </a>
+                <div class="playlist-item">
+                    <div class="playlist-thumbnail gradient-orange">
+                        <div class="playlist-play">▶</div>
+                    </div>
+                    <div class="playlist-info">
+                        <h5>Innovation Digitale : Les Startups Tech au...</h5>
+                        <div class="playlist-meta">
+                            <span>⏱️ 42:10</span>
+                            <span>👁️ 11.3K</span>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            <a href="#" class="view-all-videos">📺 Voir toutes les vidéos →</a>
         </div>
     </div>
 </section>
 
-<script>
-    // Menu hamburger toggle
-document.addEventListener('DOMContentLoaded', function() {
-    const menuToggle = document.getElementById('menuToggle');
-    const menu = document.querySelector('#block-egov-theme-main-menu ul');
-    
-    if (menuToggle && menu) {
-        menuToggle.addEventListener('click', function() {
-            menu.classList.toggle('open');
-            menuToggle.classList.toggle('active');
-        });
-    }
-});
+<!-- Contact -->
+<section class="contact-section" id="contact">
+    <h2>Rejoignez l'Écosystème d'Interopérabilité</h2>
+    <p>
+        Administrations, développeurs, partenaires techniques : Ensemble, 
+        construisons le Sénégal numérique de demain. Connectez-vous à notre 
+        plateforme et participez à la transformation digitale nationale.
+    </p>
 
-document.querySelectorAll(".services-tab").forEach(tab => {
-    tab.addEventListener("click", () => {
-        
-        document.querySelectorAll(".services-tab").forEach(t => t.classList.remove("active"));
-        tab.classList.add("active");
+    <a href="#" class="btn">📞 Nous Contacter</a>
+</section>
 
-        document.querySelectorAll(".tab-content").forEach(c => c.classList.remove("active"));
 
-        document.getElementById(tab.dataset.tab).classList.add("active");
-    });
-});
-</script>
-{# Footer amélioré #}
-<footer class="site-footer" role="contentinfo">
-  <div class="footer-container">
-    {# Section principale du footer #}
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
     <div class="footer-grid">
-      
-      {# À propos / Branding #}
-      <div class="footer-section footer-about">
-        <div class="footer-brand">
-          <h3>Plateforme d'Interopérabilité</h3>
-          <p class="footer-tagline">
-            Facilitant l'échange de données et l'intégration des services publics numériques au Sénégal.
-          </p>
+        <div class="footer-section footer-about">
+            <h3>À PROPOS</h3>
+            <p>
+                La Plateforme Nationale d'Interopérabilité du Sénégal (eGov Sénégal) 
+                est une initiative du Ministère de la Communication, des Télécommunications 
+                et du Numérique dans le cadre du New Deal Technologique.
+            </p>
+            <div class="social-icons">
+                <div class="social-icon">📘</div>
+                <div class="social-icon">🐦</div>
+                <div class="social-icon">💼</div>
+                <div class="social-icon">📸</div>
+                <div class="social-icon">📹</div>
+            </div>
         </div>
-        <div class="social-links">
-          <h4 class="social-title">Suivez-nous</h4>
-          <div class="social-icons">
-            <a href="#" class="social-icon" aria-label="Facebook" title="Facebook">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-              </svg>
-            </a>
-            <a href="#" class="social-icon" aria-label="Twitter" title="Twitter">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
-              </svg>
-            </a>
-            <a href="#" class="social-icon" aria-label="LinkedIn" title="LinkedIn">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
-              </svg>
-            </a>
-            <a href="#" class="social-icon" aria-label="YouTube" title="YouTube">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
-              </svg>
-            </a>
-          </div>
+
+        <div class="footer-section">
+            <h3>SERVICES</h3>
+            <ul>
+                <li><a href="#protection-sociale">Protection Sociale</a></li>
+                <li><a href="#troisieme-age">Troisième Âge</a></li>
+                <li><a href="#education">Éducation</a></li>
+                <li><a href="#citoyennete">Citoyenneté</a></li>
+                <li><a href="#taxes">Taxes & Impôts</a></li>
+                <li><a href="#sante">Santé</a></li>
+            </ul>
         </div>
-      </div>
 
-      {# Liens rapides #}
-      <div class="footer-section">
-        <h3 class="footer-title">Liens Rapides</h3>
-        <ul class="footer-menu">
-          <li><a href="/about/vision">Vision & Mission</a></li>
-          <li><a href="/about/governance">Gouvernance</a></li>
-          <li><a href="/about/team">Notre Équipe</a></li>
-          <li><a href="/partners">Partenaires</a></li>
-          <li><a href="/news">Actualités</a></li>
-        </ul>
-      </div>
-
-      {# Ressources #}
-      <div class="footer-section">
-        <h3 class="footer-title">Ressources</h3>
-        <ul class="footer-menu">
-          <li><a href="/docs">Documentation Technique</a></li>
-          <li><a href="/api-catalog">Catalogue d'API</a></li>
-          <li><a href="/guides">Guides d'Intégration</a></li>
-          <li><a href="/faq">Questions Fréquentes</a></li>
-          <li><a href="/support">Support Développeurs</a></li>
-        </ul>
-      </div>
-
-      {# Contact #}
-      <div class="footer-section">
-        <h3 class="footer-title">Contact</h3>
-        <ul class="footer-contact">
-          <li class="footer-contact-item">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
-              <circle cx="12" cy="10" r="3"></circle>
-            </svg>
-            <span>Dakar, Sénégal</span>
-          </li>
-          <li class="footer-contact-item">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
-              <polyline points="22,6 12,13 2,6"></polyline>
-            </svg>
-            <a href="mailto:contact@interop.sn">contact@interop.sn</a>
-          </li>
-          <li class="footer-contact-item">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
-            </svg>
-            <a href="tel:+221338000000">+221 33 800 00 00</a>
-          </li>
-        </ul>
-        
-        {# Newsletter #}
-        <div class="footer-newsletter">
-          <h4>Newsletter</h4>
-          <p class="newsletter-text">Restez informé des dernières mises à jour</p>
-          <form class="newsletter-form" action="/newsletter/subscribe" method="post">
-            <input type="email" name="email" placeholder="Votre email" required aria-label="Adresse email pour la newsletter">
-            <button type="submit" aria-label="S'abonner à la newsletter">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <line x1="5" y1="12" x2="19" y2="12"></line>
-                <polyline points="12 5 19 12 12 19"></polyline>
-              </svg>
-            </button>
-          </form>
+        <div class="footer-section">
+            <h3>RESSOURCES</h3>
+            <ul>
+                <li><a href="#">Documentation API</a></li>
+                <li><a href="#">Guides d'Intégration</a></li>
+                <li><a href="#">Catalogue d'API</a></li>
+                <li><a href="#">Centre d'Aide</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Blog</a></li>
+            </ul>
         </div>
-      </div>
+
+        <div class="footer-section">
+            <h3>CONTACT</h3>
+            <ul>
+                <li><a href="#">📍 Dakar, Sénégal</a></li>
+                <li><a href="#">📧 <span class="__cf_email__" data-cfemail="4724282933262433072e293322352837693429">[email&#160;protected]</span></a></li>
+                <li><a href="#">📞 +221 33 XXX XX XX</a></li>
+                <li><a href="#">💬 Chat en Direct</a></li>
+                <li><a href="#">🎫 Créer un Ticket</a></li>
+            </ul>
+        </div>
     </div>
 
-    {# Barre inférieure #}
     <div class="footer-bottom">
-      <div class="footer-bottom-content">
-        <div class="footer-copyright">
-          <p>&copy; {{ "now"|date("Y") }} MCTN/SENUM - République du Sénégal</p>
-          <p class="footer-subtitle">Plateforme développée dans le cadre du New Deal Technologique</p>
+        <p>© 2025 eGov Sénégal - MCTN/SENUM - République du Sénégal</p>
+        <div class="footer-bottom-links">
+            <a href="#">Mentions Légales</a>
+            <a href="#">Politique de Confidentialité</a>
+            <a href="#">Conditions d'Utilisation</a>
+            <a href="#">Accessibilité</a>
+            <a href="#">Plan du Site</a>
         </div>
-        <nav class="footer-legal" aria-label="Liens légaux">
-          <ul>
-            <li><a href="/legal/terms">Conditions d'utilisation</a></li>
-            <li><a href="/legal/privacy">Politique de confidentialité</a></li>
-            <li><a href="/legal/accessibility">Accessibilité</a></li>
-            <li><a href="/sitemap">Plan du site</a></li>
-          </ul>
-        </nav>
-      </div>
     </div>
-  </div>
 </footer>
+
+
+<script>
+    (function () {
+        'use strict';
+
+        console.log('Menu mobile inline - chargé');
+
+        function initMenu() {
+            const hamburger = document.getElementById('hamburgerBtn');
+            const menu = document.querySelector('.nav-menu-desktop');
+
+            console.log('Init - Hamburger:', hamburger);
+            console.log('Init - Menu:', menu);
+
+            if (!hamburger || !menu) {
+                console.error('Éléments introuvables !');
+                return;
+            }
+
+            // Clic hamburger
+            hamburger.onclick = function (e) {
+                e.preventDefault();
+                console.log('CLICK HAMBURGER !');
+                this.classList.toggle('active');
+                menu.classList.toggle('open');
+                console.log('Classes menu:', menu.className);
+            };
+
+            // Clic dehors
+            document.onclick = function (e) {
+                if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+                    hamburger.classList.remove('active');
+                    menu.classList.remove('open');
+                }
+            };
+
+            // Sous-menus mobile
+            const items = document.querySelectorAll('.nav-menu-desktop li.menu-item--expanded > a');
+            items.forEach(function (link) {
+                link.onclick = function (e) {
+                    if (window.innerWidth <= 968) {
+                        e.preventDefault();
+                        this.parentElement.classList.toggle('submenu-open');
+                        console.log('Sous-menu toggled');
+                    }
+                };
+            });
+
+            console.log('Menu initialisé OK');
+        }
+
+        // Lancer l'init
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initMenu);
+        } else {
+            initMenu();
+        }
+    })();
+</script>

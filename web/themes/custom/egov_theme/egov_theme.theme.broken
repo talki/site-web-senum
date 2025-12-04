@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function egov_theme_preprocess_page(&$variables) {
+  // Pour la page d'accueil uniquement
+  if (\Drupal::service('path.matcher')->isFrontPage()) {
+    // Charger le node 22 directement (homepage)
+    $node = \Drupal\node\Entity\Node::load(22);
+    if ($node && $node->bundle() == 'page_d_accueil') {
+      $variables['homepage_node'] = $node;
+    }
+    
+    // Charger les 3 dernières actualités
+    $actualites_query = \Drupal::entityQuery('node')
+      ->condition('type', 'actualite')
+      ->condition('status', 1)
+      ->sort('created', 'DESC')
+      ->range(0, 3)
+      ->accessCheck(FALSE)
+      ->execute();
+    
+    if (!empty($actualites_query)) {
+      $actualites = \Drupal\node\Entity\Node::loadMultiple($actualites_query);
+      $variables['actualites_recentes'] = $actualites;
+    }
+  }
+}
+  }
+}

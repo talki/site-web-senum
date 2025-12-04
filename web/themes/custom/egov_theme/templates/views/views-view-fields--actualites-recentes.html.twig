@@ -1,0 +1,24 @@
+{# Article - Format identique à votre code statique #}
+{% set categorie = fields.field_categorie.content|render|striptags|trim|lower %}
+{% set node_id = fields.nid.content|render|striptags|trim %}
+
+<article class="news-item news-item-{{ categorie }}">
+  <div class="news-date">
+    <span class="date-icon">📅</span>
+    <span class="date-text">{{ fields.created.content }}</span>
+    <span class="news-badge badge-{{ categorie }}">
+      {% if categorie == 'nouveau' %}Nouveau
+      {% elseif categorie == 'urgent' %}Urgent
+      {% elseif categorie == 'info' %}Info
+      {% endif %}
+    </span>
+  </div>
+  
+  <h4 class="news-title">{{ fields.title.content|striptags }}</h4>
+  
+  <p class="news-excerpt">
+    {{ fields.field_extrait.content|striptags }}
+  </p>
+  
+  <a href="/node/{{ node_id }}" class="news-link">Lire plus →</a>
+</article>

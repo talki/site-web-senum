@@ -12,4 +12,58 @@ function egov_theme_preprocess_page(&$variables) {
       $variables['homepage_node'] = $node;
     }
   }
+  
+  // Gestion des CSS spécifiques par page
+  $node = \Drupal::routeMatch()->getParameter('node');
+  
+  if ($node) {
+    // Page services (node 27)
+    if ($node->id() == 27) {
+      $variables['#attached']['library'][] = 'egov_theme/services-page';
+    }
+    
+  
+
+    // Page services (node 27)
+    if ($node->id() == 28) {
+      $variables['#attached']['library'][] = 'egov_theme/contact-page';
+    }
+
+    // Page services (node 27)
+    if ($node->id() == 20) {
+      $variables['#attached']['library'][] = 'egov_theme/tableau-de-bord-page';
+    }
+    
+    // Page présentation (node 10)
+    if ($node->id() == 10) {
+      $variables['#attached']['library'][] = 'egov_theme/presentation-page';
+    }
+  }
 }
+
+/**
+ * Force le menu principal à charger les sous-menus (multi-niveaux).
+ */
+function egov_theme_preprocess_block(&$variables) {
+  if (isset($variables['elements']['#id']) && $variables['elements']['#id'] == 'egov_theme_main_menu') {
+    $menu_tree = \Drupal::menuTree();
+    $menu_name = 'main';
+    
+    // Charger jusqu'à 3 niveaux de profondeur
+    $parameters = $menu_tree->getCurrentRouteMenuTreeParameters($menu_name);
+    $parameters->setMinDepth(1);
+    $parameters->setMaxDepth(3);
+    $parameters->onlyEnabledLinks();
+    
+    $tree = $menu_tree->load($menu_name, $parameters);
+    $manipulators = [
+      ['callable' => 'menu.default_tree_manipulators:checkAccess'],
+      ['callable' => 'menu.default_tree_manipulators:generateIndexAndSort'],
+    ];
+    $tree = $menu_tree->transform($tree, $manipulators);
+    
+    $variables['content'] = $menu_tree->build($tree);
+  }
+}
+
+

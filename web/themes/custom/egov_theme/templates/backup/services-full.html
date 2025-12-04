@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Catalogue des Services - eGov Sénégal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --senegal-green: #00853F;
+            --senegal-green-light: #00A859;
+            --senegal-yellow: #FCD116;
+            --senegal-red: #E31B23;
+            --white: #FFFFFF;
+            --text-dark: #1F2937;
+            --text-light: #6B7280;
+            --bg-light: #F9FAFB;
+            --bg-gray: #F3F4F6;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: var(--white);
+            padding: 1rem 5%;
+            box-shadow: var(--shadow-md);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo-flag {
+            width: 45px;
+            height: 30px;
+            display: flex;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .flag-stripe {
+            flex: 1;
+        }
+
+        .flag-green { background: var(--senegal-green); }
+        .flag-yellow { background: var(--senegal-yellow); }
+        .flag-red { background: var(--senegal-red); }
+
+        .logo-text h1 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #475569;
+        }
+
+        .logo-subtitle {
+            font-size: 0.7rem;
+            color: var(--text-light);
+        }
+
+        .nav-menu-desktop {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu-desktop a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-menu-desktop a:hover {
+            color: #475569;
+        }
+
+        .nav-menu-desktop a.active {
+            color: #475569;
+        }
+
+        /* Hero Services */
+        .services-hero {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            color: #334155;
+            padding: 5rem 5%;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .services-hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(100, 116, 139, 0.05) 0%, transparent 70%);
+            animation: rotate 30s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .services-hero-content {
+            position: relative;
+            z-index: 10;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .services-hero h1 {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 1.5rem;
+        }
+
+        .services-hero p {
+            font-size: 1.3rem;
+            opacity: 0.95;
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .hero-stats {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .hero-stat-item {
+            text-align: center;
+        }
+
+        .hero-stat-number {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #475569;
+        }
+
+        .hero-stat-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        /* Search & Filter */
+        .search-filter-section {
+            background: var(--white);
+            padding: 2rem 5%;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+        }
+
+        .search-filter-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .search-box {
+            flex: 1;
+            position: relative;
+        }
+
+        .search-box input {
+            width: 100%;
+            padding: 1rem 1rem 1rem 3rem;
+            border: 2px solid var(--bg-gray);
+            border-radius: 12px;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .search-box input:focus {
+            outline: none;
+            border-color: #64748b;
+            box-shadow: 0 0 0 3px rgba(100, 116, 139, 0.1);
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: var(--text-light);
+        }
+
+        .filter-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .filter-btn {
+            padding: 1rem 1.5rem;
+            border: 2px solid var(--bg-gray);
+            background: var(--white);
+            border-radius: 12px;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.3s;
+            white-space: nowrap;
+        }
+
+        .filter-btn:hover, .filter-btn.active {
+            border-color: #64748b;
+            background: #64748b;
+            color: var(--white);
+        }
+
+        /* Services Grid */
+        .services-main {
+            padding: 4rem 5%;
+            background: var(--bg-light);
+        }
+
+        .services-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .category-section {
+            margin-bottom: 4rem;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 3px solid #cbd5e1;
+        }
+
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, #64748b, #94a3b8);
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .category-info h2 {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--text-dark);
+        }
+
+        .category-count {
+            font-size: 0.9rem;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 2rem;
+        }
+
+        .service-item {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s;
+            border-left: 4px solid transparent;
+            cursor: pointer;
+        }
+
+        .service-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+            border-left-color: #64748b;
+        }
+
+        .service-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .service-icon {
+            width: 50px;
+            height: 50px;
+            background: var(--bg-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .service-info h3 {
+            font-size: 1.2rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .service-badge {
+            display: inline-block;
+            padding: 0.2rem 0.6rem;
+            background: #e2e8f0;
+            color: #475569;
+            border-radius: 8px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .service-item p {
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .service-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid var(--bg-light);
+        }
+
+        .service-users {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .service-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: #475569;
+            font-weight: 700;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+
+        .service-link:hover {
+            gap: 0.8rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-grid {
+            max-width: 1400px;
+            margin: 0 auto 3rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            color: #e2e8f0;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .footer-about p {
+            color: rgba(255,255,255,0.8);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #cbd5e1;
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .social-icon:hover {
+            background: #64748b;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .footer-bottom p {
+            margin-bottom: 1rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .footer-bottom-links a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom-links a:hover {
+            color: var(--senegal-yellow);
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .nav-menu-desktop {
+                display: none;
+            }
+
+            .services-hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 1.5rem;
+            }
+
+            .search-filter-container {
+                flex-direction: column;
+            }
+
+            .filter-buttons {
+                width: 100%;
+                overflow-x: auto;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .category-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .services-hero h1 {
+                font-size: 2rem;
+            }
+
+            .footer-bottom-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <div class="logo-flag">
+                <div class="flag-stripe flag-green"></div>
+                <div class="flag-stripe flag-yellow"></div>
+                <div class="flag-stripe flag-red"></div>
+            </div>
+            <div class="logo-text">
+                <h1>eGov Sénégal</h1>
+                <div class="logo-subtitle">Plateforme d'Interopérabilité</div>
+            </div>
+        </div>
+        
+        <ul class="nav-menu-desktop">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="services.html" class="active">Services</a></li>
+            <li><a href="index.html#standards">Cadres & Standards</a></li>
+            <li><a href="index.html#dashboard">Tableau de bord</a></li>
+            <li><a href="index.html#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero -->
+    <section class="services-hero">
+        <div class="services-hero-content">
+            <h1>Catalogue des Services</h1>
+            <p>
+                Découvrez l'ensemble des services publics numériques disponibles 
+                pour simplifier vos démarches administratives au Sénégal.
+            </p>
+            <div class="hero-stats">
+                <div class="hero-stat-item">
+                    <div class="hero-stat-number">127</div>
+                    <div class="hero-stat-label">Services Disponibles</div>
+                </div>
+                <div class="hero-stat-item">
+                    <div class="hero-stat-number">45+</div>
+                    <div class="hero-stat-label">Administrations</div>
+                </div>
+                <div class="hero-stat-item">
+                    <div class="hero-stat-number">850K</div>
+                    <div class="hero-stat-label">Utilisateurs Actifs</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search & Filter -->
+    <section class="search-filter-section">
+        <div class="search-filter-container">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" placeholder="Rechercher un service..." id="searchInput">
+            </div>
+            <div class="filter-buttons">
+                <button class="filter-btn active" data-category="all">Tous</button>
+                <button class="filter-btn" data-category="populaires">Populaires</button>
+                <button class="filter-btn" data-category="nouveaux">Nouveaux</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Main -->
+    <main class="services-main">
+        <div class="services-container">
+            
+            <!-- Protection Sociale -->
+            <div class="category-section" data-category="protection-sociale">
+                <div class="category-header">
+                    <div class="category-icon">🛡️</div>
+                    <div class="category-info">
+                        <h2>Protection Sociale</h2>
+                        <div class="category-count">15 services disponibles</div>
+                    </div>
+                </div>
+                <div class="services-grid">
+                    <div class="service-item">
+                        <div class="service-header">
+                            <div class="service-icon">💼</div>
+                            <div class="service-info">
+                                <h3>Allocations Familiales</h3>
+                                <span class="service-badge">Populaire</span>
+                            </div>
+                        </div>
+                        <p>Demande et suivi des allocations familiales en ligne. Paiement direct et rapide.</p>
+                        <div class="service-meta">
+                            <div class="service-users">👥 125K utilisateurs</div>
+                            <a href="#" class="service-link">
+                                <span>Accéder</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-header">
+                            <div class="service-icon">🏥</div>
+                            <div class="service-info">
+                                <h3>Couverture Maladie</h3>
+                            </div>
+                        </div>
+                        <p>Inscription et gestion de votre couverture maladie universelle.</p>
+                        <div class="service-meta">
+                            <div class="service-users">👥 98K utilisateurs</div>
+                            <a href="#" class="service-link">
+                                <span>Accéder</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-header">
+                            <div class="service-icon">👶</div>
+                            <div class="service-info">
+                                <h3>Aide à la Petite Enfance</h3>
+                                <span class="service-badge">Nouveau</span>
+                            </div>
+                        </div>
+                        <p>Demande d'aides pour la garde d'enfants et allocations parentales.</p>
+                        <div class="service-meta">
+                            <div class="service-users">👥 45K utilisateurs</div>
+                            <a href="#" class="service-link">
+                                <span>Accéder</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Troisième Âge -->
+            <div class="category-section" data-category="troisieme-age">
+                <div class="category-header">
+                    <div class="category-icon" style="background: linear-gradient(135deg, #8B5CF6, #7C3AED);">👴</div>
+                    <div class="category-info">
+                        <h2>Troisième Âge</h2>
+                        <div class="category-count">12 services disponibles</div>
+                    </div>
+                </div>
+                <div class="services-grid">
+                    <div class="service-item">
+                        <div class="service-header">
+                            <div class="service-icon">💳</div>
+                            <div class="service-info">
+                                <h3>Pension de Retraite</h3>
+                                <span class="service-badge">Populaire</span>
+                            </div>
+                        </div>
+                        <p>Consultation et gestion de votre pension de retraite en ligne.</p>
+                        <div class="service-meta">
+                            <div class="service-users">👥 156K utilisateurs</div>
+                            <a href="#" class="service-link">
+                                <span>Accéder</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-header">
+                            <div class="service-icon">🏡</div>
+                            <div class="service-info">
+                                <h3>Aide au Logement Senior</h3>
+                            </div>
+                        </div>
+                        <p>Demande d'aides pour l'adaptation de votre logement.</p>
+                        <div class="service-meta">
+                            <div class="service-users">👥 34K utilisateurs</div>
+                            <a href="#" class="service-link">
+                                <span>Accéder</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-header">
+                            <div class="service-icon">💊</div>
+                            <div class="service-info">
+                                <h3>Soins à Domicile</h3>
+                            </div>
+                        </div>
+                        <p>Demande et planification de soins à domicile pour seniors.</p>
+                        <div class="service-meta">
+                            <div class="service-users">👥 28K utilisateurs</div>
+                            <a href="#" class="service-link">
+                                <span>Accéder</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Éducation -->
+            <div class="category-section" data-category="education">
+                <div class="category-header">
+                    <div class="category-icon" style="background: linear-gradient(135deg, #10B981, #059669);">🎓</div>
+                    <div class="category-info">
+                        <h2>Éducation</h2>
+                        <div class="category-count">25 services disponibles</div>
+                    </div>
+                </div>
+                <div class="services-grid">
+                    <div class="service-item">
+                        <div class="service-header">
+                            <div class="service-icon">📝</div>
+                            <div class="service-info">
+                                <h3>Inscription Scolaire</h3>
+                                <span class="service-badge">Populaire</span>
+                            </div>
+                        </div>
+                        <p>Inscription en ligne dans les établissements scolaires publics.</p>
+                        <div class="service-meta">
+                            <div class="service-users">👥 245K utilisateurs</div>
+                            <a href="#" class="service-link">
+                                <span>Accéder</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-header">
+                            <div class="service-icon">🎯</div>
+                            <div class="service-info">
+                                <h3>Bourses d'Études</h3>
+                            </div>
+                        </div>
+                        <p>Demande et suivi de bourses scolaires et universitaires.</p>
+                        <div class="service-meta">
+                            <div class="service-users">👥 167K utilisateurs</div>
+                            <a href="#" class="service-link">
+                                <span>Accéder</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-header">
+                            <div class="service-icon">📚</div>
+                            <div class="service-info">
+                                <h3>Résultats d'Examens</h3>
+                                <span class="service-badge">Nouveau</span>
+                            </div>
+                        </div>
+                        <p>Consultation en ligne des résultats du Bac, BFEM et autres examens.</p>
+                        <div class="service-meta">
+                            <div class="service-users">👥 189K utilisateurs</div>
+                            <a href="#" class="service-link">
+                                <span>Accéder</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Citoyenneté -->
+            <div class="category-section" data-category="citoyennete">
+                <div class="category-header">
+                    <div class="category-icon" style="background: linear-gradient(135deg, #F59E0B, #D97706);">🆔</div>
+                    <div class="category-info">
+                        <h2>Citoyenneté</h2>
+                        <div class="category-count">18 services disponibles</div>
+                    </div>
+                </div>
+                <div class="services-grid">
+                    <div class="service-item">
+                        <div class="service-header">
+                            <div class="service-icon">🪪</div>
+                            <div class="service-info">
+                                <h3>Carte d'Identité Nationale</h3>
+                                <span class="service-badge">Populaire</span>
+                            </div>
+                        </div>
+                        <p>Demande, renouvellement et suivi de votre carte d'identité.</p>
+                        <div class="service-meta">
+                            <div class="service-users">👥 312K utilisateurs</div>
+                            <a href="#" class="service-link">
+                                <span>Accéder</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-header">
+                            <div class="service-icon">✈️</div>
+                            <div class="service-info">
+                                <h3>Passeport</h3>
+                            </div>
+                        </div>
+                        <p>Pré-demande de passeport et prise de rendez-vous en ligne.</p>
+                        <div class="service-meta">
+                            <div class="service-users">👥 198K utilisateurs</div>
+                            <a href="#" class="service-link">
+                                <span>Accéder</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-header">
+                            <div class="service-icon">📄</div>
+                            <div class="service-info">
+                                <h3>Actes d'État Civil</h3>
+                            </div>
+                        </div>
+                        <p>Demande en ligne d'extraits de naissance, mariage, décès.</p>
+                        <div class="service-meta">
+                            <div class="service-users">👥 276K utilisateurs</div>
+                            <a href="#" class="service-link">
+                                <span>Accéder</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Taxes -->
+            <div class="category-section" data-category="taxes">
+                <div class="category-header">
+                    <div class="category-icon" style="background: linear-gradient(135deg, #EF4444, #DC2626);">💰</div>
+                    <div class="category-info">
+                        <h2>Taxes & Impôts</h2>
+                        <div class="category-count">20 services disponibles</div>
+                    </div>
+                </div>
+                <div class="services-grid">
+                    <div class="service-item">
+                        <div class="service-header">
+                            <div class="service-icon">💳</div>
+                            <div class="service-info">
+                                <h3>Déclaration d'Impôts</h3>
+                                <span class="service-badge">Populaire</span>
+                            </div>
+                        </div>
+                        <p>Déclaration en ligne de vos revenus et paiement sécurisé.</p>
+                        <div class="service-meta">
+                            <div class="service-users">👥 234K utilisateurs</div>
+                            <a href="#" class="service-link">
+                                <span>Accéder</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-header">
+                            <div class="service-icon">🏢</div>
+                            <div class="service-info">
+                                <h3>Taxe Professionnelle</h3>
+                            </div>
+                        </div>
+                        <p>Déclaration et paiement de la taxe professionnelle pour entreprises.</p>
+                        <div class="service-meta">
+                            <div class="service-users">👥 89K utilisateurs</div>
+                            <a href="#" class="service-link">
+                                <span>Accéder</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-header">
+                            <div class="service-icon">🚗</div>
+                            <div class="service-info">
+                                <h3>Taxe sur Véhicules</h3>
+                            </div>
+                        </div>
+                        <p>Paiement en ligne de la vignette et autres taxes véhicules.</p>
+                        <div class="service-meta">
+                            <div class="service-users">👥 156K utilisateurs</div>
+                            <a href="#" class="service-link">
+                                <span>Accéder</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Santé -->
+            <div class="category-section" data-category="sante">
+                <div class="category-header">
+                    <div class="category-icon" style="background: linear-gradient(135deg, #EC4899, #DB2777);">🏥</div>
+                    <div class="category-info">
+                        <h2>Santé</h2>
+                        <div class="category-count">22 services disponibles</div>
+                    </div>
+                </div>
+                <div class="services-grid">
+                    <div class="service-item">
+                        <div class="service-header">
+                            <div class="service-icon">📋</div>
+                            <div class="service-info">
+                                <h3>Dossier Médical Partagé</h3>
+                                <span class="service-badge">Populaire</span>
+                            </div>
+                        </div>
+                        <p>Accès sécurisé à votre dossier médical depuis n'importe où.</p>
+                        <div class="service-meta">
+                            <div class="service-users">👥 198K utilisateurs</div>
+                            <a href="#" class="service-link">
+                                <span>Accéder</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-header">
+                            <div class="service-icon">📅</div>
+                            <div class="service-info">
+                                <h3>Rendez-vous Médical</h3>
+                                <span class="service-badge">Nouveau</span>
+                            </div>
+                        </div>
+                        <p>Prise de rendez-vous en ligne dans les hôpitaux et centres de santé.</p>
+                        <div class="service-meta">
+                            <div class="service-users">👥 143K utilisateurs</div>
+                            <a href="#" class="service-link">
+                                <span>Accéder</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-header">
+                            <div class="service-icon">💉</div>
+                            <div class="service-info">
+                                <h3>Carnet de Vaccination</h3>
+                            </div>
+                        </div>
+                        <p>Consultation et mise à jour de votre carnet de vaccination numérique.</p>
+                        <div class="service-meta">
+                            <div class="service-users">👥 167K utilisateurs</div>
+                            <a href="#" class="service-link">
+                                <span>Accéder</span>
+                                <span>→</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-section footer-about">
+                <h3>À PROPOS</h3>
+                <p>
+                    La Plateforme Nationale d'Interopérabilité du Sénégal (eGov Sénégal) 
+                    est une initiative du Ministère de la Communication, des Télécommunications 
+                    et du Numérique dans le cadre du New Deal Technologique.
+                </p>
+                <div class="social-icons">
+                    <div class="social-icon">📘</div>
+                    <div class="social-icon">🐦</div>
+                    <div class="social-icon">💼</div>
+                    <div class="social-icon">📸</div>
+                    <div class="social-icon">📹</div>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>SERVICES</h3>
+                <ul>
+                    <li><a href="#protection-sociale">Protection Sociale</a></li>
+                    <li><a href="#troisieme-age">Troisième Âge</a></li>
+                    <li><a href="#education">Éducation</a></li>
+                    <li><a href="#citoyennete">Citoyenneté</a></li>
+                    <li><a href="#taxes">Taxes & Impôts</a></li>
+                    <li><a href="#sante">Santé</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>RESSOURCES</h3>
+                <ul>
+                    <li><a href="#">Documentation API</a></li>
+                    <li><a href="#">Guides d'Intégration</a></li>
+                    <li><a href="#">Catalogue d'API</a></li>
+                    <li><a href="#">Centre d'Aide</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>CONTACT</h3>
+                <ul>
+                    <li><a href="#">📍 Dakar, Sénégal</a></li>
+                    <li><a href="#">📧 <span class="__cf_email__" data-cfemail="53303c3d27323027133a3d2736213c237d203d">[email&#160;protected]</span></a></li>
+                    <li><a href="#">📞 +221 33 XXX XX XX</a></li>
+                    <li><a href="#">💬 Chat en Direct</a></li>
+                    <li><a href="#">🎫 Créer un Ticket</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 eGov Sénégal - MCTN/SENUM - République du Sénégal</p>
+            <div class="footer-bottom-links">
+                <a href="#">Mentions Légales</a>
+                <a href="#">Politique de Confidentialité</a>
+                <a href="#">Conditions d'Utilisation</a>
+                <a href="#">Accessibilité</a>
+                <a href="#">Plan du Site</a>
+            </div>
+        </div>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const serviceItems = document.querySelectorAll('.service-item');
+
+        searchInput.addEventListener('input', function(e) {
+            const searchTerm = e.target.value.toLowerCase();
+            
+            serviceItems.forEach(item => {
+                const title = item.querySelector('h3').textContent.toLowerCase();
+                const description = item.querySelector('p').textContent.toLowerCase();
+                
+                if (title.includes(searchTerm) || description.includes(searchTerm)) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        });
+
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const category = this.getAttribute('data-category');
+                
+                if (category === 'all') {
+                    serviceItems.forEach(item => item.style.display = 'block');
+                } else if (category === 'populaires') {
+                    serviceItems.forEach(item => {
+                        const hasPopularBadge = item.querySelector('.service-badge') && 
+                                               item.querySelector('.service-badge').textContent === 'Populaire';
+                        item.style.display = hasPopularBadge ? 'block' : 'none';
+                    });
+                } else if (category === 'nouveaux') {
+                    serviceItems.forEach(item => {
+                        const hasNewBadge = item.querySelector('.service-badge') && 
+                                           item.querySelector('.service-badge').tex

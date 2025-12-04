@@ -2,7 +2,11 @@ global-styling:
   version: 1.0
   css:
     theme:
-      css/style.css: {}
+      css/style.css: { weight: 100 }
+      css/navigation-menu.css: { weight: 110 }
+  dependencies:
+    - core/normalize
+    - egov_theme/navigation
 
 global-scripts:
   version: 1.0
@@ -12,16 +16,48 @@ global-scripts:
     - core/drupal
     - core/jquery
 
-# DÉSACTIVÉ - Conflit CSS menu
-# menu-styling:
-#   version: 1.0
-#   css:
-#     theme:
-#       css/menu-styles.css: {}
+navigation:
+  version: 1.0
+  js:
+    js/navigation-menu.js: {}
+  dependencies:
+    - core/drupal
 
-# DÉSACTIVÉ - Conflit CSS menu  
-# menu-pro:
-#   version: 1.0
-#   css:
-#     theme:
-#       css/menu-pro.css: {}
+services-page:
+  version: 1.x
+  css:
+    theme:
+      css/services.css: { weight: 120 }
+  js:
+    js/services.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+    - egov_theme/global-styling
+
+presentation-page:
+  version: 1.x
+  css:
+    theme:
+      css/presentation.css: { weight: 130 }
+  dependencies:
+    - core/drupal
+    - egov_theme/global-styling
+
+tableau-de-bord-page:
+  version: 1.x
+  css:
+    theme:
+      css/tableau-de-bord.css: { weight: 130 }
+  dependencies:
+    - core/drupal
+    - egov_theme/global-styling
+
+contact-page:
+  version: 1.x
+  css:
+    theme:
+      css/contact.css: { weight: 130 }
+  dependencies:
+    - core/drupal
+    - egov_theme/global-styling
