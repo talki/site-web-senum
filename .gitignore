@@ -41,7 +41,6 @@ Thumbs.db
 *.sublime-workspace
 
 # Ignorer les sauvegardes
-*.sql
 *.sql.gz
 *.tar.gz
 *.zip
