@@ -1,0 +1,67 @@
+{# Page Contact entièrement surchargée #}
+{{ attach_library('egov_theme/global-styling') }}
+
+<div class="page-wrapper">
+
+    <header class="page-header">
+        <!-- Navigation -->
+        <nav>
+            <div class="logo">
+                <div class="logo-flag">
+                    <div class="flag-stripe flag-green"></div>
+                    <div class="flag-stripe flag-yellow"></div>
+                    <div class="flag-stripe flag-red"></div>
+                </div>
+                <div class="logo-text">
+                    <h1>Jokkoo</h1>
+                    <div class="logo-subtitle">Plateforme d'Interopérabilité</div>
+                </div>
+            </div>
+
+            <div class="nav-menu-desktop">
+                {% if page.primary_menu %}
+                    {{ page.primary_menu }}
+                {% endif %}
+            </div>
+
+            <div class="nav-actions-mobile">
+                <button class="search-btn">🔍</button>
+                <button class="hamburger-btn" id="hamburgerBtn">
+                    <span></span><span></span><span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main class="page-main" role="main">
+
+        {# 💚 MESSAGE DE SUCCÈS #}
+        {% if app.request.get('success') == '1' %}
+        <div style="
+            padding: 20px;
+            background: #e6ffed;
+            border: 1px solid #34d399;
+            color: #065f46;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            font-size: 1.1rem;">
+            <strong>Merci pour votre message !</strong><br>
+            Nous reviendrons vers vous dans les meilleurs délais.
+        </div>
+        {% endif %}
+
+        {{ page.content }}
+
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            {% if page.footer %}
+                {{ page.footer }}
+            {% endif %}
+        </div>
+    </footer>
+
+</div>
+
+{{ attach_library('egov_theme/global-scripts') }}

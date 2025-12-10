@@ -1,0 +1,24 @@
+<?php
+
+/**
+ * Implements hook_mail().
+ *
+ * Permet l'envoi d'email depuis le contrôleur via :
+ * $mailManager->mail('management', 'contact_form', ...)
+ */
+function management_mail($key, &$message, $params) {
+
+  switch ($key) {
+
+    case 'contact_form':
+      $message['subject'] = "Nouveau message - Formulaire de contact Jokko";
+
+      $message['body'][] =
+        "Vous avez reçu un nouveau message depuis le site Jokko :\n\n" .
+        "Nom : " . ($params['nom'] ?? '') . "\n" .
+        "Email : " . ($params['email'] ?? '') . "\n\n" .
+        "Message :\n" . ($params['message'] ?? '') . "\n";
+
+      break;
+  }
+}

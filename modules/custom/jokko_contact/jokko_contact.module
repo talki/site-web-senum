@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * Implements hook_mail().
+ */
+function jokko_contact_mail($key, &$message, $params) {
+  switch ($key) {
+    case 'contact_message':
+      $message['subject'] = 'Nouveau message via le site Jokko';
+
+      $body = "Nouveau message reçu :\n\n";
+      $body .= "Prénom : {$params['prenom']}\n";
+      $body .= "Nom : {$params['nom']}\n";
+      $body .= "Email : {$params['email']}\n";
+      $body .= "Téléphone : {$params['telephone']}\n";
+      $body .= "Organisation : {$params['organisation']}\n";
+      $body .= "Sujet : {$params['sujet']}\n\n";
+      $body .= "Message :\n{$params['message']}\n";
+
+      $message['body'][] = $body;
+      break;
+  }
+}

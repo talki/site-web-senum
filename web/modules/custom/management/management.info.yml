@@ -1,0 +1,5 @@
+name: Management
+type: module
+description: 'Module pour gérer le formulaire de contact'
+core_version_requirement: '^9 || ^10 || ^11'
+package: Custom

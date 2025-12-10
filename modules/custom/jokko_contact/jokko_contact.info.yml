@@ -1,0 +1,5 @@
+name: Jokko Contact
+type: module
+description: 'Module de réception du formulaire HTML de contact.'
+core_version_requirement: ^8 || ^9 || ^10
+package: Custom

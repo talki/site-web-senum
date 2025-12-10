@@ -1,0 +1,8 @@
+management.contact_submit:
+  path: '/management/contact/submit'
+  defaults:
+    _controller: '\Drupal\management\Controller\ContactController::submitForm'
+    _title: 'Contact Submit'
+  methods: [POST]
+  requirements:
+    _permission: 'access content'

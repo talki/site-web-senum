@@ -1,0 +1,8 @@
+jokko_contact.send:
+  path: '/contact/send'
+  defaults:
+    _controller: '\Drupal\jokko_contact\Controller\ContactController::send'
+    _title: 'Contact form handler'
+  requirements:
+    _access: 'TRUE'
+  methods: [POST]
