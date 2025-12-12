@@ -1,0 +1,344 @@
+/* CSS ACTUALITÉS - Design complet */
+/* TEST CSS - SUPPRIMEZ APRÈS */
+
+
+/* Puis tout votre CSS normal... */
+:root {
+    --senegal-green: #00853F;
+    --senegal-yellow: #FCD116;
+    --senegal-red: #E31B23;
+    --text-dark: #1F2937;
+    --text-light: #6B7280;
+    --bg-light: #F9FAFB;
+    --white: #FFFFFF;
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* Hero Actualités */
+.actualites-hero {
+    background: linear-gradient(135deg, var(--senegal-green) 0%, #00A859 100%);
+    color: var(--white);
+    padding: 5rem 5% 4rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.actualites-hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.1) 0%, transparent 70%);
+    animation: rotate 30s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+.actualites-hero-content {
+    position: relative;
+    z-index: 10;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.actualites-hero h1 {
+    font-size: 3.5rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.actualites-hero p {
+    font-size: 1.3rem;
+    opacity: 0.95;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+}
+
+.actualites-hero .news-count {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    padding: 0.8rem 1.5rem;
+    border-radius: 25px;
+    font-weight: 600;
+    backdrop-filter: blur(10px);
+}
+
+/* Main Content */
+.actualites-main {
+    padding: 4rem 5%;
+    background: var(--bg-light);
+    min-height: 60vh;
+}
+
+.actualites-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* Filters */
+.actualites-filters {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 3rem;
+    flex-wrap: wrap;
+}
+
+.filter-chip {
+    padding: 0.8rem 1.5rem;
+    background: var(--white);
+    border: 2px solid #E5E7EB;
+    border-radius: 25px;
+    font-weight: 600;
+    color: var(--text-dark);
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+}
+
+.filter-chip:hover,
+.filter-chip.active {
+    background: var(--senegal-green);
+    border-color: var(--senegal-green);
+    color: var(--white);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+}
+
+/* News Grid */
+.news-grid {
+    display: grid;
+    gap: 2rem;
+    margin-bottom: 3rem;
+}
+
+.news-article {
+    background: var(--white);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s;
+    border-left: 4px solid transparent;
+}
+
+.news-article:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-left-color: var(--senegal-green);
+}
+
+/* Types de news */
+.news-article.nouveau {
+    border-left-color: var(--senegal-green);
+}
+
+.news-article.urgent {
+    border-left-color: var(--senegal-red);
+}
+
+.news-article.info {
+    border-left-color: var(--senegal-yellow);
+}
+
+.news-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 1.5rem 1.5rem 0;
+}
+
+.news-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.news-date {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+.news-category {
+    font-size: 0.8rem;
+    padding: 0.3rem 0.8rem;
+    border-radius: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    width: fit-content;
+}
+
+.news-category.nouveau {
+    background: #dcfce7;
+    color: #16a34a;
+}
+
+.news-category.urgent {
+    background: #fef2f2;
+    color: #dc2626;
+}
+
+.news-category.info {
+    background: #fef3c7;
+    color: #d97706;
+}
+
+.news-content {
+    padding: 0 1.5rem 1.5rem;
+}
+
+.news-title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: var(--text-dark);
+    margin-bottom: 0.8rem;
+    line-height: 1.4;
+}
+
+.news-title a {
+    text-decoration: none;
+    color: inherit;
+    transition: color 0.3s;
+}
+
+.news-title a:hover {
+    color: var(--senegal-green);
+}
+
+.news-excerpt {
+    color: var(--text-light);
+    line-height: 1.6;
+    margin-bottom: 1rem;
+}
+
+.news-actions {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid #F3F4F6;
+}
+
+.read-more {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--senegal-green);
+    font-weight: 600;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+.read-more:hover {
+    gap: 0.8rem;
+    color: var(--senegal-green);
+}
+
+.news-stats {
+    display: flex;
+    gap: 1rem;
+    font-size: 0.9rem;
+    color: var(--text-light);
+}
+
+/* Search Box */
+.news-search {
+    background: var(--white);
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.search-input {
+    flex: 1;
+    border: 2px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 0.8rem 1rem;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--senegal-green);
+}
+
+.search-btn {
+    background: var(--senegal-green);
+    color: var(--white);
+    border: none;
+    padding: 0.8rem 1.5rem;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.search-btn:hover {
+    background: #006a32;
+}
+
+/* Responsive */
+@media (max-width: 968px) {
+    .actualites-hero {
+        padding: 3rem 3% 2rem;
+    }
+    
+    .actualites-hero h1 {
+        font-size: 2.5rem;
+    }
+    
+    .actualites-main {
+        padding: 3rem 3%;
+    }
+    
+    .actualites-filters {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+    }
+    
+    .news-header {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: flex-start;
+    }
+    
+    .news-search {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+@media (max-width: 640px) {
+    .actualites-hero h1 {
+        font-size: 2rem;
+    }
+    
+    .news-actions {
+        flex-direction: column;
+        gap: 0.8rem;
+        align-items: flex-start;
+    }
+    
+    .filter-chip {
+        white-space: nowrap;
+        flex-shrink: 0;
+    }
+}

@@ -1,0 +1,96 @@
+
+
+                {# Section Fil d'Actualités - VERSION VENANT DE DRUPAL #}
+                <section class="news-section-main">
+                    <div class="container">
+                        <div class="news-feed">
+                            <div class="news-feed-header">
+                                <span class="news-feed-icon">📰</span>
+                                <h3>Fil d'Actualités</h3>
+                            </div>
+
+                            {% if actualites_recentes %}
+                                {# CONTENU ADMINISTRABLE DEPUIS DRUPAL #}
+                                <div class="news-grid">
+                                    {% for actualite in actualites_recentes %}
+                                        {% set categorie = actualite.field_categorie.value %}
+                                        <article class="news-item news-item-{{ categorie }}">
+                                            <div class="news-date">
+                                                <span class="date-icon">📅</span>
+                                                <span class="date-text">{{ actualite.created.value|date('d M Y') }}</span>
+                                                <span class="news-badge badge-{{ categorie }}">
+                                                    {% if categorie == 'nouveau' %}Nouveau
+                                                    {% elseif categorie == 'urgent' %}Urgent
+                                                    {% elseif categorie == 'info' %}Info
+                                                    {% endif %}
+                                                </span>
+                                            </div>
+
+                                            <h4 class="news-title">{{ actualite.title.value }}</h4>
+
+                                            <p class="news-excerpt">
+                                                {{ actualite.field_extrait.value }}
+                                            </p>
+
+                                            <a href="{{ path('entity.node.canonical', {'node': actualite.nid.value}) }}" class="news-link">Lire plus →</a>
+                                        </article>
+                                    {% endfor %}
+                                </div>
+
+                            {% else %}
+                                {# FALLBACK - Si pas d'actualités dans Drupal #}
+                                <div class="news-grid">
+                                    <article class="news-item news-item-nouveau">
+                                        <div class="news-date">
+                                            <span class="date-icon">📅</span>
+                                            <span class="date-text">16 Nov 2025 ****</span>
+                                            <span class="news-badge badge-nouveau">Nouveau</span>
+                                        </div>
+                                        <h4 class="news-title">Lancement de 15 nouvelles API gouvernementales</h4>
+                                        <p class="news-excerpt">
+                                            Le MCTN annonce la mise en ligne de 15 nouvelles API pour faciliter l'accès aux données publiques.
+                                        </p>
+                                        <a href="#" class="news-link">Lire plus →</a>
+                                    </article>
+
+                                    <article class="news-item news-item-urgent">
+                                        <div class="news-date">
+                                            <span class="date-icon">📅</span>
+                                            <span class="date-text">14 Nov 2025</span>
+                                            <span class="news-badge badge-urgent">Urgent</span>
+                                        </div>
+                                        <h4 class="news-title">Maintenance programmée ce week-end</h4>
+                                        <p class="news-excerpt">
+                                            Interruption prévue dimanche de 2h à 6h pour mise à jour système.
+                                        </p>
+                                        <a href="#" class="news-link">Lire plus →</a>
+                                    </article>
+
+                                    <article class="news-item news-item-info">
+                                        <div class="news-date">
+                                            <span class="date-icon">📅</span>
+                                            <span class="date-text">12 Nov 2025</span>
+                                            <span class="news-badge badge-info">Info</span>
+                                        </div>
+                                        <h4 class="news-title">Webinaire : Intégration API Santé</h4>
+                                        <p class="news-excerpt">
+                                            Formation gratuite sur l'utilisation des API du secteur santé, inscription ouverte.
+                                        </p>
+                                        <a href="#" class="news-link">Lire plus →</a>
+                                    </article>
+                                </div>
+                            {% endif %}
+
+                            <div class="news-footer">
+                                <a href="/actualites" class="view-all-news">
+                                    Voir toutes les actualités
+                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                                    <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                </a>
+                            </div>
+
+                        </div>
+                    </div>
+                </section>

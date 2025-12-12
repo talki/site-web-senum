@@ -1,0 +1,97 @@
+{#
+/**
+ * @file
+ * Template pour views-view--actualites-list.html.twig
+ * Page principale listant toutes les actualités avec design moderne
+ */
+#}
+
+<div class="actualites-page-wrapper">
+
+  <!-- Hero Section -->
+  <section class="news-hero">
+      <div class="news-hero-content">
+          <h1>Actualités & Annonces</h1>
+          <p>Restez informé des dernières nouveautés, mises à jour et événements de la plateforme nationale d'interopérabilité</p>
+          
+          {% if rows|length %}
+          <div class="news-count">
+              <span>📰</span>
+              <span>{{ rows|length }} actualité{{ rows|length > 1 ? 's' : '' }} publiée{{ rows|length > 1 ? 's' : '' }}</span>
+          </div>
+          {% endif %}
+      </div>
+  </section>
+
+  <!-- Filter Section -->
+  <section class="filter-section">
+      <div class="filter-container">
+          <span class="filter-label">Filtrer par :</span>
+          <button class="filter-btn active" data-filter="all">Tout voir</button>
+          <button class="filter-btn" data-filter="urgent">Urgent</button>
+          <button class="filter-btn" data-filter="nouveau">Nouveau</button>
+          <button class="filter-btn" data-filter="info">Info</button>
+          <button class="filter-btn" data-filter="annonce">Annonce</button>
+      </div>
+  </section>
+
+  <!-- Main Content -->
+  <main class="news-main">
+      <div class="news-container">
+          
+          {% if rows %}
+              
+              {% set featured_node = rows|first.content['#node'] %}
+              {% if featured_node %}
+              <!-- Featured Article (Premier article) -->
+              <article class="featured-article">
+                  <div class="featured-image">
+                      🚀
+                  </div>
+                  <div class="featured-content">
+                      <span class="featured-badge">À LA UNE</span>
+                      <h2>{{ featured_node.title.value }}</h2>
+                      <div class="featured-meta">
+                          <span>📅 {{ featured_node.created.value|date('d M Y') }}</span>
+                          <span>⏱️ {{ random(3, 8) }} min de lecture</span>
+                      </div>
+                      <p class="featured-excerpt">
+                          {{ featured_node.body.summary|default(featured_node.field_extrait.value)|default('Découvrez cette actualité importante de la plateforme eGov Sénégal...') }}
+                      </p>
+                      <a href="{{ url('entity.node.canonical', {'node': featured_node.id}) }}" class="featured-link">
+                          <span>Lire l'article complet</span>
+                          <span>→</span>
+                      </a>
+                  </div>
+              </article>
+              {% endif %}
+
+              <!-- Articles Grid -->
+              <div class="articles-grid">
+                  {% for key, row in rows %}
+                      {% if key > 0 %}  {# Skip le premier article (featured) #}
+                          {{ row.content }}
+                      {% endif %}
+                  {% endfor %}
+              </div>
+
+              <!-- Pagination -->
+              {% if pager %}
+              <div class="pagination-wrapper">
+                  {{ pager }}
+              </div>
+              {% endif %}
+
+          {% else %}
+              <!-- Message si aucune actualité -->
+              <div class="no-content">
+                  <div class="no-content-icon">📰</div>
+                  <h3>Aucune actualité disponible</h3>
+                  <p>Les actualités seront publiées prochainement.</p>
+              </div>
+          {% endif %}
+
+      </div>
+  </main>
+
+</div>

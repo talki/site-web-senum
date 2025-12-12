@@ -34,6 +34,18 @@ services-page:
     - core/drupal
     - core/once
     - egov_theme/global-styling
+    
+actualites-page:
+  version: 1.x
+  css:
+    theme:
+      css/actualites.css: { weight: 140 }
+  js:
+    js/actualites-filters.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+    - egov_theme/global-styling
 
 presentation-page:
   version: 1.x

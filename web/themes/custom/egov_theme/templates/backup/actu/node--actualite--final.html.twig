@@ -1,0 +1,144 @@
+{#
+/**
+ * @file
+ * Template pour node--actualite.html.twig
+ * Affichage des actualités individuelles selon le mode (teaser, full)
+ */
+#}
+aaaaaaaaaaokkkkkkokkkkkkokkkkkkokkkkkkokkkkkkokkkkkkokkkkkkokkkkkk
+{% set categorie = node.field_categorie.value|default('info') %}
+{% set date_creation = node.created.value|date('d M Y') %}
+{% set extrait = node.body.summary|default(node.field_extrait.value)|default('Contenu de l\'actualité...') %}
+
+{% if view_mode == 'full' %}
+    {# =============================================================
+       MODE PAGE COMPLETE (quand on clique sur un article)
+       ============================================================= #}
+    
+    <article class="actualite-full-page">
+        
+        <!-- Hero de l'article -->
+        <header class="actualite-header">
+            <div class="actualite-hero">
+                <div class="actualite-hero-content">
+                    
+                    <!-- Badge catégorie -->
+                    <div class="actualite-category-badge badge-{{ categorie|lower }}">
+                        {% if categorie == 'urgent' %}⚠️ URGENT
+                        {% elseif categorie == 'nouveau' %}🎉 NOUVEAU  
+                        {% elseif categorie == 'info' %}📄 INFO
+                        {% elseif categorie == 'annonce' %}📢 ANNONCE
+                        {% else %}📰 ACTUALITÉ
+                        {% endif %}
+                    </div>
+                    
+                    <!-- Titre principal -->
+                    <h1 class="actualite-title">{{ node.title.value }}</h1>
+                    
+                    <!-- Métadonnées -->
+                    <div class="actualite-meta">
+                        <div class="meta-item">
+                            <span class="meta-icon">📅</span>
+                            <span>{{ date_creation }}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">👤</span>
+                            <span>{{ node.owner.entity.name.value|default('Admin') }}</span>
+                        </div>
+                        <div class="meta-item">
+                            <span class="meta-icon">⏱️</span>
+                            <span>{{ random(3, 8) }} min de lecture</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Extrait/résumé -->
+                    {% if extrait %}
+                    <p class="actualite-excerpt">{{ extrait }}</p>
+                    {% endif %}
+                    
+                </div>
+            </div>
+        </header>
+        
+        <!-- Contenu principal -->
+        <div class="actualite-content">
+            <div class="actualite-container">
+                
+                <!-- Corps de l'article -->
+                {% if node.body.value %}
+                <div class="actualite-body">
+                    {{ node.body.value|raw }}
+                </div>
+                {% endif %}
+                
+                <!-- Actions -->
+                <div class="actualite-actions">
+                    <a href="/actualites" class="btn-back">
+                        ← Retour aux actualités
+                    </a>
+                    
+                    <div class="social-share">
+                        <span>Partager :</span>
+                        <a href="#" class="share-btn" title="Partager sur Facebook">📘</a>
+                        <a href="#" class="share-btn" title="Partager sur Twitter">🐦</a>
+                        <a href="#" class="share-btn" title="Partager par email">📧</a>
+                    </div>
+                </div>
+                
+            </div>
+        </div>
+        
+    </article>
+
+{% else %}
+    {# =============================================================
+       MODE TEASER/CARD (pour la liste et la grille)
+       ============================================================= #}
+    
+    <article class="article-card" data-category="{{ categorie|lower }}">
+        
+        <!-- Image/Icône -->
+        <div class="article-image">
+            <span class="article-badge badge-{{ categorie|lower }}">
+                {{ categorie|upper }}
+            </span>
+            
+            <!-- Icône selon la catégorie -->
+            {% if categorie == 'urgent' %}⚠️
+            {% elseif categorie == 'nouveau' %}🎉
+            {% elseif categorie == 'info' %}📄
+            {% elseif categorie == 'annonce' %}📢
+            {% else %}📰
+            {% endif %}
+        </div>
+        
+        <!-- Contenu de la card -->
+        <div class="article-content">
+            
+            <!-- Métadonnées -->
+            <div class="article-meta">
+                <span>📅 {{ date_creation }}</span>
+                <span>⏱️ {{ random(3, 8) }} min</span>
+            </div>
+            
+            <!-- Titre (avec lien vers l'article complet) -->
+            <h3 class="article-title">
+                <a href="{{ url('entity.node.canonical', {'node': node.id}) }}">
+                    {{ node.title.value }}
+                </a>
+            </h3>
+            
+            <!-- Extrait -->
+            <p class="article-excerpt">{{ extrait }}</p>
+            
+            <!-- Action -->
+            <a href="{{ url('entity.node.canonical', {'node': node.id}) }}" class="article-link">
+                <span>Lire plus</span>
+                <span>→</span>
+            </a>
+            
+        </div>
+        
+    </article>
+
+{% endif %}

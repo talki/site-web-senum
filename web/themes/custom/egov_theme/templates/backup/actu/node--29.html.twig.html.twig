@@ -1,0 +1,63 @@
+{#
+/**
+ * Template pour content type "actualité"
+ * Utilise la même structure que notre CSS actualites.css
+ */
+#}
+okkkkkkokkkkkk!!!!!okkkkkkokkkkkkokkkkkkokkkkkk!!!!okkkkkkokkkkkk
+<!-- Hero Actualités (seulement sur la page principale) -->
+{% if view_mode == 'full' %}
+<section class="actualites-hero">
+    <div class="actualites-hero-content">
+        <h1>{{ node.title.value }}</h1>
+        <p>{{ node.field_resume.value|default('Actualité eGov Sénégal') }}</p>
+        
+        <div class="news-count">
+            <span>📰</span>
+            <span>{{ node.created.value|date('d M Y') }}</span>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- Article individuel -->
+<article class="news-article {{ node.field_categorie.value|default('info')|lower }}">
+    <div class="news-header">
+        <div class="news-meta">
+            <div class="news-date">{{ node.created.value|date('d M Y') }}</div>
+            {% if node.field_categorie.value %}
+                <div class="news-category {{ node.field_categorie.value|lower }}">
+                    {{ node.field_categorie.value|upper }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    
+    <div class="news-content">
+        {% if view_mode != 'full' %}
+            <h2 class="news-title">
+                <a href="{{ url('entity.node.canonical', {'node': node.id}) }}">{{ node.title.value }}</a>
+            </h2>
+        {% endif %}
+        
+        {% if node.field_resume.value %}
+            <p class="news-excerpt">{{ node.field_resume.value }}</p>
+        {% endif %}
+        
+        {% if view_mode == 'full' and node.body.value %}
+            <div class="news-body">{{ node.body.value|raw }}</div>
+        {% endif %}
+        
+        <div class="news-actions">
+            {% if view_mode != 'full' %}
+                <a href="{{ url('entity.node.canonical', {'node': node.id}) }}" class="read-more">
+                    Lire la suite →
+                </a>
+            {% endif %}
+            <div class="news-stats">
+                <span>👁️ {{ random(500, 2000) }} vues</span>
+                <span>💬 {{ random(5, 50) }}</span>
+            </div>
+        </div>
+    </div>
+</article>

@@ -1,0 +1,19 @@
+{#
+/**
+ * @file
+ * Template pour page--actualites.html.twig (optionnel)
+ * Page wrapper pour la section actualités
+ */
+#}
+
+{% extends "page.html.twig" %}
+
+{# Attacher automatiquement les styles et scripts actualités #}
+{% set #attached = attach_library('egov_theme/actualites-page') %}
+
+{# Optionnel: Customiser le titre de la page #}
+{% block page_title %}
+  <!-- Pas de titre auto-généré, géré dans la view -->
+{% endblock %}
+
+{# Le contenu de la page (view) sera injecté automatiquement #}
