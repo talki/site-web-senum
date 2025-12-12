@@ -1,0 +1,204 @@
+{# Template pour le détail d'une publication #}
+
+<!-- Breadcrumb -->
+<div class="breadcrumb">
+    <div class="breadcrumb-container">
+        <a href="/">Accueil</a>
+        <span>›</span>
+        <a href="/publications">Publications</a>
+        <span>›</span>
+        <span>{{ node.title.value }}</span>
+    </div>
+</div>
+
+<!-- Main Content -->
+<main class="publication-main">
+    <div class="publication-container">
+        
+        <!-- Left Column: Publication Content -->
+        <div class="publication-content-section">
+            
+            <!-- Publication Card -->
+            <article class="publication-card">
+                
+                <!-- Header -->
+                <div class="publication-header">
+                    <div class="author-section">
+                        <div class="author-avatar">🏛️</div>
+                        <div class="author-info">
+                            <div class="author-name">Ministère du Numérique - MCTN</div>
+                            <div class="publication-meta">
+                                <div class="meta-item">
+                                    <span>📅</span>
+                                    <span>{{ node.created.value|format_date('custom', 'd F Y · H:i', '', 'fr') }}</span>
+                                </div>
+                                {% if node.field_temps_lecture.value %}
+                                <div class="meta-item">
+                                    <span>⏱️</span>
+                                    <span>{{ node.field_temps_lecture.value }} min de lecture</span>
+                                </div>
+                                {% endif %}
+                                <div class="meta-item">
+                                    <span>👁️</span>
+                                    <span>{{ random(500, 5000) }} vues</span>
+                                </div>
+                            </div>
+                        </div>
+                        {% if node.field_categorie.value %}
+                        <span class="publication-badge badge-{{ node.field_categorie.value }}">
+                            {% if node.field_categorie.value == 'urgent' %}Urgent
+                            {% elseif node.field_categorie.value == 'nouveau' %}Nouveau
+                            {% elseif node.field_categorie.value == 'info' %}Info
+                            {% elseif node.field_categorie.value == 'annonce' %}Annonce
+                            {% endif %}
+                        </span>
+                        {% endif %}
+                    </div>
+                    <h1 class="publication-title">{{ node.title.value }}</h1>
+                </div>
+
+                <!-- Actions Bar -->
+                <div class="actions-bar">
+                    <button class="action-btn">
+                        <span>👍</span>
+                        <span>{{ random(50, 300) }}</span>
+                    </button>
+                    <button class="action-btn">
+                        <span>💬</span>
+                        <span>{{ random(5, 50) }} commentaires</span>
+                    </button>
+                    <button class="action-btn">
+                        <span>📤</span>
+                        <span>Partager</span>
+                    </button>
+                    <button class="action-btn">
+                        <span>🔖</span>
+                        <span>Sauvegarder</span>
+                    </button>
+                </div>
+
+                <!-- Featured Image -->
+                {% if node.field_image_actualite %}
+                <div class="featured-image-section">
+                    {{ content.field_image_actualite }}
+                    <p class="image-caption">{{ node.title.value }}</p>
+                </div>
+                {% endif %}
+
+                <!-- Article Content -->
+                <div class="article-content">
+                    {% if node.field_extrait.value %}
+                    <p><strong>{{ node.field_extrait.value }}</strong></p>
+                    {% endif %}
+                    
+                    {{ content.body }}
+                </div>
+
+                <!-- Tags -->
+                <div class="tags-section">
+                    <div class="tags-title">🏷️ Tags</div>
+                    <div class="tags-list">
+                        {% if node.field_categorie.value == 'nouveau' %}
+                            <span class="tag">Nouveau</span>
+                            <span class="tag">Innovation</span>
+                        {% elseif node.field_categorie.value == 'urgent' %}
+                            <span class="tag">Urgent</span>
+                            <span class="tag">Important</span>
+                        {% endif %}
+                        <span class="tag">Publication</span>
+                        <span class="tag">MCTN</span>
+                    </div>
+                </div>
+
+            </article>
+
+            <!-- Comments Section -->
+            <div class="comments-section">
+                <div class="comments-header">
+                    <span class="comments-count">{{ random(5, 50) }} Commentaires</span>
+                    <button class="sort-btn">▼ Trier par</button>
+                </div>
+
+                <!-- Add Comment -->
+                <div class="add-comment">
+                    <div class="comment-avatar">👤</div>
+                    <div class="comment-input-wrapper">
+                        <textarea class="comment-input" placeholder="Ajouter un commentaire..."></textarea>
+                        <div class="comment-actions">
+                            <button class="comment-btn btn-cancel">Annuler</button>
+                            <button class="comment-btn btn-submit">Publier</button>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Right Column: Sidebar -->
+        <aside class="sidebar">
+            
+            <!-- Share Card -->
+            <div class="sidebar-card">
+                <div class="sidebar-title">
+                    <span>📤</span>
+                    <span>Partager</span>
+                </div>
+                <div class="share-buttons">
+                    <button class="share-btn">
+                        <span>📘</span>
+                        <span>Facebook</span>
+                    </button>
+                    <button class="share-btn">
+                        <span>🐦</span>
+                        <span>Twitter</span>
+                    </button>
+                    <button class="share-btn">
+                        <span>💼</span>
+                        <span>LinkedIn</span>
+                    </button>
+                    <button class="share-btn">
+                        <span>📧</span>
+                        <span>Email</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Related Posts -->
+            <div class="sidebar-card">
+                <div class="sidebar-title">
+                    <span>📋</span>
+                    <span>Publications similaires</span>
+                </div>
+
+                {# Publications similaires - dynamique #}
+                {% set related_query = drupal_entity_query('node', {
+                    'type': 'publication',
+                    'status': 1,
+                    'nid': {'!=': node.id}
+                }).range(0, 4).sort('created', 'DESC') %}
+                {% set related_nids = related_query.execute() %}
+                {% set related_nodes = related_nids ? drupal_entity('node', related_nids, check_access=false) : [] %}
+
+                {% for related in related_nodes %}
+                <div class="related-post">
+                    <div class="related-icon">
+                        {% if related.field_categorie.value == 'urgent' %}⚠️
+                        {% elseif related.field_categorie.value == 'nouveau' %}🎓
+                        {% elseif related.field_categorie.value == 'annonce' %}🏆
+                        {% else %}📊
+                        {% endif %}
+                    </div>
+                    <div class="related-info">
+                        <h4><a href="{{ path('entity.node.canonical', {'node': related.id}) }}">{{ related.title.value }}</a></h4>
+                        <div class="related-date">{{ related.created.value|format_date('custom', 'Il y a', '', 'fr') }}</div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+
+        </aside>
+
+    </div>
+</main>

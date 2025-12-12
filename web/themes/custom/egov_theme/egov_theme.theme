@@ -86,6 +86,30 @@ if ($node->id() == 31) {
       $nids = $query->execute();
       $variables['actualites_recentes'] = !empty($nids) ? $node_storage->loadMultiple($nids) : [];
     }
+    
+     // Attacher CSS/JS UNIQUEMENT pour le détail d'une publication
+  if ($node->bundle() == 'publication' && $variables['view_mode'] == 'full') {
+    $variables['#attached']['library'][] = 'egov_theme/publication-detail-page';
+  }
+  
+  }
+}
+
+/**
+ * Implements hook_preprocess_node().
+ */
+function egov_theme_preprocess_node(&$variables) {
+  $node = $variables['node'];
+  
+  // Attacher CSS/JS pour le détail d'une publication
+  if ($node->bundle() == 'publication' && $variables['view_mode'] == 'full') {
+    $variables['#attached']['library'][] = 'egov_theme/publication-detail-page';
+  }
+  
+  
+  // Attacher CSS/JS pour le détail d'une actualité
+  if ($node->bundle() == 'actualite' && $variables['view_mode'] == 'full') {
+    $variables['#attached']['library'][] = 'egov_theme/actualite-detail-page';
   }
 }
 

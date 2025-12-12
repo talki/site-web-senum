@@ -73,3 +73,19 @@ contact-page:
   dependencies:
     - core/drupal
     - egov_theme/global-styling
+    
+publication-detail-page:
+  version: 1.x
+  css:
+    theme:
+      css/publications-detail.css: {}
+  js:
+    js/publications-detail.js: {}
+    
+actualite-detail-page:
+  version: 1.x
+  css:
+    theme:
+      css/actualites-detail.css: {}
+  js:
+    js/actualites-detail.js: {}
