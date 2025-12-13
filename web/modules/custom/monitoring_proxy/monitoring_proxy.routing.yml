@@ -1,0 +1,8 @@
+monitoring_proxy.data:
+  path: '/api/monitoring-data'
+  defaults:
+    _controller: '\Drupal\monitoring_proxy\Controller\MonitoringProxyController::getData'
+  requirements:
+    _permission: 'access content'
+  options:
+    no_cache: TRUE

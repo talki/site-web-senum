@@ -1110,3 +1110,16 @@ footer {
     background: #fee2e2;
     color: #991b1b;
 }
+
+
+.ss-ip-info {
+    font-size: 0.875rem;
+    color: #6b7280;
+    font-weight: 400;
+}
+
+.ss-tab {
+    font-size: 0.875rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}

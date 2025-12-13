@@ -1,0 +1,5 @@
+name: Monitoring Proxy
+type: module
+description: Proxy pour API de monitoring
+core_version_requirement: ^11
+package: Custom
