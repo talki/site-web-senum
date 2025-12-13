@@ -971,3 +971,142 @@ footer {
         page-break-inside: avoid;
     }
 }
+
+
+
+
+/* Loading & Error States */
+.loading-container, .error-container {
+    text-align: center;
+    padding: 4rem 2rem;
+}
+
+.loading-spinner {
+    font-size: 3rem;
+    animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.error-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.retry-btn {
+    margin-top: 1rem;
+    padding: 0.75rem 2rem;
+    background: var(--primary-green);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}
+
+/* Security Servers Tabs */
+.ss-tabs-section {
+    background: white;
+    border-radius: 16px;
+    padding: 2rem;
+    margin-top: 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+.ss-tabs-header h2 {
+    margin-bottom: 1.5rem;
+    color: var(--primary-dark);
+}
+
+.ss-tabs {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid #e5e7eb;
+    padding-bottom: 0.5rem;
+}
+
+.ss-tab {
+    padding: 0.75rem 1.5rem;
+    background: transparent;
+    border: none;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+    font-weight: 600;
+    color: #6b7280;
+    transition: all 0.3s ease;
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.ss-tab:hover {
+    background: #f3f4f6;
+    color: var(--primary-green);
+}
+
+.ss-tab.active {
+    background: var(--primary-green);
+    color: white;
+}
+
+.ss-tab-badge {
+    background: rgba(255,255,255,0.3);
+    padding: 0.25rem 0.5rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.ss-tab.active .ss-tab-badge {
+    background: rgba(255,255,255,0.3);
+}
+
+.ss-tab-content {
+    min-height: 400px;
+}
+
+.ss-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.ss-stats-mini {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.ss-stat {
+    font-size: 0.9rem;
+    color: #6b7280;
+}
+
+.ss-data-table {
+    overflow-x: auto;
+}
+
+.status-badge {
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.status-badge.success {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.status-badge.error {
+    background: #fee2e2;
+    color: #991b1b;
+}

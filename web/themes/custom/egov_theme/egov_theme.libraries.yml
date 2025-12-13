@@ -89,3 +89,19 @@ actualite-detail-page:
       css/actualites-detail.css: {}
   js:
     js/actualites-detail.js: {}
+    
+videopodcasts-page:
+  version: 1.x
+  css:
+    theme:
+      css/videopodcasts.css: {}
+  js:
+    js/videopodcasts.js: {}
+
+videopodcast-detail-page:
+  version: 1.x
+  css:
+    theme:
+      css/videopodcasts-detail.css: {}
+  js:
+    js/videopodcasts-detail.js: {}

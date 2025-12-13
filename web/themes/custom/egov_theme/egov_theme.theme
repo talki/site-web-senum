@@ -12,13 +12,13 @@ function egov_theme_preprocess_page(&$variables) {
       $variables['homepage_node'] = $node;
     }
     
-    // 🆕 CHARGER LES ACTUALITÉS POUR LA PAGE D'ACCUEIL
+    // Charger les actualités pour la page d'accueil
     $node_storage = \Drupal::entityTypeManager()->getStorage('node');
     $query = $node_storage->getQuery()
-      ->condition('type', 'actualite') // Le machine name de ton content type
-      ->condition('status', 1) // Seulement les contenus publiés
-      ->sort('created', 'DESC') // Trier par date décroissante
-      ->range(0, 10) // Limiter à 10 résultats
+      ->condition('type', 'actualite')
+      ->condition('status', 1)
+      ->sort('created', 'DESC')
+      ->range(0, 10)
       ->accessCheck(TRUE);
     
     $nids = $query->execute();
@@ -50,48 +50,56 @@ function egov_theme_preprocess_page(&$variables) {
       $variables['#attached']['library'][] = 'egov_theme/presentation-page';
     }
     
-    
-    // Page publications (node 31)
-if ($node->id() == 31) {
-  \Drupal::logger('egov_theme')->notice('CSS publications attaché!');
-  $variables['#attached']['library'][] = 'egov_theme/actualites-page';
-  
-  // Charger les publications
-  $node_storage = \Drupal::entityTypeManager()->getStorage('node');
-  $query = $node_storage->getQuery()
-    ->condition('type', 'publication')
-    ->condition('status', 1)
-    ->sort('created', 'DESC')
-    ->range(0, 20)
-    ->accessCheck(TRUE);
-  
-  $nids = $query->execute();
-  $variables['publications_recentes'] = !empty($nids) ? $node_storage->loadMultiple($nids) : [];
-}
-
-    // 🆕 Page actualités (node 30) - CHARGER LES ACTUALITÉS
+    // Page actualités (node 30)
     if ($node->id() == 30) {
-      \Drupal::logger('egov_theme')->notice('CSS actualites attaché okkkkkk!');
+      \Drupal::logger('egov_theme')->notice('CSS actualites attaché!');
       $variables['#attached']['library'][] = 'egov_theme/actualites-page';
       
-      // Charger les actualités pour la page dédiée
       $node_storage = \Drupal::entityTypeManager()->getStorage('node');
       $query = $node_storage->getQuery()
         ->condition('type', 'actualite')
         ->condition('status', 1)
         ->sort('created', 'DESC')
-        ->range(0, 20) // Plus d'actualités pour la page dédiée
+        ->range(0, 20)
         ->accessCheck(TRUE);
       
       $nids = $query->execute();
       $variables['actualites_recentes'] = !empty($nids) ? $node_storage->loadMultiple($nids) : [];
     }
     
-     // Attacher CSS/JS UNIQUEMENT pour le détail d'une publication
-  if ($node->bundle() == 'publication' && $variables['view_mode'] == 'full') {
-    $variables['#attached']['library'][] = 'egov_theme/publication-detail-page';
-  }
-  
+    // Page publications (node 31)
+    if ($node->id() == 31) {
+      \Drupal::logger('egov_theme')->notice('CSS publications attaché!');
+      $variables['#attached']['library'][] = 'egov_theme/actualites-page';
+      
+      $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+      $query = $node_storage->getQuery()
+        ->condition('type', 'publication')
+        ->condition('status', 1)
+        ->sort('created', 'DESC')
+        ->range(0, 20)
+        ->accessCheck(TRUE);
+      
+      $nids = $query->execute();
+      $variables['publications_recentes'] = !empty($nids) ? $node_storage->loadMultiple($nids) : [];
+    }
+    
+    // Page vidéos podcast (node 61)
+    if ($node->id() == 61) {
+      \Drupal::logger('egov_theme')->notice('CSS videopodcasts attaché!');
+      $variables['#attached']['library'][] = 'egov_theme/videopodcasts-page';
+      
+      $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+      $query = $node_storage->getQuery()
+        ->condition('type', 'video_podcast')
+        ->condition('status', 1)
+        ->sort('created', 'DESC')
+        ->range(0, 20)
+        ->accessCheck(TRUE);
+      
+      $nids = $query->execute();
+      $variables['videos_podcast'] = !empty($nids) ? $node_storage->loadMultiple($nids) : [];
+    }
   }
 }
 
@@ -106,10 +114,14 @@ function egov_theme_preprocess_node(&$variables) {
     $variables['#attached']['library'][] = 'egov_theme/publication-detail-page';
   }
   
-  
   // Attacher CSS/JS pour le détail d'une actualité
   if ($node->bundle() == 'actualite' && $variables['view_mode'] == 'full') {
     $variables['#attached']['library'][] = 'egov_theme/actualite-detail-page';
+  }
+  
+  // Attacher CSS/JS pour le détail d'une vidéo podcast
+  if ($node->bundle() == 'video_podcast' && $variables['view_mode'] == 'full') {
+    $variables['#attached']['library'][] = 'egov_theme/videopodcast-detail-page';
   }
 }
 
@@ -121,7 +133,6 @@ function egov_theme_preprocess_block(&$variables) {
     $menu_tree = \Drupal::menuTree();
     $menu_name = 'main';
     
-    // Charger jusqu'à 3 niveaux de profondeur
     $parameters = $menu_tree->getCurrentRouteMenuTreeParameters($menu_name);
     $parameters->setMinDepth(1);
     $parameters->setMaxDepth(3);

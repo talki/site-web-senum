@@ -1,0 +1,258 @@
+{# Template pour le détail d'une vidéo podcast #}
+
+<!-- Breadcrumb -->
+<div class="breadcrumb">
+    <div class="breadcrumb-container">
+        <a href="/">Accueil</a>
+        <span>›</span>
+        <a href="/videos-podcast">Vidéos Podcast</a>
+        <span>›</span>
+        <span>{{ node.title.value }}</span>
+    </div>
+</div>
+
+<!-- Main Content -->
+<main class="video-main">
+    <div class="video-container">
+        
+        <!-- Left Column: Video Player & Info -->
+        <div class="video-player-section">
+            
+            <!-- Video Player -->
+            <div class="video-player">
+                {% if node.field_url_video.value %}
+                    {% set video_id = node.field_url_video.value|split('live/')[1]|split('?')[0] %}
+                    <div class="player-wrapper">
+                        <iframe 
+                            width="100%" 
+                            height="600" 
+                            src="https://www.youtube.com/embed/{{ video_id }}" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen
+                            style="border-radius: 12px;">
+                        </iframe>
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Video Info -->
+            <div class="video-info">
+                <span class="video-category-badge">
+                    {% if node.field_categorie.value == 'interview' %}Interview
+                    {% elseif node.field_categorie.value == 'tutorial' %}Tutoriel
+                    {% elseif node.field_categorie.value == 'conference' %}Conférence
+                    {% else %}Actualité
+                    {% endif %}
+                </span>
+                <h1 class="video-title">{{ node.title.value }}</h1>
+                
+                <div class="video-meta-bar">
+                    <div class="meta-item">
+                        <span>👁️</span>
+                        <span>{{ node.field_vues.value|number_format(0, ',', ' ') }} vues</span>
+                    </div>
+                    <div class="meta-item">
+                        <span>📅</span>
+                        <span>{{ node.created.value|format_date('custom', 'd F Y') }}</span>
+                    </div>
+                    {% if node.field_duree.value %}
+                    <div class="meta-item">
+                        <span>⏱️</span>
+                        <span>{{ node.field_duree.value }}</span>
+                    </div>
+                    {% endif %}
+                </div>
+
+                <div class="video-actions">
+                    <button class="action-button">
+                        <span>👍</span>
+                        <span>{{ random(100, 2000) }}</span>
+                    </button>
+                    <button class="action-button">
+                        <span>👎</span>
+                        <span>{{ random(5, 50) }}</span>
+                    </button>
+                    <button class="action-button">
+                        <span>📤</span>
+                        <span>Partager</span>
+                    </button>
+                    <button class="action-button">
+                        <span>📥</span>
+                        <span>Télécharger</span>
+                    </button>
+                    <button class="action-button">
+                        <span>📋</span>
+                        <span>Playlist</span>
+                    </button>
+                </div>
+
+                <div class="channel-info">
+                    <div class="channel-avatar">📹</div>
+                    <div class="channel-details">
+                        <div class="channel-name">eGov Sénégal Officiel</div>
+                        <div class="channel-subscribers">15.2K abonnés</div>
+                    </div>
+                    <button class="subscribe-btn">S'abonner</button>
+                </div>
+
+                <div class="video-description">
+                    {% if node.field_extrait.value %}
+                    <p class="description-text">
+                        <strong>{{ node.field_extrait.value }}</strong>
+                    </p>
+                    {% endif %}
+                    
+                    {% if node.body.value %}
+                    <div class="description-text">
+                        {{ node.body.value|raw }}
+                    </div>
+                    {% endif %}
+                    
+                    <button class="show-more-btn">Afficher plus</button>
+                </div>
+            </div>
+
+            <!-- Comments Section -->
+            <div class="comments-section">
+                <div class="comments-header">
+                    <span class="comments-count">{{ random(50, 300) }} commentaires</span>
+                    <button class="sort-comments">▼ Trier par</button>
+                </div>
+
+                <!-- Add Comment -->
+                <div class="add-comment">
+                    <div class="user-avatar">👤</div>
+                    <div class="comment-input-wrapper">
+                        <textarea class="comment-input" placeholder="Ajouter un commentaire public..."></textarea>
+                        <div class="comment-actions">
+                            <button class="comment-btn btn-cancel">Annuler</button>
+                            <button class="comment-btn btn-submit">Commenter</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Comment Items (exemples statiques) -->
+                <div class="comment-item">
+                    <div class="user-avatar">👤</div>
+                    <div class="comment-content">
+                        <div class="comment-header">
+                            <span class="comment-author">Mamadou Diop</span>
+                            <span class="comment-date">Il y a 2 heures</span>
+                        </div>
+                        <p class="comment-text">
+                            Excellente initiative ! Cette interview montre clairement l'engagement du gouvernement 
+                            dans la digitalisation. J'espère voir ces solutions déployées rapidement dans toutes 
+                            les régions du Sénégal. 👏
+                        </p>
+                        <div class="comment-actions-bar">
+                            <div class="comment-action">
+                                <span>👍</span>
+                                <span>24</span>
+                            </div>
+                            <div class="comment-action">
+                                <span>👎</span>
+                            </div>
+                            <div class="comment-action">
+                                <span>💬 Répondre</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comment-item">
+                    <div class="user-avatar">👤</div>
+                    <div class="comment-content">
+                        <div class="comment-header">
+                            <span class="comment-author">Fatou Seck</span>
+                            <span class="comment-date">Il y a 5 heures</span>
+                        </div>
+                        <p class="comment-text">
+                            En tant que développeuse, je suis impressionnée par la qualité technique de l'API v3.0. 
+                            La documentation est claire et les exemples très utiles. Bravo à toute l'équipe !
+                        </p>
+                        <div class="comment-actions-bar">
+                            <div class="comment-action">
+                                <span>👍</span>
+                                <span>31</span>
+                            </div>
+                            <div class="comment-action">
+                                <span>👎</span>
+                            </div>
+                            <div class="comment-action">
+                                <span>💬 Répondre</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="comment-item">
+                    <div class="user-avatar">👤</div>
+                    <div class="comment-content">
+                        <div class="comment-header">
+                            <span class="comment-author">Aminata Ba</span>
+                            <span class="comment-date">Il y a 2 jours</span>
+                        </div>
+                        <p class="comment-text">
+                            C'est exactement ce dont le Sénégal a besoin ! Une vraie transformation digitale qui 
+                            simplifie la vie des citoyens. Merci pour cette vidéo très claire. 🇸🇳
+                        </p>
+                        <div class="comment-actions-bar">
+                            <div class="comment-action">
+                                <span>👍</span>
+                                <span>45</span>
+                            </div>
+                            <div class="comment-action">
+                                <span>👎</span>
+                            </div>
+                            <div class="comment-action">
+                                <span>💬 Répondre</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Right Column: Sidebar -->
+        <div class="video-sidebar">
+            
+            <!-- Up Next -->
+            <div class="up-next-section">
+                <div class="sidebar-title">
+                    <span>🎬 À suivre</span>
+                    <div class="autoplay-toggle">
+                        <span class="toggle-label">Lecture auto</span>
+                        <div class="toggle-switch active">
+                            <div class="toggle-slider"></div>
+                        </div>
+                    </div>
+                </div>
+
+                {# Charger les vidéos similaires #}
+                {% set current_category = node.field_categorie.value %}
+                {% set related_videos = [] %}
+                
+                {# Cette partie sera gérée par le preprocessing #}
+                {% for i in 1..6 %}
+                <div class="related-video">
+                    <div class="related-thumbnail">
+                        <div class="related-play">▶</div>
+                        <span class="related-duration">{{ random(15, 45) }}:{{ random(10, 59) }}</span>
+                    </div>
+                    <div class="related-info">
+                        <div class="related-title">Vidéo similaire {{ i }}</div>
+                        <div class="related-channel">eGov Sénégal</div>
+                        <div class="related-stats">{{ random(5, 20) }}K vues • Il y a {{ i }} semaines</div>
+                    </div>
+                </div>
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+</main>

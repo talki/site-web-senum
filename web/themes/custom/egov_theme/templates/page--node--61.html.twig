@@ -1,0 +1,315 @@
+{# Template de page pour les video podcast #}
+
+<nav>
+    <div class="logo">
+        <div class="logo-flag">
+            <div class="flag-stripe flag-green"></div>
+            <div class="flag-stripe flag-yellow"></div>
+            <div class="flag-stripe flag-red"></div>
+        </div>
+        <div class="logo-text">
+            <h1>Jokkoo</h1>
+            <div class="logo-subtitle">Plateforme d'Interopérabilité</div>
+        </div>
+    </div>
+
+    {# Menu Desktop #}
+    <div class="nav-menu-desktop">
+        {% if page.primary_menu %}
+            {{ page.primary_menu }}
+        {% endif %}
+    </div>
+
+    {# Actions Mobile #}
+    <div class="nav-actions-mobile">
+        <button class="search-btn">🔍</button>
+        <button class="hamburger-btn" id="hamburgerBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</nav>
+<!-- Hero Section -->
+<section class="podcast-hero">
+    <div class="hero-content">
+        <div class="hero-icon">📹</div>
+        <h1>Vidéos Podcast eGov</h1>
+        <p>Découvrez nos émissions exclusives sur la transformation digitale, l'innovation technologique et l'avenir de l'e-gouvernement au Sénégal</p>
+    </div>
+</section>
+
+<!-- Stats Bar -->
+<section class="stats-bar">
+    <div class="stats-container">
+        <div class="stat-item">
+            <span class="stat-number">{{ videos_podcast|length }}+</span>
+            <span class="stat-label">Épisodes Publiés</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">250K+</span>
+            <span class="stat-label">Vues Totales</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">15K+</span>
+            <span class="stat-label">Abonnés</span>
+        </div>
+        <div class="stat-item">
+            <span class="stat-number">12</span>
+            <span class="stat-label">Playlists Thématiques</span>
+        </div>
+    </div>
+</section>
+
+<!-- Filter Section -->
+<section class="filter-section">
+    <div class="filter-container">
+        <span class="filter-label">Catégories :</span>
+        <button class="filter-btn active" data-filter="all">Tous</button>
+        <button class="filter-btn" data-filter="interview">Interviews</button>
+        <button class="filter-btn" data-filter="tutorial">Tutoriels</button>
+        <button class="filter-btn" data-filter="conference">Conférences</button>
+        <button class="filter-btn" data-filter="actualite">Actualités</button>
+    </div>
+</section>
+
+<!-- Main Content -->
+<main class="podcast-main">
+    <div class="podcast-container">
+
+        <!-- Featured Video -->
+   {% if videos_podcast|first %}
+    {% set featured = videos_podcast|first %}
+    {% if featured.field_url_video.value %}
+        {% set video_id = featured.field_url_video.value|split('live/')[1]|split('?')[0] %}
+    {% endif %}
+    <div class="featured-video">
+        <div class="featured-thumbnail" {% if video_id %}style="background-image: url('https://img.youtube.com/vi/{{ video_id }}/maxresdefault.jpg'); background-size: cover; position: relative;"{% endif %}>
+            <span class="video-badge">✨ NOUVEAU</span>
+            <div class="play-button" {% if video_id %}onclick="playVideoInline(this, '{{ video_id }}')" style="cursor: pointer;"{% endif %}>▶</div>
+            <span class="video-duration">{{ featured.field_duree.value }}</span>
+        </div>
+                <div class="featured-details">
+                    <span class="featured-category">
+                        {% if featured.field_categorie.value == 'interview' %}Interview
+                        {% elseif featured.field_categorie.value == 'tutorial' %}Tutoriel
+                        {% elseif featured.field_categorie.value == 'conference' %}Conférence
+                        {% else %}Actualité
+                        {% endif %}
+                    </span>
+                    <h2>{{ featured.title.value }}</h2>
+                    <div class="featured-meta">
+                        <span>📅 {{ featured.created.value|format_date('custom', 'd F Y', null, 'fr') }}</span>
+                        <span>👁️ {{ featured.field_vues.value|number_format(0, ',', '.') }} vues</span>
+                        <span>💬 {{ random(50, 200) }} commentaires</span>
+                    </div>
+                    <p class="featured-description">
+                        {{ featured.field_extrait.value }}
+                    </p>
+                    <div class="featured-actions">
+                        <a href="{{ path('entity.node.canonical', {'node': featured.id}) }}" class="action-btn btn-primary">
+                            <span>▶</span>
+                            <span>Regarder maintenant</span>
+                        </a>
+                        <button class="action-btn btn-secondary">
+                            <span>📋</span>
+                            <span>Playlist</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        {% endif %}
+
+        <!-- Recent Videos Section -->
+        <div class="section-header">
+            <h2 class="section-title">🎬 Derniers Épisodes</h2>
+            <a href="#" class="view-all-link">Voir tout →</a>
+        </div>
+
+        <div class="videos-grid">
+            {% for video in videos_podcast %}
+                {% if loop.index > 1 %}
+
+                    <div class="video-card" data-category="{{ video.field_categorie.value }}">
+                        {% if video.field_url_video.value %}
+                            {% set video_id = video.field_url_video.value|split('live/')[1]|split('?')[0] %}
+                        {% endif %}
+
+                        <!-- Vignette cliquable pour ouvrir le player -->
+                 <!-- Vignette cliquable pour jouer la vidéo inline -->
+<div class="video-thumbnail gradient-{{ random(['purple', 'pink', 'cyan', 'orange', 'blue', 'green', 'indigo', 'red']) }}" 
+     {% if video_id %}style="background-image: url('https://img.youtube.com/vi/{{ video_id }}/maxresdefault.jpg'); background-size: cover; position: relative;"{% endif %}>
+    {% if loop.index == 2 %}
+    <span class="video-new-badge">NOUVEAU</span>
+    {% endif %}
+    <div class="thumbnail-play" {% if video_id %}onclick="playVideoInline(this, '{{ video_id }}')" style="cursor: pointer;"{% endif %}>▶</div>
+    <span class="video-time">{{ video.field_duree.value }}</span>
+</div>
+
+                        <div class="video-content">
+                            <span class="video-category">
+                                {% if video.field_categorie.value == 'interview' %}Interview
+                                {% elseif video.field_categorie.value == 'tutorial' %}Tutoriel
+                                {% elseif video.field_categorie.value == 'conference' %}Conférence
+                                {% else %}Actualité
+                                {% endif %}
+                            </span>
+                            <!-- Titre cliquable vers la page de détail -->
+                            <h3><a href="{{ path('entity.node.canonical', {'node': video.id}) }}">{{ video.title.value }}</a></h3>
+                            <p class="video-description">
+                                {{ video.field_extrait.value }}
+                            </p>
+                            <div class="video-stats">
+                                <span class="video-stat">
+                                    <span>📅</span>
+                                    <span>{{ video.created.value|format_date('custom', 'd M Y') }}</span>
+                                </span>
+                                <span class="video-stat">
+                                    <span>👁️</span>
+                                    <span>{{ (video.field_vues.value / 1000)|number_format(1, '.', '') }}K vues</span>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+
+        <!-- Playlists Section -->
+        <div class="playlists-section">
+            <div class="section-header">
+                <h2 class="section-title">📚 Playlists Thématiques</h2>
+                <a href="#" class="view-all-link">Voir toutes →</a>
+            </div>
+
+            <div class="playlists-grid">
+
+                <div class="playlist-card">
+                    <div class="playlist-cover gradient-purple">
+                        <span class="playlist-count">12 vidéos</span>
+                        <div class="playlist-icon">🎓</div>
+                    </div>
+                    <div class="playlist-info">
+                        <h3>Formation Développeurs</h3>
+                        <p class="playlist-description">
+                            Tutoriels complets pour maîtriser l'intégration des API eGov
+                        </p>
+                        <div class="playlist-meta">
+                            <span>⏱️ 6h 30min</span>
+                            <span>👁️ 45K vues</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="playlist-card">
+                    <div class="playlist-cover gradient-pink">
+                        <span class="playlist-count">8 vidéos</span>
+                        <div class="playlist-icon">💬</div>
+                    </div>
+                    <div class="playlist-info">
+                        <h3>Interviews Experts</h3>
+                        <p class="playlist-description">
+                            Rencontres avec les acteurs clés de la transformation digitale
+                        </p>
+                        <div class="playlist-meta">
+                            <span>⏱️ 4h 15min</span>
+                            <span>👁️ 38K vues</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="playlist-card">
+                    <div class="playlist-cover gradient-cyan">
+                        <span class="playlist-count">15 vidéos</span>
+                        <div class="playlist-icon">🔒</div>
+                    </div>
+                    <div class="playlist-info">
+                        <h3>Sécurité & Conformité</h3>
+                        <p class="playlist-description">
+                            Tout sur la sécurité des données et la conformité réglementaire
+                        </p>
+                        <div class="playlist-meta">
+                            <span>⏱️ 7h 45min</span>
+                            <span>👁️ 52K vues</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="playlist-card">
+                    <div class="playlist-cover gradient-orange">
+                        <span class="playlist-count">10 vidéos</span>
+                        <div class="playlist-icon">💡</div>
+                    </div>
+                    <div class="playlist-info">
+                        <h3>Innovation & Startups</h3>
+                        <p class="playlist-description">
+                            Découvrez les solutions innovantes de l'écosystème tech sénégalais
+                        </p>
+                        <div class="playlist-meta">
+                            <span>⏱️ 5h 20min</span>
+                            <span>👁️ 31K vues</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="playlist-card">
+                    <div class="playlist-cover gradient-blue">
+                        <span class="playlist-count">9 vidéos</span>
+                        <div class="playlist-icon">🏥</div>
+                    </div>
+                    <div class="playlist-info">
+                        <h3>E-Santé & Digital Health</h3>
+                        <p class="playlist-description">
+                            Digitalisation du secteur de la santé au Sénégal
+                        </p>
+                        <div class="playlist-meta">
+                            <span>⏱️ 4h 50min</span>
+                            <span>👁️ 42K vues</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="playlist-card">
+                    <div class="playlist-cover gradient-green">
+                        <span class="playlist-count">14 vidéos</span>
+                        <div class="playlist-icon">🌍</div>
+                    </div>
+                    <div class="playlist-info">
+                        <h3>Smart Cities & IoT</h3>
+                        <p class="playlist-description">
+                            Villes intelligentes et Internet des Objets pour l'administration
+                        </p>
+                        <div class="playlist-meta">
+                            <span>⏱️ 6h 10min</span>
+                            <span>👁️ 28K vues</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Newsletter Section -->
+        <div class="newsletter-section">
+            <div class="newsletter-icon">📧</div>
+            <h2>Ne Manquez Aucun Épisode</h2>
+            <p>
+                Inscrivez-vous à notre newsletter pour recevoir les notifications des nouveaux 
+                épisodes, les événements à venir et les contenus exclusifs.
+            </p>
+            <form class="newsletter-form">
+                <input type="email" class="newsletter-input" placeholder="Votre adresse email" required>
+                <button type="submit" class="newsletter-btn">S'abonner</button>
+            </form>
+        </div>
+
+    </div>
+</main>
+
+    <!-- Modal pour le player vidéo -->
+    <div id="videoModal" class="video-modal" onclick="closeVideoModal()">
+        <div class="video-modal-content" onclick="event.stopPropagation()">
+            <span class="video-modal-close" onclick="closeVideoModal()">&times;</span>
+            <div id="videoPlayerContainer"></div>
+        </div>
+    </div>

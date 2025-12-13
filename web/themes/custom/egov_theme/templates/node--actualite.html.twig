@@ -1,5 +1,4 @@
-
-{# Template pour le détail d'une actualité #}
+{# Template pour le détail d'une actualité - Design respecté à 100% #}
 
 <!-- Breadcrumb -->
 <div class="breadcrumb">
@@ -82,14 +81,19 @@
 </div>
 
 <!-- Featured Image -->
-{% if node.field_image_actualite %}
+<!-- Featured Image -->
 <section class="featured-image-section">
     <div class="featured-image-container">
-        {{ content.field_image_actualite }}
+        {% if node.field_image_actualite.entity %}
+            {# Image uploadée depuis l'admin #}
+            {{ content.field_image_actualite }}
+        {% else %}
+            {# Image de fallback depuis le thème #}
+            <img src="{{ base_path ~ directory }}/images/image_actualite-detail_fallback.jpeg" alt="{{ node.title.value }}" class="featured-image">
+        {% endif %}
         <p class="image-caption">{{ node.title.value }}</p>
     </div>
 </section>
-{% endif %}
 
 <!-- Main Content -->
 <main class="article-main">
@@ -98,7 +102,7 @@
         <!-- Article Body -->
         <article class="article-body">
             <div class="article-content">
-                {{ content.body }}
+                {{ node.body.value|raw }}
             </div>
 
             <!-- Article Footer -->
@@ -109,7 +113,7 @@
                         {% if node.field_categorie.value %}
                         <span class="tag">{{ node.field_categorie.value|capitalize }}</span>
                         {% endif %}
-                        <span class="tag">Actualité</span>
+                        <span class="tag">Transformation Digitale</span>
                         <span class="tag">MCTN</span>
                         <span class="tag">Sénégal</span>
                     </div>
@@ -127,18 +131,41 @@
                     <span>Actualités Similaires</span>
                 </div>
 
-                {# Articles similaires - 4 dernières actualités #}
-                {% for i in 1..4 %}
                 <div class="related-article">
-                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=100&h=100&fit=crop" alt="Actualité" class="related-image">
+                    <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=100&h=100&fit=crop" alt="Digital Partnership" class="related-image">
                     <div class="related-info">
-                        <div class="related-category">Technologie</div>
-                        <div class="related-title">Actualité similaire {{ i }}</div>
-                        <div class="related-date">Il y a {{ i }} jours</div>
+                        <div class="related-category">International</div>
+                        <div class="related-title">Partenariat Digital avec l'Union Européenne</div>
+                        <div class="related-date">10 Nov 2025</div>
                     </div>
                 </div>
-                {% endfor %}
 
+                <div class="related-article">
+                    <img src="https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=100&h=100&fit=crop" alt="Tech Summit" class="related-image">
+                    <div class="related-info">
+                        <div class="related-category">Technologie</div>
+                        <div class="related-title">Dakar Tech Summit 2025</div>
+                        <div class="related-date">12 Nov 2025</div>
+                    </div>
+                </div>
+
+                <div class="related-article">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=100&h=100&fit=crop" alt="Smart City" class="related-image">
+                    <div class="related-info">
+                        <div class="related-category">Gouvernement</div>
+                        <div class="related-title">Diamniadio Ville Intelligente</div>
+                        <div class="related-date">08 Nov 2025</div>
+                    </div>
+                </div>
+
+                <div class="related-article">
+                    <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?w=100&h=100&fit=crop" alt="Startup" class="related-image">
+                    <div class="related-info">
+                        <div class="related-category">Technologie</div>
+                        <div class="related-title">Startups Sénégalaises à Y Combinator</div>
+                        <div class="related-date">06 Nov 2025</div>
+                    </div>
+                </div>
             </div>
 
             <!-- Newsletter -->

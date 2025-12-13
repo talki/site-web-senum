@@ -1,27 +1,35 @@
-
-
+{# Template pour le détail d'une actualité - Design respecté à 100% #}
 
 <!-- Breadcrumb -->
 <div class="breadcrumb">
     <div class="breadcrumb-container">
-        <a href="index.html">Accueil</a>
+        <a href="/">Accueil</a>
         <span>›</span>
-        <a href="actualites.html">Actualités</a>
+        <a href="/actualites">Actualités</a>
         <span>›</span>
-        <span>MCTN signe un mémorandum avec Alchemist</span>
+        <span>{{ node.title.value }}</span>
     </div>
 </div>
 
 <!-- Article Header -->
 <header class="article-header">
     <div class="article-header-content">
-        <span class="article-category">International</span>
-        <h1 class="article-title">MCTN Signe un Mémorandum d'Entente avec Alchemist au MWC25 Doha</h1>
+        {% if node.field_categorie.value %}
+        <span class="article-category">
+            {% if node.field_categorie.value == 'urgent' %}Urgent
+            {% elseif node.field_categorie.value == 'nouveau' %}Nouveau
+            {% elseif node.field_categorie.value == 'info' %}Information
+            {% elseif node.field_categorie.value == 'annonce' %}Annonce
+            {% else %}International
+            {% endif %}
+        </span>
+        {% endif %}
+        <h1 class="article-title">{{ node.title.value }}</h1>
+        {% if node.field_extrait.value %}
         <p class="article-excerpt">
-            Le Ministère de la Communication, des Télécommunications et du Numérique a signé un accord 
-            stratégique avec la société Alchemist lors du Mobile World Congress 2025 à Doha. Ce partenariat 
-            vise à accélérer la transformation digitale du Sénégal avec des solutions innovantes.
+            {{ node.field_extrait.value }}
         </p>
+        {% endif %}
         <div class="article-meta">
             <div class="meta-author">
                 <div class="author-avatar">✍️</div>
@@ -31,15 +39,17 @@
             </div>
             <div class="meta-item">
                 <span>📅</span>
-                <span>18 Novembre 2025</span>
+                <span>{{ node.created.value|format_date('custom', 'd F Y', '', 'fr') }}</span>
             </div>
+            {% if node.field_temps_lecture.value %}
             <div class="meta-item">
                 <span>⏱️</span>
-                <span>8 min de lecture</span>
+                <span>{{ node.field_temps_lecture.value }} min de lecture</span>
             </div>
+            {% endif %}
             <div class="meta-item">
                 <span>👁️</span>
-                <span>3.2K vues</span>
+                <span>{{ random(1000, 5000) }} vues</span>
             </div>
         </div>
     </div>
@@ -71,210 +81,28 @@
 </div>
 
 <!-- Featured Image -->
+<!-- Featured Image -->
 <section class="featured-image-section">
     <div class="featured-image-container">
-        <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1200&h=600&fit=crop" alt="MWC25 Doha" class="featured-image">
-        <p class="image-caption">Cérémonie de signature du mémorandum d'entente entre le MCTN et Alchemist au Mobile World Congress 2025 à Doha, Qatar</p>
+        {% if node.field_image_actualite.0 %}
+            {# Image uploadée depuis l'admin #}
+            {{ content.field_image_actualite }}
+        {% else %}
+            {# Image de fallback depuis le thème #}
+            <img src="/themes/custom/egov_theme/images/image_actualite-detail_fallback.jpeg" alt="{{ node.title.value }}" class="featured-image">
+        {% endif %}
+        <p class="image-caption">{{ node.title.value }}</p>
     </div>
 </section>
 
 <!-- Main Content -->
 <main class="article-main">
     <div class="article-container">
-
+        
         <!-- Article Body -->
         <article class="article-body">
             <div class="article-content">
-
-                <p>
-                    <strong>Doha, Qatar - 18 novembre 2025</strong> - Dans le cadre du Mobile World Congress 2025 (MWC25) 
-                    qui se tient à Doha, le Ministère de la Communication, des Télécommunications et du Numérique du Sénégal 
-                    (MCTN) a officiellement signé un mémorandum d'entente stratégique avec Alchemist, une entreprise leader 
-                    dans les solutions de transformation digitale et d'intelligence artificielle.
-                </p>
-
-                <div class="highlight-box">
-                    <strong>🎯 Points clés de l'accord :</strong> Ce partenariat représente un investissement de 15 millions USD 
-                    sur 3 ans et touchera plus de 5 millions de citoyens sénégalais avec des services digitaux de nouvelle génération.
-                </div>
-
-                <h2>Un Partenariat Stratégique Majeur</h2>
-
-                <p>
-                    Cette signature marque une étape décisive dans l'ambition du Sénégal de devenir un hub technologique 
-                    en Afrique de l'Ouest. Le ministre Alioune Sall, accompagné d'une délégation technique de haut niveau, 
-                    a exprimé sa satisfaction face à ce partenariat qui s'inscrit parfaitement dans la vision du Sénégal 
-                    numérique 2035.
-                </p>
-
-                <div class="quote-box">
-                    <p class="quote-text">
-                        "Ce partenariat avec Alchemist représente bien plus qu'un simple accord commercial. C'est une alliance 
-                        stratégique qui nous permettra d'accélérer notre transformation digitale et d'offrir à nos citoyens 
-                        des services publics de classe mondiale."
-                    </p>
-                    <p class="quote-author">— Alioune Sall, Ministre de la Communication, des Télécommunications et du Numérique</p>
-                </div>
-
-                <h2>Les Axes de Collaboration</h2>
-
-                <p>
-                    Le mémorandum d'entente couvre plusieurs domaines stratégiques de la transformation digitale du Sénégal :
-                </p>
-
-                <h3>1. Infrastructure Cloud Souveraine</h3>
-                <p>
-                    Alchemist s'engage à déployer une infrastructure cloud souveraine au Sénégal, permettant au pays de 
-                    stocker et gérer ses données sensibles sur son territoire national. Cette infrastructure comprendra :
-                </p>
-                <ul>
-                    <li>Deux datacenters Tier III à Dakar et Diamniadio</li>
-                    <li>Une capacité de stockage initiale de 5 pétaoctets</li>
-                    <li>Des systèmes de sécurité conformes aux normes ISO 27001 et ISO 27017</li>
-                    <li>Une connectivité fiber optique à 100 Gbps entre les sites</li>
-                </ul>
-
-                <h3>2. Intelligence Artificielle pour les Services Publics</h3>
-                <p>
-                    Le partenariat prévoit le développement de solutions d'IA adaptées au contexte sénégalais, notamment :
-                </p>
-                <ul>
-                    <li>Des chatbots multilingues (français, wolof, pulaar, sérère) pour l'assistance citoyenne 24/7</li>
-                    <li>Des systèmes de reconnaissance vocale pour faciliter l'accès aux services pour les populations analphabètes</li>
-                    <li>Des algorithmes de détection de fraude pour sécuriser les transactions gouvernementales</li>
-                    <li>Des outils d'analyse prédictive pour optimiser les services publics</li>
-                </ul>
-
-                <h3>3. Formation et Renforcement des Capacités</h3>
-                <p>
-                    Un volet crucial de l'accord concerne la formation de talents locaux :
-                </p>
-                <ul>
-                    <li>Formation de 5000 développeurs et ingénieurs sénégalais sur 3 ans</li>
-                    <li>Création d'un centre d'excellence en IA à Dakar</li>
-                    <li>Programme de bourses pour les étudiants en informatique</li>
-                    <li>Certification professionnelle en cloud computing et cybersécurité</li>
-                </ul>
-
-                <div class="stats-grid">
-                    <div class="stat-card">
-                        <div class="stat-value">15M $</div>
-                        <div class="stat-label">Investissement Total</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value">5000</div>
-                        <div class="stat-label">Professionnels Formés</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value">5M+</div>
-                        <div class="stat-label">Citoyens Impactés</div>
-                    </div>
-                    <div class="stat-card">
-                        <div class="stat-value">3 ans</div>
-                        <div class="stat-label">Durée du Programme</div>
-                    </div>
-                </div>
-
-                <h2>Impact sur l'Écosystème Digital Sénégalais</h2>
-
-                <p>
-                    Ce partenariat aura des répercussions majeures sur plusieurs secteurs clés de l'économie sénégalaise :
-                </p>
-
-                <h3>Secteur Public</h3>
-                <p>
-                    Les administrations publiques bénéficieront de solutions cloud avancées, réduisant les coûts 
-                    opérationnels de 40% tout en améliorant la qualité et la rapidité des services aux citoyens. 
-                    L'État civil, la fiscalité, la santé et l'éducation seront les premiers secteurs concernés.
-                </p>
-
-                <h3>Secteur Privé</h3>
-                <p>
-                    Les entreprises sénégalaises, notamment les PME, auront accès à des infrastructures cloud de qualité 
-                    internationale à des tarifs préférentiels. Cela devrait stimuler l'innovation et la création d'emplois 
-                    dans le secteur technologique.
-                </p>
-
-                <h3>Éducation et Recherche</h3>
-                <p>
-                    Les universités et centres de recherche sénégalais pourront utiliser les capacités de calcul et de 
-                    stockage pour leurs projets scientifiques, positionnant le Sénégal comme un pôle de recherche en IA 
-                    en Afrique.
-                </p>
-
-                <div class="info-box">
-                    <div class="info-box-title">
-                        <span>💡</span>
-                        <span>Calendrier de Déploiement</span>
-                    </div>
-                    <p>
-                        <strong>Phase 1 (2026) :</strong> Construction des datacenters et formation de 1500 professionnels<br>
-                        <strong>Phase 2 (2027) :</strong> Déploiement des solutions IA et migration des services critiques<br>
-                        <strong>Phase 3 (2028) :</strong> Généralisation et optimisation des services digitaux
-                    </p>
-                </div>
-
-                <h2>Une Reconnaissance Internationale</h2>
-
-                <p>
-                    La signature de cet accord au MWC25, l'un des plus grands événements technologiques mondiaux, 
-                    témoigne de la reconnaissance internationale dont bénéficie le Sénégal pour ses efforts en matière 
-                    de transformation digitale.
-                </p>
-
-                <p>
-                    Plus de 3000 participants au congrès ont assisté à la cérémonie de signature, incluant des représentants 
-                    de gouvernements africains, d'organisations internationales et de grandes entreprises technologiques. 
-                    Plusieurs pays ont déjà exprimé leur intérêt pour des partenariats similaires.
-                </p>
-
-                <h2>Engagement en faveur de la Souveraineté Numérique</h2>
-
-                <p>
-                    Un aspect fondamental de cet accord est l'engagement commun en faveur de la souveraineté numérique 
-                    du Sénégal. Contrairement aux solutions cloud internationales standard, ce partenariat garantit :
-                </p>
-
-                <ul>
-                    <li>Le stockage de toutes les données sensibles sur le territoire sénégalais</li>
-                    <li>L'application exclusive de la législation sénégalaise sur les données</li>
-                    <li>Le transfert progressif de technologie vers les équipes locales</li>
-                    <li>La propriété intellectuelle partagée des solutions développées</li>
-                </ul>
-
-                <h2>Réactions et Perspectives</h2>
-
-                <p>
-                    La communauté tech sénégalaise a accueilli très favorablement cette annonce. Plusieurs startups 
-                    et entrepreneurs ont déjà manifesté leur intérêt pour utiliser ces nouvelles infrastructures et 
-                    participer aux programmes de formation.
-                </p>
-
-                <p>
-                    Les organisations internationales comme la Banque Mondiale et l'Union Africaine ont salué cette 
-                    initiative, y voyant un modèle de collaboration Sud-Sud qui pourrait inspirer d'autres pays africains.
-                </p>
-
-                <h2>Conclusion</h2>
-
-                <p>
-                    Le mémorandum d'entente signé entre le MCTN et Alchemist représente une étape majeure dans la 
-                    transformation digitale du Sénégal. Au-delà des aspects techniques et financiers, c'est un signal 
-                    fort de l'engagement du pays à devenir un leader africain du numérique.
-                </p>
-
-                <p>
-                    Ce partenariat stratégique, combiné aux autres initiatives en cours comme la plateforme nationale 
-                    d'interopérabilité eGov, positionne le Sénégal sur la voie d'un avenir numérique inclusif, innovant 
-                    et souverain.
-                </p>
-
-                <p>
-                    Les prochains mois seront cruciaux pour la mise en œuvre opérationnelle de cet accord. Le MCTN 
-                    a promis de communiquer régulièrement sur les avancées et de maintenir un dialogue ouvert avec 
-                    toutes les parties prenantes de l'écosystème digital sénégalais.
-                </p>
-
+                {{ node.body.value|raw }}
             </div>
 
             <!-- Article Footer -->
@@ -282,13 +110,12 @@
                 <div class="tags-section">
                     <div class="tags-title">🏷️ Tags</div>
                     <div class="tags-list">
-                        <span class="tag">MWC25</span>
-                        <span class="tag">Partenariat</span>
+                        {% if node.field_categorie.value %}
+                        <span class="tag">{{ node.field_categorie.value|capitalize }}</span>
+                        {% endif %}
                         <span class="tag">Transformation Digitale</span>
-                        <span class="tag">Intelligence Artificielle</span>
-                        <span class="tag">Cloud Computing</span>
-                        <span class="tag">Souveraineté Numérique</span>
-                        <span class="tag">Innovation</span>
+                        <span class="tag">MCTN</span>
+                        <span class="tag">Sénégal</span>
                     </div>
                 </div>
             </div>
@@ -296,7 +123,7 @@
 
         <!-- Sidebar -->
         <aside class="article-sidebar">
-
+            
             <!-- Related Articles -->
             <div class="sidebar-card">
                 <div class="sidebar-title">
