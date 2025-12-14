@@ -1123,3 +1123,134 @@ footer {
     font-weight: 700;
     text-transform: uppercase;
 }
+
+
+/* Environment Filter */
+.environment-filter {
+    background: white;
+    border-radius: 16px;
+    padding: 1.5rem 2rem;
+    margin-top: 2rem;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.filter-label {
+    font-weight: 700;
+    color: var(--primary-dark);
+    font-size: 1rem;
+}
+
+.filter-options {
+    display: flex;
+    gap: 1rem;
+}
+
+.filter-radio {
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+}
+
+.filter-radio input[type="radio"] {
+    display: none;
+}
+
+.filter-radio-label {
+    padding: 0.75rem 1.5rem;
+    border-radius: 12px;
+    border: 2px solid #e5e7eb;
+    background: white;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    color: #6b7280;
+}
+
+.filter-radio input[type="radio"]:checked + .filter-radio-label {
+    border-color: var(--primary-green);
+    background: rgba(5, 150, 105, 0.1);
+    color: var(--primary-green);
+}
+
+.filter-radio:hover .filter-radio-label {
+    border-color: var(--primary-green);
+}
+
+.filter-icon {
+    font-size: 1.2rem;
+}
+
+
+/* Tableau des données */
+.ss-data-table {
+    overflow-x: auto;
+    margin-top: 1rem;
+}
+
+.ss-data-table table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.ss-data-table th {
+    background: #f3f4f6;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    font-weight: 600;
+    border-bottom: 2px solid #e5e7eb;
+    white-space: nowrap;
+}
+
+.ss-data-table td {
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid #e5e7eb;
+    vertical-align: middle;
+}
+
+.ss-data-table tr:hover {
+    background: #f9fafb;
+}
+
+/* Badge environnement */
+.env-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.env-badge.prod {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.env-badge.integration {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+/* Badge statut */
+.status-badge {
+    display: inline-block;
+    padding: 0.25rem 0.75rem;
+    border-radius: 12px;
+    font-size: 0.875rem;
+    font-weight: 600;
+}
+
+.status-badge.success {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.status-badge.error {
+    background: #fee2e2;
+    color: #991b1b;
+}

@@ -31,7 +31,6 @@
     </div>
 </nav>
 
-
 {# Template pour le Tableau de Bord - Node 20 #}
 
 <!-- Dashboard Hero -->
@@ -49,9 +48,37 @@
     </div>
 </section>
 
+<!-- Environment Filter -->
+<section class="environment-filter">
+    <div class="filter-label"></div>
+    <div class="filter-options">
+        <label class="filter-radio">
+            <input type="radio" name="environment" value="prod" checked>
+            <span class="filter-radio-label">
+                <span class="filter-icon">🟢</span>
+                Production
+            </span>
+        </label>
+        <label class="filter-radio">
+            <input type="radio" name="environment" value="uat">
+            <span class="filter-radio-label">
+                <span class="filter-icon">🟡</span>
+                UAT
+            </span>
+        </label>
+        <label class="filter-radio">
+            <input type="radio" name="environment" value="integration">
+            <span class="filter-radio-label">
+                <span class="filter-icon">🔵</span>
+                Intégration
+            </span>
+        </label>
+    </div>
+</section>
+
 <!-- Main Dashboard -->
 <main class="dashboard-main">
-
+    
     <!-- Loading Indicator -->
     <div id="loadingIndicator" class="loading-container">
         <div class="loading-spinner">⏳</div>
@@ -62,7 +89,7 @@
     <div id="errorMessage" class="error-container" style="display: none;">
         <div class="error-icon">⚠️</div>
         <p id="errorText"></p>
-        <button onclick="loadMonitoringData()" class="retry-btn">Réessayer</button>
+        <button onclick="MonitoringDashboard.loadData()" class="retry-btn">Réessayer</button>
     </div>
 
     <!-- Stats Overview (Global) -->
@@ -74,7 +101,7 @@
             <div class="stat-card-value" id="totalServers">0</div>
             <div class="stat-card-label">Security Servers</div>
         </div>
-
+        
         <div class="stat-card">
             <div class="stat-card-header">
                 <div class="stat-card-icon">📊</div>
@@ -82,7 +109,7 @@
             <div class="stat-card-value" id="totalRequests">0</div>
             <div class="stat-card-label">Requêtes totales</div>
         </div>
-
+        
         <div class="stat-card">
             <div class="stat-card-header">
                 <div class="stat-card-icon">✅</div>
@@ -90,7 +117,7 @@
             <div class="stat-card-value" id="avgSuccessRate">0%</div>
             <div class="stat-card-label">Taux de succès moyen</div>
         </div>
-
+        
         <div class="stat-card">
             <div class="stat-card-header">
                 <div class="stat-card-icon">⚡</div>
@@ -105,265 +132,337 @@
         <div class="ss-tabs-header">
             <h2>Security Servers</h2>
         </div>
-
+        
         <div class="ss-tabs" id="ssTabs">
             <!-- Onglets générés dynamiquement -->
         </div>
-
+        
         <div class="ss-tab-content" id="ssTabContent">
             <!-- Contenu de l'onglet actif -->
         </div>
     </section>
 
 </main>
+  <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-section footer-about">
+                <h3>À PROPOS</h3>
+                <p>
+                    La Plateforme Nationale d'Interopérabilité du Sénégal (eGov Sénégal) 
+                    est une initiative du Ministère de la Communication, des Télécommunications 
+                    et du Numérique dans le cadre du New Deal Technologique.
+                </p>
+                <div class="social-icons">
+                    <div class="social-icon">📘</div>
+                    <div class="social-icon">🐦</div>
+                    <div class="social-icon">💼</div>
+                    <div class="social-icon">📸</div>
+                    <div class="social-icon">📹</div>
+                </div>
+            </div>
 
+            <div class="footer-section">
+                <h3>SERVICES</h3>
+                <ul>
+                    <li><a href="#protection-sociale">Protection Sociale</a></li>
+                    <li><a href="#troisieme-age">Troisième Âge</a></li>
+                    <li><a href="#education">Éducation</a></li>
+                    <li><a href="#citoyennete">Citoyenneté</a></li>
+                    <li><a href="#taxes">Taxes & Impôts</a></li>
+                    <li><a href="#sante">Santé</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>RESSOURCES</h3>
+                <ul>
+                    <li><a href="#">Documentation API</a></li>
+                    <li><a href="#">Guides d'Intégration</a></li>
+                    <li><a href="#">Catalogue d'API</a></li>
+                    <li><a href="#">Centre d'Aide</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>CONTACT</h3>
+                <ul>
+                    <li><a href="#">📍 Dakar, Sénégal</a></li>
+                    <li><a href="#">📧 contact@egov.sn</a></li>
+                    <li><a href="#">📞 +221 33 XXX XX XX</a></li>
+                    <li><a href="#">💬 Chat en Direct</a></li>
+                    <li><a href="#">🎫 Créer un Ticket</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 eGov Sénégal - MCTN/SENUM - République du Sénégal</p>
+            <div class="footer-bottom-links">
+                <a href="#">Mentions Légales</a>
+                <a href="#">Politique de Confidentialité</a>
+                <a href="#">Conditions d'Utilisation</a>
+                <a href="#">Accessibilité</a>
+                <a href="#">Plan du Site</a>
+            </div>
+        </div>
+    </footer>
 <script>
-    (function () {
-        'use strict';
-
-        // Configuration
-        const MONITORING_API_URL = '/api/monitoring-data';
-
-        // Mapping des IPs vers les noms d'organisations
-        const SS_NAMES = {
-            '10.0.1.62': 'SECURITE-CENTRAL',
-            '10.0.1.198': 'DONNEES-REF',
-            '10.0.3.98': 'DGD',
-            '10.0.2.173': 'GDID',
-            '10.0.2.189': 'DGPSN',
-            '10.0.3.48': 'SEN-CSU'
-        };
-
-        // Variables globales
-        let monitoringData = [];
-        let securityServers = {};
-        let currentTab = null;
-
-        // Fonction pour obtenir le nom d'un Security Server
-        function getServerName(ip) {
-            return SS_NAMES[ip] || ip;
-        }
-
-        // Charger les données au chargement de la page
-        document.addEventListener('DOMContentLoaded', function () {
-            loadMonitoringData();
-
-            // Actualiser toutes les 30 secondes
-            setInterval(loadMonitoringData, 30000);
+var MonitoringDashboard = (function() {
+    'use strict';
+    
+    // Configuration
+    const API_URL = '/api/monitoring-data';
+    
+    // Mapping des IPs vers les noms d'organisations
+    const SS_NAMES = {
+        // PROD
+        '10.0.1.62': 'SECURITE-CENTRAL',
+        '10.0.1.198': 'DONNEES-REF',
+        '10.0.3.98': 'DGD',
+        '10.0.2.173': 'GDID',
+        '10.0.2.189': 'DGPSN',
+        '10.0.3.48': 'SEN-CSU',
+        // INTEGRATION
+        '10.121.222.37': 'INT-SECURITE-CENTRAL',
+        '10.121.222.38': 'INT-DONNEES-REF',
+        '10.121.222.39': 'INT-DGD',
+        '10.121.222.40': 'INT-DGID',
+        '10.121.222.41': 'INT-DGPSN',
+        '10.121.222.42': 'INT-SEN-CSU'
+    };
+    
+    // Variables
+    let monitoringData = [];
+    let securityServers = {};
+    let currentEnvironment = 'all';
+    let currentTab = null;
+    
+    // Fonction pour obtenir le nom d'un Security Server
+    function getServerName(ip) {
+        return SS_NAMES[ip] || ip;
+    }
+    
+    // Initialisation
+    function init() {
+        loadData();
+        
+        // Event listener pour les filtres d'environnement
+        document.querySelectorAll('input[name="environment"]').forEach(function(radio) {
+            radio.addEventListener('change', function() {
+                currentEnvironment = this.value;
+                filterByEnvironment();
+            });
         });
-
-        // Fonction pour charger les données
-        window.loadMonitoringData = async function () {
-            try {
-                document.getElementById('loadingIndicator').style.display = 'block';
-                document.getElementById('errorMessage').style.display = 'none';
-
-                const response = await fetch(MONITORING_API_URL);
-
-                if (!response.ok) {
-                    throw new Error(`Erreur HTTP: ${response.status}`);
-                }
-
-                const data = await response.json();
-                monitoringData = Array.isArray(data) ? data : [];
-
-                // Organiser les données par Security Server
-                organizeDataBySecurityServer();
-
-                // Afficher les données
-                displayGlobalStats();
-                displaySecurityServerTabs();
-
-                // Masquer le loading
-                document.getElementById('loadingIndicator').style.display = 'none';
-                document.getElementById('globalStats').style.display = 'grid';
-                document.getElementById('ssTabsSection').style.display = 'block';
-
-                // Mettre à jour l'heure
-                updateLastUpdateTime();
-
-            } catch (error) {
-                console.error('Erreur lors du chargement des données:', error);
-                document.getElementById('loadingIndicator').style.display = 'none';
-                document.getElementById('errorMessage').style.display = 'block';
-                document.getElementById('errorText').textContent = `Impossible de charger les données: ${error.message}`;
+        
+        // Actualiser toutes les 30 secondes
+        setInterval(loadData, 30000);
+    }
+    
+    // Fonction pour charger les données
+    async function loadData() {
+        try {
+            document.getElementById('loadingIndicator').style.display = 'block';
+            document.getElementById('errorMessage').style.display = 'none';
+            
+            const url = API_URL;
+            const res = await fetch(url);
+            
+            if (!res.ok) {
+                throw new Error('Erreur HTTP: ' + res.status);
             }
+            
+            const json = await res.json();
+            
+            // Gérer le nouveau format avec wrapper
+            if (json.data && Array.isArray(json.data)) {
+                monitoringData = json.data;
+            } else if (Array.isArray(json)) {
+                monitoringData = json;
+            } else {
+                monitoringData = [];
+            }
+            
+            filterByEnvironment();
+            
+            document.getElementById('loadingIndicator').style.display = 'none';
+            document.getElementById('globalStats').style.display = 'grid';
+            document.getElementById('ssTabsSection').style.display = 'block';
+            
+            updateLastUpdateTime();
+            
+        } catch (error) {
+            console.error('Erreur:', error);
+            document.getElementById('loadingIndicator').style.display = 'none';
+            document.getElementById('errorMessage').style.display = 'block';
+            document.getElementById('errorText').textContent = 'Impossible de charger les données: ' + error.message;
         }
-
-        // Organiser les données par Security Server
-        function organizeDataBySecurityServer() {
-            securityServers = {};
-
-            monitoringData.forEach(item => {
-                const ssIp = item.security_server_internal_ip;
-
-                if (!securityServers[ssIp]) {
-                    securityServers[ssIp] = [];
-                }
-
-                securityServers[ssIp].push(item);
+    }
+    
+    // Filtrer les données par environnement
+    function filterByEnvironment() {
+        let filteredData = monitoringData;
+        
+        if (currentEnvironment !== 'all') {
+            filteredData = monitoringData.filter(function(item) {
+                return (item.environment || 'PROD') === currentEnvironment.toUpperCase();
             });
         }
-
-        // Afficher les statistiques globales
-        function displayGlobalStats() {
-            const totalServers = Object.keys(securityServers).length;
-            document.getElementById('totalServers').textContent = totalServers;
-
-            const totalRequests = monitoringData.length;
-            document.getElementById('totalRequests').textContent = totalRequests.toLocaleString();
-
-            // Calculer le taux de succès moyen
-            let successCount = 0;
-            monitoringData.forEach(item => {
+        
+        // Réorganiser avec les données filtrées
+        securityServers = {};
+        filteredData.forEach(function(item) {
+            const ssIp = item.security_server_internal_ip;
+            if (!securityServers[ssIp]) {
+                securityServers[ssIp] = [];
+            }
+            securityServers[ssIp].push(item);
+        });
+        
+        // Mettre à jour l'affichage
+        displayGlobalStats();
+        displaySecurityServerTabs();
+    }
+    
+    function displayGlobalStats() {
+        const totalServers = Object.keys(securityServers).length;
+        document.getElementById('totalServers').textContent = totalServers;
+        
+        // Compter depuis securityServers (données filtrées)
+        let totalRequests = 0;
+        Object.values(securityServers).forEach(function(items) {
+            totalRequests += items.length;
+        });
+        document.getElementById('totalRequests').textContent = totalRequests.toLocaleString();
+        
+        let successCount = 0;
+        Object.values(securityServers).forEach(function(items) {
+            items.forEach(function(item) {
                 if (item.succeeded !== false) {
                     successCount++;
                 }
             });
-            const successRate = totalRequests > 0 ? ((successCount / totalRequests) * 100).toFixed(1) : 0;
-            document.getElementById('avgSuccessRate').textContent = successRate + '%';
-
-            document.getElementById('activeServers').textContent = totalServers;
-        }
-
-        // Afficher les onglets des Security Servers
-        function displaySecurityServerTabs() {
-            const tabsContainer = document.getElementById('ssTabs');
-            tabsContainer.innerHTML = '';
-
-            let isFirst = true;
-
-            // Trier par nom pour un affichage cohérent
-            const sortedServers = Object.keys(securityServers).sort((a, b) => {
-                return getServerName(a).localeCompare(getServerName(b));
-            });
-
-            sortedServers.forEach(ssIp => {
-                const tab = document.createElement('button');
-                tab.className = 'ss-tab' + (isFirst ? ' active' : '');
-                tab.dataset.ip = ssIp;
-
-                const serverName = getServerName(ssIp);
-                const nameSpan = document.createElement('span');
-                nameSpan.textContent = serverName;
-                tab.appendChild(nameSpan);
-
-                const count = securityServers[ssIp].length;
-                const badge = document.createElement('span');
-                badge.className = 'ss-tab-badge';
-                badge.textContent = count;
-                tab.appendChild(badge);
-
-                tab.addEventListener('click', function () {
-                    switchTab(ssIp);
-                });
-
-                tabsContainer.appendChild(tab);
-
-                if (isFirst) {
-                    displayServerData(ssIp);
-                    currentTab = ssIp;
-                    isFirst = false;
-                }
-            });
-        }
-
-        // Changer d'onglet
-        function switchTab(ssIp) {
-            // Mettre à jour les onglets actifs
-            document.querySelectorAll('.ss-tab').forEach(tab => {
-                tab.classList.remove('active');
-                if (tab.dataset.ip === ssIp) {
-                    tab.classList.add('active');
-                }
-            });
-
-            currentTab = ssIp;
-
-            // Afficher les données du serveur
-            displayServerData(ssIp);
-        }
-
-        // Afficher les données d'un Security Server
-        function displayServerData(ssIp) {
-            const contentContainer = document.getElementById('ssTabContent');
-            const serverData = securityServers[ssIp];
-
-            if (!serverData || serverData.length === 0) {
-                contentContainer.innerHTML = '<p>Aucune donnée disponible pour ce serveur.</p>';
-                return;
-            }
-
-            const serverName = getServerName(ssIp);
-
-            // Créer le contenu HTML
-            let html = `
-            <div class="ss-detail-header">
-                <div>
-                    <h3>${serverName}</h3>
-                    <div class="ss-ip-info">IP Interne: ${ssIp}</div>
-                </div>
-                <div class="ss-stats-mini">
-                    <span class="ss-stat">📊 ${serverData.length} enregistrements</span>
-                </div>
-            </div>
+        });
+        const successRate = totalRequests > 0 ? ((successCount / totalRequests) * 100).toFixed(1) : 0;
+        document.getElementById('avgSuccessRate').textContent = successRate + '%';
+        
+        document.getElementById('activeServers').textContent = totalServers;
+    }
+    
+    function displaySecurityServerTabs() {
+        const tabsContainer = document.getElementById('ssTabs');
+        tabsContainer.innerHTML = '';
+        
+        let isFirst = true;
+        
+        const sortedServers = Object.keys(securityServers).sort(function(a, b) {
+            return getServerName(a).localeCompare(getServerName(b));
+        });
+        
+        sortedServers.forEach(function(ssIp) {
+            const tab = document.createElement('button');
+            tab.className = 'ss-tab' + (isFirst ? ' active' : '');
+            tab.dataset.ip = ssIp;
             
-            <div class="ss-data-table">
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Service</th>
-                            <th>Client</th>
-                            <th>Provider</th>
-                            <th>Timestamp</th>
-                            <th>Durée (ms)</th>
-                            <th>Statut</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-        `;
-
-            // Afficher les 50 premières entrées
-            serverData.slice(0, 50).forEach(item => {
-                const timestamp = item.request_in_ts ? new Date(item.request_in_ts * 1000).toLocaleString('fr-FR') : 'N/A';
-                const duration = item.total_duration ? item.total_duration + ' ms' : 'N/A';
-                const succeeded = item.succeeded !== false;
-
-                html += `
-                <tr>
-                    <td><strong>${item.service_code || 'N/A'}</strong></td>
-                    <td>${item.client_member_code || 'N/A'}</td>
-                    <td>${item.service_member_code || 'N/A'}</td>
-                    <td>${timestamp}</td>
-                    <td>${duration}</td>
-                    <td>
-                        <span class="status-badge ${succeeded ? 'success' : 'error'}">
-                            ${succeeded ? '✓ Succès' : '✗ Erreur'}
-                        </span>
-                    </td>
-                </tr>
-            `;
+            const serverName = getServerName(ssIp);
+            const nameSpan = document.createElement('span');
+            nameSpan.textContent = serverName;
+            tab.appendChild(nameSpan);
+            
+            const count = securityServers[ssIp].length;
+            const badge = document.createElement('span');
+            badge.className = 'ss-tab-badge';
+            badge.textContent = count;
+            tab.appendChild(badge);
+            
+            tab.addEventListener('click', function() {
+                switchTab(ssIp);
             });
-
-            html += `
-                    </tbody>
-                </table>
-            </div>
-        `;
-
-            contentContainer.innerHTML = html;
+            
+            tabsContainer.appendChild(tab);
+            
+            if (isFirst) {
+                displayServerData(ssIp);
+                currentTab = ssIp;
+                isFirst = false;
+            }
+        });
+    }
+    
+    function switchTab(ssIp) {
+        document.querySelectorAll('.ss-tab').forEach(function(tab) {
+            tab.classList.remove('active');
+            if (tab.dataset.ip === ssIp) {
+                tab.classList.add('active');
+            }
+        });
+        
+        currentTab = ssIp;
+        displayServerData(ssIp);
+    }
+    
+    function displayServerData(ssIp) {
+        const contentContainer = document.getElementById('ssTabContent');
+        const serverData = securityServers[ssIp];
+        
+        if (!serverData || serverData.length === 0) {
+            contentContainer.innerHTML = '<p>Aucune donnée disponible pour ce serveur.</p>';
+            return;
         }
+        
+        const serverName = getServerName(ssIp);
+        
+        let html = '<div class="ss-detail-header"><div><h3>' + serverName + '</h3>';
+        html += '<div class="ss-ip-info">IP Interne: ' + ssIp + '</div></div>';
+        html += '<div class="ss-stats-mini"><span class="ss-stat">📊 ' + serverData.length + ' enregistrements</span></div></div>';
+        html += '<div class="ss-data-table"><table class="table"><thead><tr>';
+        html += '<th>Env</th><th>Service</th><th>Client</th><th>Provider</th><th>Timestamp</th><th>Durée (ms)</th><th>Statut</th>';
+        html += '</tr></thead><tbody>';
+        
+        serverData.slice(0, 50).forEach(function(item) {
+            const timestamp = item.request_in_ts ? new Date(item.request_in_ts * 1000).toLocaleString('fr-FR') : 'N/A';
+            const duration = item.total_duration ? item.total_duration + ' ms' : 'N/A';
+            const succeeded = item.succeeded !== false;
+            const env = item.environment || 'PROD';
+            
+            html += '<tr>';
+            html += '<td><span class="env-badge ' + env.toLowerCase() + '">' + env + '</span></td>';
+            html += '<td><strong>' + (item.service_code || 'N/A') + '</strong></td>';
+            html += '<td>' + (item.client_member_code || 'N/A') + '</td>';
+            html += '<td>' + (item.service_member_code || 'N/A') + '</td>';
+            html += '<td>' + timestamp + '</td>';
+            html += '<td>' + duration + '</td>';
+            html += '<td><span class="status-badge ' + (succeeded ? 'success' : 'error') + '">';
+            html += succeeded ? '✓ Succès' : '✗ Erreur';
+            html += '</span></td></tr>';
+        });
+        
+        html += '</tbody></table></div>';
+        contentContainer.innerHTML = html;
+    }
+    
+    function updateLastUpdateTime() {
+        const now = new Date();
+        const timeString = now.toLocaleString('fr-FR', {
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit'
+        });
+        document.getElementById('lastUpdate').textContent = 'Aujourd\'hui à ' + timeString;
+    }
+    
+    // Public API
+    return {
+        init: init,
+        loadData: loadData
+    };
+    
+})();
 
-        // Mettre à jour l'heure de dernière mise à jour
-        function updateLastUpdateTime() {
-            const now = new Date();
-            const timeString = now.toLocaleString('fr-FR', {
-                hour: '2-digit',
-                minute: '2-digit',
-                second: '2-digit'
-            });
-            document.getElementById('lastUpdate').textContent = `Aujourd'hui à ${timeString}`;
-        }
-
-    })();
+// Init au chargement
+document.addEventListener('DOMContentLoaded', function() {
+    MonitoringDashboard.init();
+});
 </script>
