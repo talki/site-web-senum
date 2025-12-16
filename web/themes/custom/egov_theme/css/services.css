@@ -268,7 +268,6 @@ nav {
 .category-icon {
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #64748b, #94a3b8);
     border-radius: 15px;
     display: flex;
     align-items: center;

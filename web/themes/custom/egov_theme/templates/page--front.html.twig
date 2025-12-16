@@ -1,17 +1,13 @@
 
 <!-- Navigation -->
 <nav>
-    <div class="logo">
-        <div class="logo-flag">
-            <div class="flag-stripe flag-green"></div>
-            <div class="flag-stripe flag-yellow"></div>
-            <div class="flag-stripe flag-red"></div>
-        </div>
-        <div class="logo-text">
-            <h1>Jokkoo</h1>
-            <div class="logo-subtitle">Plateforme d'Interopérabilité</div>
-        </div>
+<div class="logo">
+    <img src="/themes/custom/egov_theme/images/senegal.png" alt="Logo Interopérabilité Sénégal" style="width: 60px; height: 60px; object-fit: contain;">
+    <div class="logo-text">
+        <h1>Jokkoo</h1>
+        <div class="logo-subtitle">Plateforme d'Interopérabilité</div>
     </div>
+</div>
 
 
 
@@ -267,8 +263,13 @@
         <!-- News Feed -->
         <div class="news-feed-widget">
             <div class="widget-header">
-                <img src="/themes/custom/egov_theme/icon/publication.png" alt="Administrations" style="width: 48px; height: 48px;">
-                <h3>Publications</h3>
+                <a href="/publications" class="">
+
+                    <img src="/themes/custom/egov_theme/icon/publication.png" alt="Administrations" style="width: 48px; height: 48px;">
+                </a>
+                <a href="/publications" class="">
+                    <h3>Publications</h3>                </a>
+
             </div>
 
             <div class="news-timeline">
@@ -308,7 +309,7 @@
                 <div class="news-timeline-item">
                     <div class="news-post-header">
                         <div class="ne">                        <img src="/themes/custom/egov_theme/icon/onepublication.png" alt="Administrations" style="width: 48px; height: 48px;">
-</div>
+                        </div>
                         <div class="news-post-author-info">
                             <div class="news-post-author">eGov Sénégal - Service Technique</div>
                             <div class="news-post-date">14 Nov 2025 · 15:45</div>
@@ -369,85 +370,96 @@
             </div>
         </div>
 
+       
+        
         <!-- Video Podcast -->
-        <div class="video-podcast-widget">
-            <div class="widget-header">
-                <img src="/themes/custom/egov_theme/icon/videopodcast.png" alt="Administrations" style="width: 48px; height: 48px;">
-                <h3>Vidéos Podcast</h3>
+<!-- Video Podcast -->
+<div class="video-podcast-widget">
+    <div class="widget-header">
+        <a href="/videos-podcast">
+            <img src="/themes/custom/egov_theme/icon/videopodcast.png" alt="Vidéos" style="width: 48px; height: 48px;">
+        </a>
+        <a href="/videos-podcast">
+            <h3>Vidéos Podcast</h3>
+        </a>
+    </div>
+    
+    <!-- Vidéo principale avec miniature YouTube -->
+    <div class="featured-video-card">
+        <a href="https://www.youtube.com/watch?v=fBGnFzPf5B4" target="_blank" class="featured-video-thumbnail" style="position: relative; display: block; border-radius: 12px; overflow: hidden;">
+            <img src="https://img.youtube.com/vi/fBGnFzPf5B4/maxresdefault.jpg" alt="Vidéo" style="width: 100%; height: auto; display: block;">
+            <span class="new-video-badge">🔴 NOUVEAU</span>
+            <div class="featured-play-btn">▶</div>
+            <span class="video-time">32:15</span>
+        </a>
+        <div class="featured-video-details">
+            <h4>L'Interopérabilité au Service du Citoyen Sénégalais</h4>
+            <div class="video-stats">
+                <span>📅 14 Nov 2025</span>
+                <span>👁️ 12.5K vues</span>
             </div>
-
-            <div class="featured-video-card">
-                <div class="featured-video-thumbnail">
-                    <span class="new-video-badge">🔴 NOUVEAU</span>
-                    <div class="featured-play-btn">▶</div>
-                    <span class="video-time">32:15</span>
-                </div>
-                <div class="featured-video-details">
-                    <h4>L'Interopérabilité au Service du Citoyen Sénégalais</h4>
-                    <div class="video-stats">
-                        <span>📅 14 Nov 2025</span>
-                        <span>👁️ 12.5K vues</span>
-                    </div>
-                    <p>Interview exclusive avec le Directeur du MCTN sur la transformation digitale.</p>
-                </div>
-            </div>
-
-            <div class="video-playlist">
-                <div class="playlist-item">
-                    <div class="playlist-thumbnail gradient-purple">
-                        <div class="playlist-play">▶</div>
-                    </div>
-                    <div class="playlist-info">
-                        <h5>Sécurité des API : Bonnes Pratiques et...</h5>
-                        <div class="playlist-meta">
-                            <span>⏱️ 28:45</span>
-                            <span>👁️ 8.2K</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="playlist-item">
-                    <div class="playlist-thumbnail gradient-pink">
-                        <div class="playlist-play">▶</div>
-                    </div>
-                    <div class="playlist-info">
-                        <h5>Digitalisation du Secteur Santé :...</h5>
-                        <div class="playlist-meta">
-                            <span>⏱️ 35:20</span>
-                            <span>👁️ 15.7K</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="playlist-item">
-                    <div class="playlist-thumbnail gradient-cyan">
-                        <div class="playlist-play">▶</div>
-                    </div>
-                    <div class="playlist-info">
-                        <h5>Open Data et Transparence...</h5>
-                        <div class="playlist-meta">
-                            <span>⏱️ 25:30</span>
-                            <span>👁️ 6.9K</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="playlist-item">
-                    <div class="playlist-thumbnail gradient-orange">
-                        <div class="playlist-play">▶</div>
-                    </div>
-                    <div class="playlist-info">
-                        <h5>Innovation Digitale : Les Startups Tech au...</h5>
-                        <div class="playlist-meta">
-                            <span>⏱️ 42:10</span>
-                            <span>👁️ 11.3K</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <a href="#" class="view-all-videos">📺 Voir toutes les vidéos →</a>
+            <p>Interview exclusive avec le Directeur du MCTN sur la transformation digitale.</p>
         </div>
+    </div>
+    
+    <!-- Playlist avec vraies miniatures YouTube -->
+    <div class="video-playlist">
+        <a href="https://www.youtube.com/watch?v=fBGnFzPf5B4" target="_blank" class="playlist-item" style="text-decoration: none; color: inherit;">
+            <div class="playlist-thumbnail" style="width: 120px; min-width: 120px; height: 68px; overflow: hidden; border-radius: 8px;">
+                <img src="https://img.youtube.com/vi/fBGnFzPf5B4/mqdefault.jpg" alt="Vidéo" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="playlist-info">
+                <h5>Sécurité des API : Bonnes Pratiques</h5>
+                <div class="playlist-meta">
+                    <span>⏱️ 28:45</span>
+                    <span>👁️ 8.2K</span>
+                </div>
+            </div>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=fBGnFzPf5B4" target="_blank" class="playlist-item" style="text-decoration: none; color: inherit;">
+            <div class="playlist-thumbnail" style="width: 120px; min-width: 120px; height: 68px; overflow: hidden; border-radius: 8px;">
+                <img src="https://img.youtube.com/vi/fBGnFzPf5B4/mqdefault.jpg" alt="Vidéo" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="playlist-info">
+                <h5>Digitalisation du Secteur Santé</h5>
+                <div class="playlist-meta">
+                    <span>⏱️ 35:20</span>
+                    <span>👁️ 15.7K</span>
+                </div>
+            </div>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=fBGnFzPf5B4" target="_blank" class="playlist-item" style="text-decoration: none; color: inherit;">
+            <div class="playlist-thumbnail" style="width: 120px; min-width: 120px; height: 68px; overflow: hidden; border-radius: 8px;">
+                <img src="https://img.youtube.com/vi/fBGnFzPf5B4/mqdefault.jpg" alt="Vidéo" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="playlist-info">
+                <h5>Open Data et Transparence</h5>
+                <div class="playlist-meta">
+                    <span>⏱️ 25:30</span>
+                    <span>👁️ 6.9K</span>
+                </div>
+            </div>
+        </a>
+        
+        <a href="https://www.youtube.com/watch?v=fBGnFzPf5B4" target="_blank" class="playlist-item" style="text-decoration: none; color: inherit;">
+            <div class="playlist-thumbnail" style="width: 120px; min-width: 120px; height: 68px; overflow: hidden; border-radius: 8px;">
+                <img src="https://img.youtube.com/vi/fBGnFzPf5B4/mqdefault.jpg" alt="Vidéo" style="width: 100%; height: 100%; object-fit: cover;">
+            </div>
+            <div class="playlist-info">
+                <h5>Innovation Digitale : Les Startups Tech</h5>
+                <div class="playlist-meta">
+                    <span>⏱️ 42:10</span>
+                    <span>👁️ 11.3K</span>
+                </div>
+            </div>
+        </a>
+    </div>
+    
+    <a href="/videos-podcast" class="view-all-videos">📺 Voir toutes les vidéos →</a>
+</div>
+        
     </div>
 </section>
 

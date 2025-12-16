@@ -1,4 +1,6 @@
 {# Template pour le Tableau de Bord - Node 20 #}
+{# Template de page pour les video podcast #}
+
 <nav>
     <div class="logo">
         <div class="logo-flag">
@@ -61,44 +63,7 @@
         <button onclick="DashboardApp.loadData()" class="retry-btn">Réessayer</button>
     </div>
 
-    <!-- Stats Overview -->
-    <section class="stats-overview" id="statsSection" style="display: none;">
-        <div class="stat-card">
-            <div class="stat-card-header">
-                <div class="stat-card-trend up">
-                    <span>↑</span>
-                    <span>12.5%</span>
-                </div>
-            </div>
-            <div class="stat-card-value" id="totalTransactions">0</div>
-            <div class="stat-card-label">Transactions ce mois</div>
-        </div>
 
-        <div class="stat-card">
-            <div class="stat-card-header">
-                <div class="stat-card-trend up">
-                    <span>↑</span>
-                    <span>8.2%</span>
-                </div>
-            </div>
-            <div class="stat-card-value" id="totalAdministrations">0</div>
-            <div class="stat-card-label">Administrations connectées</div>
-        </div>
-
-        <div class="stat-card">
-            <div class="stat-card-header">
-
-                <div class="stat-card-trend up">
-                    <span>↑</span>
-                    <span>3.1%</span>
-                </div>
-            </div>
-            <div class="stat-card-value" id="totalAPIs">0</div>
-            <div class="stat-card-label">API actives</div>
-        </div>
-
-   
-    </section>
 
     <!-- Dashboard Grid -->
     <section class="dashboard-grid" id="dashboardGrid" style="display: none;">
@@ -106,11 +71,7 @@
         <div class="top-services-card">
             <div class="top-services-header">
                 <h2 class="top-services-title">
-                    <span class="top-services-icon">
-                        
-        <img src="/themes/custom/egov_theme/icon/services.png" alt="" style="width: 48px; height: 48px;">
-
-                    </span>
+                    <span class="top-services-icon">🔥</span>
                     Services les plus utilisés
                 </h2>
                 <span class="top-services-period">Aujourd'hui</span>
@@ -248,7 +209,7 @@
         </table>
     </section>
 </main>
-  <!-- Footer -->
+   <!-- Footer -->
     <footer>
         <div class="footer-grid">
             <div class="footer-section footer-about">
@@ -259,11 +220,11 @@
                     et du Numérique dans le cadre du New Deal Technologique.
                 </p>
                 <div class="social-icons">
-                    <div class="social-icon"></div>
-                    <div class="social-icon"></div>
-                    <div class="social-icon"></div>
-                    <div class="social-icon"></div>
-                    <div class="social-icon"></div>
+                    <div class="social-icon">📘</div>
+                    <div class="social-icon">🐦</div>
+                    <div class="social-icon">💼</div>
+                    <div class="social-icon">📸</div>
+                    <div class="social-icon">📹</div>
                 </div>
             </div>
 
@@ -377,9 +338,13 @@ var DashboardApp = (function() {
             if (item.succeeded !== false) successCount++;
         });
         const successRate = totalRequests > 0 ? ((successCount / totalRequests) * 100).toFixed(1) : 0;
+        document.getElementById('systemAvailability').textContent = successRate + '%';
         
         const trend = document.getElementById('availabilityTrend');
-       
+        if (successRate < 99) {
+            trend.className = 'stat-card-trend down';
+            trend.innerHTML = '<span>↓</span> <span>' + (100 - successRate).toFixed(1) + '%</span>';
+        }
     }
     
     function displayTopServices() {
@@ -397,7 +362,7 @@ var DashboardApp = (function() {
             .sort((a, b) => b[1].count - a[1].count)
             .slice(0, 5);
         
-        const icons = ['', '', '', '', ''];
+        const icons = ['🏛️', '💰', '🛡️', '🏥', '🎓'];
         
         const html = sorted.map((item, index) => {
             const [service, data] = item;

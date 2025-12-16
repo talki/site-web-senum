@@ -628,7 +628,9 @@
             
             <article class="featured-article">
                 <div class="featured-image">
-                    {% if categorie_featured == 'urgent' %}🚀
+                    {% if categorie_featured == 'urgent' %} 
+           <img src="/themes/custom/egov_theme/icon/news.png" alt="" style="width: 78px; height: 58px;" class="help-icon">
+
                     {% elseif categorie_featured == 'nouveau' %}
                      <img src="/themes/custom/egov_theme/icon/graph.png" alt="" style="width: 78px; height: 58px;" class="help-icon">
 
@@ -706,6 +708,7 @@
                             {% set icon = '📰' %}
                             {% set badge_label = 'INFO' %}
                         {% endif %}
+                            {% set icon = '' %}
 
                         <article class="article-card" data-category="{{ categorie }}">
                             <div class="article-image">
@@ -752,7 +755,7 @@
     </div>
 </main>
 
-    <!-- Footer -->
+   <!-- Footer -->
     <footer>
         <div class="footer-grid">
             <div class="footer-section footer-about">
@@ -763,11 +766,11 @@
                     et du Numérique dans le cadre du New Deal Technologique.
                 </p>
                 <div class="social-icons">
-                    <div class="social-icon">📘</div>
-                    <div class="social-icon">🐦</div>
-                    <div class="social-icon">💼</div>
-                    <div class="social-icon">📸</div>
-                    <div class="social-icon">📹</div>
+                    <div class="social-icon"></div>
+                    <div class="social-icon"></div>
+                    <div class="social-icon"></div>
+                    <div class="social-icon"></div>
+                    <div class="social-icon"></div>
                 </div>
             </div>
 
