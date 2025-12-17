@@ -1,0 +1,39 @@
+
+// TEST DE CHARGEMENT JS
+console.log('🔥🔥🔥 JS CADRES-ET-STANDARDS CHARGÉ ! 🔥🔥🔥');
+
+alert('JAVASCRIPT CHARGÉ - NODE 19 !');
+
+// Test visuel encore plus visible
+document.addEventListener('DOMContentLoaded', function() {
+  const testDiv = document.createElement('div');
+  testDiv.innerHTML = '✅ JAVASCRIPT CHARGÉ !';
+  testDiv.style.cssText = `
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: blue;
+    color: white;
+    padding: 40px;
+    font-size: 40px;
+    font-weight: bold;
+    z-index: 999999;
+    border: 10px solid white;
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+  `;
+  document.body.appendChild(testDiv);
+});
+
+
+
+/* TEST DE CHARGEMENT CSS */
+body {
+  background-color: red !important;
+  border: 20px solid yellow !important;
+}
+
+* {
+  outline: 5px dashed blue !important;
+}
+

@@ -39,6 +39,13 @@ function egov_theme_preprocess_page(&$variables) {
       $variables['#attached']['library'][] = 'egov_theme/contact-page';
     }
     
+    // Page tableau de bord (node 19)
+    if ($node->id() == 64) {
+      \Drupal::logger('egov_theme')->notice('CSS node 64 attaché!');
+      $variables['#attached']['library'][] = 'egov_theme/cadres-et-standards-page';
+    }
+    
+    
     // Page tableau de bord (node 20)
     if ($node->id() == 20) {
       \Drupal::logger('egov_theme')->notice('CSS node 20 attaché!');

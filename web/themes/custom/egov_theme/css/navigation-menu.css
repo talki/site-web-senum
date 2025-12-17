@@ -1,5 +1,5 @@
 /* ============================================
-   MENU DRUPAL - CSS COMPLET CORRIGÉ
+   MENU DRUPAL - CSS COMPLET CORRIGÉ : navigation-menu.css
    ============================================ */
 
 /* Cacher le titre du block Drupal */
@@ -171,35 +171,6 @@
    RESPONSIVE - TABLETTE
    ============================================ */
 
-@media (max-width: 1024px) {
-    .nav-menu-desktop ul.menu-main {
-        gap: 1.5rem !important;
-    }
-    
-    .nav-menu-desktop ul.menu-main > li > a {
-        font-size: 0.9rem;
-    }
-}
-
-/* ============================================
-   RESPONSIVE - MOBILE
-   ============================================ */
-
-@media (max-width: 968px) {
-    /* Cacher le menu desktop sur mobile */
-    .nav-menu-desktop {
-        display: none !important;
-    }
-    
-    /* Afficher les actions mobile (hamburger) */
-    .nav-actions-mobile {
-        display: flex !important;
-    }
-    
-    .hamburger-btn {
-        display: flex !important;
-    }
-}
 
 /* ============================================
    ACCESSIBILITÉ

@@ -4,6 +4,7 @@ global-styling:
     theme:
       css/style.css: { weight: 100 }
       css/navigation-menu.css: { weight: 110 }
+      css/mobile-menu.css: { weight: 110 }
   dependencies:
     - core/normalize
     - egov_theme/navigation
@@ -12,6 +13,7 @@ global-scripts:
   version: 1.0
   js:
     js/script.js: {}
+    js/mobile-menu.js: {}
   dependencies:
     - core/drupal
     - core/jquery
@@ -105,3 +107,12 @@ videopodcast-detail-page:
       css/videopodcasts-detail.css: {}
   js:
     js/videopodcasts-detail.js: {}
+
+
+cadres-et-standards-page:
+  version: 1.x
+  css:
+    theme:
+      css/cadres-et-standards.css: {}
+  js:
+    js/cadres-et-standards.js: {}

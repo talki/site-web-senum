@@ -1,0 +1,70 @@
+{# Template de TEST - Include Footer - Node 63 #}
+{{ attach_library('egov_theme/global-styling') }}
+
+<div class="page-wrapper">
+    <header style="background: #333; color: white; padding: 1.5rem; text-align: center;">
+        <h1>TEST INCLUDE FOOTER</h1>
+        <p style="margin: 0.5rem 0 0 0;">Node 63 - Test Page Include</p>
+    </header>
+
+    <main style="max-width: 1200px; margin: 0 auto; padding: 2rem;">
+        
+        <div style="background: white; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
+            <h2>Instructions</h2>
+            <p>Cette page teste 4 methodes d include du footer.</p>
+        </div>
+
+        <hr style="margin: 2rem 0;">
+
+        <div style="background: white; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
+            <h2 style="background: #e3f2fd; padding: 1rem;">Test 1 : Include simple</h2>
+            <code style="display: block; background: #263238; color: #aed581; padding: 1rem; margin: 1rem 0;">
+                {% verbatim %}{% include 'footer.html.twig' %}{% endverbatim %}
+            </code>
+            <div style="border: 3px dashed #00a651; padding: 1rem;">
+            </div>
+        </div>
+
+        <hr style="margin: 2rem 0;">
+
+        <div style="background: white; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
+            <h2 style="background: #e3f2fd; padding: 1rem;">Test 2 : Include avec partials/</h2>
+            <code style="display: block; background: #263238; color: #aed581; padding: 1rem; margin: 1rem 0;">
+                {% verbatim %}{% include 'partials/footer.html.twig' %}{% endverbatim %}
+            </code>
+            <div style="border: 3px dashed #e63946; padding: 1rem;">
+                {{ include(active_theme_path() ~ '/templates/partials/footer.html.twig') }}
+            </div>
+        </div>
+
+        <hr style="margin: 2rem 0;">
+
+        <div style="background: white; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
+            <h2 style="background: #e3f2fd; padding: 1rem;">Test 3 : Include avec @egov_theme</h2>
+            <code style="display: block; background: #263238; color: #aed581; padding: 1rem; margin: 1rem 0;">
+                {% verbatim %}{% include '@egov_theme/footer.html.twig' %}{% endverbatim %}
+            </code>
+            <div style="border: 3px dashed #2196f3; padding: 1rem;">
+                                {{ include(active_theme_path() ~ '/templates/partials/footer.html.twig') }}
+
+            </div>
+        </div>
+
+        <hr style="margin: 2rem 0;">
+
+        <div style="background: white; padding: 2rem; margin-bottom: 2rem; border-radius: 8px;">
+            <h2 style="background: #e3f2fd; padding: 1rem;">Test 4 : Include avec @egov_theme/partials</h2>
+            <code style="display: block; background: #263238; color: #aed581; padding: 1rem; margin: 1rem 0;">
+                {% verbatim %}{% include '@egov_theme/partials/footer.html.twig' %}{% endverbatim %}
+            </code>
+            <div style="border: 3px dashed #9c27b0; padding: 1rem;">
+            </div>
+        </div>
+
+        <div style="background: #fff3cd; padding: 2rem; border-radius: 8px; margin-top: 2rem;">
+            <h3>Resultats</h3>
+            <p>Footer VERT = fonctionne | Footer ROUGE = fonctionne | ERREUR = ne fonctionne pas</p>
+        </div>
+
+    </main>
+</div>

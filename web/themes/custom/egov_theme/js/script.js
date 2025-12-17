@@ -2,10 +2,9 @@
  * @file
  * JavaScript pour le thème E-Gov Sénégal
  */
-
 (function (Drupal, once) {
   'use strict';
-
+  
   Drupal.behaviors.egovTheme = {
     attach: function (context, settings) {
       
@@ -25,7 +24,7 @@
         threshold: 0.2,
         rootMargin: '0px 0px -50px 0px'
       };
-
+      
       const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
           if (entry.isIntersecting) {
@@ -49,7 +48,7 @@
         const start = 0;
         const increment = target / (duration / 16);
         let current = start;
-
+        
         const timer = setInterval(() => {
           current += increment;
           if (current >= target) {
@@ -82,23 +81,7 @@
       once('stats-animation', '.stats-section, .stats-section-fullwidth', context).forEach(function(section) {
         statsObserver.observe(section);
       });
-
     }
   };
-
 })(Drupal, once);
 
-
-
-// Menu hamburger toggle
-document.addEventListener('DOMContentLoaded', function() {
-    const menuToggle = document.getElementById('menuToggle');
-    const menu = document.querySelector('#block-egov-theme-main-menu ul');
-    
-    if (menuToggle && menu) {
-        menuToggle.addEventListener('click', function() {
-            menu.classList.toggle('open');
-            menuToggle.classList.toggle('active');
-        });
-    }
-});

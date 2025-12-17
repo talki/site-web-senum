@@ -25,3 +25,8 @@ libraries:
 
 ckeditor5-stylesheets:
   - css/style.css
+
+component-libraries:
+  egov_theme:
+    paths:
+      - templates
