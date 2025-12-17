@@ -1,0 +1,120 @@
+{#
+/**
+ * Layout principal pour TOUTES les pages page.html.twig
+ */
+#}
+{{ attach_library('egov_theme/global-styling') }}
+
+<div class="page-wrapper">
+    {# Header commun à toutes les pages #}
+    <header class="page-header">
+        <!-- Navigation -->
+        <nav>
+            <div class="logo">
+                <div class="logo-flag">
+                    <div class="flag-stripe flag-green"></div>
+                    <div class="flag-stripe flag-yellow"></div>
+                    <div class="flag-stripe flag-red"></div>
+                </div>
+                <div class="logo-text">
+                    <h1>Jokkoo</h1>
+                    <div class="logo-subtitle">Plateforme d'Interopérabilité</div>
+                </div>
+            </div>
+
+
+
+            {# Menu Desktop #}
+            <div class="nav-menu-desktop">
+                {% if page.primary_menu %}
+                    {{ page.primary_menu }}
+                {% endif %}
+            </div>
+
+            {# Actions Mobile #}
+            <div class="nav-actions-mobile">
+                <button class="search-btn">🔍</button>
+                <button class="hamburger-btn" id="hamburgerBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    {# Contenu principal - varie selon la page #}
+    <main class="page-main" role="main">
+        {{ page.content }}
+    </main>
+
+    {# Footer commun à toutes les pages #}
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-section footer-about">
+                <h3>À PROPOS</h3>
+                <p>
+                  22222222222  La Plateforme Nationale d'Interopérabilité du Sénégal (eGov Sénégal) 
+                    est une initiative du Ministère de la Communication, des Télécommunications 
+                    et du Numérique dans le cadre du New Deal Technologique.
+                </p>
+                <div class="social-icons">
+                    <div class="social-icon"></div>
+                    <div class="social-icon"></div>
+                    <div class="social-icon"></div>
+                    <div class="social-icon"></div>
+                    <div class="social-icon"></div>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>SERVICES</h3>
+                <ul>
+                    <li><a href="#protection-sociale">Protection Sociale</a></li>
+                    <li><a href="#troisieme-age">Troisième Âge</a></li>
+                    <li><a href="#education">Éducation</a></li>
+                    <li><a href="#citoyennete">Citoyenneté</a></li>
+                    <li><a href="#taxes">Taxes & Impôts</a></li>
+                    <li><a href="#sante">Santé</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>RESSOURCES</h3>
+                <ul>
+                    <li><a href="#">Documentation API</a></li>
+                    <li><a href="#">Guides d'Intégration</a></li>
+                    <li><a href="#">Catalogue d'API</a></li>
+                    <li><a href="#">Centre d'Aide</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>CONTACT</h3>
+                <ul>
+                    <li><a href="#">📍 Dakar, Sénégal</a></li>
+                    <li><a href="#">📧 <span class="__cf_email__" data-cfemail="4724282933262433072e293322352837693429">[email&#160;protected]</span></a></li>
+                    <li><a href="#">📞 +221 33 XXX XX XX</a></li>
+                    <li><a href="#">💬 Chat en Direct</a></li>
+                    <li><a href="#">🎫 Créer un Ticket</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 eGov Sénégal - MCTN/SENUM - République du Sénégal</p>
+            <div class="footer-bottom-links">
+                <a href="#">Mentions Légales</a>
+                <a href="#">Politique de Confidentialité</a>
+                <a href="#">Conditions d'Utilisation</a>
+                <a href="#">Accessibilité</a>
+                <a href="#">Plan du Site</a>
+            </div>
+        </div>
+    </footer>
+
+</div>
+
+{{ attach_library('egov_theme/global-scripts') }}

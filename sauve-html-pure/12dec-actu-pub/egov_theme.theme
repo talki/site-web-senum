@@ -1,0 +1,129 @@
+<?php
+
+/**
+ * Implements hook_preprocess_page().
+ */
+function egov_theme_preprocess_page(&$variables) {
+  // Pour la page d'accueil uniquement
+  if (\Drupal::service('path.matcher')->isFrontPage()) {
+    // Charger le node 22 directement
+    $node = \Drupal\node\Entity\Node::load(22);
+    if ($node && $node->bundle() == 'page_d_accueil') {
+      $variables['homepage_node'] = $node;
+    }
+    
+    //  CHARGER LES ACTUALITÉS POUR LA PAGE D'ACCUEIL
+    $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+    $query = $node_storage->getQuery()
+      ->condition('type', 'actualite') // Le machine name de ton content type
+      ->condition('status', 1) // Seulement les contenus publiés
+      ->sort('created', 'DESC') // Trier par date décroissante
+      ->range(0, 10) // Limiter à 10 résultats
+      ->accessCheck(TRUE);
+    
+    $nids = $query->execute();
+    $variables['actualites_recentes'] = !empty($nids) ? $node_storage->loadMultiple($nids) : [];
+  }
+  
+  // Gestion des CSS spécifiques par page
+  $node = \Drupal::routeMatch()->getParameter('node');
+  
+  if ($node) {
+    // Page services (node 27)
+    if ($node->id() == 27) {
+      $variables['#attached']['library'][] = 'egov_theme/services-page';
+    }
+    
+    // Page contact (node 28)
+    if ($node->id() == 28) {
+      $variables['#attached']['library'][] = 'egov_theme/contact-page';
+    }
+    
+    //
+    
+    // Page tableau de bord (node 20)
+    if ($node->id() == 20) {
+      \Drupal::logger('egov_theme')->notice('CSS node 20 attaché!');
+      $variables['#attached']['library'][] = 'egov_theme/tableau-de-bord-page';
+    }
+    
+    // Page présentation (node 10)
+    if ($node->id() == 10) {
+      $variables['#attached']['library'][] = 'egov_theme/presentation-page';
+    }
+    
+    
+    // Page publications (node 31)
+    if ($node->id() == 31) {
+      \Drupal::logger('egov_theme')->notice('CSS publications attaché!');
+      $variables['#attached']['library'][] = 'egov_theme/actualites-page';
+
+      // Charger les publications
+      $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+      $query = $node_storage->getQuery()
+        ->condition('type', 'publication')
+        ->condition('status', 1)
+        ->sort('created', 'DESC')
+        ->range(0, 20)
+        ->accessCheck(TRUE);
+
+      $nids = $query->execute();
+      $variables['publications_recentes'] = !empty($nids) ? $node_storage->loadMultiple($nids) : [];
+    }
+
+    // 🆕 Page actualités (node 30) - CHARGER LES ACTUALITÉS
+    if ($node->id() == 30) {
+      \Drupal::logger('egov_theme')->notice('CSS actualites attaché okkkkkk!');
+      $variables['#attached']['library'][] = 'egov_theme/actualites-page';
+      
+      // Charger les actualités pour la page dédiée
+      $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+      $query = $node_storage->getQuery()
+        ->condition('type', 'actualite')
+        ->condition('status', 1)
+        ->sort('created', 'DESC')
+        ->range(0, 20) // Plus d'actualités pour la page dédiée
+        ->accessCheck(TRUE);
+      
+      $nids = $query->execute();
+      $variables['actualites_recentes'] = !empty($nids) ? $node_storage->loadMultiple($nids) : [];
+    }
+    
+    //a deplacer dans le template mis à jour depuis remoot
+    if ($node->id() == 32) {
+      $variables['#attached']['library'][] = 'egov_theme/actualites-detail-page';
+    }
+    
+    if ($node->id() == 32) {
+      $variables['#attached']['library'][] = 'egov_theme/publication-detail-page';
+    }
+    
+    
+    
+  }
+}
+
+/**
+ * Force le menu principal à charger les sous-menus (multi-niveaux).
+ */
+function egov_theme_preprocess_block(&$variables) {
+  if (isset($variables['elements']['#id']) && $variables['elements']['#id'] == 'egov_theme_main_menu') {
+    $menu_tree = \Drupal::menuTree();
+    $menu_name = 'main';
+    
+    // Charger jusqu'à 3 niveaux de profondeur
+    $parameters = $menu_tree->getCurrentRouteMenuTreeParameters($menu_name);
+    $parameters->setMinDepth(1);
+    $parameters->setMaxDepth(3);
+    $parameters->onlyEnabledLinks();
+    
+    $tree = $menu_tree->load($menu_name, $parameters);
+    $manipulators = [
+      ['callable' => 'menu.default_tree_manipulators:checkAccess'],
+      ['callable' => 'menu.default_tree_manipulators:generateIndexAndSort'],
+    ];
+    $tree = $menu_tree->transform($tree, $manipulators);
+    
+    $variables['content'] = $menu_tree->build($tree);
+  }
+}

@@ -11,35 +11,36 @@
     
     {# ========== HEADER ========== #}
     <header class="page-header">
-        <nav>
-            {# Logo #}
-            <div class="logo">
-                <img src="/themes/custom/egov_theme/images/senegal.png" 
-                     alt="Logo Interopérabilité Sénégal" 
-                     style="width: 60px; height: 60px; object-fit: contain;">
-                <div class="logo-text">
-                    <h1>Jokkoo</h1>
-                    <div class="logo-subtitle">Plateforme d'Interopérabilité</div>
-                </div>
-            </div>
+      <!-- Navigation -->
+<nav>
+<div class="logo">
+    <img src="/themes/custom/egov_theme/images/senegal.png" alt="Logo Interopérabilité Sénégal" style="width: 60px; height: 60px; object-fit: contain;">
+    <div class="logo-text">
+        <h1>Jokkoo</h1>
+        <div class="logo-subtitle">Plateforme d'Interopérabilité</div>
+    </div>
+</div>
 
-            {# Menu Desktop #}
-            <div class="nav-menu-desktop">
-                {% if page.primary_menu %}
-                    {{ page.primary_menu }}
-                {% endif %}
-            </div>
 
-            {# Actions Mobile #}
-            <div class="nav-actions-mobile">
-                <button class="search-btn" aria-label="Rechercher">🔍</button>
-                <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-        </nav>
+
+    {# Menu Desktop #}
+    <div class="nav-menu-desktop">
+        {% if page.primary_menu %}
+            {{ page.primary_menu }}
+        {% endif %}
+    </div>
+
+    {# Actions Mobile #}
+    <div class="nav-actions-mobile">
+        <button class="search-btn">🔍</button>
+        <button class="hamburger-btn" id="hamburgerBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</nav>
+
     </header>
 
     {# ========== CONTENU PRINCIPAL ========== #}
@@ -47,79 +48,72 @@
         {{ page.content }}
     </main>
 
-    {# ========== FOOTER ========== #}
-    <footer class="page-footer">
-        <div class="footer-grid">
-            
-            {# Section À Propos #}
-            <div class="footer-section footer-about">
-                <h3>À PROPOS</h3>
-                <p>
-                    La Plateforme Nationale d'Interopérabilité du Sénégal (eGov Sénégal) 
-                    est une initiative du Ministère de la Communication, des Télécommunications 
-                    et du Numérique dans le cadre du New Deal Technologique.
-                </p>
-                <div class="social-icons">
-                    <a href="#" class="social-icon" aria-label="Facebook">📘</a>
-                    <a href="#" class="social-icon" aria-label="Twitter">🐦</a>
-                    <a href="#" class="social-icon" aria-label="LinkedIn">💼</a>
-                    <a href="#" class="social-icon" aria-label="Instagram">📸</a>
-                    <a href="#" class="social-icon" aria-label="YouTube">📹</a>
-                </div>
-            </div>
-
-            {# Section Services #}
-            <div class="footer-section">
-                <h3>SERVICES</h3>
-                <ul>
-                    <li><a href="#protection-sociale">Protection Sociale</a></li>
-                    <li><a href="#troisieme-age">Troisième Âge</a></li>
-                    <li><a href="#education">Éducation</a></li>
-                    <li><a href="#citoyennete">Citoyenneté</a></li>
-                    <li><a href="#taxes">Taxes & Impôts</a></li>
-                    <li><a href="#sante">Santé</a></li>
-                </ul>
-            </div>
-
-            {# Section Ressources #}
-            <div class="footer-section">
-                <h3>RESSOURCES</h3>
-                <ul>
-                    <li><a href="/documentation">Documentation API</a></li>
-                    <li><a href="/guides">Guides d'Intégration</a></li>
-                    <li><a href="/catalogue">Catalogue d'API</a></li>
-                    <li><a href="/aide">Centre d'Aide</a></li>
-                    <li><a href="/faq">FAQ</a></li>
-                    <li><a href="/blog">Blog</a></li>
-                </ul>
-            </div>
-
-            {# Section Contact #}
-            <div class="footer-section">
-                <h3>CONTACT</h3>
-                <ul>
-                    <li><a href="https://maps.google.com/?q=Dakar,Senegal" target="_blank">📍 Dakar, Sénégal</a></li>
-                    <li><a href="mailto:contact@egov.sn">📧 contact@egov.sn</a></li>
-                    <li><a href="tel:+221338888888">📞 +221 33 XXX XX XX</a></li>
-                    <li><a href="/chat">💬 Chat en Direct</a></li>
-                    <li><a href="/support">🎫 Créer un Ticket</a></li>
-                </ul>
-            </div>
-
-        </div>
-
-        {# Footer Bottom #}
-        <div class="footer-bottom">
-            <p>© {{ "now"|date("Y") }} eGov Sénégal - MCTN/SENUM - République du Sénégal</p>
-            <div class="footer-bottom-links">
-                <a href="/mentions-legales">Mentions Légales</a>
-                <a href="/confidentialite">Politique de Confidentialité</a>
-                <a href="/conditions">Conditions d'Utilisation</a>
-                <a href="/accessibilite">Accessibilité</a>
-                <a href="/sitemap">Plan du Site</a>
+<!-- Footer -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-section footer-about">
+            <h3>À PROPOS</h3>
+            <p>
+                La Plateforme Nationale d'Interopérabilité du Sénégal (eGov Sénégal) 
+                est une initiative du Ministère de la Communication, des Télécommunications 
+                et du Numérique dans le cadre du New Deal Technologique.
+            </p>
+            <div class="social-icons">
+                <div class="social-icon"></div>
+                <div class="social-icon"></div>
+                <div class="social-icon"></div>
+                <div class="social-icon"></div>
+                <div class="social-icon"></div>
             </div>
         </div>
-    </footer>
+
+        <div class="footer-section">
+            <h3>SERVICES</h3>
+            <ul>
+                <li><a href="#protection-sociale">Protection Sociale</a></li>
+                <li><a href="#troisieme-age">Troisième Âge</a></li>
+                <li><a href="#education">Éducation</a></li>
+                <li><a href="#citoyennete">Citoyenneté</a></li>
+                <li><a href="#taxes">Taxes & Impôts</a></li>
+                <li><a href="#sante">Santé</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>RESSOURCES</h3>
+            <ul>
+                <li><a href="#">Documentation API</a></li>
+                <li><a href="#">Guides d'Intégration</a></li>
+                <li><a href="#">Catalogue d'API</a></li>
+                <li><a href="#">Centre d'Aide</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Blog</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>CONTACT</h3>
+            <ul>
+                <li><a href="#">📍 Dakar, Sénégal</a></li>
+                <li><a href="#">📧 <span class="__cf_email__" data-cfemail="4724282933262433072e293322352837693429">[email&#160;protected]</span></a></li>
+                <li><a href="#">📞 +221 33 XXX XX XX</a></li>
+                <li><a href="#">💬 Chat en Direct</a></li>
+                <li><a href="#">🎫 Créer un Ticket</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2025 eGov Sénégal - MCTN/SENUM - République du Sénégal</p>
+        <div class="footer-bottom-links">
+            <a href="#">Mentions Légales</a>
+            <a href="#">Politique de Confidentialité</a>
+            <a href="#">Conditions d'Utilisation</a>
+            <a href="#">Accessibilité</a>
+            <a href="#">Plan du Site</a>
+        </div>
+    </div>
+</footer>
 
 </div>
 

@@ -1,0 +1,1083 @@
+{# Template pour le Tableau de Bord - Node 20 #}
+{# Template de page avec remontées dynamiques de l'API monitoring #}
+
+<nav>
+    <div class="logo">
+        <div class="logo-flag">
+            <div class="flag-stripe flag-green"></div>
+            <div class="flag-stripe flag-yellow"></div>
+            <div class="flag-stripe flag-red"></div>
+        </div>
+        <div class="logo-text">
+            <h1>Jokkoo</h1>
+            <div class="logo-subtitle">Plateforme d'Interopérabilité</div>
+        </div>
+    </div>
+
+    {# Menu Desktop #}
+    <div class="nav-menu-desktop">
+        {% if page.primary_menu %}
+            {{ page.primary_menu }}
+        {% endif %}
+    </div>
+
+    {# Actions Mobile #}
+    <div class="nav-actions-mobile">
+        <button class="search-btn">🔍</button>
+        <button class="hamburger-btn" id="hamburgerBtn">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+    </div>
+</nav>
+
+<!-- Dashboard Hero with Stats -->
+<section class="dashboard-hero">
+    <div class="dashboard-hero-content">
+        <h1>Tableau de Bord</h1>
+        <p>Vue d'ensemble des performances et des indicateurs clés de la plateforme</p>
+        
+        <div class="dashboard-time">
+            <div class="dashboard-time-icon">🕐</div>
+            <div>
+                <div class="dashboard-time-info">Dernière mise à jour</div>
+                <div class="dashboard-time-value" id="lastUpdate">Chargement...</div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Integrated Stats - Dynamiques -->
+    <div class="stats-bar-container">
+        <div class="stat-item">
+            <div class="stat-value" id="totalTransactions">--</div>
+            <div class="stat-description">Transactions ce mois</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+            <div class="stat-value" id="totalAdministrations">--</div>
+            <div class="stat-description">Administrations connectées</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+            <div class="stat-value" id="totalAPIs">--</div>
+            <div class="stat-description">API actives</div>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+            <div class="stat-value" id="systemAvailability">--</div>
+            <div class="stat-description">Disponibilité système</div>
+        </div>
+    </div>
+</section>
+
+<!-- Loading Indicator -->
+<div id="loadingIndicator" class="loading-container">
+    <div class="loading-spinner">
+        <div class="spinner"></div>
+    </div>
+    <p>Chargement des données de monitoring...</p>
+</div>
+
+<!-- Error Message -->
+<div id="errorMessage" class="error-container" style="display: none;">
+    <div class="error-icon">⚠️</div>
+    <p id="errorText"></p>
+    <button onclick="DashboardApp.loadData()" class="retry-btn">Réessayer</button>
+</div>
+
+<!-- Main Dashboard -->
+<main class="dashboard-main" id="mainDashboard" style="display: none;">
+    
+    <!-- Dashboard Grid -->
+    <section class="dashboard-grid">
+        <!-- Top Services -->
+        <div class="top-services-card">
+            <div class="top-services-header">
+                <h2 class="top-services-title">
+                    <span class="top-services-icon">🔥</span>
+                    Services les plus utilisés
+                </h2>
+                <span class="top-services-period">Aujourd'hui</span>
+            </div>
+
+            <div class="top-services-list" id="topServicesList">
+                <!-- Services générés dynamiquement par l'API -->
+                <div class="service-item-placeholder">
+                    <div class="placeholder-animation"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Management Panel -->
+        <div class="management-panel">
+            <!-- Tabs Header -->
+            <div class="tabs-header">
+                <button class="tab-button active" data-tab="services">
+                    <span class="tab-icon">⚙️</span>
+                    <span>Services</span>
+                    <span class="tab-count" id="servicesCount">0</span>
+                </button>
+                <button class="tab-button" data-tab="members">
+                    <span class="tab-icon">👥</span>
+                    <span>Membres</span>
+                    <span class="tab-count" id="membersCount">0</span>
+                </button>
+            </div>
+
+            <!-- Services Tab -->
+            <div class="tab-content active" id="services-tab">
+                <!-- Filters -->
+                <div class="filters-bar">
+                    <div class="filter-group">
+                        <button class="filter-button active" data-filter="all">Tout</button>
+                        <button class="filter-button" data-filter="active">Actif</button>
+                        <button class="filter-button" data-filter="inactive">Inactif</button>
+                    </div>
+                    <div class="search-wrapper">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" class="search-input" id="servicesSearch" placeholder="Rechercher un service...">
+                    </div>
+                </div>
+
+                <!-- Services Table -->
+                <table class="items-table" id="services-table">
+                    <thead>
+                        <tr>
+                            <th>Service</th>
+                            <th>Requêtes</th>
+                            <th>Dernière activité</th>
+                            <th>Fournisseur</th>
+                            <th>Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody id="servicesTableBody">
+                        <!-- Lignes générées dynamiquement par l'API -->
+                    </tbody>
+                </table>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <div class="pagination-info" id="servicesPaginationInfo">
+                        Chargement...
+                    </div>
+                    <div class="pagination-controls" id="servicesPaginationControls">
+                        <button class="pagination-button" disabled>← Précédent</button>
+                        <button class="pagination-button active">1</button>
+                        <button class="pagination-button">Suivant →</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Members Tab -->
+            <div class="tab-content" id="members-tab">
+                <!-- Filters -->
+                <div class="filters-bar">
+                    <div class="filter-group">
+                        <button class="filter-button active" data-filter="all">Tout</button>
+                        <button class="filter-button" data-filter="active">Actif</button>
+                        <button class="filter-button" data-filter="inactive">Inactif</button>
+                    </div>
+                    <div class="search-wrapper">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" class="search-input" id="membersSearch" placeholder="Rechercher un membre...">
+                    </div>
+                </div>
+
+                <!-- Members Table -->
+                <table class="items-table" id="members-table">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Membre</th>
+                            <th>Services</th>
+                            <th>Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody id="membersTableBody">
+                        <!-- Lignes générées dynamiquement par l'API -->
+                    </tbody>
+                </table>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <div class="pagination-info" id="membersPaginationInfo">
+                        Chargement...
+                    </div>
+                    <div class="pagination-controls" id="membersPaginationControls">
+                        <button class="pagination-button" disabled>← Précédent</button>
+                        <button class="pagination-button active">1</button>
+                        <button class="pagination-button">Suivant →</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- API Usage Table -->
+    <section class="api-usage-section">
+        <div class="api-usage-header">
+            <h2 class="api-usage-title">Utilisation des API</h2>
+            <div class="api-usage-actions">
+                <span class="refresh-indicator" id="refreshIndicator">
+                    <span class="refresh-icon">🔄</span>
+                    <span>Actualisation auto: 30s</span>
+                </span>
+            </div>
+        </div>
+
+        <table class="api-table">
+            <thead>
+                <tr>
+                    <th>API</th>
+                    <th>Requêtes/Jour</th>
+                    <th>Latence Moy.</th>
+                    <th>Taux de Succès</th>
+                    <th>Statut</th>
+                </tr>
+            </thead>
+            <tbody id="apiTableBody">
+                <!-- Lignes générées dynamiquement par l'API -->
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<!-- Footer -->
+<footer>
+    <div class="footer-grid">
+        <div class="footer-section footer-about">
+            <h3>À PROPOS</h3>
+            <p>
+                La Plateforme Nationale d'Interopérabilité du Sénégal (eGov Sénégal) 
+                est une initiative du Ministère de la Communication, des Télécommunications 
+                et du Numérique dans le cadre du New Deal Technologique.
+            </p>
+            <div class="social-icons">
+                <div class="social-icon">📘</div>
+                <div class="social-icon">🐦</div>
+                <div class="social-icon">💼</div>
+                <div class="social-icon">📸</div>
+                <div class="social-icon">📹</div>
+            </div>
+        </div>
+
+        <div class="footer-section">
+            <h3>SERVICES</h3>
+            <ul>
+                <li><a href="#protection-sociale">Protection Sociale</a></li>
+                <li><a href="#troisieme-age">Troisième Âge</a></li>
+                <li><a href="#education">Éducation</a></li>
+                <li><a href="#citoyennete">Citoyenneté</a></li>
+                <li><a href="#taxes">Taxes & Impôts</a></li>
+                <li><a href="#sante">Santé</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>RESSOURCES</h3>
+            <ul>
+                <li><a href="#">Documentation API</a></li>
+                <li><a href="#">Guides d'Intégration</a></li>
+                <li><a href="#">Catalogue d'API</a></li>
+                <li><a href="#">Centre d'Aide</a></li>
+                <li><a href="#">FAQ</a></li>
+                <li><a href="#">Blog</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-section">
+            <h3>CONTACT</h3>
+            <ul>
+                <li><a href="#">📍 Dakar, Sénégal</a></li>
+                <li><a href="mailto:contact@egov.sn">📧 contact@egov.sn</a></li>
+                <li><a href="#">📞 +221 33 XXX XX XX</a></li>
+                <li><a href="#">💬 Chat en Direct</a></li>
+                <li><a href="#">🎫 Créer un Ticket</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="footer-bottom">
+        <p>© 2025 eGov Sénégal - MCTN/SENUM - République du Sénégal</p>
+        <div class="footer-bottom-links">
+            <a href="#">Mentions Légales</a>
+            <a href="#">Politique de Confidentialité</a>
+            <a href="#">Conditions d'Utilisation</a>
+            <a href="#">Accessibilité</a>
+            <a href="#">Plan du Site</a>
+        </div>
+    </div>
+</footer>
+
+<style>
+/* Loading & Error Styles */
+.loading-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    text-align: center;
+}
+
+.loading-spinner {
+    margin-bottom: 1rem;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 4px solid #e0e0e0;
+    border-top-color: #00a651;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
+}
+
+.error-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4rem 2rem;
+    text-align: center;
+    background: #fff3cd;
+    border: 1px solid #ffc107;
+    border-radius: 12px;
+    margin: 2rem;
+}
+
+.error-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+}
+
+.retry-btn {
+    margin-top: 1rem;
+    padding: 0.75rem 2rem;
+    background: #00a651;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: background 0.3s ease;
+}
+
+.retry-btn:hover {
+    background: #008c44;
+}
+
+/* Placeholder Animation */
+.service-item-placeholder {
+    height: 80px;
+    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+    background-size: 200% 100%;
+    animation: shimmer 1.5s infinite;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+@keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+}
+
+/* Refresh Indicator */
+.api-usage-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.refresh-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.85rem;
+    color: #666;
+    background: #f5f5f5;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+}
+
+.refresh-icon {
+    animation: rotate 2s linear infinite;
+}
+
+@keyframes rotate {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* Stats Bar Responsive */
+.stats-bar-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.stat-description {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: 0.25rem;
+}
+
+.stat-divider {
+    width: 1px;
+    height: 40px;
+    background: rgba(255, 255, 255, 0.3);
+}
+
+@media (max-width: 768px) {
+    .stats-bar-container {
+        gap: 1rem;
+    }
+    
+    .stat-divider {
+        display: none;
+    }
+    
+    .stat-value {
+        font-size: 1.5rem;
+    }
+}
+</style>
+
+<script>
+/**
+ * Dashboard Application - Jokkoo Platform
+ * Gestion dynamique des données de monitoring
+ */
+var DashboardApp = (function() {
+    'use strict';
+    
+    // Configuration
+    const CONFIG = {
+        API_URL: '/api/monitoring-data',
+        REFRESH_INTERVAL: 30000, // 30 secondes
+        ITEMS_PER_PAGE: 10,
+        DATE_LOCALE: 'fr-FR'
+    };
+    
+    // État de l'application
+    let state = {
+        monitoringData: [],
+        services: [],
+        members: [],
+        currentServicePage: 1,
+        currentMemberPage: 1,
+        serviceFilter: 'all',
+        memberFilter: 'all',
+        serviceSearch: '',
+        memberSearch: '',
+        isLoading: false,
+        lastUpdate: null
+    };
+    
+    // Icônes pour les services
+    const SERVICE_ICONS = ['🏛️', '💰', '🛡️', '🏥', '🎓', '🚗', '📊', '🏦', '⚖️', '🌾'];
+    
+    /**
+     * Initialisation de l'application
+     */
+    function init() {
+        console.log('🚀 DashboardApp: Initialisation...');
+        
+        // Charger les données initiales
+        loadData();
+        
+        // Configurer les onglets
+        setupTabs();
+        
+        // Configurer les filtres
+        setupFilters();
+        
+        // Configurer la recherche
+        setupSearch();
+        
+        // Actualisation automatique
+        setInterval(loadData, CONFIG.REFRESH_INTERVAL);
+        
+        // Mise à jour de l'heure
+        updateTime();
+        setInterval(updateTime, 60000);
+        
+        console.log('✅ DashboardApp: Initialisation terminée');
+    }
+    
+    /**
+     * Chargement des données depuis l'API
+     */
+    async function loadData() {
+        if (state.isLoading) return;
+        
+        state.isLoading = true;
+        
+        try {
+            showLoading(true);
+            hideError();
+            
+            const response = await fetch(CONFIG.API_URL);
+            
+            if (!response.ok) {
+                throw new Error(`Erreur HTTP: ${response.status}`);
+            }
+            
+            const json = await response.json();
+            state.monitoringData = Array.isArray(json) ? json : (json.data || []);
+            state.lastUpdate = new Date();
+            
+            console.log(`📊 DashboardApp: ${state.monitoringData.length} enregistrements chargés`);
+            
+            // Traiter et afficher les données
+            processData();
+            displayStats();
+            displayTopServices();
+            displayServicesTable();
+            displayMembersTable();
+            displayAPIUsage();
+            
+            // Afficher le dashboard
+            showLoading(false);
+            showDashboard(true);
+            
+        } catch (error) {
+            console.error('❌ DashboardApp: Erreur de chargement', error);
+            showLoading(false);
+            showError(`Impossible de charger les données: ${error.message}`);
+        } finally {
+            state.isLoading = false;
+        }
+    }
+    
+    /**
+     * Traitement des données brutes
+     */
+    function processData() {
+        const now = Date.now();
+        const oneDayAgo = now - (24 * 60 * 60 * 1000);
+        
+        // Traitement des services
+        const serviceMap = {};
+        state.monitoringData.forEach(item => {
+            const service = item.service_code || 'Unknown';
+            const provider = item.service_member_code || 'Unknown';
+            const timestamp = item.request_in_ts ? item.request_in_ts * 1000 : 0;
+            const succeeded = item.succeeded !== false;
+            const duration = item.total_duration || 0;
+            
+            if (!serviceMap[service]) {
+                serviceMap[service] = {
+                    name: service,
+                    provider: provider,
+                    count: 0,
+                    successCount: 0,
+                    totalDuration: 0,
+                    validDurations: 0,
+                    lastActivity: timestamp
+                };
+            }
+            
+            serviceMap[service].count++;
+            if (succeeded) serviceMap[service].successCount++;
+            if (duration > 0) {
+                serviceMap[service].totalDuration += duration;
+                serviceMap[service].validDurations++;
+            }
+            if (timestamp > serviceMap[service].lastActivity) {
+                serviceMap[service].lastActivity = timestamp;
+            }
+        });
+        
+        state.services = Object.values(serviceMap).map(s => ({
+            ...s,
+            isActive: s.lastActivity > oneDayAgo,
+            avgLatency: s.validDurations > 0 ? Math.round(s.totalDuration / s.validDurations) : 0,
+            successRate: s.count > 0 ? ((s.successCount / s.count) * 100).toFixed(1) : 0
+        })).sort((a, b) => b.count - a.count);
+        
+        // Traitement des membres
+        const memberMap = {};
+        state.monitoringData.forEach(item => {
+            const member = item.client_member_code || item.service_member_code || 'Unknown';
+            const timestamp = item.request_in_ts ? item.request_in_ts * 1000 : 0;
+            const service = item.service_code || 'Unknown';
+            
+            if (!memberMap[member]) {
+                memberMap[member] = {
+                    name: member,
+                    services: new Set(),
+                    lastActivity: timestamp,
+                    requestCount: 0
+                };
+            }
+            
+            memberMap[member].services.add(service);
+            memberMap[member].requestCount++;
+            if (timestamp > memberMap[member].lastActivity) {
+                memberMap[member].lastActivity = timestamp;
+            }
+        });
+        
+        state.members = Object.values(memberMap).map(m => ({
+            name: m.name,
+            code: generateMemberCode(m.name),
+            servicesCount: m.services.size,
+            requestCount: m.requestCount,
+            isActive: m.lastActivity > oneDayAgo
+        })).sort((a, b) => b.requestCount - a.requestCount);
+    }
+    
+    /**
+     * Affichage des statistiques globales
+     */
+    function displayStats() {
+        const totalRequests = state.monitoringData.length;
+        const uniqueServers = new Set(state.monitoringData.map(d => d.security_server_internal_ip)).size;
+        const uniqueServices = state.services.length;
+        
+        let successCount = 0;
+        state.monitoringData.forEach(item => {
+            if (item.succeeded !== false) successCount++;
+        });
+        const successRate = totalRequests > 0 ? ((successCount / totalRequests) * 100).toFixed(1) : 0;
+        
+        // Mise à jour des éléments DOM
+        updateElement('totalTransactions', formatNumber(totalRequests));
+        updateElement('totalAdministrations', uniqueServers);
+        updateElement('totalAPIs', uniqueServices);
+        updateElement('systemAvailability', `${successRate}%`);
+    }
+    
+    /**
+     * Affichage des services les plus utilisés
+     */
+    function displayTopServices() {
+        const topServices = state.services.slice(0, 5);
+        
+        const html = topServices.map((service, index) => `
+            <div class="service-item">
+                <div class="service-rank">${index + 1}</div>
+                <div class="service-info">
+                    <div class="service-name">${escapeHtml(service.name)}</div>
+                    <div class="service-member">
+                        <span class="service-member-icon">${SERVICE_ICONS[index] || '📦'}</span>
+                        <span>${escapeHtml(service.provider)}</span>
+                    </div>
+                </div>
+                <div class="service-requests">
+                    <div class="service-requests-count">${formatNumber(service.count)}</div>
+                    <div class="service-requests-label">Requêtes</div>
+                </div>
+            </div>
+        `).join('');
+        
+        updateElement('topServicesList', html);
+    }
+    
+    /**
+     * Affichage du tableau des services
+     */
+    function displayServicesTable() {
+        // Filtrer les services
+        let filteredServices = state.services.filter(s => {
+            if (state.serviceFilter === 'active' && !s.isActive) return false;
+            if (state.serviceFilter === 'inactive' && s.isActive) return false;
+            if (state.serviceSearch) {
+                const search = state.serviceSearch.toLowerCase();
+                return s.name.toLowerCase().includes(search) || 
+                       s.provider.toLowerCase().includes(search);
+            }
+            return true;
+        });
+        
+        // Pagination
+        const totalItems = filteredServices.length;
+        const totalPages = Math.ceil(totalItems / CONFIG.ITEMS_PER_PAGE);
+        const startIndex = (state.currentServicePage - 1) * CONFIG.ITEMS_PER_PAGE;
+        const paginatedServices = filteredServices.slice(startIndex, startIndex + CONFIG.ITEMS_PER_PAGE);
+        
+        // Générer le HTML du tableau
+        const html = paginatedServices.map(service => {
+            const date = service.lastActivity ? formatDate(service.lastActivity) : 'N/A';
+            
+            return `
+                <tr data-status="${service.isActive ? 'active' : 'inactive'}">
+                    <td><span class="item-name">${escapeHtml(service.name)}</span></td>
+                    <td><span class="item-version">${formatNumber(service.count)}</span></td>
+                    <td><span class="item-date">${date}</span></td>
+                    <td><span class="item-provider">${escapeHtml(service.provider)}</span></td>
+                    <td>
+                        <span class="status-badge ${service.isActive ? 'active' : 'inactive'}">
+                            <span class="status-dot"></span> 
+                            ${service.isActive ? 'Actif' : 'Inactif'}
+                        </span>
+                    </td>
+                </tr>
+            `;
+        }).join('');
+        
+        updateElement('servicesTableBody', html);
+        updateElement('servicesCount', state.services.length);
+        updateElement('servicesPaginationInfo', 
+            `Affichage de <strong>${startIndex + 1}-${Math.min(startIndex + CONFIG.ITEMS_PER_PAGE, totalItems)}</strong> sur <strong>${totalItems}</strong> services`
+        );
+        
+        // Mettre à jour la pagination
+        updatePagination('servicesPaginationControls', state.currentServicePage, totalPages, 'service');
+    }
+    
+    /**
+     * Affichage du tableau des membres
+     */
+    function displayMembersTable() {
+        // Filtrer les membres
+        let filteredMembers = state.members.filter(m => {
+            if (state.memberFilter === 'active' && !m.isActive) return false;
+            if (state.memberFilter === 'inactive' && m.isActive) return false;
+            if (state.memberSearch) {
+                const search = state.memberSearch.toLowerCase();
+                return m.name.toLowerCase().includes(search) || 
+                       m.code.toLowerCase().includes(search);
+            }
+            return true;
+        });
+        
+        // Pagination
+        const totalItems = filteredMembers.length;
+        const totalPages = Math.ceil(totalItems / CONFIG.ITEMS_PER_PAGE);
+        const startIndex = (state.currentMemberPage - 1) * CONFIG.ITEMS_PER_PAGE;
+        const paginatedMembers = filteredMembers.slice(startIndex, startIndex + CONFIG.ITEMS_PER_PAGE);
+        
+        // Générer le HTML du tableau
+        const html = paginatedMembers.map(member => `
+            <tr data-status="${member.isActive ? 'active' : 'inactive'}">
+                <td><span class="item-code">${escapeHtml(member.code)}</span></td>
+                <td><span class="item-name">${escapeHtml(member.name)}</span></td>
+                <td><span class="item-count">${member.servicesCount} services</span></td>
+                <td>
+                    <span class="status-badge ${member.isActive ? 'active' : 'inactive'}">
+                        <span class="status-dot"></span> 
+                        ${member.isActive ? 'Actif' : 'Inactif'}
+                    </span>
+                </td>
+            </tr>
+        `).join('');
+        
+        updateElement('membersTableBody', html);
+        updateElement('membersCount', state.members.length);
+        updateElement('membersPaginationInfo', 
+            `Affichage de <strong>${startIndex + 1}-${Math.min(startIndex + CONFIG.ITEMS_PER_PAGE, totalItems)}</strong> sur <strong>${totalItems}</strong> membres`
+        );
+        
+        // Mettre à jour la pagination
+        updatePagination('membersPaginationControls', state.currentMemberPage, totalPages, 'member');
+    }
+    
+    /**
+     * Affichage de l'utilisation des API
+     */
+    function displayAPIUsage() {
+        const topAPIs = state.services.slice(0, 5);
+        
+        const html = topAPIs.map(api => {
+            const status = api.successRate >= 99 ? 'operational' : 
+                          (api.successRate >= 95 ? 'degraded' : 'down');
+            const statusText = api.successRate >= 99 ? 'Opérationnel' : 
+                              (api.successRate >= 95 ? 'Dégradé' : 'Indisponible');
+            
+            return `
+                <tr>
+                    <td class="api-name">${escapeHtml(api.name)}</td>
+                    <td>${formatNumber(api.count)}</td>
+                    <td>${api.avgLatency}ms</td>
+                    <td>
+                        <div class="progress-bar">
+                            <div class="progress-bar-fill" style="width: ${api.successRate}%;"></div>
+                        </div>
+                        ${api.successRate}%
+                    </td>
+                    <td><span class="api-status ${status}">● ${statusText}</span></td>
+                </tr>
+            `;
+        }).join('');
+        
+        updateElement('apiTableBody', html);
+    }
+    
+    /**
+     * Configuration des onglets
+     */
+    function setupTabs() {
+        const tabButtons = document.querySelectorAll('.tab-button');
+        
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const tabName = this.getAttribute('data-tab');
+                
+                // Mise à jour des boutons
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                this.classList.add('active');
+                
+                // Mise à jour du contenu
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.remove('active');
+                });
+                
+                const targetContent = document.getElementById(tabName + '-tab');
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
+            });
+        });
+    }
+    
+    /**
+     * Configuration des filtres
+     */
+    function setupFilters() {
+        // Filtres services
+        document.querySelectorAll('#services-tab .filter-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const filter = this.getAttribute('data-filter');
+                
+                document.querySelectorAll('#services-tab .filter-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                state.serviceFilter = filter;
+                state.currentServicePage = 1;
+                displayServicesTable();
+            });
+        });
+        
+        // Filtres membres
+        document.querySelectorAll('#members-tab .filter-button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault();
+                const filter = this.getAttribute('data-filter');
+                
+                document.querySelectorAll('#members-tab .filter-button').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                this.classList.add('active');
+                
+                state.memberFilter = filter;
+                state.currentMemberPage = 1;
+                displayMembersTable();
+            });
+        });
+    }
+    
+    /**
+     * Configuration de la recherche
+     */
+    function setupSearch() {
+        const servicesSearch = document.getElementById('servicesSearch');
+        if (servicesSearch) {
+            servicesSearch.addEventListener('input', debounce(function() {
+                state.serviceSearch = this.value;
+                state.currentServicePage = 1;
+                displayServicesTable();
+            }, 300));
+        }
+        
+        const membersSearch = document.getElementById('membersSearch');
+        if (membersSearch) {
+            membersSearch.addEventListener('input', debounce(function() {
+                state.memberSearch = this.value;
+                state.currentMemberPage = 1;
+                displayMembersTable();
+            }, 300));
+        }
+    }
+    
+    /**
+     * Mise à jour de la pagination
+     */
+    function updatePagination(containerId, currentPage, totalPages, type) {
+        const container = document.getElementById(containerId);
+        if (!container) return;
+        
+        let html = '';
+        
+        // Bouton Précédent
+        html += `<button class="pagination-button" ${currentPage === 1 ? 'disabled' : ''} 
+                  onclick="DashboardApp.goToPage(${currentPage - 1}, '${type}')">← Précédent</button>`;
+        
+        // Pages
+        const maxVisiblePages = 5;
+        let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+        let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+        
+        if (endPage - startPage + 1 < maxVisiblePages) {
+            startPage = Math.max(1, endPage - maxVisiblePages + 1);
+        }
+        
+        if (startPage > 1) {
+            html += `<button class="pagination-button" onclick="DashboardApp.goToPage(1, '${type}')">1</button>`;
+            if (startPage > 2) {
+                html += `<span class="pagination-ellipsis">...</span>`;
+            }
+        }
+        
+        for (let i = startPage; i <= endPage; i++) {
+            html += `<button class="pagination-button ${i === currentPage ? 'active' : ''}" 
+                      onclick="DashboardApp.goToPage(${i}, '${type}')">${i}</button>`;
+        }
+        
+        if (endPage < totalPages) {
+            if (endPage < totalPages - 1) {
+                html += `<span class="pagination-ellipsis">...</span>`;
+            }
+            html += `<button class="pagination-button" onclick="DashboardApp.goToPage(${totalPages}, '${type}')">${totalPages}</button>`;
+        }
+        
+        // Bouton Suivant
+        html += `<button class="pagination-button" ${currentPage === totalPages ? 'disabled' : ''} 
+                  onclick="DashboardApp.goToPage(${currentPage + 1}, '${type}')">Suivant →</button>`;
+        
+        container.innerHTML = html;
+    }
+    
+    /**
+     * Navigation vers une page
+     */
+    function goToPage(page, type) {
+        if (type === 'service') {
+            state.currentServicePage = page;
+            displayServicesTable();
+        } else if (type === 'member') {
+            state.currentMemberPage = page;
+            displayMembersTable();
+        }
+    }
+    
+    /**
+     * Mise à jour de l'heure
+     */
+    function updateTime() {
+        const now = new Date();
+        const timeString = now.toLocaleString(CONFIG.DATE_LOCALE, {
+            hour: '2-digit',
+            minute: '2-digit'
+        });
+        updateElement('lastUpdate', `Aujourd'hui à ${timeString}`);
+    }
+    
+    // === Fonctions utilitaires ===
+    
+    function showLoading(show) {
+        const loader = document.getElementById('loadingIndicator');
+        if (loader) loader.style.display = show ? 'flex' : 'none';
+    }
+    
+    function showDashboard(show) {
+        const dashboard = document.getElementById('mainDashboard');
+        if (dashboard) dashboard.style.display = show ? 'block' : 'none';
+    }
+    
+    function showError(message) {
+        const errorContainer = document.getElementById('errorMessage');
+        const errorText = document.getElementById('errorText');
+        if (errorContainer && errorText) {
+            errorText.textContent = message;
+            errorContainer.style.display = 'flex';
+        }
+    }
+    
+    function hideError() {
+        const errorContainer = document.getElementById('errorMessage');
+        if (errorContainer) errorContainer.style.display = 'none';
+    }
+    
+    function updateElement(id, content) {
+        const element = document.getElementById(id);
+        if (element) element.innerHTML = content;
+    }
+    
+    function formatNumber(num) {
+        if (num >= 1000000) {
+            return (num / 1000000).toFixed(1) + 'M';
+        } else if (num >= 1000) {
+            return (num / 1000).toFixed(1) + 'K';
+        }
+        return num.toLocaleString(CONFIG.DATE_LOCALE);
+    }
+    
+    function formatDate(timestamp) {
+        return new Date(timestamp).toLocaleDateString(CONFIG.DATE_LOCALE, {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric'
+        });
+    }
+    
+    function generateMemberCode(name) {
+        const words = name.split(/[\s-_]+/);
+        let code = '';
+        for (let i = 0; i < Math.min(3, words.length); i++) {
+            code += words[i].charAt(0).toUpperCase();
+        }
+        code += '-' + String(Math.floor(Math.random() * 900) + 100);
+        return code;
+    }
+    
+    function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+    }
+    
+    function debounce(func, wait) {
+        let timeout;
+        return function executedFunction(...args) {
+            const later = () => {
+                clearTimeout(timeout);
+                func.apply(this, args);
+            };
+            clearTimeout(timeout);
+            timeout = setTimeout(later, wait);
+        };
+    }
+    
+    // API publique
+    return {
+        init: init,
+        loadData: loadData,
+        goToPage: goToPage
+    };
+})();
+
+// Initialisation au chargement du DOM
+document.addEventListener('DOMContentLoaded', function() {
+    DashboardApp.init();
+});
+</script>

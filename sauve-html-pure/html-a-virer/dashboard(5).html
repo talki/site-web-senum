@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tableau de Bord - eGov Sénégal [VERSION CORRIGÉE FINALE - Event Listeners]</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --senegal-green: #00853F;
+            --senegal-yellow: #FCD116;
+            --senegal-red: #E31B23;
+            --white: #FFFFFF;
+            --text-dark: #1F2937;
+            --text-light: #6B7280;
+            --bg-light: #F9FAFB;
+            --bg-gray: #F3F4F6;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background: var(--bg-light);
+        }
+
+        /* Navigation */
+        nav {
+            position: sticky;
+            top: 0;
+            background: var(--white);
+            padding: 1rem 5%;
+            box-shadow: var(--shadow-md);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo-flag {
+            width: 45px;
+            height: 30px;
+            display: flex;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .flag-stripe {
+            flex: 1;
+        }
+
+        .flag-green { background: var(--senegal-green); }
+        .flag-yellow { background: var(--senegal-yellow); }
+        .flag-red { background: var(--senegal-red); }
+
+        .logo-text h1 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: #475569;
+        }
+
+        .logo-subtitle {
+            font-size: 0.7rem;
+            color: var(--text-light);
+        }
+
+        .nav-menu-desktop {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu-desktop a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-menu-desktop a:hover,
+        .nav-menu-desktop a.active {
+            color: #475569;
+        }
+
+        /* Dashboard Hero */
+        .dashboard-hero {
+            background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+            padding: 3rem 5%;
+            border-bottom: 1px solid #cbd5e1;
+        }
+
+        .dashboard-hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            margin-bottom: 3rem;
+        }
+
+        .dashboard-hero h1 {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #334155;
+            margin-bottom: 0.5rem;
+        }
+
+        .dashboard-hero p {
+            font-size: 1.1rem;
+            color: #64748b;
+        }
+
+        .dashboard-time {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: var(--white);
+            border-radius: 12px;
+            display: inline-flex;
+        }
+
+        .dashboard-time-icon {
+            font-size: 1.5rem;
+        }
+
+        .dashboard-time-info {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .dashboard-time-value {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        /* Main Dashboard */
+        .dashboard-main {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 3rem 5%;
+        }
+
+        /* Stats Bar (now inside hero) */
+        .dashboard-hero .stats-bar-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            padding: 2rem;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-item {
+            text-align: center;
+            color: #475569;
+        }
+
+        .stat-value {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #334155;
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-description {
+            font-size: 0.95rem;
+            font-weight: 500;
+            opacity: 0.85;
+        }
+
+        .stat-divider {
+            width: 1px;
+            height: 60px;
+            background: rgba(100, 116, 139, 0.2);
+        }
+
+        /* Dashboard Grid */
+        .dashboard-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        /* Top Services Card */
+        .top-services-card {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 2.5rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #e2e8f0;
+        }
+
+        .top-services-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .top-services-title {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--text-dark);
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .top-services-icon {
+            font-size: 1.8rem;
+        }
+
+        .top-services-period {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-weight: 600;
+            padding: 0.5rem 1rem;
+            background: var(--bg-light);
+            border-radius: 20px;
+        }
+
+        .top-services-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .service-item {
+            display: grid;
+            grid-template-columns: auto 1fr auto;
+            gap: 1.2rem;
+            padding: 1.5rem;
+            background: var(--bg-light);
+            border-radius: 15px;
+            transition: all 0.3s;
+            cursor: pointer;
+            align-items: center;
+        }
+
+        .service-item:hover {
+            background: #e2e8f0;
+            transform: translateX(5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+
+        .service-rank {
+            width: 40px;
+            height: 40px;
+            background: linear-gradient(135deg, #64748b, #94a3b8);
+            color: var(--white);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 900;
+            flex-shrink: 0;
+            box-shadow: 0 4px 12px rgba(100, 116, 139, 0.2);
+        }
+
+        .service-item:nth-child(1) .service-rank {
+            background: linear-gradient(135deg, #475569, #64748b);
+            box-shadow: 0 4px 12px rgba(71, 85, 105, 0.25);
+        }
+
+        .service-item:nth-child(2) .service-rank {
+            background: linear-gradient(135deg, #64748b, #94a3b8);
+            box-shadow: 0 4px 12px rgba(100, 116, 139, 0.22);
+        }
+
+        .service-item:nth-child(3) .service-rank {
+            background: linear-gradient(135deg, #94a3b8, #cbd5e1);
+            box-shadow: 0 4px 12px rgba(148, 163, 184, 0.2);
+            color: #334155;
+        }
+
+        .service-info {
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        .service-name {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+
+        .service-member {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .service-member-icon {
+            font-size: 0.9rem;
+        }
+
+        .service-requests {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 0.2rem;
+        }
+
+        .service-requests-count {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: #334155;
+            background: linear-gradient(135deg, #1e293b, #475569);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .service-requests-label {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        /* Management Panel */
+        .management-panel {
+            background: var(--white);
+            border-radius: 20px;
+            padding: 0;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+        }
+
+        /* Tabs Header */
+        .tabs-header {
+            display: flex;
+            border-bottom: 2px solid #f1f5f9;
+            background: var(--bg-light);
+        }
+
+        .tab-button {
+            flex: 1;
+            padding: 1.2rem 1.5rem;
+            background: transparent;
+            border: none;
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--text-light);
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .tab-button::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: #64748b;
+            transform: scaleX(0);
+            transition: transform 0.3s;
+        }
+
+        .tab-button:hover {
+            color: var(--text-dark);
+            background: rgba(100, 116, 139, 0.05);
+        }
+
+        .tab-button.active {
+            color: #334155;
+            background: var(--white);
+        }
+
+        .tab-button.active::after {
+            transform: scaleX(1);
+        }
+
+        .tab-icon {
+            font-size: 1.2rem;
+        }
+
+        .tab-count {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 24px;
+            height: 24px;
+            padding: 0 0.5rem;
+            background: #e2e8f0;
+            color: #64748b;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 800;
+        }
+
+        .tab-button.active .tab-count {
+            background: #64748b;
+            color: var(--white);
+        }
+
+        /* Tab Content */
+        .tab-content {
+            display: none;
+            padding: 2rem;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* Filters Bar */
+        .filters-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .filter-group {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .filter-button {
+            padding: 0.6rem 1.2rem;
+            background: var(--bg-light);
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .filter-button:hover {
+            background: #e2e8f0;
+        }
+
+        .filter-button.active {
+            background: #64748b;
+            color: var(--white);
+            border-color: #64748b;
+        }
+
+        .search-wrapper {
+            position: relative;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: 0.8rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--text-light);
+            font-size: 1rem;
+        }
+
+        .search-input {
+            padding: 0.6rem 1rem 0.6rem 2.5rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 0.9rem;
+            min-width: 250px;
+            transition: all 0.3s;
+            background: var(--white);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #64748b;
+            box-shadow: 0 0 0 3px rgba(100, 116, 139, 0.1);
+        }
+
+        /* Items Table */
+        .items-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 0.5rem;
+        }
+
+        .items-table thead tr {
+            background: transparent;
+        }
+
+        .items-table th {
+            padding: 0.8rem 1rem;
+            text-align: left;
+            font-size: 0.75rem;
+            font-weight: 800;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid #f1f5f9;
+        }
+
+        .items-table tbody tr {
+            background: var(--bg-light);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .items-table tbody tr:hover {
+            background: #e2e8f0;
+            transform: translateX(3px);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .items-table td {
+            padding: 1rem;
+            border-top: 1px solid transparent;
+            border-bottom: 1px solid transparent;
+        }
+
+        .items-table tbody tr td:first-child {
+            border-left: 3px solid transparent;
+            border-radius: 12px 0 0 12px;
+        }
+
+        .items-table tbody tr:hover td:first-child {
+            border-left-color: #64748b;
+        }
+
+        .items-table tbody tr td:last-child {
+            border-radius: 0 12px 12px 0;
+        }
+
+        /* Table Cell Styles */
+        .item-name {
+            font-weight: 800;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        .item-code {
+            font-family: 'Courier New', monospace;
+            font-weight: 700;
+            color: #475569;
+            background: #f1f5f9;
+            padding: 0.3rem 0.6rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+
+        .item-version {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            background: #f1f5f9;
+            color: #64748b;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .item-date {
+            color: var(--text-light);
+            font-size: 0.85rem;
+        }
+
+        .item-provider,
+        .item-count {
+            color: var(--text-light);
+            font-size: 0.9rem;
+        }
+
+        .item-count {
+            font-weight: 700;
+            color: #475569;
+        }
+
+        .status-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.4rem 0.9rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .status-badge.active {
+            background: #dcfce7;
+            color: #15803d;
+        }
+
+        .status-badge.inactive {
+            background: #fee2e2;
+            color: #b91c1c;
+        }
+
+        .status-dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: currentColor;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .pagination-info {
+            font-size: 0.9rem;
+            color: var(--text-light);
+        }
+
+        .pagination-info strong {
+            color: var(--text-dark);
+            font-weight: 700;
+        }
+
+        .pagination-controls {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .pagination-button {
+            padding: 0.5rem 1rem;
+            background: var(--white);
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .pagination-button:hover:not(:disabled) {
+            background: #64748b;
+            color: var(--white);
+            border-color: #64748b;
+        }
+
+        .pagination-button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .pagination-button.active {
+            background: #64748b;
+            color: var(--white);
+            border-color: #64748b);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 3rem 2rem;
+            color: var(--text-light);
+        }
+
+        .empty-state-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .empty-state-text {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        /* API Usage Table */
+        .api-usage-section {
+            background: var(--white);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 3rem;
+        }
+
+        .api-usage-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .api-usage-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--text-dark);
+        }
+
+        .api-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .api-table thead {
+            background: var(--bg-light);
+        }
+
+        .api-table th {
+            padding: 1rem;
+            text-align: left;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .api-table td {
+            padding: 1.2rem 1rem;
+            border-bottom: 1px solid var(--bg-light);
+            font-size: 0.9rem;
+        }
+
+        .api-table tr:hover {
+            background: #f8fafc;
+        }
+
+        .api-name {
+            font-weight: 700;
+            color: var(--text-dark);
+        }
+
+        .api-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .api-status.operational {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .api-status.degraded {
+            background: #fef3c7;
+            color: #d97706;
+        }
+
+        .api-status.down {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: var(--bg-light);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #64748b, #94a3b8);
+            border-radius: 10px;
+            transition: width 0.3s;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-grid {
+            max-width: 1400px;
+            margin: 0 auto 3rem;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1fr;
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            color: #e2e8f0;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 800;
+        }
+
+        .footer-about p {
+            color: rgba(255,255,255,0.8);
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section a {
+            color: rgba(255,255,255,0.7);
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .footer-section a:hover {
+            color: #cbd5e1;
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-icon {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .social-icon:hover {
+            background: #64748b;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255,255,255,0.1);
+            padding-top: 2rem;
+            text-align: center;
+            color: rgba(255,255,255,0.6);
+        }
+
+        .footer-bottom p {
+            margin-bottom: 1rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-bottom-links a {
+            color: rgba(255,255,255,0.6);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s;
+        }
+
+        .footer-bottom-links a:hover {
+            color: rgba(255,255,255,0.9);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .dashboard-hero .stats-bar-container {
+                gap: 1.5rem;
+                padding: 1.5rem;
+            }
+
+            .stat-value {
+                font-size: 3rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .api-table {
+                font-size: 0.85rem;
+            }
+
+            .api-table th,
+            .api-table td {
+                padding: 0.8rem 0.6rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            /* Navigation mobile */
+            .nav-menu-desktop {
+                display: none;
+            }
+
+            nav {
+                padding: 1rem 3%;
+            }
+
+            .logo-text h1 {
+                font-size: 1.1rem;
+            }
+
+            .logo-subtitle {
+                font-size: 0.65rem;
+            }
+
+            /* Dashboard hero mobile */
+            .dashboard-hero {
+                padding: 2rem 4%;
+            }
+
+            .dashboard-hero h1 {
+                font-size: 2rem;
+            }
+
+            .dashboard-hero p {
+                font-size: 1rem;
+            }
+
+            .dashboard-time {
+                width: 100%;
+                justify-content: flex-start;
+            }
+
+            /* Dashboard main mobile */
+            .dashboard-main {
+                padding: 2rem 4%;
+            }
+
+            /* Stats bar mobile (inside hero) */
+            .dashboard-hero .stats-bar-container {
+                flex-wrap: wrap;
+                gap: 2rem;
+                padding: 1.5rem;
+            }
+
+            .stat-divider {
+                display: none;
+            }
+
+            .stat-value {
+                font-size: 2.5rem;
+            }
+
+            .stat-description {
+                font-size: 0.85rem;
+            }
+
+            /* Top Services mobile */
+            .top-services-card {
+                padding: 1.8rem;
+            }
+
+            .top-services-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 0.8rem;
+            }
+
+            .top-services-title {
+                font-size: 1.2rem;
+            }
+
+            .service-item {
+                grid-template-columns: auto 1fr;
+                gap: 1rem;
+                padding: 1.2rem;
+            }
+
+            .service-rank {
+                width: 35px;
+                height: 35px;
+                font-size: 1rem;
+            }
+
+            .service-info {
+                grid-column: 1 / -1;
+                grid-row: 2;
+            }
+
+            .service-requests {
+                align-items: flex-start;
+            }
+
+            .service-requests-count {
+                font-size: 1.3rem;
+            }
+
+            .service-name {
+                font-size: 0.95rem;
+            }
+
+            .service-member {
+                font-size: 0.8rem;
+            }
+
+            /* Management Panel mobile */
+            .management-panel {
+                border-radius: 15px;
+            }
+
+            .tab-button {
+                padding: 1rem;
+                font-size: 0.9rem;
+                flex-direction: column;
+                gap: 0.3rem;
+            }
+
+            .tab-icon {
+                font-size: 1.1rem;
+            }
+
+            .tab-content {
+                padding: 1.5rem;
+            }
+
+            .filters-bar {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .filter-group {
+                width: 100%;
+            }
+
+            .filter-button {
+                flex: 1;
+            }
+
+            .search-wrapper {
+                width: 100%;
+            }
+
+            .search-input {
+                width: 100%;
+                min-width: auto;
+            }
+
+            .items-table {
+                font-size: 0.85rem;
+            }
+
+            .items-table th {
+                padding: 0.6rem 0.8rem;
+                font-size: 0.7rem;
+            }
+
+            .items-table td {
+                padding: 0.8rem;
+            }
+
+            .item-name {
+                font-size: 0.9rem;
+            }
+
+            .item-code {
+                font-size: 0.8rem;
+            }
+
+            .pagination {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: stretch;
+            }
+
+            .pagination-controls {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+
+            /* API Usage Table mobile */
+            .api-usage-section {
+                padding: 1.5rem;
+                overflow-x: auto;
+            }
+
+            .api-usage-title {
+                font-size: 1.2rem;
+            }
+
+            .api-table {
+                min-width: 600px;
+                font-size: 0.8rem;
+            }
+
+            .api-table th,
+            .api-table td {
+                padding: 0.8rem 0.5rem;
+                white-space: nowrap;
+            }
+
+            .api-name {
+                font-size: 0.85rem;
+            }
+
+            .api-status {
+                font-size: 0.7rem;
+                padding: 0.3rem 0.6rem;
+            }
+
+            /* System status mobile */
+            /* Footer mobile */
+            .footer-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            footer {
+                padding: 3rem 4% 1.5rem;
+            }
+
+            .footer-bottom-links {
+                flex-direction: column;
+                gap: 0.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            /* Extra small screens */
+            .dashboard-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .dashboard-time {
+                flex-direction: column;
+                align-items: flex-start;
+                padding: 0.8rem;
+            }
+
+            .dashboard-time-icon {
+                font-size: 1.3rem;
+            }
+
+            /* Stats bar compact */
+            .stat-value {
+                font-size: 2rem;
+            }
+
+            .stat-description {
+                font-size: 0.8rem;
+            }
+
+            /* Top Services compact */
+            .top-services-card {
+                padding: 1.5rem;
+            }
+
+            .service-item {
+                padding: 1rem;
+            }
+
+            .service-rank {
+                width: 32px;
+                height: 32px;
+                font-size: 0.9rem;
+            }
+
+            .service-requests-count {
+                font-size: 1.2rem;
+            }
+
+            .service-name {
+                font-size: 0.9rem;
+            }
+
+            .service-member {
+                font-size: 0.75rem;
+            }
+
+            /* Management Panel compact */
+            .tab-content {
+                padding: 1.2rem;
+            }
+
+            .items-table {
+                display: block;
+                overflow-x: auto;
+            }
+
+            .items-table th,
+            .items-table td {
+                white-space: nowrap;
+            }
+
+            /* API table scroll hint */
+            .api-usage-section::after {
+                content: '← Faites défiler →';
+                display: block;
+                text-align: center;
+                color: var(--text-light);
+                font-size: 0.8rem;
+                margin-top: 1rem;
+                font-style: italic;
+            }
+
+            .api-table {
+                font-size: 0.75rem;
+            }
+        }
+
+        /* Landscape orientation for phones */
+        @media (max-width: 968px) and (orientation: landscape) {
+            .dashboard-hero {
+                padding: 1.5rem 4%;
+            }
+
+            .dashboard-hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .dashboard-hero .stats-bar-container {
+                flex-wrap: nowrap;
+                gap: 1rem;
+            }
+        }
+
+        /* Print styles */
+        @media print {
+            nav,
+            footer,
+            .dashboard-time,
+            .filters-bar {
+                display: none;
+            }
+
+            .dashboard-hero {
+                background: white;
+                color: black;
+            }
+
+            .dashboard-hero .stats-bar-container {
+                page-break-inside: avoid;
+            }
+
+            .top-services-card,
+            .api-usage-section,
+            .management-panel {
+                border: 1px solid #ddd;
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <div class="logo-flag">
+                <div class="flag-stripe flag-green"></div>
+                <div class="flag-stripe flag-yellow"></div>
+                <div class="flag-stripe flag-red"></div>
+            </div>
+            <div class="logo-text">
+                <h1>eGov Sénégal</h1>
+                <div class="logo-subtitle">Plateforme d'Interopérabilité</div>
+            </div>
+        </div>
+        
+        <ul class="nav-menu-desktop">
+            <li><a href="accueil.html">Accueil</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="#standards">Cadres & Standards</a></li>
+            <li><a href="dashboard.html" class="active">Tableau de bord</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Dashboard Hero with Stats -->
+    <section class="dashboard-hero">
+        <div class="dashboard-hero-content">
+            <h1>Tableau de Bord</h1>
+            <p>Vue d'ensemble des performances et des indicateurs clés de la plateforme</p>
+            
+            <div class="dashboard-time">
+                <div class="dashboard-time-icon">🕐</div>
+                <div>
+                    <div class="dashboard-time-info">Dernière mise à jour</div>
+                    <div class="dashboard-time-value">Aujourd'hui à 14:32</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Integrated Stats -->
+        <div class="stats-bar-container">
+            <div class="stat-item">
+                <div class="stat-value">2.3M</div>
+                <div class="stat-description">Transactions ce mois</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-value">45</div>
+                <div class="stat-description">Administrations connectées</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-value">127</div>
+                <div class="stat-description">API actives</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Dashboard -->
+    <main class="dashboard-main">
+            <!-- Top Services -->
+            <div class="top-services-card">
+                <div class="top-services-header">
+                    <h2 class="top-services-title">
+                        <span class="top-services-icon">🔥</span>
+                        Services les plus utilisés
+                    </h2>
+                    <span class="top-services-period">Aujourd'hui</span>
+                </div>
+
+                <div class="top-services-list">
+                    <div class="service-item">
+                        <div class="service-rank">1</div>
+                        <div class="service-info">
+                            <div class="service-name">API Identité Nationale</div>
+                            <div class="service-member">
+                                <span class="service-member-icon">🏛️</span>
+                                <span>Direction de l'Automatisation des Fichiers</span>
+                            </div>
+                        </div>
+                        <div class="service-requests">
+                            <div class="service-requests-count">89.4K</div>
+                            <div class="service-requests-label">Requêtes</div>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-rank">2</div>
+                        <div class="service-info">
+                            <div class="service-name">API Taxes & Impôts</div>
+                            <div class="service-member">
+                                <span class="service-member-icon">💰</span>
+                                <span>Direction Générale des Impôts et Domaines</span>
+                            </div>
+                        </div>
+                        <div class="service-requests">
+                            <div class="service-requests-count">78.9K</div>
+                            <div class="service-requests-label">Requêtes</div>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-rank">3</div>
+                        <div class="service-info">
+                            <div class="service-name">API Protection Sociale</div>
+                            <div class="service-member">
+                                <span class="service-member-icon">🛡️</span>
+                                <span>Caisse de Sécurité Sociale</span>
+                            </div>
+                        </div>
+                        <div class="service-requests">
+                            <div class="service-requests-count">67.8K</div>
+                            <div class="service-requests-label">Requêtes</div>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-rank">4</div>
+                        <div class="service-info">
+                            <div class="service-name">API Santé</div>
+                            <div class="service-member">
+                                <span class="service-member-icon">🏥</span>
+                                <span>Ministère de la Santé et de l'Action Sociale</span>
+                            </div>
+                        </div>
+                        <div class="service-requests">
+                            <div class="service-requests-count">54.1K</div>
+                            <div class="service-requests-label">Requêtes</div>
+                        </div>
+                    </div>
+
+                    <div class="service-item">
+                        <div class="service-rank">5</div>
+                        <div class="service-info">
+                            <div class="service-name">API Éducation</div>
+                            <div class="service-member">
+                                <span class="service-member-icon">🎓</span>
+                                <span>Ministère de l'Éducation Nationale</span>
+                            </div>
+                        </div>
+                        <div class="service-requests">
+                            <div class="service-requests-count">45.6K</div>
+                            <div class="service-requests-label">Requêtes</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Management Panel -->
+            <div class="management-panel">
+                <!-- Debug Indicator -->
+                <div id="tab-debug" style="background: #d4edda; border: 2px solid #c3e6cb; color: #155724; padding: 0.8rem; margin-bottom: 1rem; border-radius: 8px; font-size: 0.9rem;">
+                    <strong>🔧 Mode Debug:</strong> <span id="tab-status">Initialisation...</span>
+                </div>
+                <!-- Tabs Header -->
+                <div class="tabs-header">
+                    <button class="tab-button active">
+                        <span class="tab-icon">⚙️</span>
+                        <span>Services</span>
+                        <span class="tab-count">127</span>
+                    </button>
+                    <button class="tab-button">
+                        <span class="tab-icon">👥</span>
+                        <span>Membres</span>
+                        <span class="tab-count">45</span>
+                    </button>
+                </div>
+
+                <!-- Services Tab -->
+                <div class="tab-content active" id="services-tab">
+                    <!-- Filters -->
+                    <div class="filters-bar">
+                        <div class="filter-group">
+                            <button class="filter-button active" onclick="filterServices('all', event)">Tout</button>
+                            <button class="filter-button" onclick="filterServices('active', event)">Actif</button>
+                            <button class="filter-button" onclick="filterServices('inactive', event)">Inactif</button>
+                        </div>
+                        <div class="search-wrapper">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" class="search-input" placeholder="Rechercher un service..." onkeyup="searchServices(this.value)">
+                        </div>
+                    </div>
+
+                    <!-- Services Table -->
+                    <table class="items-table" id="services-table">
+                        <thead>
+                            <tr>
+                                <th>Service</th>
+                                <th>Version</th>
+                                <th>Date</th>
+                                <th>Fournisseur</th>
+                                <th>Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-status="active">
+                                <td><span class="item-name">API Identité Nationale</span></td>
+                                <td><span class="item-version">v2.3.1</span></td>
+                                <td><span class="item-date">12 Nov 2025</span></td>
+                                <td><span class="item-provider">Direction de l'Automatisation</span></td>
+                                <td><span class="status-badge active"><span class="status-dot"></span> Actif</span></td>
+                            </tr>
+                            <tr data-status="active">
+                                <td><span class="item-name">API Protection Sociale</span></td>
+                                <td><span class="item-version">v1.8.5</span></td>
+                                <td><span class="item-date">08 Nov 2025</span></td>
+                                <td><span class="item-provider">Caisse de Sécurité Sociale</span></td>
+                                <td><span class="status-badge active"><span class="status-dot"></span> Actif</span></td>
+                            </tr>
+                            <tr data-status="active">
+                                <td><span class="item-name">API Santé</span></td>
+                                <td><span class="item-version">v3.1.0</span></td>
+                                <td><span class="item-date">05 Nov 2025</span></td>
+                                <td><span class="item-provider">Ministère de la Santé</span></td>
+                                <td><span class="status-badge active"><span class="status-dot"></span> Actif</span></td>
+                            </tr>
+                            <tr data-status="inactive">
+                                <td><span class="item-name">API Transport Urbain</span></td>
+                                <td><span class="item-version">v1.2.0</span></td>
+                                <td><span class="item-date">28 Oct 2025</span></td>
+                                <td><span class="item-provider">Ministère des Transports</span></td>
+                                <td><span class="status-badge inactive"><span class="status-dot"></span> Inactif</span></td>
+                            </tr>
+                            <tr data-status="active">
+                                <td><span class="item-name">API Éducation</span></td>
+                                <td><span class="item-version">v2.0.3</span></td>
+                                <td><span class="item-date">22 Oct 2025</span></td>
+                                <td><span class="item-provider">Ministère de l'Éducation</span></td>
+                                <td><span class="status-badge active"><span class="status-dot"></span> Actif</span></td>
+                            </tr>
+                            <tr data-status="active">
+                                <td><span class="item-name">API Taxes & Impôts</span></td>
+                                <td><span class="item-version">v4.2.1</span></td>
+                                <td><span class="item-date">18 Oct 2025</span></td>
+                                <td><span class="item-provider">Direction Générale des Impôts</span></td>
+                                <td><span class="status-badge active"><span class="status-dot"></span> Actif</span></td>
+                            </tr>
+                            <tr data-status="active">
+                                <td><span class="item-name">API Cadastre</span></td>
+                                <td><span class="item-version">v1.5.2</span></td>
+                                <td><span class="item-date">15 Oct 2025</span></td>
+                                <td><span class="item-provider">Direction des Domaines</span></td>
+                                <td><span class="status-badge active"><span class="status-dot"></span> Actif</span></td>
+                            </tr>
+                            <tr data-status="inactive">
+                                <td><span class="item-name">API Statistiques Agricoles</span></td>
+                                <td><span class="item-version">v0.9.1</span></td>
+                                <td><span class="item-date">10 Oct 2025</span></td>
+                                <td><span class="item-provider">Ministère de l'Agriculture</span></td>
+                                <td><span class="status-badge inactive"><span class="status-dot"></span> Inactif</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <div class="pagination-info">
+                            Affichage de <strong>1-8</strong> sur <strong>127</strong> services
+                        </div>
+                        <div class="pagination-controls">
+                            <button class="pagination-button" disabled>← Précédent</button>
+                            <button class="pagination-button active">1</button>
+                            <button class="pagination-button">2</button>
+                            <button class="pagination-button">3</button>
+                            <button class="pagination-button">...</button>
+                            <button class="pagination-button">16</button>
+                            <button class="pagination-button">Suivant →</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Members Tab -->
+                <div class="tab-content" id="members-tab">
+                    <!-- Filters -->
+                    <div class="filters-bar">
+                        <div class="filter-group">
+                            <button class="filter-button active" onclick="filterMembers('all', event)">Tout</button>
+                            <button class="filter-button" onclick="filterMembers('active', event)">Actif</button>
+                            <button class="filter-button" onclick="filterMembers('inactive', event)">Inactif</button>
+                        </div>
+                        <div class="search-wrapper">
+                            <span class="search-icon">🔍</span>
+                            <input type="text" class="search-input" placeholder="Rechercher un membre..." onkeyup="searchMembers(this.value)">
+                        </div>
+                    </div>
+
+                    <!-- Members Table -->
+                    <table class="items-table" id="members-table">
+                        <thead>
+                            <tr>
+                                <th>Code</th>
+                                <th>Membre</th>
+                                <th>Services</th>
+                                <th>Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr data-status="active">
+                                <td><span class="item-code">DAF-001</span></td>
+                                <td><span class="item-name">Direction de l'Automatisation des Fichiers</span></td>
+                                <td><span class="item-count">12 services</span></td>
+                                <td><span class="status-badge active"><span class="status-dot"></span> Actif</span></td>
+                            </tr>
+                            <tr data-status="active">
+                                <td><span class="item-code">DGID-002</span></td>
+                                <td><span class="item-name">Direction Générale des Impôts et Domaines</span></td>
+                                <td><span class="item-count">8 services</span></td>
+                                <td><span class="status-badge active"><span class="status-dot"></span> Actif</span></td>
+                            </tr>
+                            <tr data-status="active">
+                                <td><span class="item-code">CSS-003</span></td>
+                                <td><span class="item-name">Caisse de Sécurité Sociale</span></td>
+                                <td><span class="item-count">15 services</span></td>
+                                <td><span class="status-badge active"><span class="status-dot"></span> Actif</span></td>
+                            </tr>
+                            <tr data-status="active">
+                                <td><span class="item-code">MSAS-004</span></td>
+                                <td><span class="item-name">Ministère de la Santé et de l'Action Sociale</span></td>
+                                <td><span class="item-count">18 services</span></td>
+                                <td><span class="status-badge active"><span class="status-dot"></span> Actif</span></td>
+                            </tr>
+                            <tr data-status="inactive">
+                                <td><span class="item-code">MEN-005</span></td>
+                                <td><span class="item-name">Ministère de l'Éducation Nationale</span></td>
+                                <td><span class="item-count">7 services</span></td>
+                                <td><span class="status-badge inactive"><span class="status-dot"></span> Inactif</span></td>
+                            </tr>
+                            <tr data-status="active">
+                                <td><span class="item-code">MAG-006</span></td>
+                                <td><span class="item-name">Ministère de l'Agriculture</span></td>
+                                <td><span class="item-count">5 services</span></td>
+                                <td><span class="status-badge active"><span class="status-dot"></span> Actif</span></td>
+                            </tr>
+                            <tr data-status="active">
+                                <td><span class="item-code">MTR-007</span></td>
+                                <td><span class="item-name">Ministère des Transports</span></td>
+                                <td><span class="item-count">9 services</span></td>
+                                <td><span class="status-badge active"><span class="status-dot"></span> Actif</span></td>
+                            </tr>
+                            <tr data-status="inactive">
+                                <td><span class="item-code">MEF-008</span></td>
+                                <td><span class="item-name">Ministère de l'Économie et des Finances</span></td>
+                                <td><span class="item-count">11 services</span></td>
+                                <td><span class="status-badge inactive"><span class="status-dot"></span> Inactif</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <div class="pagination-info">
+                            Affichage de <strong>1-8</strong> sur <strong>45</strong> membres
+                        </div>
+                        <div class="pagination-controls">
+                            <button class="pagination-button" disabled>← Précédent</button>
+                            <button class="pagination-button active">1</button>
+                            <button class="pagination-button">2</button>
+                            <button class="pagination-button">3</button>
+                            <button class="pagination-button">4</button>
+                            <button class="pagination-button">5</button>
+                            <button class="pagination-button">6</button>
+                            <button class="pagination-button">Suivant →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- API Usage Table -->
+        <section class="api-usage-section">
+            <div class="api-usage-header">
+                <h2 class="api-usage-title">Utilisation des API</h2>
+            </div>
+
+            <table class="api-table">
+                <thead>
+                    <tr>
+                        <th>API</th>
+                        <th>Requêtes/Jour</th>
+                        <th>Latence Moy.</th>
+                        <th>Taux de Succès</th>
+                        <th>Statut</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="api-name">API Identité Nationale</td>
+                        <td>89,432</td>
+                        <td>124ms</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill" style="width: 99.2%;"></div>
+                            </div>
+                            99.2%
+                        </td>
+                        <td><span class="api-status operational">● Opérationnel</span></td>
+                    </tr>
+                    <tr>
+                        <td class="api-name">API Protection Sociale</td>
+                        <td>67,821</td>
+                        <td>156ms</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill" style="width: 98.8%;"></div>
+                            </div>
+                            98.8%
+                        </td>
+                        <td><span class="api-status operational">● Opérationnel</span></td>
+                    </tr>
+                    <tr>
+                        <td class="api-name">API Santé</td>
+                        <td>54,129</td>
+                        <td>189ms</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill" style="width: 97.5%;"></div>
+                            </div>
+                            97.5%
+                        </td>
+                        <td><span class="api-status degraded">● Dégradé</span></td>
+                    </tr>
+                    <tr>
+                        <td class="api-name">API Taxes & Impôts</td>
+                        <td>78,965</td>
+                        <td>142ms</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill" style="width: 99.5%;"></div>
+                            </div>
+                            99.5%
+                        </td>
+                        <td><span class="api-status operational">● Opérationnel</span></td>
+                    </tr>
+                    <tr>
+                        <td class="api-name">API Éducation</td>
+                        <td>45,687</td>
+                        <td>167ms</td>
+                        <td>
+                            <div class="progress-bar">
+                                <div class="progress-bar-fill" style="width: 98.9%;"></div>
+                            </div>
+                            98.9%
+                        </td>
+                        <td><span class="api-status operational">● Opérationnel</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-section footer-about">
+                <h3>À PROPOS</h3>
+                <p>
+                    La Plateforme Nationale d'Interopérabilité du Sénégal (eGov Sénégal) 
+                    est une initiative du Ministère de la Communication, des Télécommunications 
+                    et du Numérique dans le cadre du New Deal Technologique.
+                </p>
+                <div class="social-icons">
+                    <div class="social-icon">📘</div>
+                    <div class="social-icon">🐦</div>
+                    <div class="social-icon">💼</div>
+                    <div class="social-icon">📸</div>
+                    <div class="social-icon">📹</div>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>SERVICES</h3>
+                <ul>
+                    <li><a href="#protection-sociale">Protection Sociale</a></li>
+                    <li><a href="#troisieme-age">Troisième Âge</a></li>
+                    <li><a href="#education">Éducation</a></li>
+                    <li><a href="#citoyennete">Citoyenneté</a></li>
+                    <li><a href="#taxes">Taxes & Impôts</a></li>
+                    <li><a href="#sante">Santé</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>RESSOURCES</h3>
+                <ul>
+                    <li><a href="#">Documentation API</a></li>
+                    <li><a href="#">Guides d'Intégration</a></li>
+                    <li><a href="#">Catalogue d'API</a></li>
+                    <li><a href="#">Centre d'Aide</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>CONTACT</h3>
+                <ul>
+                    <li><a href="#">📍 Dakar, Sénégal</a></li>
+                    <li><a href="#">📧 <span class="__cf_email__" data-cfemail="fa9995948e9b998eba9f9d958cd48994">[email&#160;protected]</span></a></li>
+                    <li><a href="#">📞 +221 33 XXX XX XX</a></li>
+                    <li><a href="#">💬 Chat en Direct</a></li>
+                    <li><a href="#">🎫 Créer un Ticket</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 eGov Sénégal - MCTN/SENUM - République du Sénégal</p>
+            <div class="footer-bottom-links">
+                <a href="#">Mentions Légales</a>
+                <a href="#">Politique de Confidentialité</a>
+                <a href="#">Conditions d'Utilisation</a>
+                <a href="#">Accessibilité</a>
+                <a href="#">Plan du Site</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Tab switching with event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded, initializing tabs...');
+            
+            // Get all tab buttons
+            const tabButtons = document.querySelectorAll('.tab-button');
+            console.log('Found tab buttons:', tabButtons.length);
+            
+            tabButtons.forEach((button, index) => {
+                button.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    // Determine which tab to show based on button index
+                    const tabName = index === 0 ? 'services' : 'members';
+                    console.log('Tab button clicked:', tabName);
+                    
+                    // Remove active from all buttons
+                    tabButtons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Remove active from all content
+                    document.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    // Add active to clicked button
+                    this.classList.add('active');
+                    
+                    // Add active to corresponding content
+                    const targetContent = document.getElementById(tabName + '-tab');
+                    if (targetContent) {
+                        targetContent.classList.add('active');
+                        console.log('Activated tab:', tabName + '-tab');
+                    } else {
+                        console.error('Tab content not found:', tabName + '-tab');
+                    }
+                });
+            });
+            
+            console.log('Tabs initialized successfully');
+        });
+
+        // Filter services
+        function filterServices(status, event) {
+            const buttons = document.querySelectorAll('#services-tab .filter-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            if (event) {
+                event.currentTarget.classList.add('active');
+            }
+            
+            const rows = document.querySelectorAll('#services-table tbody tr');
+            rows.forEach(row => {
+                if (status === 'all') {
+                    row.style.display = '';
+                } else {
+                    row.style.display = row.dataset.status === status ? '' : 'none';
+                }
+            });
+        }
+
+        // Filter members
+        function filterMembers(status, event) {
+            const buttons = document.querySelectorAll('#members-tab .filter-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            if (event) {
+                event.currentTarget.classList.add('active');
+            }
+            
+            const rows = document.querySelectorAll('#members-table tbody tr');
+            rows.forEach(row => {
+                if (status === 'all') {
+                    row.style.display = '';
+                } else {
+                    row.style.display = row.dataset.status === status ? '' : 'none';
+                }
+            });
+        }
+
+        // Search services
+        function searchServices(query) {
+            const searchTerm = query.toLowerCase();
+            const rows = document.querySelectorAll('#services-table tbody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        }
+
+        // Search members
+        function searchMembers(query) {
+            const searchTerm = query.toLowerCase();
+            const rows = document.querySelectorAll('#members-table tbody tr');
+            
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(searchTerm) ? '' : 'none';
+            });
+        }
+
+        // Simulate real-time updates
+        setInterval(() => {
+            const timeValue = document.querySelector('.dashboard-time-value');
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            if (timeValue) {
+                timeValue.textContent = `${hours}:${String(now.getMinutes()).padStart(2, '0')}`;
+            }
+        }, 60000);
+    </script>
+</body>
+</html>

@@ -1,34 +1,33 @@
 {# Template pour le Tableau de Bord - Node 20 #}
-<nav>
-    <div class="logo">
-        <div class="logo-flag">
-            <div class="flag-stripe flag-green"></div>
-            <div class="flag-stripe flag-yellow"></div>
-            <div class="flag-stripe flag-red"></div>
-        </div>
-        <div class="logo-text">
-            <h1>Jokkoo</h1>
-            <div class="logo-subtitle">Plateforme d'Interopérabilité</div>
-        </div>
-    </div>
+  <nav>
+            {# Logo #}
+            <div class="logo">
+                <img src="/themes/custom/egov_theme/images/senegal.png" 
+                     alt="Logo Interopérabilité Sénégal" 
+                     style="width: 60px; height: 60px; object-fit: contain;">
+                <div class="logo-text">
+                    <h1>Jokkoo</h1>
+                    <div class="logo-subtitle">Plateforme d'Interopérabilité</div>
+                </div>
+            </div>
 
-    {# Menu Desktop #}
-    <div class="nav-menu-desktop">
-        {% if page.primary_menu %}
-            {{ page.primary_menu }}
-        {% endif %}
-    </div>
+            {# Menu Desktop #}
+            <div class="nav-menu-desktop">
+                {% if page.primary_menu %}
+                    {{ page.primary_menu }}
+                {% endif %}
+            </div>
 
-    {# Actions Mobile #}
-    <div class="nav-actions-mobile">
-        <button class="search-btn">🔍</button>
-        <button class="hamburger-btn" id="hamburgerBtn">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </div>
-</nav>
+            {# Actions Mobile #}
+            <div class="nav-actions-mobile">
+                <button class="search-btn" aria-label="Rechercher">🔍</button>
+                <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
 <!-- Dashboard Hero -->
 <section class="dashboard-hero">
     <div class="dashboard-hero-content">

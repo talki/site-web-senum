@@ -373,3 +373,337 @@
             <div id="videoPlayerContainer"></div>
         </div>
     </div>
+    
+    
+<script>
+(function() {
+    'use strict';
+
+    console.log('Vidéos Podcast - Filtres initialisés');
+
+    // ========== ÉLÉMENTS DOM ==========
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    const videoCards = document.querySelectorAll('.video-card');
+
+    console.log('Boutons de filtre trouvés:', filterButtons.length);
+    console.log('Cartes vidéo trouvées:', videoCards.length);
+
+    // ========== FONCTION DE FILTRAGE ==========
+    function applyFilter(filterValue) {
+        console.log('Filtre appliqué:', filterValue);
+        
+        let visibleCount = 0;
+
+        videoCards.forEach(card => {
+            const category = card.getAttribute('data-category');
+            
+            // Réinitialiser les styles
+            card.style.opacity = '0';
+            card.style.transform = 'translateY(20px)';
+            
+            if (filterValue === 'all') {
+                // Afficher toutes les vidéos
+                card.style.display = 'block';
+                setTimeout(() => {
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 50 + (visibleCount * 50)); // Animation en cascade
+                visibleCount++;
+            } else {
+                // Filtrer par catégorie
+                if (category === filterValue) {
+                    card.style.display = 'block';
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'translateY(0)';
+                    }, 50 + (visibleCount * 50));
+                    visibleCount++;
+                } else {
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 300);
+                }
+            }
+        });
+
+        // Afficher message si aucun résultat
+        checkForNoResults(visibleCount);
+        
+        console.log('Vidéos visibles:', visibleCount);
+    }
+
+    // ========== MESSAGE AUCUN RÉSULTAT ==========
+    function checkForNoResults(visibleCount) {
+        // Retirer ancien message
+        const existingMessage = document.querySelector('.no-results-message');
+        if (existingMessage) {
+            existingMessage.remove();
+        }
+
+        // Afficher message si aucun résultat
+        if (visibleCount === 0) {
+            const videosGrid = document.querySelector('.videos-grid');
+            if (videosGrid) {
+                const message = document.createElement('div');
+                message.className = 'no-results-message';
+                message.style.cssText = 'grid-column: 1 / -1; text-align: center; padding: 4rem 2rem; color: #666;';
+                message.innerHTML = `
+                    <div style="font-size: 3rem; margin-bottom: 1rem;">🎬</div>
+                    <h3 style="margin-bottom: 0.5rem;">Aucune vidéo dans cette catégorie</h3>
+                    <p>Essayez de sélectionner une autre catégorie</p>
+                `;
+                videosGrid.appendChild(message);
+            }
+        }
+    }
+
+    // ========== ÉVÉNEMENTS BOUTONS FILTRES ==========
+    filterButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            console.log('Bouton cliqué:', this.getAttribute('data-filter'));
+            
+            // Retirer la classe active de tous les boutons
+            filterButtons.forEach(btn => btn.classList.remove('active'));
+            
+            // Ajouter la classe active au bouton cliqué
+            this.classList.add('active');
+            
+            // Appliquer le filtre
+            const filterValue = this.getAttribute('data-filter');
+            applyFilter(filterValue);
+        });
+    });
+
+    // ========== ANIMATIONS AU SCROLL ==========
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Observer les cartes vidéo
+    videoCards.forEach(card => {
+        card.style.transition = 'all 0.6s ease';
+        observer.observe(card);
+    });
+
+    // ========== NEWSLETTER FORM ==========
+    const newsletterForm = document.querySelector('.newsletter-form');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            const emailInput = this.querySelector('input[type="email"]');
+            const email = emailInput.value;
+            
+            // Animation de succès
+            const btn = this.querySelector('.newsletter-btn');
+            const originalText = btn.textContent;
+            btn.textContent = '✓ Inscrit !';
+            btn.style.background = '#00a651';
+            
+            setTimeout(() => {
+                btn.textContent = originalText;
+                btn.style.background = '';
+                emailInput.value = '';
+            }, 3000);
+            
+            console.log('Inscription newsletter:', email);
+        });
+    }
+
+    // ========== INITIALISATION ==========
+    console.log('✅ Filtres vidéos initialisés avec succès');
+
+})();
+
+// ========== FONCTION POUR JOUER VIDÉO INLINE ==========
+function playVideoInline(element, videoId) {
+    console.log('Lecture vidéo:', videoId);
+    
+    // Trouver le conteneur parent
+    const container = element.parentElement;
+    
+    // Créer l'iframe YouTube
+    const iframe = document.createElement('iframe');
+    iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+    iframe.style.cssText = 'position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; border-radius: 12px;';
+    iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+    iframe.allowFullscreen = true;
+    
+    // Remplacer le contenu par l'iframe
+    container.innerHTML = '';
+    container.appendChild(iframe);
+}
+
+// ========== MODAL VIDEO (si vous voulez l'utiliser) ==========
+function openVideoModal(videoId) {
+    const modal = document.getElementById('videoModal');
+    const playerContainer = document.getElementById('videoPlayerContainer');
+    
+    if (modal && playerContainer) {
+        // Créer l'iframe
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+        iframe.style.cssText = 'width: 100%; height: 100%; min-height: 500px; border: none;';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        iframe.allowFullscreen = true;
+        
+        playerContainer.innerHTML = '';
+        playerContainer.appendChild(iframe);
+        
+        modal.style.display = 'flex';
+        document.body.style.overflow = 'hidden';
+    }
+}
+
+function closeVideoModal() {
+    const modal = document.getElementById('videoModal');
+    const playerContainer = document.getElementById('videoPlayerContainer');
+    
+    if (modal && playerContainer) {
+        modal.style.display = 'none';
+        playerContainer.innerHTML = '';
+        document.body.style.overflow = '';
+    }
+}
+
+// Fermer la modal avec la touche Échap
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closeVideoModal();
+    }
+});
+</script>
+
+<style>
+/* Transitions pour les cartes vidéo */
+.video-card {
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Animation pour les filtres */
+.filter-btn {
+    transition: all 0.3s ease;
+}
+
+.filter-btn.active {
+    background: #00a651;
+    color: white;
+    transform: scale(1.05);
+}
+
+.filter-btn:hover:not(.active) {
+    background: #f0f0f0;
+    transform: translateY(-2px);
+}
+
+/* Message aucun résultat */
+.no-results-message {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Modal vidéo */
+.video-modal {
+    display: none;
+    position: fixed;
+    z-index: 10000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.9);
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.video-modal-content {
+    position: relative;
+    width: 90%;
+    max-width: 1200px;
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.video-modal-close {
+    position: absolute;
+    top: -40px;
+    right: 0;
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 10001;
+    transition: transform 0.3s ease;
+}
+
+.video-modal-close:hover {
+    transform: scale(1.2);
+}
+
+/* Style pour le bouton newsletter après soumission */
+.newsletter-btn {
+    transition: all 0.3s ease;
+}
+
+/* Responsive pour les miniatures vidéo */
+.video-thumbnail,
+.featured-thumbnail {
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.video-thumbnail:hover,
+.featured-thumbnail:hover {
+    transform: scale(1.02);
+}
+
+.thumbnail-play,
+.play-button {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 60px;
+    height: 60px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    color: #00a651;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.thumbnail-play:hover,
+.play-button:hover {
+    background: white;
+    transform: translate(-50%, -50%) scale(1.1);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+</style>

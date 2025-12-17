@@ -1,0 +1,84 @@
+global-styling:
+  version: 1.0
+  css:
+    theme:
+      css/style.css: { weight: 100 }
+      css/navigation-menu.css: { weight: 110 }
+  dependencies:
+    - core/normalize
+    - egov_theme/navigation
+
+global-scripts:
+  version: 1.0
+  js:
+    js/script.js: {}
+  dependencies:
+    - core/drupal
+    - core/jquery
+
+navigation:
+  version: 1.0
+  js:
+    js/navigation-menu.js: {}
+  dependencies:
+    - core/drupal
+
+services-page:
+  version: 1.x
+  css:
+    theme:
+      css/services.css: { weight: 120 }
+  js:
+    js/services.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+    - egov_theme/global-styling
+    
+actualites-page:
+  version: 1.x
+  css:
+    theme:
+      css/actualites.css: { weight: 140 }
+  js:
+    js/actualites-filters.js: {}
+  dependencies:
+    - core/drupal
+    - core/once
+    - egov_theme/global-styling
+
+presentation-page:
+  version: 1.x
+  css:
+    theme:
+      css/presentation.css: { weight: 130 }
+  dependencies:
+    - core/drupal
+    - egov_theme/global-styling
+
+tableau-de-bord-page:
+  version: 1.x
+  css:
+    theme:
+      css/tableau-de-bord.css: { weight: 130 }
+  dependencies:
+    - core/drupal
+    - egov_theme/global-styling
+
+contact-page:
+  version: 1.x
+  css:
+    theme:
+      css/contact.css: { weight: 130 }
+  dependencies:
+    - core/drupal
+    - egov_theme/global-styling
+
+actualites-detail-page:
+  version: 1.x
+  css:
+    theme:
+      css/actualites-detail.css: { weight: 130 }
+  dependencies:
+    - core/drupal
+    - egov_theme/global-styling

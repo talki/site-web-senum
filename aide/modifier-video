@@ -1,0 +1,78 @@
+Pour modifier les liens vidéo dans le backoffice Drupal, voici les endroits où aller :
+1. Modifier une vidéo existante
+Via le menu Content
+/admin/content
+
+2. Modifier le type de contenu (Content Type)
+Si vous voulez modifier le champ lui-même :
+/admin/structure/types/manage/videos_podcast/fields
+
+Là vous pouvez :
+
+Modifier le champ "field_url_video"
+Changer son type (Text, Link, etc.)
+Modifier ses paramètres
+
+3. Structure du champ URL Vidéo
+Votre champ devrait être configuré comme :
+Nom machine : field_url_video
+Type : Link ou Text (plain)
+Widget : Textfield
+Pour le modifier :
+
+Allez dans les champs du content type
+Cliquez sur "Edit" à côté de "URL Vidéo"
+Ajustez les paramètres
+
+4. Ajouter/Modifier en masse
+Via Views
+
+Administration → Structure → Views → Videos Podcast
+/admin/structure/views/view/videos_podcast
+
+Via Content (en masse)
+Administration → Content
+
+Cochez plusieurs vidéos
+Utilisez "Bulk operations" (Opérations groupées)
+Sélectionnez "Modify field values"
+
+5. Accès rapide pour modifier une vidéo
+Si vous êtes sur la page d'une vidéo :
+
+Cliquez sur l'onglet "Edit" en haut de la page
+Ou ajoutez /edit à la fin de l'URL : /node/123/edit
+
+6. Via Drush (en ligne de commande)
+
+
+# Lister les vidéos
+drush content:list --type=videos_podcast
+
+# Modifier une vidéo
+drush content:edit NID
+
+
+
+7. Structure typique du champ
+Dans votre template, vous utilisez :
+
+7. Structure typique du champ
+Dans votre template, vous utilisez :
+
+Donc dans Drupal, cherchez le champ nommé :
+
+Label : "URL Vidéo" ou "Lien Vidéo"
+Machine name : field_url_video
+
+Chemin le plus rapide :
+
+Menu admin → Content (/admin/content)
+Filter par type = "Videos Podcast"
+Edit la vidéo souhaitée
+Modifier le champ "URL Vidéo"
+Save
+
+
+Besoin de modifier plusieurs vidéos ?
+Utilisez le module Views Bulk Operations (VBO) pour modifier en masse ! 
