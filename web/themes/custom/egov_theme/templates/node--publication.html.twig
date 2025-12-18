@@ -5,7 +5,7 @@
     <div class="breadcrumb-container">
         <a href="/">Accueil</a>
         <span>›</span>
-        <a href="/publications">Publicationsdddddd</a>
+        <a href="/publications">Publications</a>
         <span>›</span>
         <span>{{ node.title.value }}</span>
     </div>
@@ -14,13 +14,13 @@
 <!-- Main Content -->
 <main class="publication-main">
     <div class="publication-container">
-        
+
         <!-- Left Column: Publication Content -->
         <div class="publication-content-section">
-            
+
             <!-- Publication Card -->
             <article class="publication-card">
-                
+
                 <!-- Header -->
                 <div class="publication-header">
                     <div class="author-section">
@@ -33,10 +33,10 @@
                                     <span>{{ node.created.value|format_date('custom', 'd F Y · H:i', '', 'fr') }}</span>
                                 </div>
                                 {% if node.field_temps_lecture.value %}
-                                <div class="meta-item">
-                                    <span>⏱️</span>
-                                    <span>{{ node.field_temps_lecture.value }} min de lecture</span>
-                                </div>
+                                    <div class="meta-item">
+                                        <span>⏱️</span>
+                                        <span>{{ node.field_temps_lecture.value }} min de lecture</span>
+                                    </div>
                                 {% endif %}
                                 <div class="meta-item">
                                     <span>👁️</span>
@@ -45,13 +45,13 @@
                             </div>
                         </div>
                         {% if node.field_categorie.value %}
-                        <span class="publication-badge badge-{{ node.field_categorie.value }}">
-                            {% if node.field_categorie.value == 'urgent' %}Urgent
-                            {% elseif node.field_categorie.value == 'nouveau' %}Nouveau
-                            {% elseif node.field_categorie.value == 'info' %}Info
-                            {% elseif node.field_categorie.value == 'annonce' %}Annonce
-                            {% endif %}
-                        </span>
+                            <span class="publication-badge badge-{{ node.field_categorie.value }}">
+                                {% if node.field_categorie.value == 'urgent' %}Urgent
+                                {% elseif node.field_categorie.value == 'nouveau' %}Nouveau
+                                {% elseif node.field_categorie.value == 'info' %}Info
+                                {% elseif node.field_categorie.value == 'annonce' %}Annonce
+                                {% endif %}
+                            </span>
                         {% endif %}
                     </div>
                     <h1 class="publication-title">{{ node.title.value }}</h1>
@@ -79,18 +79,18 @@
 
                 <!-- Featured Image -->
                 {% if node.field_image_actualite %}
-                <div class="featured-image-section">
-                    {{ content.field_image_actualite }}
-                    <p class="image-caption">{{ node.title.value }}</p>
-                </div>
+                    <div class="featured-image-section">
+                        {{ content.field_image_actualite }}
+                        <p class="image-caption">{{ node.title.value }}</p>
+                    </div>
                 {% endif %}
 
                 <!-- Article Content -->
                 <div class="article-content">
                     {% if node.field_extrait.value %}
-                    <p><strong>{{ node.field_extrait.value }}</strong></p>
+                        <p><strong>{{ node.field_extrait.value }}</strong></p>
                     {% endif %}
-                    
+
                     {{ content.body }}
                 </div>
 
@@ -112,32 +112,18 @@
 
             </article>
 
-            <!-- Comments Section -->
-            <div class="comments-section">
-                <div class="comments-header">
-                    <span class="comments-count">{{ random(5, 50) }} Commentaires</span>
-                    <button class="sort-btn">▼ Trier par</button>
-                </div>
-
-                <!-- Add Comment -->
-                <div class="add-comment">
-                    <div class="comment-avatar">👤</div>
-                    <div class="comment-input-wrapper">
-                        <textarea class="comment-input" placeholder="Ajouter un commentaire..."></textarea>
-                        <div class="comment-actions">
-                            <button class="comment-btn btn-cancel">Annuler</button>
-                            <button class="comment-btn btn-submit">Publier</button>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
+        <!-- Comments Section - SYSTÈME DRUPAL COMPLET -->
+{% if content.comment %}
+<div class="comments-section-wrapper">
+    {{ content.comment }}
+</div>
+{% endif %}
 
         </div>
 
         <!-- Right Column: Sidebar -->
         <aside class="sidebar">
-            
+
             <!-- Share Card -->
             <div class="sidebar-card">
                 <div class="sidebar-title">

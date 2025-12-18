@@ -1,33 +1,5 @@
 {# Template pour le détail d'une actualité - Design respecté à 100% #}
-<!-- Navigation -->
-<nav>
-    <div class="logo">
-        <img src="/themes/custom/egov_theme/images/senegal.png" alt="Logo Interopérabilité Sénégal" style="width: 60px; height: 60px; object-fit: contain;">
-        <div class="logo-text">
-            <h1>Jokkoo</h1>
-            <div class="logo-subtitle">Plateforme d'Interopérabilité</div>
-        </div>
-    </div>
 
-
-
-    {# Menu Desktop #}
-    <div class="nav-menu-desktop">
-        {% if page.primary_menu %}
-            {{ page.primary_menu }}
-        {% endif %}
-    </div>
-
-    {# Actions Mobile #}
-    <div class="nav-actions-mobile">
-        <button class="search-btn">🔍</button>
-        <button class="hamburger-btn" id="hamburgerBtn">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </div>
-</nav>
 <!-- Breadcrumb -->
 <div class="breadcrumb">
     <div class="breadcrumb-container">
@@ -43,20 +15,20 @@
 <header class="article-header">
     <div class="article-header-content">
         {% if node.field_categorie.value %}
-            <span class="article-category">
-                {% if node.field_categorie.value == 'urgent' %}Urgent
-                {% elseif node.field_categorie.value == 'nouveau' %}Nouveau
-                {% elseif node.field_categorie.value == 'info' %}Information
-                {% elseif node.field_categorie.value == 'annonce' %}Annonce
-                {% else %}International
-                {% endif %}
-            </span>
+        <span class="article-category">
+            {% if node.field_categorie.value == 'urgent' %}Urgent
+            {% elseif node.field_categorie.value == 'nouveau' %}Nouveau
+            {% elseif node.field_categorie.value == 'info' %}Information
+            {% elseif node.field_categorie.value == 'annonce' %}Annonce
+            {% else %}International
+            {% endif %}
+        </span>
         {% endif %}
         <h1 class="article-title">{{ node.title.value }}</h1>
         {% if node.field_extrait.value %}
-            <p class="article-excerpt">
-                {{ node.field_extrait.value }}
-            </p>
+        <p class="article-excerpt">
+            {{ node.field_extrait.value }}
+        </p>
         {% endif %}
         <div class="article-meta">
             <div class="meta-author">
@@ -70,10 +42,10 @@
                 <span>{{ node.created.value|format_date('custom', 'd F Y', '', 'fr') }}</span>
             </div>
             {% if node.field_temps_lecture.value %}
-                <div class="meta-item">
-                    <span>⏱️</span>
-                    <span>{{ node.field_temps_lecture.value }} min de lecture</span>
-                </div>
+            <div class="meta-item">
+                <span>⏱️</span>
+                <span>{{ node.field_temps_lecture.value }} min de lecture</span>
+            </div>
             {% endif %}
             <div class="meta-item">
                 <span>👁️</span>
@@ -112,12 +84,12 @@
 <!-- Featured Image -->
 <section class="featured-image-section">
     <div class="featured-image-container">
-        {% if node.field_image_actualite.entity %}
+        {% if node.field_image_actualite.0 %}
             {# Image uploadée depuis l'admin #}
             {{ content.field_image_actualite }}
         {% else %}
             {# Image de fallback depuis le thème #}
-            <img src="{{ base_path ~ directory }}/images/image_actualite-detail_fallback.jpeg" alt="{{ node.title.value }}" class="featured-image">
+            <img src="/themes/custom/egov_theme/images/image_actualite-detail_fallback.jpeg" alt="{{ node.title.value }}" class="featured-image">
         {% endif %}
         <p class="image-caption">{{ node.title.value }}</p>
     </div>
@@ -126,7 +98,7 @@
 <!-- Main Content -->
 <main class="article-main">
     <div class="article-container">
-
+        
         <!-- Article Body -->
         <article class="article-body">
             <div class="article-content">
@@ -139,7 +111,7 @@
                     <div class="tags-title">🏷️ Tags</div>
                     <div class="tags-list">
                         {% if node.field_categorie.value %}
-                            <span class="tag">{{ node.field_categorie.value|capitalize }}</span>
+                        <span class="tag">{{ node.field_categorie.value|capitalize }}</span>
                         {% endif %}
                         <span class="tag">Transformation Digitale</span>
                         <span class="tag">MCTN</span>
@@ -151,7 +123,7 @@
 
         <!-- Sidebar -->
         <aside class="article-sidebar">
-
+            
             <!-- Related Articles -->
             <div class="sidebar-card">
                 <div class="sidebar-title">
