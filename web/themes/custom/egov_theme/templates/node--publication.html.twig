@@ -5,9 +5,9 @@
     <div class="breadcrumb-container">
         <a href="/">Accueil</a>
         <span>›</span>
-        <a href="/publications">Publications</a>
+        <a href="/publications">Publications: </a>
         <span>›</span>
-        <span>{{ node.title.value }}</span>
+        <span>{{ node.title.value }}test3:</span>
     </div>
 </div>
 
@@ -24,7 +24,7 @@
                 <!-- Header -->
                 <div class="publication-header">
                     <div class="author-section">
-                        <div class="author-avatar">🏛️</div>
+                        <div class="author-avatar"></div>
                         <div class="author-info">
                             <div class="author-name">Ministère du Numérique - MCTN</div>
                             <div class="publication-meta">
@@ -60,13 +60,23 @@
                 <!-- Actions Bar -->
                 <div class="actions-bar">
                     <button class="action-btn">
-                        <span>👍</span>
+                        <span></span>
                         <span>{{ random(50, 300) }}</span>
                     </button>
+
                     <button class="action-btn">
                         <span>💬</span>
-                        <span>{{ random(5, 50) }} commentaires</span>
+                        <span>
+                            {% if node.comment.comment_count == 0 %}
+                                Aucun commentaire
+                            {% elseif node.comment.comment_count == 1 %}
+                                1 commentaire
+                            {% else %}
+                                {{ node.comment.comment_count }} commentaires
+                            {% endif %}
+                        </span>
                     </button>
+
                     <button class="action-btn">
                         <span>📤</span>
                         <span>Partager</span>
@@ -96,7 +106,7 @@
 
                 <!-- Tags -->
                 <div class="tags-section">
-                    <div class="tags-title">🏷️ Tags</div>
+                    <div class="tags-title">Tags</div>
                     <div class="tags-list">
                         {% if node.field_categorie.value == 'nouveau' %}
                             <span class="tag">Nouveau</span>
@@ -112,78 +122,69 @@
 
             </article>
 
-        <!-- Comments Section - SYSTÈME DRUPAL COMPLET -->
-{% if content.comment %}
-<div class="comments-section-wrapper">
-    {{ content.comment }}
-</div>
-{% endif %}
+
+            <!-- Comments Section - AFFICHAGE FORCÉ -->
+            <div class="comments-section">
+
+
+                <!-- Liste des commentaires Drupal -->
+                <div class="comments-list-drupal">
+                    {{ content.comment }}
+                </div>
+
+            </div>
 
         </div>
 
         <!-- Right Column: Sidebar -->
         <aside class="sidebar">
 
-            <!-- Share Card -->
-            <div class="sidebar-card">
-                <div class="sidebar-title">
-                    <span>📤</span>
-                    <span>Partager</span>
-                </div>
-                <div class="share-buttons">
-                    <button class="share-btn">
-                        <span>📘</span>
-                        <span>Facebook</span>
-                    </button>
-                    <button class="share-btn">
-                        <span>🐦</span>
-                        <span>Twitter</span>
-                    </button>
-                    <button class="share-btn">
-                        <span>💼</span>
-                        <span>LinkedIn</span>
-                    </button>
-                    <button class="share-btn">
-                        <span>📧</span>
-                        <span>Email</span>
-                    </button>
-                </div>
-            </div>
+      <!-- Related Posts -->
+<div class="sidebar-card">
+    <div class="sidebar-title">
+        <span></span>
+        <span>Publications similaires</span>
+    </div>
 
-            <!-- Related Posts -->
-            <div class="sidebar-card">
-                <div class="sidebar-title">
-                    <span>📋</span>
-                    <span>Publications similaires</span>
-                </div>
+    {% set pub_sim1 = publications_similaires[0]|default(null) %}
+    {% set pub_sim1_url = pub_sim1 ? path('entity.node.canonical', {'node': pub_sim1.id}) : '#' %}
+    <a href="{{ pub_sim1_url }}" class="related-post">
+        <div class="related-icon">🔒</div>
+        <div class="related-info">
+            <h4>{{ pub_sim1 ? pub_sim1.title.value : 'Nouvelle politique de sécurité renforcée' }}</h4>
+            <div class="related-date">{{ pub_sim1 ? pub_sim1.created.value|date('d M Y') : 'Il y a 2 jours' }}</div>
+        </div>
+    </a>
 
-                <div class="related-post">
-                    <div class="related-icon">🔒</div>
-                    <div class="related-info">
-                        <h4>Nouvelle politique de sécurité renforcée</h4>
-                        <div class="related-date">Il y a 2 jours</div>
-                    </div>
-                </div>
+    {% set pub_sim2 = publications_similaires[1]|default(null) %}
+    {% set pub_sim2_url = pub_sim2 ? path('entity.node.canonical', {'node': pub_sim2.id}) : '#' %}
+    <a href="{{ pub_sim2_url }}" class="related-post">
+        <div class="related-icon">📘</div>
+        <div class="related-info">
+            <h4>{{ pub_sim2 ? pub_sim2.title.value : 'Guide des Meilleures Pratiques' }}</h4>
+            <div class="related-date">{{ pub_sim2 ? pub_sim2.created.value|date('d M Y') : 'Il y a 4 jours' }}</div>
+        </div>
+    </a>
 
-                <div class="related-post">
-                    <div class="related-icon">🎓</div>
-                    <div class="related-info">
-                        <h4>Guide des Meilleures Pratiques</h4>
-                        <div class="related-date">Il y a 4 jours</div>
-                    </div>
-                </div>
+    {% set pub_sim3 = publications_similaires[2]|default(null) %}
+    {% set pub_sim3_url = pub_sim3 ? path('entity.node.canonical', {'node': pub_sim3.id}) : '#' %}
+    <a href="{{ pub_sim3_url }}" class="related-post">
+        <div class="related-icon">📊</div>
+        <div class="related-info">
+            <h4>{{ pub_sim3 ? pub_sim3.title.value : 'Rapport Annuel 2024' }}</h4>
+            <div class="related-date">{{ pub_sim3 ? pub_sim3.created.value|date('d M Y') : 'Il y a 1 semaine' }}</div>
+        </div>
+    </a>
 
-                <div class="related-post">
-                    <div class="related-icon">🏆</div>
-                    <div class="related-info">
-                        <h4>Rapport Annuel 2024</h4>
-                        <div class="related-date">Il y a 1 semaine</div>
-                    </div>
-                </div>
+</div>
 
-            </div>
 
         </aside>
 
     </div>
 </main>
+
+{{ attach_library('egov_theme/custom-comments') }}
+{{ attach_library('egov_theme/share-save') }}
+
+

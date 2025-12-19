@@ -1,33 +1,6 @@
-{# Template pour le détail d'une actualité - Design respecté à 100% #}
-<!-- Navigation -->
-<nav>
-    <div class="logo">
-        <img src="/themes/custom/egov_theme/images/senegal.png" alt="Logo Interopérabilité Sénégal" style="width: 60px; height: 60px; object-fit: contain;">
-        <div class="logo-text">
-            <h1>Jokkoo</h1>
-            <div class="logo-subtitle">Plateforme d'Interopérabilité</div>
-        </div>
-    </div>
 
+{{ attach_library('egov_theme/global-styling') }}
 
-
-    {# Menu Desktop #}
-    <div class="nav-menu-desktop">
-        {% if page.primary_menu %}
-            {{ page.primary_menu }}
-        {% endif %}
-    </div>
-
-    {# Actions Mobile #}
-    <div class="nav-actions-mobile">
-        <button class="search-btn">🔍</button>
-        <button class="hamburger-btn" id="hamburgerBtn">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </div>
-</nav>
 <!-- Breadcrumb -->
 <div class="breadcrumb">
     <div class="breadcrumb-container">
@@ -35,7 +8,7 @@
         <span>›</span>
         <a href="/actualites">Actualités</a>
         <span>›</span>
-        <span>{{ node.title.value }}</span>
+        <span>{{ node.title.value }}test2:</span>
     </div>
 </div>
 

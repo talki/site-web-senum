@@ -1,0 +1,7 @@
+egov_api.add_comment:
+  path: '/egov-api/add-comment'
+  defaults:
+    _controller: '\Drupal\egov_api\Controller\CommentController::addComment'
+  methods: [POST]
+  requirements:
+    _access: 'TRUE'

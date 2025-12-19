@@ -1,47 +1,48 @@
-{#
-/**
- * Layout principal pour TOUTES les pages - page.html.twig
- * Template de base pour la plateforme eGov Sénégal
- */
-#}
-
 {{ attach_library('egov_theme/global-styling') }}
+
+
 
 <div class="page-wrapper">
 
     {# ========== HEADER ========== #}
-    <header class="page-header">
-        <!-- Navigation -->
-        <nav>
-            <div class="logo">
-                <img src="/themes/custom/egov_theme/images/senegal.png" alt="Logo Interopérabilité Sénégal" style="width: 60px; height: 60px; object-fit: contain;">
-                <div class="logo-text">
-                    <h1>Jokkoo</h1>
-                    <div class="logo-subtitle">Plateforme d'Interopérabilité</div>
-                </div>
+    <nav>
+        <a href="/" class="logo">
+            <img src="/themes/custom/egov_theme/images/senegal.png" 
+                 alt="Logo Interopérabilité Sénégal" 
+                 style="width: 60px; height: 60px; object-fit: contain;">
+            <div class="logo-text">
+                <h1>Jokkoo</h1>
+                <div class="logo-subtitle">Plateforme d'Interopérabilité</div>
             </div>
+        </a>
 
+        {# Menu Desktop avec sous-menu #}
+        <ul class="nav-menu-desktop">
+            <li class="has-submenu">
+                <a href="javascript:void(0);">Accueil</a>
+                <ul class="submenu">
+                    <li><a href="/presentation-du-projet">A propos</a></li>
+                    <li><a href="/publications">Publications</a></li>
+                    <li><a href="/actualites">Actualités</a></li>
+                    <li><a href="/videos-podcast">Vidéos Podcast</a></li>
+                </ul>
+            </li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/cadre-et-standard">Cadres et Standards</a></li>
+            <li><a href="/tableau-de-bord">Tableau de Bord</a></li>
+            <li><a href="/contact">Contact</a></li>
+        </ul>
 
-
-            {# Menu Desktop #}
-            <div class="nav-menu-desktop">
-                {% if page.primary_menu %}
-                    {{ page.primary_menu }}
-                {% endif %}
-            </div>
-
-            {# Actions Mobile #}
-            <div class="nav-actions-mobile">
-                <button class="search-btn">🔍</button>
-                <button class="hamburger-btn" id="hamburgerBtn">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-        </nav>
-
-    </header>
+        {# Actions Mobile #}
+        <div class="nav-actions-mobile">
+            <button class="search-btn" aria-label="Rechercher">🔍</button>
+            <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
 
     {# ========== CONTENU PRINCIPAL ========== #}
     <main class="page-main" role="main">
@@ -50,67 +51,7 @@
 
     {{ include(active_theme_path() ~ '/templates/partials/footer.html.twig') }}
 
-
 </div>
 
-    
+
 {{ attach_library('egov_theme/global-scripts') }}
-
-<script>
-    (function () {
-        'use strict';
-
-        console.log('Menu mobile inline - chargé');
-
-        function initMenu() {
-            const hamburger = document.getElementById('hamburgerBtn');
-            const menu = document.querySelector('.nav-menu-desktop');
-
-            console.log('Init - Hamburger:', hamburger);
-            console.log('Init - Menu:', menu);
-
-            if (!hamburger || !menu) {
-                console.error('Éléments introuvables !');
-                return;
-            }
-
-            // Clic hamburger
-            hamburger.onclick = function (e) {
-                e.preventDefault();
-                console.log('CLICK HAMBURGER !');
-                this.classList.toggle('active');
-                menu.classList.toggle('open');
-                console.log('Classes menu:', menu.className);
-            };
-
-            // Clic dehors
-            document.onclick = function (e) {
-                if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
-                    hamburger.classList.remove('active');
-                    menu.classList.remove('open');
-                }
-            };
-
-            // Sous-menus mobile
-            const items = document.querySelectorAll('.nav-menu-desktop li.menu-item--expanded > a');
-            items.forEach(function (link) {
-                link.onclick = function (e) {
-                    if (window.innerWidth <= 968) {
-                        e.preventDefault();
-                        this.parentElement.classList.toggle('submenu-open');
-                        console.log('Sous-menu toggled');
-                    }
-                };
-            });
-
-            console.log('Menu initialisé OK');
-        }
-
-        // Lancer l'init
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initMenu);
-        } else {
-            initMenu();
-        }
-    })();
-</script>

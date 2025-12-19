@@ -733,3 +733,20 @@ nav {
     }
 }
 
+a.related-post {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    gap: 1rem;
+    padding: 1rem;
+    border-radius: 10px;
+    transition: all 0.3s;
+}
+
+a.related-post:hover {
+    background: var(--bg-light);
+}
+
+a.related-post:hover h4 {
+    color: var(--senegal-green);
+}

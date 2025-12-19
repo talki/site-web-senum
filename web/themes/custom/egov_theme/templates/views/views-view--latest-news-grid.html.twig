@@ -1,0 +1,33 @@
+<div class="latest-news-grid">
+    {% for key, row in rows %}
+        {% set node = row.content['#row']._entity %}
+        {% set image_uri = node.field_image.entity.fileuri %}
+        {% set image_url = file_url(image_uri) %}
+        
+        {# Premier article = grand format #}
+        {% if key == 0 %}
+            <a href="{{ path('entity.node.canonical', {'node': node.id}) }}" class="news-card news-card-large">
+                {% if image_url %}
+                    <img src="{{ image_url }}" alt="{{ node.title.value }}" class="news-card-image">
+                {% else %}
+                    <img src="/themes/custom/egov_theme/images/default-news.jpg" alt="{{ node.title.value }}" class="news-card-image">
+                {% endif %}
+                <div class="news-card-content">
+                    <h3 class="news-card-title">{{ node.title.value }}</h3>
+                </div>
+            </a>
+        {% else %}
+            {# Articles suivants = petit format #}
+            <a href="{{ path('entity.node.canonical', {'node': node.id}) }}" class="news-card">
+                {% if image_url %}
+                    <img src="{{ image_url }}" alt="{{ node.title.value }}" class="news-card-image">
+                {% else %}
+                    <img src="/themes/custom/egov_theme/images/default-news.jpg" alt="{{ node.title.value }}" class="news-card-image">
+                {% endif %}
+                <div class="news-card-content">
+                    <h3 class="news-card-title">{{ node.title.value|length > 80 ? node.title.value|slice(0, 80) ~ '...' : node.title.value }}</h3>
+                </div>
+            </a>
+        {% endif %}
+    {% endfor %}
+</div>

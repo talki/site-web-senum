@@ -1,39 +1,13 @@
 {# Template de page pour les video podcast #}
 
-<nav>
-    <div class="logo">
-        <div class="logo-flag">
-            <div class="flag-stripe flag-green"></div>
-            <div class="flag-stripe flag-yellow"></div>
-            <div class="flag-stripe flag-red"></div>
-        </div>
-        <div class="logo-text">
-            <h1>Jokkoo</h1>
-            <div class="logo-subtitle">Plateforme d'Interopérabilité</div>
-        </div>
-    </div>
 
-    {# Menu Desktop #}
-    <div class="nav-menu-desktop">
-        {% if page.primary_menu %}
-            {{ page.primary_menu }}
-        {% endif %}
-    </div>
 
-    {# Actions Mobile #}
-    <div class="nav-actions-mobile">
-        <button class="search-btn">🔍</button>
-        <button class="hamburger-btn" id="hamburgerBtn">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </div>
-</nav>
+{{ include(active_theme_path() ~ '/templates/partials/header.html.twig') }}
+
 <!-- Hero Section -->
 <section class="podcast-hero">
     <div class="hero-content">
-        <div class="hero-icon">📹</div>
+        <div class="hero-icon"></div>
         <h1>Vidéos Podcast eGov</h1>
         <p>Découvrez nos émissions exclusives sur la transformation digitale, l'innovation technologique et l'avenir de l'e-gouvernement au Sénégal</p>
     </div>

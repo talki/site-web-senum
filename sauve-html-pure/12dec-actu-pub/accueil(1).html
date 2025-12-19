@@ -1,4 +1,10 @@
-
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plateforme d'Interopérabilité du Sénégal</title>
+    <style>
         * {
             margin: 0;
             padding: 0;
@@ -63,7 +69,7 @@
         .logo-text h1 {
             font-size: 1.3rem;
             font-weight: 800;
-            color: var(--senegal-black);
+            color: var(--senegal-green);
         }
 
         .logo-subtitle {
@@ -1648,458 +1654,557 @@
                 font-size: 0.95rem;
             }
         }
-
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="logo">
+            <div class="logo-flag">
+                <div class="flag-stripe flag-green"></div>
+                <div class="flag-stripe flag-yellow"></div>
+                <div class="flag-stripe flag-red"></div>
+            </div>
+            <div class="logo-text">
+                <h1>eGov Sénégal</h1>
+                <div class="logo-subtitle">Plateforme d'Interopérabilité</div>
+            </div>
+        </div>
         
-        /* ===== SOUS-MENUS DESKTOP (hover) ===== */
-.nav-menu-desktop li {
-    position: relative;
-}
+        <ul class="nav-menu-desktop">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="services.html">Services</a></li>
+            <li><a href="#standards">Cadres & Standards</a></li>
+            <li><a href="#dashboard">Tableau de bord</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+        
+        <div class="nav-actions-mobile">
+            <button class="search-btn">🔍</button>
+            <button class="hamburger-btn" id="hamburgerBtn">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </nav>
 
-.nav-menu-desktop .submenu {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    min-width: 220px;
-    background: var(--white);
-    border-radius: 10px;
-    box-shadow: var(--shadow-lg);
-    padding: 0.5rem 0;
-    max-height: 0;
-    overflow: hidden;
-    opacity: 0;
-    visibility: hidden;
-    transition: all 0.3s ease;
-}
+    <!-- Sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="sidebar-menu" id="sidebarMenu">
+        <div class="sidebar-header">
+            <div class="sidebar-logo">
+                <div class="logo-flag">
+                    <div class="flag-stripe flag-green"></div>
+                    <div class="flag-stripe flag-yellow"></div>
+                    <div class="flag-stripe flag-red"></div>
+                </div>
+                <h2>eGov Sénégal</h2>
+            </div>
+            <button class="close-btn" id="closeBtn">✕</button>
+        </div>
+        
+        <ul class="sidebar-nav">
+            <li class="sidebar-section">
+                <a href="#accueil" class="sidebar-link">Accueil</a>
+            </li>
+            <li class="sidebar-section">
+                <button class="sidebar-link has-submenu" data-submenu="services">
+                    <span>Services</span>
+                    <span class="arrow">›</span>
+                </button>
+                <ul class="submenu" id="submenu-services">
+                    <li><a href="#api">API Gateway</a></li>
+                    <li><a href="#identite">Identité Numérique</a></li>
+                    <li><a href="#data">Data Exchange</a></li>
+                </ul>
+            </li>
+            <li class="sidebar-section">
+                <a href="#standards" class="sidebar-link">Cadres & Standards</a>
+            </li>
+            <li class="sidebar-section">
+                <a href="#dashboard" class="sidebar-link">Tableau de bord</a>
+            </li>
+            <li class="sidebar-section">
+                <a href="#contact" class="sidebar-link">Contact</a>
+            </li>
+        </ul>
+    </div>
 
-.nav-menu-desktop li:hover > .submenu {
-    max-height: 500px;
-    opacity: 1;
-    visibility: visible;
-}
+    <!-- Hero -->
+    <section class="hero" id="accueil">
+        <h2>
+            Bienvenue sur la Plateforme<br>
+            <span class="hero-highlight">d'Interopérabilité du Sénégal</span>
+        </h2>
+        <p>
+            Notre plateforme constitue l'épine dorsale de la transformation digitale 
+            des services publics sénégalais. Nous connectons les administrations, 
+            harmonisons les systèmes et accélérons l'innovation.
+        </p>
+    </section>
 
-.nav-menu-desktop .submenu a {
-    display: block;
-    padding: 0.8rem 1.5rem;
-    color: var(--text-dark);
-    font-weight: 500;
-    transition: all 0.3s;
-}
+    <!-- Stats Bar -->
+    <section class="stats-bar">
+        <div class="stats-bar-container">
+            <div class="stat-item">
+                <div class="stat-value">45</div>
+                <div class="stat-description">Administrations Connectées</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-value">127</div>
+                <div class="stat-description">API Actives</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-value">2.3M</div>
+                <div class="stat-description">Transactions/Mois</div>
+            </div>
+            <div class="stat-divider"></div>
+            <div class="stat-item">
+                <div class="stat-value">99.7%</div>
+                <div class="stat-description">Disponibilité</div>
+            </div>
+        </div>
+    </section>
 
-.nav-menu-desktop .submenu a:hover {
-    background: var(--bg-light);
-    color: var(--senegal-green);
-    padding-left: 2rem;
-}
+    <!-- Services Catalog Section -->
+    <section class="services-catalog-section" id="catalogue-services">
+        <div class="services-catalog-container">
+            <div class="catalog-header">
+                <h2>Nos Services</h2>
+                <p>Accédez à l'ensemble des services publics numériques du Sénégal</p>
+            </div>
 
-/* ===== CORRECTION SIDEBAR (si JS manquant) ===== */
-/* Version CSS-only avec :focus-within */
-.sidebar-section:focus-within .submenu,
-.sidebar-link:focus + .submenu {
-    max-height: 500px;
-}
+            <div class="services-catalog-grid">
+                <div class="catalog-card protection-sociale">
+                    <div class="catalog-card-icon">
+                        <div class="icon-circle">🛡️</div>
+                    </div>
+                    <h3>Protection Sociale</h3>
+                    <p>Allocations, aides familiales et couverture sociale</p>
+                    <a href="#protection" class="catalog-link">
+                        <span>Accéder</span>
+                        <span class="arrow-icon">→</span>
+                    </a>
+                </div>
 
-a.logo {
-    text-decoration: none;
-    color: inherit;
-}
+                <div class="catalog-card troisieme-age">
+                    <div class="catalog-card-icon">
+                        <div class="icon-circle">👴</div>
+                    </div>
+                    <h3>Troisième Âge</h3>
+                    <p>Services dédiés aux seniors et retraités</p>
+                    <a href="#seniors" class="catalog-link">
+                        <span>Accéder</span>
+                        <span class="arrow-icon">→</span>
+                    </a>
+                </div>
 
-a.logo:hover {
-    opacity: 0.9;
-}
+                <div class="catalog-card education">
+                    <div class="catalog-card-icon">
+                        <div class="icon-circle">🎓</div>
+                    </div>
+                    <h3>Éducation</h3>
+                    <p>Inscriptions, bourses et orientation scolaire</p>
+                    <a href="#education" class="catalog-link">
+                        <span>Accéder</span>
+                        <span class="arrow-icon">→</span>
+                    </a>
+                </div>
+
+                <div class="catalog-card citoyennete">
+                    <div class="catalog-card-icon">
+                        <div class="icon-circle">🆔</div>
+                    </div>
+                    <h3>Citoyenneté</h3>
+                    <p>Documents d'identité et actes d'état civil</p>
+                    <a href="#citoyennete" class="catalog-link">
+                        <span>Accéder</span>
+                        <span class="arrow-icon">→</span>
+                    </a>
+                </div>
+
+                <div class="catalog-card taxes">
+                    <div class="catalog-card-icon">
+                        <div class="icon-circle">💰</div>
+                    </div>
+                    <h3>Taxes</h3>
+                    <p>Déclarations fiscales et paiement en ligne</p>
+                    <a href="#taxes" class="catalog-link">
+                        <span>Accéder</span>
+                        <span class="arrow-icon">→</span>
+                    </a>
+                </div>
+
+                <div class="catalog-card sante">
+                    <div class="catalog-card-icon">
+                        <div class="icon-circle">🏥</div>
+                    </div>
+                    <h3>Santé</h3>
+                    <p>Dossier médical et rendez-vous en ligne</p>
+                    <a href="#sante" class="catalog-link">
+                        <span>Accéder</span>
+                        <span class="arrow-icon">→</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="catalog-cta">
+                <a href="services.html" class="btn-all-services">
+                    <span>📋</span>
+                    <span>Tous les Services</span>
+                    <span class="btn-arrow">→</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest News Section -->
+    <section class="latest-news-section">
+        <div class="latest-news-container">
+            <div class="latest-news-header">
+                <h2>Actualités</h2>
+                <a href="#" class="explore-more-news">
+                    Voir Plus d'Actualités
+                    <span>→</span>
+                </a>
+            </div>
+
+            <div class="latest-news-grid">
+                <!-- Large Featured News -->
+                <div class="news-card news-card-large">
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop" alt="MWC25" class="news-card-image">
+                    <div class="news-card-content">
+                        <h3 class="news-card-title">MCIT Signe un Mémorandum d'Entente avec Alchemist au MWC25 Doha</h3>
+                    </div>
+                </div>
+
+                <!-- Small News Cards -->
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&h=300&fit=crop" alt="Ministry of Justice" class="news-card-image">
+                    <div class="news-card-content">
+                        <h3 class="news-card-title">Ministère de la Justice Reçoit la Certification ISO 22301 pour...</h3>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=400&h=300&fit=crop" alt="State Budget" class="news-card-image">
+                    <div class="news-card-content">
+                        <h3 class="news-card-title">Projet de Budget Général de l'État pour l'Exercice Fiscal 2026 Approuvé</h3>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1560523159-4a9692d222ef?w=400&h=300&fit=crop" alt="FIFA Arab Cup" class="news-card-image">
+                    <div class="news-card-content">
+                        <h3 class="news-card-title">S.A. l'Émir Inaugure la Coupe Arabe de la FIFA Qatar 2025...</h3>
+                    </div>
+                </div>
+
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop" alt="GRSIA Daman" class="news-card-image">
+                    <div class="news-card-content">
+                        <h3 class="news-card-title">GRSIA Lance une Nouvelle Identité d'Entreprise "Daman"</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Combined Media & News -->
+    <section class="combined-section">
+        <div class="combined-container">
+            <!-- News Feed -->
+            <div class="news-feed-widget">
+                <div class="widget-header">
+                    <span class="widget-icon">📝</span>
+                    <h3>Publications</h3>
+                </div>
+                
+                <div class="news-timeline">
+                    <!-- Publication 1 -->
+                    <div class="news-timeline-item">
+                        <div class="news-post-header">
+                            <div class="news-post-avatar">🏛️</div>
+                            <div class="news-post-author-info">
+                                <div class="news-post-author">Ministère du Numérique - MCTN</div>
+                                <div class="news-post-date">16 Nov 2025 · 10:30</div>
+                            </div>
+                            <div class="news-badge-type nouveau">NOUVEAU</div>
+                        </div>
+                        <div class="news-timeline-content">
+                            <h4>Lancement de 15 nouvelles API gouvernementales</h4>
+                            <p>Le MCTN annonce la mise en ligne de 15 nouvelles API pour faciliter l'accès aux données publiques. Ces nouvelles interfaces permettront aux développeurs et administrations de créer des applications innovantes au service des citoyens.</p>
+                            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop" alt="API Launch" class="news-post-image">
+                        </div>
+                        <div class="news-post-actions">
+                            <button class="news-action-btn">
+                                <span>👍</span>
+                                <span>245</span>
+                            </button>
+                            <button class="news-action-btn">
+                                <span>💬</span>
+                                <span>38 commentaires</span>
+                            </button>
+                            <button class="news-action-btn">
+                                <span>📤</span>
+                                <span>Partager</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Publication 2 -->
+                    <div class="news-timeline-item">
+                        <div class="news-post-header">
+                            <div class="news-post-avatar">⚙️</div>
+                            <div class="news-post-author-info">
+                                <div class="news-post-author">eGov Sénégal - Service Technique</div>
+                                <div class="news-post-date">14 Nov 2025 · 15:45</div>
+                            </div>
+                            <div class="news-badge-type urgent">URGENT</div>
+                        </div>
+                        <div class="news-timeline-content">
+                            <h4>Maintenance programmée ce week-end</h4>
+                            <p>Interruption prévue dimanche de 2h à 6h pour mise à jour majeure du système. Veuillez planifier vos activités en conséquence.</p>
+                        </div>
+                        <div class="news-post-actions">
+                            <button class="news-action-btn">
+                                <span>👍</span>
+                                <span>89</span>
+                            </button>
+                            <button class="news-action-btn">
+                                <span>💬</span>
+                                <span>12 commentaires</span>
+                            </button>
+                            <button class="news-action-btn">
+                                <span>📤</span>
+                                <span>Partager</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Publication 3 -->
+                    <div class="news-timeline-item">
+                        <div class="news-post-header">
+                            <div class="news-post-avatar">🎓</div>
+                            <div class="news-post-author-info">
+                                <div class="news-post-author">Centre de Formation eGov</div>
+                                <div class="news-post-date">12 Nov 2025 · 09:00</div>
+                            </div>
+                            <div class="news-badge-type info">INFO</div>
+                        </div>
+                        <div class="news-timeline-content">
+                            <h4>Webinaire : Intégration API Santé</h4>
+                            <p>Formation gratuite sur l'utilisation des API du secteur santé. Inscriptions ouvertes pour les développeurs et administrateurs système.</p>
+                            <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=400&fit=crop" alt="Webinar" class="news-post-image">
+                        </div>
+                        <div class="news-post-actions">
+                            <button class="news-action-btn">
+                                <span>👍</span>
+                                <span>156</span>
+                            </button>
+                            <button class="news-action-btn">
+                                <span>💬</span>
+                                <span>27 commentaires</span>
+                            </button>
+                            <button class="news-action-btn">
+                                <span>📤</span>
+                                <span>Partager</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Video Podcast -->
+            <div class="video-podcast-widget">
+                <div class="widget-header">
+                    <span class="widget-icon">📹</span>
+                    <h3>Vidéos Podcast</h3>
+                </div>
+
+                <div class="featured-video-card">
+                    <div class="featured-video-thumbnail">
+                        <span class="new-video-badge">🔴 NOUVEAU</span>
+                        <div class="featured-play-btn">▶</div>
+                        <span class="video-time">32:15</span>
+                    </div>
+                    <div class="featured-video-details">
+                        <h4>L'Interopérabilité au Service du Citoyen Sénégalais</h4>
+                        <div class="video-stats">
+                            <span>📅 14 Nov 2025</span>
+                            <span>👁️ 12.5K vues</span>
+                        </div>
+                        <p>Interview exclusive avec le Directeur du MCTN sur la transformation digitale.</p>
+                    </div>
+                </div>
+
+                <div class="video-playlist">
+                    <div class="playlist-item">
+                        <div class="playlist-thumbnail gradient-purple">
+                            <div class="playlist-play">▶</div>
+                        </div>
+                        <div class="playlist-info">
+                            <h5>Sécurité des API : Bonnes Pratiques et...</h5>
+                            <div class="playlist-meta">
+                                <span>⏱️ 28:45</span>
+                                <span>👁️ 8.2K</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="playlist-item">
+                        <div class="playlist-thumbnail gradient-pink">
+                            <div class="playlist-play">▶</div>
+                        </div>
+                        <div class="playlist-info">
+                            <h5>Digitalisation du Secteur Santé :...</h5>
+                            <div class="playlist-meta">
+                                <span>⏱️ 35:20</span>
+                                <span>👁️ 15.7K</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="playlist-item">
+                        <div class="playlist-thumbnail gradient-cyan">
+                            <div class="playlist-play">▶</div>
+                        </div>
+                        <div class="playlist-info">
+                            <h5>Open Data et Transparence...</h5>
+                            <div class="playlist-meta">
+                                <span>⏱️ 25:30</span>
+                                <span>👁️ 6.9K</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="playlist-item">
+                        <div class="playlist-thumbnail gradient-orange">
+                            <div class="playlist-play">▶</div>
+                        </div>
+                        <div class="playlist-info">
+                            <h5>Innovation Digitale : Les Startups Tech au...</h5>
+                            <div class="playlist-meta">
+                                <span>⏱️ 42:10</span>
+                                <span>👁️ 11.3K</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <a href="#" class="view-all-videos">📺 Voir toutes les vidéos →</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="contact-section" id="contact">
+        <h2>Rejoignez l'Écosystème d'Interopérabilité</h2>
+		<p>
+			Administrations, développeurs, partenaires techniques : Ensemble, 
+			construisons le Sénégal numérique de demain. Connectez-vous à notre 
+			plateforme et participez à la transformation digitale nationale.
+		</p>
+		
+        <a href="#" class="btn">📞 Nous Contacter</a>
+    </section>
+
+    
 
 
-a.news-card {
-    text-decoration: none;
-    color: inherit;
-    display: block;
-}
+    <!-- Footer -->
+      <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-section footer-about">
+                <h3>À PROPOS</h3>
+                <p>
+                    La Plateforme Nationale d'Interopérabilité du Sénégal (eGov Sénégal) 
+                    est une initiative du Ministère de la Communication, des Télécommunications 
+                    et du Numérique dans le cadre du New Deal Technologique.
+                </p>
+                <div class="social-icons">
+                    <div class="social-icon">📘</div>
+                    <div class="social-icon">🐦</div>
+                    <div class="social-icon">💼</div>
+                    <div class="social-icon">📸</div>
+                    <div class="social-icon">📹</div>
+                </div>
+            </div>
 
-a.news-card:hover {
-    transform: translateY(-8px);
-}
+            <div class="footer-section">
+                <h3>SERVICES</h3>
+                <ul>
+                    <li><a href="#protection-sociale">Protection Sociale</a></li>
+                    <li><a href="#troisieme-age">Troisième Âge</a></li>
+                    <li><a href="#education">Éducation</a></li>
+                    <li><a href="#citoyennete">Citoyenneté</a></li>
+                    <li><a href="#taxes">Taxes & Impôts</a></li>
+                    <li><a href="#sante">Santé</a></li>
+                </ul>
+            </div>
 
-a.news-card:hover .news-card-title {
-    text-decoration: underline;
-}
+            <div class="footer-section">
+                <h3>RESSOURCES</h3>
+                <ul>
+                    <li><a href="#">Documentation API</a></li>
+                    <li><a href="#">Guides d'Intégration</a></li>
+                    <li><a href="#">Catalogue d'API</a></li>
+                    <li><a href="#">Centre d'Aide</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
 
+            <div class="footer-section">
+                <h3>CONTACT</h3>
+                <ul>
+                    <li><a href="#">📍 Dakar, Sénégal</a></li>
+                    <li><a href="#">📧 <span class="__cf_email__" data-cfemail="4724282933262433072e293322352837693429">[email&#160;protected]</span></a></li>
+                    <li><a href="#">📞 +221 33 XXX XX XX</a></li>
+                    <li><a href="#">💬 Chat en Direct</a></li>
+                    <li><a href="#">🎫 Créer un Ticket</a></li>
+                </ul>
+            </div>
+        </div>
 
+        <div class="footer-bottom">
+            <p>© 2025 eGov Sénégal - MCTN/SENUM - République du Sénégal</p>
+            <div class="footer-bottom-links">
+                <a href="#">Mentions Légales</a>
+                <a href="#">Politique de Confidentialité</a>
+                <a href="#">Conditions d'Utilisation</a>
+                <a href="#">Accessibilité</a>
+                <a href="#">Plan du Site</a>
+            </div>
+        </div>
+    </footer>
 
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        const hamburgerBtn = document.getElementById('hamburgerBtn');
+        const sidebarMenu = document.getElementById('sidebarMenu');
+        const closeBtn = document.getElementById('closeBtn');
+        const sidebarOverlay = document.getElementById('sidebarOverlay');
 
-
-    /* ===== RESET MENU COMPLET ===== */
-    .nav-menu-desktop,
-    .nav-menu-desktop ul,
-    .nav-menu-desktop li {
-        margin: 0;
-        padding: 0;
-        list-style: none !important;
-        list-style-type: none !important;
-    }
-
-    .nav-menu-desktop li::before,
-    .nav-menu-desktop li::after {
-        content: none !important;
-    }
-
-    /* ===== MENU DESKTOP ===== */
-    .nav-menu-desktop {
-        display: flex;
-        gap: 2rem;
-        align-items: center;
-    }
-
-    .nav-menu-desktop > li {
-        position: relative;
-    }
-
-    .nav-menu-desktop > li > a {
-        text-decoration: none;
-        color: #1F2937;
-        font-weight: 600;
-        font-size: 0.95rem;
-        padding: 1rem 0.5rem;
-        display: block;
-        transition: color 0.3s;
-        cursor: pointer;
-    }
-
-    .nav-menu-desktop > li > a:hover {
-        color: #00853F;
-    }
-
-    /* Indicateur de sous-menu */
-    .nav-menu-desktop > li.has-submenu > a::after {
-        content: ' ▾';
-        font-size: 0.8rem;
-        margin-left: 0.3rem;
-        transition: transform 0.3s;
-    }
-
-    .nav-menu-desktop > li.has-submenu.open > a::after {
-        transform: rotate(180deg);
-    }
-
-    /* ===== SOUS-MENU ===== */
-    .nav-menu-desktop .submenu {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        min-width: 250px;
-        background: #FFFFFF;
-        border-radius: 10px;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.15);
-        padding: 0.5rem 0;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(10px);
-        transition: all 0.3s ease;
-        z-index: 9999;
-        margin: 0 !important;
-        list-style: none !important;
-    }
-
-    /* ===== NAV CONTAINER ===== */
-    nav {
-        position: sticky;
-        top: 0;
-        background: #FFFFFF;
-        padding: 1rem 5%;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        z-index: 1000;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    /* ===== LOGO ===== */
-    .logo {
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
-        text-decoration: none;
-    }
-
-    .logo-text h1 {
-        font-size: 1.3rem;
-        font-weight: 800;
-        color: #00853F;
-        margin: 0;
-    }
-
-    .logo-subtitle {
-        font-size: 0.7rem;
-        color: #6B7280;
-    }
-
-    /* ===== MOBILE ===== */
-    .nav-actions-mobile {
-        display: none;
-        gap: 1rem;
-        align-items: center;
-    }
-
-    .hamburger-btn {
-        display: none;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 28px;
-        height: 22px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 0;
-    }
-
-    .hamburger-btn span {
-        width: 100%;
-        height: 3px;
-        background: #1F2937;
-        border-radius: 3px;
-    }
-
-    .search-btn {
-        width: 40px;
-        height: 40px;
-        border: none;
-        background: #F9FAFB;
-        border-radius: 8px;
-        font-size: 1.2rem;
-        cursor: pointer;
-    }
-
-    @media (max-width: 968px) {
-        .nav-menu-desktop {
-            display: none;
+        function openMenu() {
+            sidebarMenu.classList.add('active');
+            sidebarOverlay.classList.add('active');
         }
 
-        .nav-actions-mobile {
-            display: flex;
+        function closeMenu() {
+            sidebarMenu.classList.remove('active');
+            sidebarOverlay.classList.remove('active');
         }
 
-        .hamburger-btn {
-            display: flex;
-        }
-    }
-    .nav-menu-desktop .submenu {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        min-width: 250px;
-        background: #fff;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(10px);
-        transition: all 0.25s ease;
-        z-index: 9999;
-    }
+        if (hamburgerBtn) hamburgerBtn.addEventListener('click', openMenu);
+        if (closeBtn) closeBtn.addEventListener('click', closeMenu);
+        if (sidebarOverlay) sidebarOverlay.addEventListener('click', closeMenu);
 
-    .nav-menu-desktop > li.open > .submenu,
-    .nav-menu-desktop > li:hover > .submenu {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-    }
-
-
-    /* ===== RESET MENU COMPLET ===== */
-    .nav-menu-desktop,
-    .nav-menu-desktop ul,
-    .nav-menu-desktop li {
-        margin: 0 !important;
-        padding: 0 !important;
-        list-style: none !important;
-        list-style-type: none !important;
-    }
-
-    .nav-menu-desktop li::before,
-    .nav-menu-desktop li::after,
-    .nav-menu-desktop li::marker {
-        content: none !important;
-        display: none !important;
-    }
-
-    /* ===== MENU DESKTOP ===== */
-    .nav-menu-desktop {
-        display: flex;
-        gap: 2rem;
-        align-items: center;
-    }
-
-    .nav-menu-desktop > li {
-        position: relative;
-    }
-
-    .nav-menu-desktop > li > a {
-        text-decoration: none;
-        color: #1F2937;
-        font-weight: 600;
-        font-size: 0.95rem;
-        padding: 1rem 0.5rem;
-        display: block;
-        transition: color 0.3s;
-        cursor: pointer;
-    }
-
-    .nav-menu-desktop > li > a:hover {
-        color: #00853F;
-    }
-
-    /* ===== SOUS-MENU - VERSION QUI MARCHE ===== */
-    .nav-menu-desktop .submenu {
-        display: block !important;
-        position: absolute !important;
-        top: 100% !important;
-        left: 0 !important;
-        min-width: 250px !important;
-        background: white !important;
-        border-radius: 10px !important;
-        box-shadow: 0 10px 40px rgba(0,0,0,0.15) !important;
-        padding: 0.5rem 0 !important;
-        z-index: 9999 !important;
-        margin: 0 !important;
-
-        /* Caché par défaut */
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-10px);
-        transition: all 0.3s ease;
-    }
-
-    /* Affichage au hover */
-    .nav-menu-desktop > li:hover > .submenu {
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: translateY(0) !important;
-    }
-
-    /* Affichage avec classe open (pour JS) */
-    .nav-menu-desktop > li.open > .submenu {
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: translateY(0) !important;
-    }
-
-    .nav-menu-desktop .submenu li {
-        display: block !important;
-        margin: 0 !important;
-        padding: 0 !important;
-    }
-
-    .nav-menu-desktop .submenu a {
-        display: block;
-        padding: 0.8rem 1.5rem;
-        color: #1F2937;
-        font-weight: 500;
-        text-decoration: none;
-        font-size: 0.9rem;
-        transition: all 0.3s;
-    }
-
-    .nav-menu-desktop .submenu a:hover {
-        background: #F9FAFB;
-        color: #00853F;
-        padding-left: 2rem;
-    }
-
-    /* ===== NAV CONTAINER ===== */
-    nav {
-        position: sticky;
-        top: 0;
-        background: #FFFFFF;
-        padding: 1rem 5%;
-        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-        z-index: 1000;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-    }
-
-    /* ===== LOGO ===== */
-    .logo {
-        display: flex;
-        align-items: center;
-        gap: 0.8rem;
-        text-decoration: none;
-    }
-
-    .logo-text h1 {
-        font-size: 1.3rem;
-        font-weight: 800;
-        color: #00853F;
-        margin: 0;
-    }
-
-    .logo-subtitle {
-        font-size: 0.7rem;
-        color: #6B7280;
-    }
-
-    /* ===== MOBILE ===== */
-    .nav-actions-mobile {
-        display: none;
-        gap: 1rem;
-        align-items: center;
-    }
-
-    .hamburger-btn {
-        display: none;
-        flex-direction: column;
-        justify-content: space-between;
-        width: 28px;
-        height: 22px;
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 0;
-    }
-
-    .hamburger-btn span {
-        width: 100%;
-        height: 3px;
-        background: #1F2937;
-        border-radius: 3px;
-    }
-
-    .search-btn {
-        width: 40px;
-        height: 40px;
-        border: none;
-        background: #F9FAFB;
-        border-radius: 8px;
-        font-size: 1.2rem;
-        cursor: pointer;
-    }
-
-    @media (max-width: 968px) {
-        .nav-menu-desktop {
-            display: none;
-        }
-
-        .nav-actions-mobile {
-            display: flex;
-        }
-
-        .hamburger-btn {
-            display: flex;
-        }
-    }
-
-
-    .nav-menu-desktop .submenu {
-        position: absolute;
-        top: 100%;
-        left: 0;
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(10px);
-        transition: all 0.25s ease;
-        z-index: 9999;
-    }
-
-    .nav-menu-desktop > li.open > .submenu,
-    .nav-menu-desktop > li:hover > .submenu {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-    }
-
+        // Submenu toggle
+        document.querySelectorAll('.sidebar-link.has-submenu').forEach(button => {
+            button.addEventListener('click', function() {
+                const submenuId = 'submenu-' + this.getAttribute('data-submenu');
+                const subm

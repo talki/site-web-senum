@@ -1,0 +1,197 @@
+
+/* ========== CACHER LES INFOS TECHNIQUES ========== */
+
+/* Cacher les permaliens */
+.permalink {
+    display: none !important;
+}
+
+/* Cacher les infos sur les balises HTML autorisées */
+.filter-help,
+.filter-guidelines,
+.form-item .description,
+.text-format-wrapper .filter-wrapper {
+    display: none !important;
+}
+
+/* ========== STYLISER LE FORMULAIRE DRUPAL ========== */
+
+/* Titre de la section */
+.comments-section {
+    margin-top: 3rem;
+}
+
+.comments-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 2rem;
+}
+
+/* Formulaire d'ajout de commentaire */
+.comment-form {
+    background: #f9fafb;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    border: 2px solid #e5e7eb;
+}
+
+/* Champs du formulaire */
+.comment-form .form-item {
+    margin-bottom: 1.5rem;
+}
+
+.comment-form label {
+    display: block;
+    font-weight: 600;
+    color: #374151;
+    margin-bottom: 0.5rem;
+}
+
+.comment-form input[type="text"],
+.comment-form input[type="email"],
+.comment-form textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: border-color 0.3s;
+}
+
+.comment-form input[type="text"]:focus,
+.comment-form input[type="email"]:focus,
+.comment-form textarea:focus {
+    outline: none;
+    border-color: #00853F; /* Vert Sénégal */
+    box-shadow: 0 0 0 3px rgba(0, 133, 63, 0.1);
+}
+
+.comment-form textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+/* Boutons */
+.comment-form .form-actions {
+    margin-top: 1.5rem;
+    display: flex;
+    gap: 1rem;
+}
+
+.comment-form button,
+.comment-form input[type="submit"] {
+    padding: 0.75rem 2rem;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.comment-form input[type="submit"] {
+    background: #00853F; /* Vert Sénégal */
+    color: white;
+}
+
+.comment-form input[type="submit"]:hover {
+    background: #006b33;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 133, 63, 0.3);
+}
+
+.comment-form button[type="button"] {
+    background: #e5e7eb;
+    color: #374151;
+}
+
+.comment-form button[type="button"]:hover {
+    background: #d1d5db;
+}
+
+/* ========== LISTE DES COMMENTAIRES ========== */
+
+.comment {
+    background: white;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    border-left: 4px solid #FCD116; /* Jaune Sénégal */
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.comment .username,
+.comment-author {
+    font-weight: 600;
+    color: #00853F; /* Vert Sénégal */
+    font-size: 1.1rem;
+}
+
+.comment-time,
+.comment .submitted time {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.comment-body,
+.comment .field--name-comment-body {
+    color: #374151;
+    line-height: 1.6;
+    margin-top: 1rem;
+}
+
+/* Répondre */
+.comment .links {
+    margin-top: 1rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e5e7eb;
+}
+
+.comment .links a {
+    color: #00853F;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.comment .links a:hover {
+    color: #006b33;
+    text-decoration: underline;
+}
+
+/* Commentaires imbriqués */
+.indented {
+    margin-left: 2rem;
+    padding-left: 1rem;
+    border-left: 2px solid #e5e7eb;
+}
+
+/* Avertissement permanent au-dessus du formulaire */
+.comment-form {
+    position: relative;
+}
+
+.comment-form::before {
+    content: "💬 Votre commentaire sera publié après validation par notre équipe.";
+    display: block;
+    background: #fef3c7;
+    border-left: 4px solid #FCD116;
+    padding: 1rem 1.5rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+    color: #92400e;
+    font-weight: 500;
+}

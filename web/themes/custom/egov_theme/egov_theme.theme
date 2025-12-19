@@ -39,6 +39,11 @@ function egov_theme_preprocess_page(&$variables) {
       $variables['#attached']['library'][] = 'egov_theme/contact-page';
     }
     
+    // Page contact (node 28)
+    if ($node->id() == 31) {
+      $variables['#attached']['library'][] = 'egov_theme/publications-page';
+    }
+    
     // Page tableau de bord (node 19)
     if ($node->id() == 64) {
       \Drupal::logger('egov_theme')->notice('CSS node 64 attaché!');
@@ -74,6 +79,34 @@ function egov_theme_preprocess_page(&$variables) {
       $variables['actualites_recentes'] = !empty($nids) ? $node_storage->loadMultiple($nids) : [];
     }
     
+    // Page d'accueil (node 21)
+if ($node->id() == 21) {
+  \Drupal::logger('egov_theme')->notice('Homepage - Chargement des actualités');
+  
+  $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+  
+  // Charger les 5 dernières actualités pour la grille
+  $query_actu = $node_storage->getQuery()
+    ->condition('type', 'actualite')
+    ->condition('status', 1)
+    ->sort('created', 'DESC')
+    ->range(0, 5)
+    ->accessCheck(TRUE);
+  
+  $nids_actu = $query_actu->execute();
+$variables['actualites_homepage'] = !empty($nids_actu) ? array_values($node_storage->loadMultiple($nids_actu)) : [];  
+  // Charger les 5 dernières publications si besoin
+  $query_pub = $node_storage->getQuery()
+    ->condition('type', 'publication')
+    ->condition('status', 1)
+    ->sort('created', 'DESC')
+    ->range(0, 5)
+    ->accessCheck(TRUE);
+  
+  $nids_pub = $query_pub->execute();
+  $variables['publications_homepage'] = !empty($nids_pub) ? array_values($node_storage->loadMultiple($nids_pub)) : [];
+}
+
     // Page publications (node 31)
     if ($node->id() == 31) {
       \Drupal::logger('egov_theme')->notice('CSS publications attaché!');
@@ -115,6 +148,38 @@ function egov_theme_preprocess_page(&$variables) {
  */
 function egov_theme_preprocess_node(&$variables) {
   $node = $variables['node'];
+  
+   // Pour les publications - charger les publications similaires
+  if ($node->getType() == 'publication') {
+    $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+    
+    $query = $node_storage->getQuery()
+      ->condition('type', 'publication')
+      ->condition('status', 1)
+      ->condition('nid', $node->id(), '!=')  // Exclure la publication actuelle
+      ->sort('created', 'DESC')
+      ->range(0, 3)
+      ->accessCheck(TRUE);
+    
+    $nids = $query->execute();
+    $variables['publications_similaires'] = !empty($nids) ? array_values($node_storage->loadMultiple($nids)) : [];
+  }
+  
+  // Pour les actualités - charger les actualités similaires
+  if ($node->getType() == 'actualite') {
+    $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+    
+    $query = $node_storage->getQuery()
+      ->condition('type', 'actualite')
+      ->condition('status', 1)
+      ->condition('nid', $node->id(), '!=')  // Exclure l'actualité actuelle
+      ->sort('created', 'DESC')
+      ->range(0, 3)
+      ->accessCheck(TRUE);
+    
+    $nids = $query->execute();
+    $variables['actualites_similaires'] = !empty($nids) ? array_values($node_storage->loadMultiple($nids)) : [];
+  }
   
   // Attacher CSS/JS pour le détail d'une publication
   if ($node->bundle() == 'publication' && $variables['view_mode'] == 'full') {

@@ -1,0 +1,5 @@
+name: eGov API
+type: module
+description: API pour gérer les commentaires
+core_version_requirement: ^11
+package: Custom

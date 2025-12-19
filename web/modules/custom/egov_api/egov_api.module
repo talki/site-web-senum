@@ -1,0 +1,6 @@
+<?php
+
+/**
+ * @file
+ * Module pour gérer l'API des commentaires.
+ */

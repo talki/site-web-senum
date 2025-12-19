@@ -43,7 +43,7 @@ actualites-page:
     theme:
       css/actualites.css: { weight: 140 }
   js:
-    js/actualites-filters.js: {}
+    js/actualites.js: {}
   dependencies:
     - core/drupal
     - core/once
@@ -72,6 +72,18 @@ contact-page:
   css:
     theme:
       css/contact.css: { weight: 130 }
+  dependencies:
+    - core/drupal
+    - egov_theme/global-styling
+    
+
+publications-page:
+  version: 1.x
+  css:
+    theme:
+      css/publications.css: { weight: 130 }
+  js:
+    js/publications.js: {}
   dependencies:
     - core/drupal
     - egov_theme/global-styling
@@ -116,3 +128,26 @@ cadres-et-standards-page:
       css/cadres-et-standards.css: {}
   js:
     js/cadres-et-standards.js: {}
+
+custom-comments:
+  version: 1.x
+  css:
+    theme:
+      css/comments.css: {}
+  js:
+    js/custom-comments.js: {}
+  dependencies:
+    - core/jquery
+    - core/jquery.once
+    - core/drupal
+    
+share-save:
+  version: 1.x
+  css:
+    theme:
+      css/share-save.css: {}
+  js:
+    js/share-save.js: {}
+  dependencies:
+    - core/jquery
+    - core/drupal

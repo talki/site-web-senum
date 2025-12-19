@@ -1,42 +1,34 @@
-<!-- Navigation header -->
+
+<!-- Navigation -->
 <nav>
-    <a href="/" class="logo">
-        <img src="/themes/custom/egov_theme/images/senegal.png" 
-             alt="Logo Interopérabilité Sénégal" 
-             style="width: 60px; height: 60px; object-fit: contain;">
+    <div class="logo">
+        <img src="/themes/custom/egov_theme/images/senegal.png" alt="Logo Interopérabilité Sénégal" style="width: 60px; height: 60px; object-fit: contain;">
         <div class="logo-text">
             <h1>Jokkoo</h1>
             <div class="logo-subtitle">Plateforme d'Interopérabilité</div>
         </div>
-    </a>
-    
-    {# Menu Desktop - Version statique avec sous-menu #}
-    <ul class="nav-menu-desktop">
-        <li>
-            <a href="/">Accueil</a>
-            <ul class="submenu">
-                <li><a href="/presentation-du-projet">A propos</a></li>
-                <li><a href="/publications">Publications</a></li>
-                <li><a href="/actualites">Actualités</a></li>
-                <li><a href="/videos-podcast">Vidéos Podcast</a></li>
-            </ul>
-        </li>
-        <li><a href="/services">Services</a></li>
-        <li><a href="/cadre-et-standard">Cadres et Standards</a></li>
-        <li><a href="/tableau-de-bord">Tableau de Bord</a></li>
-        <li><a href="/contact">Contact</a></li>
-    </ul>
-    
+    </div>
+
+
+
+    {# Menu Desktop #}
+    <div class="nav-menu-desktop">
+        {% if page.primary_menu %}
+            {{ page.primary_menu }}
+        {% endif %}
+    </div>
+
     {# Actions Mobile #}
     <div class="nav-actions-mobile">
-        <button class="search-btn" aria-label="Rechercher">🔍</button>
-        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">
+        <button class="search-btn">🔍</button>
+        <button class="hamburger-btn" id="hamburgerBtn">
             <span></span>
             <span></span>
             <span></span>
         </button>
     </div>
 </nav>
+
 <!-- Sidebar -->
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 <div class="sidebar-menu" id="sidebarMenu">
@@ -210,135 +202,92 @@
         </div>
     </div>
 </section>
-<!-- Section Dernières Actualités -->
+
+<!-- Latest News Section -->
 <section class="latest-news-section">
     <div class="latest-news-container">
         <div class="latest-news-header">
-            <h2>Dernières Actualités</h2>
-            <a href="/node/30" class="explore-more-news">
-                Voir Plus d'Actualités   <span>                       
-                    <img src="/themes/custom/egov_theme/icon/news.png" alt="Administrations" style="width: 48px; height: 48px;">
+            <h2>Actualités</h2>
+            <a href="/actualites" class="explore-more-news">
+                <span>                        <img src="/themes/custom/egov_theme/icon/news.png" alt="Administrations" style="width: 48px; height: 48px;">
                 </span>
+                Voir Plus d'Actualités
+
             </a>
         </div>
 
-        {# Images par défaut attrayantes #}
-        {% set default_images = [
-            'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop',
-            'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=400&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1560523159-4a9692d222ef?w=400&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop'
-        ] %}
-
         <div class="latest-news-grid">
-            {% if actualites_homepage and actualites_homepage|length > 0 %}
-                {% for actualite in actualites_homepage %}
+            <!-- Large Featured News -->
+            <div class="news-card news-card-large">
+                <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop" alt="MWC25" class="news-card-image">
+                <div class="news-card-content">
+                    <h3 class="news-card-title">MCIT Signe un Mémorandum d'Entente avec Alchemist au MWC25 Doha</h3>
+                </div>
+            </div>
 
-                    {# Récupérer l'image - CORRECTION #}
-                    {% set image_url = null %}
-                    {% if actualite.field_image is not empty and actualite.field_image.entity %}
-                        {% set image_url = file_url(actualite.field_image.entity.uri.value) %}
-                    {% endif %}
+            <!-- Small News Cards -->
+            <div class="news-card">
+                <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&h=300&fit=crop" alt="Ministry of Justice" class="news-card-image">
+                <div class="news-card-content">
+                    <h3 class="news-card-title">Ministère de la Justice Reçoit la Certification ISO 22301 pour...</h3>
+                </div>
+            </div>
 
-                    {# Si pas d'image, utiliser une image par défaut #}
-                    {% if not image_url %}
-                        {% set image_url = default_images[loop.index0] ?? default_images[0] %}
-                    {% endif %}
+            <div class="news-card">
+                <img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=400&h=300&fit=crop" alt="State Budget" class="news-card-image">
+                <div class="news-card-content">
+                    <h3 class="news-card-title">Projet de Budget Général de l'État pour l'Exercice Fiscal 2026 Approuvé</h3>
+                </div>
+            </div>
 
-                    {# Premier article = grand format #}
-                    {% if loop.first %}
-                        <a href="{{ path('entity.node.canonical', {'node': actualite.id}) }}" class="news-card news-card-large">
-                            <img src="{{ image_url }}" alt="{{ actualite.title.value }}" class="news-card-image" loading="lazy">
-                            <div class="news-card-content">
-                                <h3 class="news-card-title">{{ actualite.title.value }}</h3>
-                            </div>
-                        </a>
-                    {% else %}
-                        {# Articles suivants = petit format #}
-                        <a href="{{ path('entity.node.canonical', {'node': actualite.id}) }}" class="news-card">
-                            <img src="{{ image_url }}" alt="{{ actualite.title.value }}" class="news-card-image" loading="lazy">
-                            <div class="news-card-content">
-                                <h3 class="news-card-title">
-                                    {{ actualite.title.value|length > 70 ? actualite.title.value|slice(0, 70) ~ '...' : actualite.title.value }}
-                                </h3>
-                            </div>
-                        </a>
-                    {% endif %}
+            <div class="news-card">
+                <img src="https://images.unsplash.com/photo-1560523159-4a9692d222ef?w=400&h=300&fit=crop" alt="FIFA Arab Cup" class="news-card-image">
+                <div class="news-card-content">
+                    <h3 class="news-card-title">S.A. l'Émir Inaugure la Coupe Arabe de la FIFA Qatar 2025...</h3>
+                </div>
+            </div>
 
-                {% endfor %}
-            {% else %}
-                {# FALLBACK COMPLET si pas d'actualités #}
-                <div class="news-card news-card-large">
-                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop" alt="MWC25" class="news-card-image">
-                    <div class="news-card-content">
-                        <h3 class="news-card-title">MCIT Signe un Mémorandum d'Entente avec Alchemist au MWC25 Doha</h3>
-                    </div>
+            <div class="news-card">
+                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop" alt="GRSIA Daman" class="news-card-image">
+                <div class="news-card-content">
+                    <h3 class="news-card-title">GRSIA Lance une Nouvelle Identité d'Entreprise "Daman"</h3>
                 </div>
-                <div class="news-card">
-                    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&h=300&fit=crop" alt="Ministry of Justice" class="news-card-image">
-                    <div class="news-card-content">
-                        <h3 class="news-card-title">Ministère de la Justice Reçoit la Certification ISO 22301</h3>
-                    </div>
-                </div>
-                <div class="news-card">
-                    <img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=400&h=300&fit=crop" alt="State Budget" class="news-card-image">
-                    <div class="news-card-content">
-                        <h3 class="news-card-title">Projet de Budget Général de l'État pour 2026 Approuvé</h3>
-                    </div>
-                </div>
-                <div class="news-card">
-                    <img src="https://images.unsplash.com/photo-1560523159-4a9692d222ef?w=400&h=300&fit=crop" alt="Event" class="news-card-image">
-                    <div class="news-card-content">
-                        <h3 class="news-card-title">Inauguration de la Nouvelle Plateforme Digitale</h3>
-                    </div>
-                </div>
-                <div class="news-card">
-                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop" alt="Innovation" class="news-card-image">
-                    <div class="news-card-content">
-                        <h3 class="news-card-title">Lancement d'une Nouvelle Identité Numérique</h3>
-                    </div>
-                </div>
-            {% endif %}
+            </div>
         </div>
     </div>
 </section>
+
+<!-- Combined Media & News -->
 <section class="combined-section">
     <div class="combined-container">
         <!-- News Feed -->
         <div class="news-feed-widget">
             <div class="widget-header">
                 <a href="/publications" class="">
+
                     <img src="/themes/custom/egov_theme/icon/publication.png" alt="Administrations" style="width: 48px; height: 48px;">
                 </a>
                 <a href="/publications" class="">
-                    <h3>Publications</h3>
-                </a>
+                    <h3>Publications</h3>                </a>
+
             </div>
 
             <div class="news-timeline">
-                {# Publication 1 #}
-                {% set pub1 = publications_homepage[0]|default(null) %}
-                {% set pub1_url = pub1 ? path('entity.node.canonical', {'node': pub1.id}) : '#' %}
                 <!-- Publication 1 -->
                 <div class="news-timeline-item">
                     <div class="news-post-header">
                         <img src="/themes/custom/egov_theme/icon/onepublication.png" alt="Administrations" style="width: 48px; height: 48px;">
 
                         <div class="news-post-author-info">
-                            <a href="{{ pub1_url }}" class="news-post-author">Ministère du Numérique - MCTN</a>
-                            <div class="news-post-date">{{ pub1 ? pub1.created.value|date('d M Y') ~ ' · ' ~ pub1.created.value|date('H:i') : '16 Nov 2025 · 10:30' }}</div>
+                            <div class="news-post-author">Ministère du Numérique - MCTN</div>
+                            <div class="news-post-date">16 Nov 2025 · 10:30</div>
                         </div>
                         <div class="news-badge-type nouveau">NOUVEAU</div>
                     </div>
                     <div class="news-timeline-content">
-                        <a href="{{ pub1_url }}"><h4>{{ pub1 ? pub1.title.value : 'Lancement de 15 nouvelles API gouvernementales' }}</h4></a>
-                        <p>{{ pub1 ? pub1.field_extrait.value|default(pub1.body.value|striptags|slice(0, 200)) : "Le MCTN annonce la mise en ligne de 15 nouvelles API pour faciliter l'accès aux données publiques. Ces nouvelles interfaces permettront aux développeurs et administrations de créer des applications innovantes au service des citoyens." }}</p>
-                        {% if pub1 and pub1.field_image.entity %}
-                            <a href="{{ pub1_url }}"><img src="{{ file_url(pub1.field_image.entity.uri.value) }}" alt="{{ pub1.title.value }}" class="news-post-image"></a>
-                            {% else %}
-                            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop" alt="API Launch" class="news-post-image">
-                        {% endif %}
+                        <h4>Lancement de 15 nouvelles API gouvernementales</h4>
+                        <p>Le MCTN annonce la mise en ligne de 15 nouvelles API pour faciliter l'accès aux données publiques. Ces nouvelles interfaces permettront aux développeurs et administrations de créer des applications innovantes au service des citoyens.</p>
+                        <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=800&h=400&fit=crop" alt="API Launch" class="news-post-image">
                     </div>
                     <div class="news-post-actions">
                         <button class="news-action-btn">
@@ -356,23 +305,20 @@
                     </div>
                 </div>
 
-                {# Publication 2 #}
-                {% set pub2 = publications_homepage[1]|default(null) %}
-                {% set pub2_url = pub2 ? path('entity.node.canonical', {'node': pub2.id}) : '#' %}
                 <!-- Publication 2 -->
                 <div class="news-timeline-item">
                     <div class="news-post-header">
                         <div class="ne">                        <img src="/themes/custom/egov_theme/icon/onepublication.png" alt="Administrations" style="width: 48px; height: 48px;">
                         </div>
                         <div class="news-post-author-info">
-                            <a href="{{ pub2_url }}" class="news-post-author">eGov Sénégal - Service Technique</a>
-                            <div class="news-post-date">{{ pub2 ? pub2.created.value|date('d M Y') ~ ' · ' ~ pub2.created.value|date('H:i') : '14 Nov 2025 · 15:45' }}</div>
+                            <div class="news-post-author">eGov Sénégal - Service Technique</div>
+                            <div class="news-post-date">14 Nov 2025 · 15:45</div>
                         </div>
                         <div class="news-badge-type urgent">URGENT</div>
                     </div>
                     <div class="news-timeline-content">
-                        <a href="{{ pub2_url }}"><h4>{{ pub2 ? pub2.title.value : 'Maintenance programmée ce week-end' }}</h4></a>
-                        <p>{{ pub2 ? pub2.field_extrait.value|default(pub2.body.value|striptags|slice(0, 200)) : 'Interruption prévue dimanche de 2h à 6h pour mise à jour majeure du système. Veuillez planifier vos activités en conséquence.' }}</p>
+                        <h4>Maintenance programmée ce week-end</h4>
+                        <p>Interruption prévue dimanche de 2h à 6h pour mise à jour majeure du système. Veuillez planifier vos activités en conséquence.</p>
                     </div>
                     <div class="news-post-actions">
                         <button class="news-action-btn">
@@ -390,43 +336,30 @@
                     </div>
                 </div>
 
-                {# Publication 3 #}
-                {% set pub3 = publications_homepage[2]|default(null) %}
-                {% set pub3_url = pub3 ? path('entity.node.canonical', {'node': pub3.id}) : '#' %}
                 <!-- Publication 3 -->
                 <div class="news-timeline-item">
                     <div class="news-post-header">
                         <img src="/themes/custom/egov_theme/icon/onepublication.png" alt="Administrations" style="width: 48px; height: 48px;">
 
                         <div class="news-post-author-info">
-                            <a href="{{ pub3_url }}" class="news-post-author">Centre de Formation eGov</a>
-                            <div class="news-post-date">{{ pub3 ? pub3.created.value|date('d M Y') ~ ' · ' ~ pub3.created.value|date('H:i') : '12 Nov 2025 · 09:00' }}</div>
+                            <div class="news-post-author">Centre de Formation eGov</div>
+                            <div class="news-post-date">12 Nov 2025 · 09:00</div>
                         </div>
                         <div class="news-badge-type info">INFO</div>
                     </div>
                     <div class="news-timeline-content">
-                        <a href="{{ pub3_url }}"><h4>{{ pub3 ? pub3.title.value : 'Webinaire : Intégration API Santé' }}</h4></a>
-                        <p>{{ pub3 ? pub3.field_extrait.value|default(pub3.body.value|striptags|slice(0, 200)) : 'Formation gratuite sur l\'utilisation des API du secteur santé. Inscriptions ouvertes pour les développeurs et administrateurs système.' }}</p>
-                        {% if pub3 and pub3.field_image.entity %}
-                            <a href="{{ pub3_url }}"><img src="{{ file_url(pub3.field_image.entity.uri.value) }}" alt="{{ pub3.title.value }}" class="news-post-image"></a>
-                            {% else %}
-                            <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=400&fit=crop" alt="Webinar" class="news-post-image">
-                        {% endif %}
+                        <h4>Webinaire : Intégration API Santé</h4>
+                        <p>Formation gratuite sur l'utilisation des API du secteur santé. Inscriptions ouvertes pour les développeurs et administrateurs système.</p>
+                        <img src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=800&h=400&fit=crop" alt="Webinar" class="news-post-image">
                     </div>
                     <div class="news-post-actions">
                         <button class="news-action-btn">
                             <span>👍</span>
-                            <span>{{ random(80, 300) }}</span>
+                            <span>156</span>
                         </button>
                         <button class="news-action-btn">
                             <span>💬</span>
-                            <span>
-                                {% set comment_count = pub1.comment.comment_count|default(0) %}
-                                {% if comment_count == 0 %}Aucun commentaire
-                                {% elseif comment_count == 1 %}1 commentaire
-                                {% else %}{{ comment_count }} commentaires
-                                {% endif %}
-                            </span>
+                            <span>27 commentaires</span>
                         </button>
                         <button class="news-action-btn">
                             <span>📤</span>
@@ -439,7 +372,8 @@
 
 
 
-        <!-- Video Podcast - RESTE STATIQUE -->
+        <!-- Video Podcast -->
+        <!-- Video Podcast -->
         <div class="video-podcast-widget">
             <div class="widget-header">
                 <a href="/videos-podcast">
@@ -528,6 +462,7 @@
 
     </div>
 </section>
+
 <!-- Contact -->
 <section class="contact-section" id="contact">
     <h2>Rejoignez l'Écosystème d'Interopérabilité</h2>
