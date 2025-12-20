@@ -1,42 +1,6 @@
 <!-- Navigation header -->
-<nav>
-    <a href="/" class="logo">
-        <img src="/themes/custom/egov_theme/images/senegal.png" 
-             alt="Logo Interopérabilité Sénégal" 
-             style="width: 60px; height: 60px; object-fit: contain;">
-        <div class="logo-text">
-            <h1>Jokkoo</h1>
-            <div class="logo-subtitle">Plateforme d'Interopérabilité</div>
-        </div>
-    </a>
-    
-    {# Menu Desktop - Version statique avec sous-menu #}
-    <ul class="nav-menu-desktop">
-        <li>
-            <a href="/">Accueil</a>
-            <ul class="submenu">
-                <li><a href="/presentation-du-projet">A propos</a></li>
-                <li><a href="/publications">Publications</a></li>
-                <li><a href="/actualites">Actualités</a></li>
-                <li><a href="/videos-podcast">Vidéos Podcast</a></li>
-            </ul>
-        </li>
-        <li><a href="/services">Services</a></li>
-        <li><a href="/cadre-et-standard">Cadres et Standards</a></li>
-        <li><a href="/tableau-de-bord">Tableau de Bord</a></li>
-        <li><a href="/contact">Contact</a></li>
-    </ul>
-    
-    {# Actions Mobile #}
-    <div class="nav-actions-mobile">
-        <button class="search-btn" aria-label="Rechercher">🔍</button>
-        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">
-            <span></span>
-            <span></span>
-            <span></span>
-        </button>
-    </div>
-</nav>
+{{ include(active_theme_path() ~ '/templates/partials/header.html.twig') }}
+
 <!-- Sidebar -->
 <div class="sidebar-overlay" id="sidebarOverlay"></div>
 <div class="sidebar-menu" id="sidebarMenu">

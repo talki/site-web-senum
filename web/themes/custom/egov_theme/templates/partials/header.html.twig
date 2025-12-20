@@ -1,8 +1,5 @@
-<!-- Navigation header -->
-
 <nav>
-    {# Logo #}
-    <div class="logo">
+    <a href="/" class="logo">
         <img src="/themes/custom/egov_theme/images/senegal.png" 
              alt="Logo Interopérabilité Sénégal" 
              style="width: 60px; height: 60px; object-fit: contain;">
@@ -10,22 +7,65 @@
             <h1>Jokkoo</h1>
             <div class="logo-subtitle">Plateforme d'Interopérabilité</div>
         </div>
-    </div>
-
-    {# Menu Desktop #}
-    <div class="nav-menu-desktop">
-        {% if page.primary_menu %}
-            {{ page.primary_menu }}
-        {% endif %}
-    </div>
-
-    {# Actions Mobile #}
+    </a>
+    
+    <ul class="nav-menu-desktop" id="mainMenu">
+        <li class="has-submenu" id="accueilItem">
+            <a href="/">Accueil ▾</a>
+            <ul class="submenu">
+                <li><a href="/presentation-du-projet">A propos</a></li>
+                <li><a href="/publications">Publications</a></li>
+                <li><a href="/actualites">Actualités</a></li>
+                <li><a href="/videos-podcast">Vidéos Podcast</a></li>
+            </ul>
+        </li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/cadre-et-standard">Cadres et Standards</a></li>
+        <li><a href="/tableau-de-bord">Tableau de Bord</a></li>
+        <li><a href="/contact">Contact</a></li>
+    </ul>
+    
     <div class="nav-actions-mobile">
         <button class="search-btn" aria-label="Rechercher">🔍</button>
-        <button class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">
+        <button type="button" class="hamburger-btn" id="hamburgerBtn" aria-label="Menu">
             <span></span>
             <span></span>
             <span></span>
         </button>
     </div>
 </nav>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    
+    var hamburger = document.getElementById('hamburgerBtn');
+    var menu = document.getElementById('mainMenu');
+    var accueilItem = document.getElementById('accueilItem');
+    var accueilLink = accueilItem.querySelector('a');
+    
+    // Hamburger toggle
+    hamburger.onclick = function(e) {
+        e.stopPropagation();
+        menu.classList.toggle('open');
+        this.classList.toggle('active');
+    };
+    
+    // Accueil - toggle sous-menu
+    accueilLink.onclick = function(e) {
+        if (window.innerWidth <= 968) {
+            e.preventDefault();
+            e.stopPropagation();
+            accueilItem.classList.toggle('submenu-open');
+        }
+    };
+    
+    // Fermer en cliquant dehors (mais PAS sur le menu)
+    document.onclick = function(e) {
+        if (!menu.contains(e.target) && !hamburger.contains(e.target)) {
+            menu.classList.remove('open');
+            hamburger.classList.remove('active');
+            accueilItem.classList.remove('submenu-open');
+        }
+    };
+});
+</script>

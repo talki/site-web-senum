@@ -1,5 +1,5 @@
 /* ============================================
-   MENU DRUPAL - CSS COMPLET CORRIGÉ : navigation-menu.css
+   MENU DRUPAL - CSS COMPLET navigation-menu.css
    ============================================ */
 
 /* Cacher le titre du block Drupal */
@@ -28,7 +28,7 @@
 }
 
 /* ============================================
-   MENU PRINCIPAL - NIVEAU 1
+   MENU PRINCIPAL - NIVEAU 1 (DESKTOP)
    ============================================ */
 
 /* Liste principale du menu */
@@ -89,10 +89,10 @@
 }
 
 /* ============================================
-   SOUS-MENUS - CLASS .submenu
+   SOUS-MENUS - CLASS .submenu (DESKTOP)
    ============================================ */
 
-/* Tous les sous-menus avec classe .submenu */
+/* Tous les sous-menus */
 .nav-menu-desktop ul.submenu,
 .nav-menu-desktop .menu-level-1 {
     position: absolute !important;
@@ -168,11 +168,6 @@
 }
 
 /* ============================================
-   RESPONSIVE - TABLETTE
-   ============================================ */
-
-
-/* ============================================
    ACCESSIBILITÉ
    ============================================ */
 
@@ -194,56 +189,57 @@
 }
 
 /* ============================================
-   ANIMATIONS
-   ============================================ */
-
-@keyframes fadeInSubmenu {
-    from {
-        opacity: 0;
-        transform: translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-.nav-menu-desktop li.menu-item--expanded:hover > ul.submenu {
-    animation: fadeInSubmenu 0.3s ease-out;
-}
-
-
-
-
-/* ============================================
-   AMÉLIORATION DESIGN MENU MOBILE
+   RESPONSIVE MOBILE - MENU LATÉRAL
    ============================================ */
 
 @media (max-width: 968px) {
-    /* Menu mobile - Design amélioré */
+    /* Menu mobile - Panneau latéral */
     .nav-menu-desktop {
-        display: flex !important;
         position: fixed !important;
-        top: 0 !important; /* ← Commence en haut */
-        right: -100% !important;
-        width: 320px !important; /* ← Plus large */
-        height: 100vh !important; /* ← Pleine hauteur */
+        top: 0 !important;
+        right: -100% !important; /* Caché par défaut */
+        width: 85% !important;
+        max-width: 380px !important;
+        height: 100vh !important;
         background: white !important;
-        box-shadow: -4px 0 30px rgba(0,0,0,0.2) !important;
+        box-shadow: -4px 0 30px rgba(0,0,0,0.3) !important;
         transition: right 0.3s ease-in-out !important;
         overflow-y: auto !important;
-        z-index: 9999 !important;
+        z-index: 99999 !important;
         padding: 0 !important;
+        display: block !important; /* Important pour le mobile */
     }
     
-    /* Menu ouvert */
+    /* Menu ouvert - Glisse depuis la droite */
     .nav-menu-desktop.open {
         right: 0 !important;
     }
     
+    /* Overlay sombre derrière */
+    body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 99998;
+        opacity: 0;
+        visibility: hidden;
+        transition: all 0.3s ease;
+        pointer-events: none;
+    }
+    
+    body:has(.nav-menu-desktop.open)::after {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: all;
+    }
+    
     /* Header du menu mobile */
-    .nav-menu-desktop::after {
-        content: 'Menu';
+    .nav-menu-desktop::before {
+        content: '☰ Menu';
         display: block;
         padding: 1.5rem;
         background: var(--senegal-green);
@@ -252,6 +248,9 @@
         font-weight: 800;
         text-align: center;
         border-bottom: 3px solid var(--senegal-yellow);
+        position: sticky;
+        top: 0;
+        z-index: 10;
     }
     
     /* Liste principale */
@@ -259,8 +258,7 @@
         flex-direction: column !important;
         gap: 0 !important;
         align-items: stretch !important;
-        padding: 1rem 0 !important;
-        margin-top: 70px !important; /* Espace pour le header */
+        padding: 0 !important;
     }
     
     /* Items du menu mobile */
@@ -269,7 +267,7 @@
         border-bottom: 1px solid #e5e7eb !important;
     }
     
-    /* Links du menu mobile - Plus espacés */
+    /* Links du menu mobile */
     .nav-menu-desktop ul.menu-main > li > a {
         display: flex !important;
         justify-content: space-between !important;
@@ -278,13 +276,11 @@
         font-size: 1.05rem !important;
         font-weight: 600 !important;
         color: var(--text-dark) !important;
-        transition: all 0.2s ease !important;
     }
     
     /* Hover sur les items */
     .nav-menu-desktop ul.menu-main > li > a:hover {
         background: var(--bg-light) !important;
-        padding-left: 2rem !important;
         color: var(--senegal-green) !important;
     }
     
@@ -292,7 +288,6 @@
     .nav-menu-desktop ul.menu-main > li > a.is-active {
         background: #e8f5e9 !important;
         color: var(--senegal-green) !important;
-        font-weight: 700 !important;
         border-left: 4px solid var(--senegal-green) !important;
     }
     
@@ -330,12 +325,9 @@
     
     /* Links de sous-menu */
     .nav-menu-desktop ul.submenu a {
-        display: block !important;
         padding: 1rem 1.5rem 1rem 3rem !important;
         font-size: 0.95rem !important;
         color: #475569 !important;
-        font-weight: 500 !important;
-        transition: all 0.2s ease !important;
     }
     
     .nav-menu-desktop ul.submenu a:hover {
@@ -344,53 +336,31 @@
         padding-left: 3.5rem !important;
     }
     
-    .nav-menu-desktop ul.submenu a.is-active {
-        background: white !important;
-        color: var(--senegal-green) !important;
-        font-weight: 700 !important;
-    }
-    
-    /* Flèches plus jolies */
+    /* Flèches en mobile */
     .nav-menu-desktop li.menu-item--expanded > a::after {
         content: '▶' !important;
         font-size: 0.8rem !important;
         color: #94a3b8 !important;
-        transition: all 0.3s ease !important;
         transform: none !important;
     }
     
     .nav-menu-desktop li.submenu-open > a::after {
         content: '▼' !important;
         color: var(--senegal-green) !important;
-        transform: none !important;
-    }
-    
-    /* Overlay sombre amélioré */
-    .nav-menu-desktop.open::before {
-        content: '';
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0,0,0,0.6);
-        z-index: -1;
-        animation: fadeIn 0.3s ease;
-    }
-    
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
     }
 }
 
-/* Animation hamburger - Plus fluide */
+/* Animation hamburger */
 .hamburger-btn {
     transition: transform 0.3s ease !important;
 }
 
 .hamburger-btn:active {
     transform: scale(0.9);
+}
+
+.hamburger-btn.active span {
+    transition: all 0.3s ease;
 }
 
 .hamburger-btn.active span:nth-child(1) {

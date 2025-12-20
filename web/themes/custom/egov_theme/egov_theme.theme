@@ -107,22 +107,47 @@ $variables['actualites_homepage'] = !empty($nids_actu) ? array_values($node_stor
   $variables['publications_homepage'] = !empty($nids_pub) ? array_values($node_storage->loadMultiple($nids_pub)) : [];
 }
 
-    // Page publications (node 31)
-    if ($node->id() == 31) {
-      \Drupal::logger('egov_theme')->notice('CSS publications attaché!');
-      $variables['#attached']['library'][] = 'egov_theme/actualites-page';
-      
-      $node_storage = \Drupal::entityTypeManager()->getStorage('node');
-      $query = $node_storage->getQuery()
-        ->condition('type', 'publication')
-        ->condition('status', 1)
-        ->sort('created', 'DESC')
-        ->range(0, 20)
-        ->accessCheck(TRUE);
-      
-      $nids = $query->execute();
-      $variables['publications_recentes'] = !empty($nids) ? $node_storage->loadMultiple($nids) : [];
-    }
+// Page publications (node 31)
+if ($node->id() == 31) {
+  \Drupal::logger('egov_theme')->notice('CSS publications attaché!');
+  $variables['#attached']['library'][] = 'egov_theme/actualites-page';
+  
+  
+  // Paramètres pagination
+  $items_per_page = 4;
+  $current_page = \Drupal::request()->query->get('page', 0);
+  
+  $node_storage = \Drupal::entityTypeManager()->getStorage('node');
+  
+  // Compter le total
+  $count_query = $node_storage->getQuery()
+    ->condition('type', 'publication')
+    ->condition('status', 1)
+    ->accessCheck(TRUE)
+    ->count();
+  
+  $total_items = $count_query->execute();
+  $total_pages = ceil($total_items / $items_per_page);
+  
+  // Récupérer les publications de la page courante
+  $query = $node_storage->getQuery()
+    ->condition('type', 'publication')
+    ->condition('status', 1)
+    ->sort('created', 'DESC')
+    ->range($current_page * $items_per_page, $items_per_page)
+    ->accessCheck(TRUE);
+  
+  $nids = $query->execute();
+  $variables['publications_recentes'] = !empty($nids) ? array_values($node_storage->loadMultiple($nids)) : [];
+  
+  // Variables pagination
+  $variables['pagination'] = [
+    'current_page' => $current_page,
+    'total_pages' => $total_pages,
+    'total_items' => $total_items,
+    'items_per_page' => $items_per_page,
+  ];
+}
     
     // Page vidéos podcast (node 61)
     if ($node->id() == 61) {

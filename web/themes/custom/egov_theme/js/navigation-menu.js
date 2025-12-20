@@ -6,60 +6,31 @@
     'use strict';
     
     document.addEventListener('DOMContentLoaded', function() {
-        console.log('Script navigation chargé');
+        console.log('🚀 Script navigation chargé');
         
         // ============================================
         // PARTIE 1 : SOUS-MENUS DESKTOP
         // ============================================
         
         const menuItemsExpanded = document.querySelectorAll('.nav-menu-desktop li.menu-item--expanded');
-        console.log('Items avec sous-menus trouvés:', menuItemsExpanded.length);
+        console.log('📋 Items avec sous-menus trouvés:', menuItemsExpanded.length);
         
         menuItemsExpanded.forEach(function(item, index) {
-            const submenu = item.querySelector('ul.submenu');
+            const submenu = item.querySelector('ul.submenu, .menu-level-1');
             
             if (submenu) {
-                console.log('Sous-menu #' + index + ' trouvé:', submenu);
-                
-                // Desktop : affichage au hover
-                item.addEventListener('mouseenter', function() {
-                    if (window.innerWidth > 968) {
-                        console.log('Hover sur item #' + index);
-                        submenu.style.display = 'block';
-                        submenu.style.opacity = '1';
-                        submenu.style.visibility = 'visible';
-                        submenu.style.transform = 'translateY(0)';
-                    }
-                });
-                
-                item.addEventListener('mouseleave', function() {
-                    if (window.innerWidth > 968) {
-                        console.log('Sortie de item #' + index);
-                        submenu.style.opacity = '0';
-                        submenu.style.visibility = 'hidden';
-                        submenu.style.transform = 'translateY(-10px)';
-                        
-                        setTimeout(function() {
-                            if (submenu.style.opacity === '0') {
-                                submenu.style.display = 'none';
-                            }
-                        }, 300);
-                    }
-                });
-                
+                // Desktop : affichage au hover (le CSS gère déjà ça)
                 // Mobile : ouverture au clic
                 const link = item.querySelector('a');
                 if (link) {
                     link.addEventListener('click', function(e) {
                         if (window.innerWidth <= 968) {
                             e.preventDefault();
-                            console.log('Sous-menu cliqué (mobile)');
+                            console.log('📱 Sous-menu cliqué (mobile) #' + index);
                             item.classList.toggle('submenu-open');
                         }
                     });
                 }
-            } else {
-                console.warn('Pas de sous-menu trouvé pour item #' + index);
             }
         });
         
@@ -70,11 +41,11 @@
         const hamburgerBtn = document.getElementById('hamburgerBtn');
         const navMenuDesktop = document.querySelector('.nav-menu-desktop');
         
-        console.log('Hamburger trouvé:', hamburgerBtn);
-        console.log('Menu trouvé:', navMenuDesktop);
+        console.log('🍔 Hamburger trouvé:', hamburgerBtn ? 'OUI' : 'NON');
+        console.log('📱 Menu trouvé:', navMenuDesktop ? 'OUI' : 'NON');
         
         if (!hamburgerBtn || !navMenuDesktop) {
-            console.error('Éléments hamburger/menu manquants !');
+            console.error('❌ Éléments hamburger/menu manquants !');
             return;
         }
         
@@ -83,20 +54,41 @@
             e.preventDefault();
             e.stopPropagation();
             
-            console.log('Hamburger cliqué !');
+            const isOpen = navMenuDesktop.classList.contains('open');
             
-            this.classList.toggle('active');
-            navMenuDesktop.classList.toggle('open');
+            console.log('🍔 Hamburger cliqué ! État actuel:', isOpen ? 'ouvert' : 'fermé');
             
-            console.log('Menu ouvert:', navMenuDesktop.classList.contains('open'));
+            if (isOpen) {
+                // Fermer
+                navMenuDesktop.classList.remove('open');
+                this.classList.remove('active');
+                document.body.style.overflow = '';
+                console.log('✅ Menu fermé');
+            } else {
+                // Ouvrir
+                navMenuDesktop.classList.add('open');
+                this.classList.add('active');
+                document.body.style.overflow = 'hidden';
+                console.log('✅ Menu ouvert');
+            }
         });
         
         // Fermer le menu si on clique en dehors
         document.addEventListener('click', function(e) {
-            if (!navMenuDesktop.contains(e.target) && !hamburgerBtn.contains(e.target)) {
-                hamburgerBtn.classList.remove('active');
+            if (navMenuDesktop.classList.contains('open') && 
+                !navMenuDesktop.contains(e.target) && 
+                !hamburgerBtn.contains(e.target)) {
+                
+                console.log('👆 Clic extérieur - Fermeture menu');
                 navMenuDesktop.classList.remove('open');
+                hamburgerBtn.classList.remove('active');
+                document.body.style.overflow = '';
             }
+        });
+        
+        // Empêcher la fermeture si on clique dans le menu
+        navMenuDesktop.addEventListener('click', function(e) {
+            e.stopPropagation();
         });
         
         // Réinitialiser au redimensionnement
@@ -104,9 +96,11 @@
             if (window.innerWidth > 968) {
                 navMenuDesktop.classList.remove('open');
                 hamburgerBtn.classList.remove('active');
+                document.body.style.overflow = '';
+                console.log('📐 Redimensionnement - Menu réinitialisé');
             }
         });
+        
+        console.log('✅ Navigation initialisée avec succès');
     });
 })();
-
-

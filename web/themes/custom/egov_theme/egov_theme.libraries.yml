@@ -4,26 +4,25 @@ global-styling:
     theme:
       css/style.css: { weight: 100 }
       css/navigation-menu.css: { weight: 110 }
-      css/mobile-menu.css: { weight: 110 }
+      css/mobile-menu.css: { weight: 120 }
   dependencies:
     - core/normalize
-    - egov_theme/navigation
 
 global-scripts:
   version: 1.0
   js:
     js/script.js: {}
-    js/mobile-menu.js: {}
+    #js/mobile-menu.js: {}
   dependencies:
     - core/drupal
     - core/jquery
-
-navigation:
-  version: 1.0
-  js:
-    js/navigation-menu.js: {}
-  dependencies:
-    - core/drupal
+    - core/once    # ← AJOUTEZ CETTE LIGNE !
+# navigation:
+#   version: 1.0
+#   js:
+#     js/navigation-menu.js: {}
+#   dependencies:
+#     - core/drupal
 
 services-page:
   version: 1.x

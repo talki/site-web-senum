@@ -1413,9 +1413,9 @@ footer {
 }
 
 @media (max-width: 968px) {
-    /* .nav-menu-desktop {
-       display: none;
-    }*/
+    .nav-menu-desktop {
+        display: none;
+    }
 
     .nav-actions-mobile {
         display: flex;
