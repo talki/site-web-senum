@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Actualités - eGov Sénégal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --senegal-green: #00853F;
+            --senegal-yellow: #FCD116;
+            --senegal-red: #E31B23;
+            --white: #FFFFFF;
+            --text-dark: #1F2937;
+            --text-light: #6B7280;
+            --bg-light: #F9FAFB;
+            --bg-gray: #F3F4F6;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            color: var(--text-dark);
+            line-height: 1.6;
+            background: var(--bg-light);
+        }
+
+        /* Navigation - Style identique à l'accueil */
+        nav {
+            position: sticky;
+            top: 0;
+            background: var(--white);
+            padding: 1rem 5%;
+            box-shadow: var(--shadow-md);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .logo-flag {
+            width: 45px;
+            height: 30px;
+            display: flex;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .flag-stripe {
+            flex: 1;
+        }
+
+        .flag-green { background: var(--senegal-green); }
+        .flag-yellow { background: var(--senegal-yellow); }
+        .flag-red { background: var(--senegal-red); }
+
+        .logo-text h1 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--senegal-green);
+        }
+
+        .logo-subtitle {
+            font-size: 0.7rem;
+            color: var(--text-light);
+        }
+
+        .nav-menu-desktop {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-menu-desktop a {
+            text-decoration: none;
+            color: var(--text-dark);
+            font-weight: 600;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-menu-desktop a:hover,
+        .nav-menu-desktop a.active {
+            color: var(--senegal-green);
+        }
+
+        /* Hero Section - Discret */
+        .news-hero {
+            background: linear-gradient(135deg, var(--white) 0%, var(--bg-light) 100%);
+            color: var(--text-dark);
+            padding: 4rem 5% 3rem;
+            text-align: center;
+            border-bottom: 1px solid var(--bg-gray);
+        }
+
+        .news-hero-content {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .news-hero h1 {
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            color: var(--text-dark);
+        }
+
+        .news-hero p {
+            font-size: 1.15rem;
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* Filter Section */
+        .filter-section {
+            background: var(--white);
+            padding: 1.5rem 5%;
+            box-shadow: var(--shadow-sm);
+            position: sticky;
+            top: 80px;
+            z-index: 100;
+            border-bottom: 1px solid var(--bg-gray);
+        }
+
+        .filter-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .filter-label {
+            font-weight: 700;
+            color: var(--text-dark);
+            font-size: 0.9rem;
+        }
+
+        .filter-btn {
+            padding: 0.65rem 1.5rem;
+            border: 2px solid var(--bg-gray);
+            background: var(--white);
+            border-radius: 8px;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .filter-btn:hover {
+            border-color: var(--senegal-green);
+            background: var(--bg-light);
+        }
+
+        .filter-btn.active {
+            border-color: var(--senegal-green);
+            background: var(--senegal-green);
+            color: var(--white);
+        }
+
+        /* News Main */
+        .news-main {
+            padding: 3rem 5%;
+            background: var(--bg-light);
+        }
+
+        .news-container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        /* Featured Article - Style sobre */
+        .featured-article {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 3rem;
+            box-shadow: var(--shadow-md);
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 0;
+            border: 1px solid var(--bg-gray);
+        }
+
+        .featured-image {
+            background: linear-gradient(135deg, var(--bg-gray) 0%, var(--bg-light) 100%);
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            position: relative;
+        }
+
+        .featured-content {
+            padding: 3rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .featured-badge {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: var(--senegal-green);
+            color: var(--white);
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.7rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            width: fit-content;
+        }
+
+        .featured-content h2 {
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+
+        .featured-meta {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 1.5rem;
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .featured-excerpt {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--text-light);
+            margin-bottom: 2rem;
+        }
+
+        .featured-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.9rem 1.8rem;
+            background: var(--senegal-green);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            width: fit-content;
+        }
+
+        .featured-link:hover {
+            background: #006d33;
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+
+        /* Article Grid - Style sobre */
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .article-card {
+            background: var(--white);
+            border-radius: 12px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid var(--bg-gray);
+        }
+
+        .article-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .article-image {
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            background: linear-gradient(135deg, var(--bg-gray), var(--bg-light));
+        }
+
+        .article-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            font-weight: 700;
+            font-size: 0.7rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            color: var(--white);
+        }
+
+        .badge-urgent { background: var(--senegal-red); }
+        .badge-nouveau { background: var(--senegal-green); }
+        .badge-info { background: #3B82F6; }
+        .badge-annonce { background: #8B5CF6; }
+
+        .article-content {
+            padding: 2rem;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .article-meta {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+            color: var(--text-light);
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .article-content h3 {
+            font-size: 1.35rem;
+            font-weight: 800;
+            color: var(--text-dark);
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .article-excerpt {
+            color: var(--text-light);
+            line-height: 1.7;
+            margin-bottom: 1.5rem;
+            flex-grow: 1;
+            font-size: 0.95rem;
+        }
+
+        .article-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--senegal-green);
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+
+        .article-link:hover {
+            gap: 0.8rem;
+            color: #006d33;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 0.8rem;
+            margin-top: 3rem;
+        }
+
+        .pagination-btn {
+            padding: 0.7rem 1.1rem;
+            border: 2px solid var(--bg-gray);
+            background: var(--white);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            color: var(--text-dark);
+            font-size: 0.95rem;
+        }
+
+        .pagination-btn:hover {
+            border-color: var(--senegal-green);
+            background: var(--bg-light);
+        }
+
+        .pagination-btn.active {
+            background: var(--senegal-green);
+            color: var(--white);
+            border-color: var(--senegal-green);
+        }
+
+        /* Footer - Identique à l'accueil */
+        footer {
+            background: linear-gradient(135deg, #1F2937 0%, #111827 100%);
+            color: var(--white);
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-grid {
+            max-width: 1400px;
+            margin: 0 auto 3rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+
+        .footer-section h3 {
+            font-size: 1rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--white);
+            letter-spacing: 1px;
+        }
+
+        .footer-section p {
+            line-height: 1.8;
+            opacity: 0.85;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-section ul li a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: all 0.3s;
+        }
+
+        .footer-section ul li a:hover {
+            opacity: 1;
+            padding-left: 5px;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+        }
+
+        .social-icon:hover {
+            background: var(--senegal-green);
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .footer-bottom p {
+            opacity: 0.7;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom-links {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-bottom-links a {
+            color: var(--white);
+            text-decoration: none;
+            opacity: 0.7;
+            transition: opacity 0.3s;
+            font-size: 0.9rem;
+        }
+
+        .footer-bottom-links a:hover {
+            opacity: 1;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .featured-article {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-image {
+                min-height: 300px;
+            }
+
+            .articles-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .news-hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .news-hero p {
+                font-size: 1rem;
+            }
+
+            .nav-menu-desktop {
+                display: none;
+            }
+
+            .filter-container {
+                justify-content: center;
+            }
+
+            .articles-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .featured-content h2 {
+                font-size: 1.8rem;
+            }
+
+            .footer-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-bottom {
+                flex-direction: column;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+   <nav>
+            <div class="logo">
+                <div class="logo-flag">
+                    <div class="flag-stripe flag-green"></div>
+                    <div class="flag-stripe flag-yellow"></div>
+                    <div class="flag-stripe flag-red"></div>
+                </div>
+                <div class="logo-text">
+                    <h1>Jokkoo</h1>
+                    <div class="logo-subtitle">Plateforme d'Interopérabilité</div>
+                </div>
+            </div>
+
+
+
+            {# Menu Desktop #}
+            <div class="nav-menu-desktop">
+                {% if page.primary_menu %}
+                    {{ page.primary_menu }}
+                {% endif %}
+            </div>
+
+            {# Actions Mobile #}
+            <div class="nav-actions-mobile">
+                <button class="search-btn">🔍</button>
+                <button class="hamburger-btn" id="hamburgerBtn">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+
+    <!-- Hero Section -->
+    <section class="news-hero">
+        <div class="news-hero-content">
+            <h1>Actualités & Annonces</h1>
+            <p>Restez informé des dernières nouveautés, mises à jour et événements de la plateforme nationale d'interopérabilité</p>
+        </div>
+    </section>
+
+    <!-- Filter Section -->
+    <section class="filter-section">
+        <div class="filter-container">
+            <span class="filter-label">Filtrer par :</span>
+            <button class="filter-btn active" data-filter="all">Tout voir</button>
+            <button class="filter-btn" data-filter="urgent">Urgent</button>
+            <button class="filter-btn" data-filter="nouveau">Nouveau</button>
+            <button class="filter-btn" data-filter="info">Info</button>
+            <button class="filter-btn" data-filter="annonce">Annonce</button>
+        </div>
+    </section>
+
+<!-- Main Content -->
+<main class="news-main">
+    <div class="news-container">
+        
+        <!-- Featured Article - DYNAMIQUE -->
+        {% if actualites_recentes and actualites_recentes|length > 0 %}
+            {% set featured = actualites_recentes|first %}
+            {% set categorie_featured = featured.field_categorie.value %}
+            
+            <article class="featured-article">
+                <div class="featured-image">
+                    {% if categorie_featured == 'urgent' %}🚀
+                    {% elseif categorie_featured == 'nouveau' %}
+                     <img src="/themes/custom/egov_theme/icon/graph.png" alt="" style="width: 78px; height: 58px;" class="help-icon">
+
+                    {% elseif categorie_featured == 'info' %}📢
+                    {% elseif categorie_featured == 'annonce' %}🎉
+                    {% else %}🚀
+                    {% endif %}
+                </div>
+                <div class="featured-content">
+                    <span class="featured-badge">À LA UNE</span>
+                    <h2>{{ featured.title.value }}</h2>
+                    <div class="featured-meta">
+                        <span>📅 {{ featured.created.value|date('d M Y') }}</span>
+                        {% if featured.field_temps_lecture.value %}
+                            <span>⏱️ {{ featured.field_temps_lecture.value }} min de lecture</span>
+                        {% endif %}
+                    </div>
+                    <p class="featured-excerpt">
+                        {{ featured.field_extrait.value }}
+                    </p>
+                    <a href="{{ path('entity.node.canonical', {'node': featured.nid.value}) }}" class="featured-link">
+                        <span>Lire l'article complet</span>
+                        <span>→</span>
+                    </a>
+                </div>
+            </article>
+        {% else %}
+            {# FALLBACK Featured si pas d'actualités #}
+            <article class="featured-article">
+                <div class="featured-image">
+                    🚀
+                </div>
+                <div class="featured-content">
+                    <span class="featured-badge">À LA UNE</span>
+                    <h2>Lancement de l'API Universelle v3.0</h2>
+                    <div class="featured-meta">
+                        <span>📅 15 Novembre 2025 </span>
+                        <span>⏱️ 8 min de lecture</span>
+                    </div>
+                    <p class="featured-excerpt">
+                        Découvrez la nouvelle version majeure de notre API avec des fonctionnalités 
+                        révolutionnaires : authentification biométrique, traitement temps réel amélioré, 
+                        et intégration IA pour une meilleure prédiction des services citoyens.
+                    </p>
+                    <a href="#" class="featured-link">
+                        <span>Lire l'article complet</span>
+                        <span>→</span>
+                    </a>
+                </div>
+            </article>
+        {% endif %}
+
+        <!-- Articles Grid - DYNAMIQUE -->
+        <div class="articles-grid">
+            {% if actualites_recentes and actualites_recentes|length > 1 %}
+                {# CONTENU DYNAMIQUE DEPUIS DRUPAL #}
+                {% for actualite in actualites_recentes %}
+                    {% if loop.index > 1 %} {# Skip le premier qui est featured #}
+                        {% set categorie = actualite.field_categorie.value %}
+                        
+                        {# Mapping des icônes #}
+                        {% if categorie == 'urgent' %}
+                            {% set icon = '⚠️' %}
+                            {% set badge_label = 'URGENT' %}
+                        {% elseif categorie == 'nouveau' %}
+                            {% set icon = '🎓' %}
+                            {% set badge_label = 'NOUVEAU' %}
+                        {% elseif categorie == 'info' %}
+                            {% set icon = '📝' %}
+                            {% set badge_label = 'INFO' %}
+                        {% elseif categorie == 'annonce' %}
+                            {% set icon = '🤝' %}
+                            {% set badge_label = 'ANNONCE' %}
+                        {% else %}
+                            {% set icon = '📰' %}
+                            {% set badge_label = 'INFO' %}
+                        {% endif %}
+
+                        <article class="article-card" data-category="{{ categorie }}">
+                            <div class="article-image">
+                                <span class="article-badge badge-{{ categorie }}">{{ badge_label }}</span>
+                                {{ icon }}
+                            </div>
+                            <div class="article-content">
+                                <div class="article-meta">
+                                    <span>📅 {{ actualite.created.value|date('d M Y') }}</span>
+                                    {% if actualite.field_temps_lecture.value %}
+                                        <span>⏱️ {{ actualite.field_temps_lecture.value }} min</span>
+                                    {% endif %}
+                                </div>
+                                <h3>{{ actualite.title.value }}</h3>
+                                <p class="article-excerpt">
+                                    {{ actualite.field_extrait.value }}
+                                </p>
+                                <a href="{{ path('entity.node.canonical', {'node': actualite.nid.value}) }}" class="article-link">
+                                    <span>Lire plus</span>
+                                    <span>→</span>
+                                </a>
+                            </div>
+                        </article>
+                    {% endif %}
+                {% endfor %}
+                
+            {% else %}
+                 {# include '@egov_theme/actualites-fallback.html.twig'  #}
+                               
+
+            {% endif %}
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button class="pagination-btn">‹</button>
+            <button class="pagination-btn active">1</button>
+            <button class="pagination-btn">2</button>
+            <button class="pagination-btn">3</button>
+            <button class="pagination-btn">4</button>
+            <button class="pagination-btn">›</button>
+        </div>
+
+    </div>
+</main>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-section footer-about">
+                <h3>À PROPOS</h3>
+                <p>
+                    La Plateforme Nationale d'Interopérabilité du Sénégal (eGov Sénégal) 
+                    est une initiative du Ministère de la Communication, des Télécommunications 
+                    et du Numérique dans le cadre du New Deal Technologique.
+                </p>
+                <div class="social-icons">
+                    <div class="social-icon">📘</div>
+                    <div class="social-icon">🐦</div>
+                    <div class="social-icon">💼</div>
+                    <div class="social-icon">📸</div>
+                    <div class="social-icon">📹</div>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>SERVICES</h3>
+                <ul>
+                    <li><a href="services.html#protection-sociale">Protection Sociale</a></li>
+                    <li><a href="services.html#troisieme-age">Troisième Âge</a></li>
+                    <li><a href="services.html#education">Éducation</a></li>
+                    <li><a href="services.html#citoyennete">Citoyenneté</a></li>
+                    <li><a href="services.html#taxes">Taxes & Impôts</a></li>
+                    <li><a href="services.html#sante">Santé</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>RESSOURCES</h3>
+                <ul>
+                    <li><a href="#">Documentation API</a></li>
+                    <li><a href="#">Guides d'Intégration</a></li>
+                    <li><a href="#">Catalogue d'API</a></li>
+                    <li><a href="#">Centre d'Aide</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">Blog</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>CONTACT</h3>
+                <ul>
+                    <li><a href="#">📍 Dakar, Sénégal</a></li>
+                    <li><a href="#">📧 contact@egov.sn</a></li>
+                    <li><a href="#">📞 +221 33 XXX XX XX</a></li>
+                    <li><a href="#">💬 Chat en Direct</a></li>
+                    <li><a href="#">🎫 Créer un Ticket</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>© 2025 eGov Sénégal - MCTN/SENUM - République du Sénégal</p>
+            <div class="footer-bottom-links">
+                <a href="#">Mentions Légales</a>
+                <a href="#">Politique de Confidentialité</a>
+                <a href="#">Conditions d'Utilisation</a>
+                <a href="#">Accessibilité</a>
+                <a href="#">Plan du Site</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Filter functionality
+        const filterButtons = document.querySelectorAll('.filter-btn');
+        const articles = document.querySelectorAll('.article-card');
+
+        filterButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                // Remove active class from all buttons
+                filterButtons.forEach(btn => btn.classList.remove('active'));
+                // Add active class to clicked button
+                this.classList.add('active');
+                
+                const filter = this.getAttribute('data-filter');
+                
+                articles.forEach(article => {
+                    if (filter === 'all') {
+                        article.style.display = 'flex';
+                        setTimeout(() => {
+                            article.style.opacity = '1';
+                            article.style.transform = 'translateY(0)';
+                        }, 10);
+                    } else {
+                        const category = article.getAttribute('data-category');
+                        if (category === filter) {
+                            article.style.display = 'flex';
+                            setTimeout(() => {
+                                article.style.opacity = '1';
+                                article.style.transform = 'translateY(0)';
+                            }, 10);
+                        } else {
+                            article.style.opacity = '0';
+                            article.style.transform = 'translateY(20px)';
+                            setTimeout(() => {
+                                article.style.display = 'none';
+                            }, 300);
+                        }
+                    }
+                });
+            });
+        });
+
+        // Smooth scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        articles.forEach(article => {
+            article.style.opacity = '0';
+            article.style.transform = 'translateY(30px)';
+            article.style.transition = 'all 0.6s ease';
+            observer.observe(article);
+        });
+    </script>
+</body>
+</html>
+
+
