@@ -6,3 +6,13 @@ management.contact_submit:
   methods: [POST]
   requirements:
     _permission: 'access content'
+
+# Route pour la soumission du formulaire d'enrôlement
+management.enrolement.submit:
+  path: '/management/enrolement/submit'
+  defaults:
+    _controller: '\Drupal\management\Controller\EnrolementController::submitForm'
+    _title: 'Soumission demande enrôlement'
+  methods: [POST]
+  requirements:
+    _access: 'TRUE'

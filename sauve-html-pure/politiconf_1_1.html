@@ -1,0 +1,165 @@
+<section class="legal-hero">
+    <div class="legal-hero-content">
+        <h1>Déclaration d’Accessibilité</h1>
+        <p>
+            Engagement de la plateforme nationale <strong>Jokkoo</strong>
+            en faveur de l’accessibilité numérique pour tous.
+        </p>
+    </div>
+</section>
+
+<main class="legal-main">
+    <div class="legal-container">
+
+        <section class="legal-card">
+            <h2>Notre Engagement</h2>
+            <p>
+                La plateforme <strong>Jokkoo</strong> s'engage à rendre ses services
+                accessibles à tous les citoyens, y compris les personnes
+                en situation de handicap, conformément aux normes internationales
+                et nationales en vigueur.
+            </p>
+        </section>
+
+        <section class="legal-card">
+            <h2>Niveau d’Accessibilité Visé</h2>
+            <ul>
+                <li><strong>WCAG 2.1</strong> – Niveau AA</li>
+                <li><strong>RGAA</strong> (Référentiel Général d’Amélioration de l’Accessibilité)</li>
+            </ul>
+        </section>
+
+        <section class="legal-card">
+            <h2>Mesures d’Accessibilité</h2>
+            <ul>
+                <li>Navigation complète au clavier</li>
+                <li>Textes alternatifs pour les images</li>
+                <li>Contrastes de couleurs suffisants</li>
+                <li>Structure de titres claire et cohérente</li>
+                <li>Compatibilité avec les lecteurs d’écran</li>
+            </ul>
+        </section>
+
+        <section class="legal-card legal-contact">
+            <h2>Signaler un Problème</h2>
+            <p>
+                Si vous rencontrez une difficulté d’accessibilité,
+                vous pouvez nous contacter à l’adresse suivante :
+            </p>
+            <p>
+                <a href="mailto:accessibilite@egov.sn">accessibilite@egov.sn</a>
+            </p>
+            <p style="margin-top: 10px;">
+                <em>Dernière mise à jour : Décembre 2025</em>
+            </p>
+        </section>
+
+    </div>
+</main>
+
+
+<style>
+    /* ===== HERO ===== */
+.legal-hero {
+    background: linear-gradient(135deg, #0055ff, #00a651);
+    color: #fff;
+    padding: 80px 20px;
+}
+
+.legal-hero-content {
+    max-width: 1100px;
+    margin: auto;
+}
+
+.legal-hero h1 {
+    font-size: 2.6rem;
+    margin-bottom: 10px;
+}
+
+.legal-hero p {
+    font-size: 1.1rem;
+    opacity: 0.95;
+}
+
+/* ===== MAIN ===== */
+.legal-main {
+    background: #f8f9fb;
+    padding: 60px 20px;
+}
+
+.legal-container {
+    max-width: 1100px;
+    margin: auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+}
+
+/* ===== CARDS ===== */
+.legal-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 28px 30px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+}
+
+.legal-card h2 {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+    color: #0b2a4a;
+    position: relative;
+}
+
+.legal-card h2::before {
+    content: "";
+    position: absolute;
+    left: -30px;
+    top: 6px;
+    width: 4px;
+    height: 24px;
+    background: #00a651;
+    border-radius: 2px;
+}
+
+.legal-card p {
+    color: #444;
+    line-height: 1.7;
+}
+
+.legal-card ul {
+    padding-left: 18px;
+    margin-top: 10px;
+}
+
+.legal-card ul li {
+    margin-bottom: 8px;
+    color: #444;
+}
+
+/* ===== CONTACT ===== */
+.legal-contact {
+    background: linear-gradient(135deg, #f0f9f4, #ffffff);
+}
+
+.legal-contact a {
+    color: #00a651;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.legal-contact a:hover {
+    text-decoration: underline;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+    .legal-hero h1 {
+        font-size: 2rem;
+    }
+
+    .legal-card {
+        padding: 22px;
+    }
+}
+
+</style>

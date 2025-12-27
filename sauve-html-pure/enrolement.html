@@ -1,0 +1,197 @@
+<section class="contact-hero">
+    <div class="contact-hero-content">
+        <h1>
+            Demande d'Adhésion
+        </h1>
+        <p>
+            Rejoignez la plateforme d'interopérabilité du Sénégal.
+        </p>
+    </div>
+</section>
+<main class="contact-main">
+    <section class="contact-grid">
+        <div class="contact-form-section">
+            <div class="contact-form-header">
+                <h2>
+                    Formulaire d'enrôlement
+                </h2>
+            </div>
+            <form id="enrolementForm" action="/management/enrolement/submit" method="POST">
+                <h3 class="section-title">
+                    <img class="section-icon" src="/themes/custom/egov_theme/icon/identification.png" alt="" width="512" height="512"> Identification de la structure
+                </h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nom_structure">Nom de la structure <span class="required">*</span></label> <input type="text" id="nom_structure" name="nom_structure" required="" placeholder="Ex: Ministère...">
+                    </div>
+                    <div class="form-group">
+                        <label for="secteur_activite">Secteur d'activité <span class="required">*</span></label> <select id="secteur_activite" name="secteur_activite" required="">
+                                                                            <option value="">Sélectionnez</option>
+                                                                            <option value="administration">Administration Publique</option>
+                                                                            <option value="sante">Santé</option>
+                                                                            <option value="education">Éducation</option>
+                                                                            <option value="finance">Finance / Banque</option>
+                                                                            <option value="telecom">Télécommunications</option>
+                                                                            <option value="autre">Autre</option>
+                                                                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="adresse_structure">Adresse <span class="required">*</span></label> <input type="text" id="adresse_structure" name="adresse_structure" required="" placeholder="Adresse complète">
+                    </div>
+                    <div class="form-group">
+                        <label for="objet_adhesion">Objet d'adhésion <span class="required">*</span></label> <select id="objet_adhesion" name="objet_adhesion" required="">
+                                                                            <option value="">Sélectionnez</option>
+                                                                            <option value="consommateur">Consommateur de données</option>
+                                                                            <option value="fournisseur">Fournisseur de données</option>
+                                                                            <option value="les_deux">Les deux</option>
+                                                                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="description_structure">Description de la structure</label> <textarea id="description_structure" name="description_structure" placeholder="Décrivez votre structure..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="type_donnees">Type de données souhaitées</label> <input type="text" id="type_donnees" name="type_donnees" placeholder="Ex: État civil, Fiscalité...">
+                </div>
+                <h3 style="border-bottom:2px solid #e5e7eb;color:#334155;margin:2rem 0 1rem;padding-bottom:0.5rem;">
+                                        <img class="section-icon" src="/themes/custom/egov_theme/icon/profile.png" alt="" width="512" height="512"> Processus d'adhésion
+ Personne de contact
+                </h3>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="civilite">Civilité <span class="required">*</span></label> <select id="civilite" name="civilite" required="">
+                                                                            <option value="">Sélectionnez</option>
+                                                                            <option value="M.">Monsieur</option>
+                                                                            <option value="Mme">Madame</option>
+                                                                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="telephone">Téléphone <span class="required">*</span></label> <input type="tel" id="telephone" name="telephone" required="" placeholder="+221 XX XXX XX XX">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="prenom">Prénom <span class="required">*</span></label> <input type="text" id="prenom" name="prenom" required="" placeholder="Votre prénom">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email <span class="required">*</span></label> <input type="email" id="email" name="email" required="" placeholder="votre@email.com">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="nom">Nom <span class="required">*</span></label> <input type="text" id="nom" name="nom" required="" placeholder="Votre nom">
+                    </div>
+                    <div class="form-group">
+                        <label for="fonction">Fonction <span class="required">*</span></label> <input type="text" id="fonction" name="fonction" required="" placeholder="Ex: Directeur IT">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message complémentaire</label> <textarea id="message" name="message" placeholder="Informations supplémentaires..."></textarea>
+                </div>
+                <div class="form-checkbox">
+                    <input type="checkbox" id="consent" name="consent" required=""> <label for="consent">J'accepte le traitement de mes données.</label>
+                </div>
+                <p>
+                    <button class="submit-btn" type="submit"> Soumettre la demande</button>
+                </p>
+            </form>
+        </div>
+        <div class="contact-info-section">
+            <div class="contact-info-card">
+                <h3 class="section-title">
+                    <img class="section-icon" src="/themes/custom/egov_theme/icon/enrolment.png" alt="" width="512" height="512"> Processus d'adhésion
+                </h3>
+                <p>
+                    <strong>1.</strong> Soumission du formulaire
+                </p>
+                <p>
+                    <strong>2.</strong> Examen (48-72h)
+                </p>
+                <p>
+                    <strong>3.</strong> Convention d'adhésion
+                </p>
+                <p>
+                    <strong>4.</strong> Activation des accès
+                </p>
+            </div>
+            <div class="contact-method">
+                <div class="contact-icon">
+                    <img src="/themes/custom/egov_theme/icon/contact/email.png" alt="Administrations" width="48" height="48">
+                </div>
+                <div class="contact-method-content">
+                    <h4>
+                        Email
+                    </h4>
+                    <p>
+                        <a href="mailto:contact@egov.sn">contact@egov.sn</a>
+                    </p>
+                    <p>
+                        <a href="mailto:support@egov.sn">support@egov.sn</a>
+                    </p>
+                </div>
+            </div>
+            <div class="contact-method">
+                <div class="contact-icon">
+                    <img src="/themes/custom/egov_theme/icon/contact/telephone.png" alt="Administrations" width="48" height="48">
+                </div>
+                <div class="contact-method-content">
+                    <h4>
+                        Téléphone
+                    </h4>
+                    <p>
+                        <a href="tel:+22133XXXXXXX">+221 33 XXX XX XX</a>
+                    </p>
+                    <p>
+                        Ligne directe support technique
+                    </p>
+                </div>
+            </div>
+            <div class="contact-method">
+                <div class="contact-icon">
+                    <img src="/themes/custom/egov_theme/icon/contact/chat.png" alt="Administrations" width="48" height="48">
+                </div>
+                <div class="contact-method-content">
+                    <h4>
+                        Chat en direct
+                    </h4>
+                    <p>
+                        Disponible sur notre plateforme<br>
+                        du lundi au vendredi
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+<style> .section-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border-bottom: 2px solid #e5e7eb;
+  color: #334155;
+  margin: 2rem 0 1rem;
+  padding-bottom: 0.5rem;
+}
+.section-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+h3 {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.section-icon {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+</style>

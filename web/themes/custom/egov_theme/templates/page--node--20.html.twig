@@ -99,9 +99,9 @@
             <div class="tabs-header">
                 <button class="tab-button active" data-tab="services">
                     <span class="tab-icon">
-                                                <img src="/themes/custom/egov_theme/icon/services_1.png" alt="" style="width: 48px; height: 48px;">
+                        <img src="/themes/custom/egov_theme/icon/services_1.png" alt="" style="width: 48px; height: 48px;">
 
-                        
+
                     </span>
                     <span>Services</span>
                     <span class="tab-count" id="servicesCount">0</span>
@@ -231,6 +231,18 @@
 {{ include(active_theme_path() ~ '/templates/partials/footer.html.twig') }}
 
 <script>
+    
+    // Ajouter cette fonction en haut du script
+function formatNumber(num) {
+    if (num >= 1000000) {
+        return (num / 1000000).toFixed(1) + 'M';
+    } else if (num >= 1000) {
+        return (num / 1000).toFixed(1) + 'K';
+    } else {
+        return num.toString();
+    }
+}
+
     var DashboardApp = (function () {
         'use strict';
 
@@ -278,27 +290,27 @@
             }
         }
 
-        function displayStats() {
-            const totalRequests = monitoringData.length;
-            document.getElementById('totalTransactions').textContent = (totalRequests / 1000).toFixed(1) + 'K';
+      
+      
+      function displayStats() {
+    const totalRequests = monitoringData.length;
+    document.getElementById('totalTransactions').textContent = formatNumber(totalRequests);  // ← ICI
 
-            const servers = new Set(monitoringData.map(d => d.security_server_internal_ip)).size;
-            document.getElementById('totalAdministrations').textContent = servers;
+    const allIPs = new Set();
+    monitoringData.forEach(item => {
+        if (item.security_server_internal_ip) allIPs.add(item.security_server_internal_ip);
+        if (item.client_security_server_address) allIPs.add(item.client_security_server_address);
+        if (item.service_security_server_address) allIPs.add(item.service_security_server_address);
+    });
+    
+    document.getElementById('totalAdministrations').textContent = allIPs.size;
 
-            const services = new Set(monitoringData.map(d => d.service_code).filter(Boolean)).size;
-            document.getElementById('totalAPIs').textContent = services;
+    const services = new Set(monitoringData.map(d => d.service_code).filter(Boolean)).size;
+    document.getElementById('totalAPIs').textContent = services;
+}
 
-            let successCount = 0;
-            monitoringData.forEach(item => {
-                if (item.succeeded !== false)
-                    successCount++;
-            });
-            const successRate = totalRequests > 0 ? ((successCount / totalRequests) * 100).toFixed(1) : 0;
 
-            const trend = document.getElementById('availabilityTrend');
-
-        }
-
+      
         function displayTopServices() {
             const serviceCounts = {};
             monitoringData.forEach(item => {
@@ -329,7 +341,7 @@
                         </div>
                     </div>
                     <div class="service-requests">
-                        <div class="service-requests-count">${(data.count / 1000).toFixed(1)}K</div>
+<div class="service-requests-count">${formatNumber(data.count)}</div>  
                         <div class="service-requests-label">Requêtes</div>
                     </div>
                 </div>
@@ -440,60 +452,101 @@
                     `Affichage de 1-${Math.min(20, members.length)} sur ${members.length} membres`;
         }
 
-        function displayAPIUsage() {
-            const apiStats = {};
+    function displayAPIUsage() {
+    const apiStats = {};
 
-            monitoringData.forEach(item => {
-                const service = item.service_code || 'Unknown';
-                if (!apiStats[service]) {
-                    apiStats[service] = {
-                        requests: 0,
-                        totalDuration: 0,
-                        successCount: 0,
-                        validDurations: 0
-                    };
-                }
-                apiStats[service].requests++;
-                if (item.total_duration) {
-                    apiStats[service].totalDuration += item.total_duration;
-                    apiStats[service].validDurations++;
-                }
-                if (item.succeeded !== false) {
-                    apiStats[service].successCount++;
-                }
-            });
+    monitoringData.forEach(item => {
+        const service = item.service_code;
+        if (!service || service === 'Unknown') return;
+        
+        if (!apiStats[service]) {
+            apiStats[service] = {
+                requests: 0,
+                responses: 0,  // Nouveau : compte les réponses
+                successCount: 0,
+                totalDuration: 0,
+                validDurations: 0
+            };
+        }
+        
+        apiStats[service].requests++;
+        
+        // Si on a reçu une réponse (même erreur)
+        if (item.response_out_ts) {
+            apiStats[service].responses++;
+        }
+        
+        // Calculer la durée
+        if (item.request_in_ts && item.response_out_ts) {
+            const duration = item.response_out_ts - item.request_in_ts;
+            if (duration > 0) {
+                apiStats[service].totalDuration += duration;
+                apiStats[service].validDurations++;
+            }
+        }
+        
+        // Succès réel
+        if (item.succeeded === true) {
+            apiStats[service].successCount++;
+        }
+    });
 
-            const sorted = Object.entries(apiStats)
-                    .sort((a, b) => b[1].requests - a[1].requests)
-                    .slice(0, 5);
+    const sorted = Object.entries(apiStats)
+        .sort((a, b) => b[1].requests - a[1].requests)
+        .slice(0, 5);
 
-            const html = sorted.map(([service, stats]) => {
-                const avgLatency = stats.validDurations > 0
-                        ? Math.round(stats.totalDuration / stats.validDurations)
-                        : 0;
-                const successRate = ((stats.successCount / stats.requests) * 100).toFixed(1);
-                const status = successRate >= 99 ? 'operational' : (successRate >= 95 ? 'degraded' : 'down');
-                const statusText = successRate >= 99 ? 'Opérationnel' : (successRate >= 95 ? 'Dégradé' : 'Indisponible');
-
-                return `
-                <tr>
-                    <td class="api-name">${service}</td>
-                    <td>${stats.requests.toLocaleString()}</td>
-                    <td>${avgLatency}ms</td>
-                    <td>
-                        <div class="progress-bar">
-                            <div class="progress-bar-fill" style="width: ${successRate}%;"></div>
-                        </div>
-                        ${successRate}%
-                    </td>
-                    <td><span class="api-status ${status}">● ${statusText}</span></td>
-                </tr>
-            `;
-            }).join('');
-
-            document.getElementById('apiTableBody').innerHTML = html;
+    const html = sorted.map(([service, stats]) => {
+        const avgLatency = stats.validDurations > 0
+            ? Math.round(stats.totalDuration / stats.validDurations)
+            : 0;
+        
+        const successRate = ((stats.successCount / stats.requests) * 100).toFixed(1);
+        const responseRate = ((stats.responses / stats.requests) * 100).toFixed(1);
+        
+        // LOGIQUE INTELLIGENTE
+        let status, statusText;
+        
+        if (stats.requests < 10) {
+            // Peu de données
+            status = 'operational';
+            statusText = 'Actif';
+        } else if (responseRate >= 95) {
+            // Le service répond (même si erreurs)
+            if (successRate >= 70) {
+                status = 'operational';
+                statusText = 'Opérationnel';
+            } else {
+                status = 'degraded';
+                statusText = 'Dégradé';
+            }
+        } else if (responseRate >= 50) {
+            // Répond partiellement
+            status = 'degraded';
+            statusText = 'Dégradé';
+        } else {
+            // Ne répond presque pas
+            status = 'down';
+            statusText = 'Indisponible';
         }
 
+        return `
+        <tr>
+            <td class="api-name">${service}</td>
+            <td>${stats.requests.toLocaleString()}</td>
+            <td>${avgLatency}ms</td>
+            <td>
+                <div class="progress-bar">
+                    <div class="progress-bar-fill" style="width: ${successRate}%;"></div>
+                </div>
+                ${successRate}%
+            </td>
+            <td><span class="api-status ${status}">● ${statusText}</span></td>
+        </tr>
+    `;
+    }).join('');
+
+    document.getElementById('apiTableBody').innerHTML = html;
+}
         function setupTabs() {
             const tabButtons = document.querySelectorAll('.tab-button');
             tabButtons.forEach(button => {

@@ -77,6 +77,101 @@
     </div>
 </section>
 
+`
+`<!-- Section Dernières Actualités -->
+<section class="latest-news-section">
+    <div class="latest-news-container">
+        <div class="latest-news-header">
+            <h2>Dernières Actualités</h2>
+            <a href="/node/30" class="explore-more-news">
+                Voir Plus d'Actualités   <span>                       
+                    <img src="/themes/custom/egov_theme/icon/news.png" alt="Administrations" style="width: 48px; height: 48px;">
+                </span>
+            </a>
+        </div>
+
+        {# Images par défaut attrayantes #}
+        {% set default_images = [
+            'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop',
+            'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1560523159-4a9692d222ef?w=400&h=300&fit=crop',
+            'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop'
+        ] %}
+
+        <div class="latest-news-grid">
+            {% if actualites_homepage and actualites_homepage|length > 0 %}
+                {% for actualite in actualites_homepage %}
+
+                    {# Récupérer l'image - CORRECTION #}
+                    {% set image_url = null %}
+                    {% if actualite.field_image is not empty and actualite.field_image.entity %}
+                        {% set image_url = file_url(actualite.field_image.entity.uri.value) %}
+                    {% endif %}
+
+                    {# Si pas d'image, utiliser une image par défaut #}
+                    {% if not image_url %}
+                        {% set image_url = default_images[loop.index0] ?? default_images[0] %}
+                    {% endif %}
+
+                    {# Premier article = grand format #}
+                    {% if loop.first %}
+                        <a href="{{ path('entity.node.canonical', {'node': actualite.id}) }}" class="news-card news-card-large">
+                            <img src="{{ image_url }}" alt="{{ actualite.title.value }}" class="news-card-image" loading="lazy">
+                            <div class="news-card-content">
+                                <h3 class="news-card-title">{{ actualite.title.value }}</h3>
+                            </div>
+                        </a>
+                    {% else %}
+                        {# Articles suivants = petit format #}
+                        <a href="{{ path('entity.node.canonical', {'node': actualite.id}) }}" class="news-card">
+                            <img src="{{ image_url }}" alt="{{ actualite.title.value }}" class="news-card-image" loading="lazy">
+                            <div class="news-card-content">
+                                <h3 class="news-card-title">
+                                    {{ actualite.title.value|length > 70 ? actualite.title.value|slice(0, 70) ~ '...' : actualite.title.value }}
+                                </h3>
+                            </div>
+                        </a>
+                    {% endif %}
+
+                {% endfor %}
+            {% else %}
+                {# FALLBACK COMPLET si pas d'actualités #}
+                <div class="news-card news-card-large">
+                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop" alt="MWC25" class="news-card-image">
+                    <div class="news-card-content">
+                        <h3 class="news-card-title">MCIT Signe un Mémorandum d'Entente avec Alchemist au MWC25 Doha</h3>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&h=300&fit=crop" alt="Ministry of Justice" class="news-card-image">
+                    <div class="news-card-content">
+                        <h3 class="news-card-title">Ministère de la Justice Reçoit la Certification ISO 22301</h3>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=400&h=300&fit=crop" alt="State Budget" class="news-card-image">
+                    <div class="news-card-content">
+                        <h3 class="news-card-title">Projet de Budget Général de l'État pour 2026 Approuvé</h3>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1560523159-4a9692d222ef?w=400&h=300&fit=crop" alt="Event" class="news-card-image">
+                    <div class="news-card-content">
+                        <h3 class="news-card-title">Inauguration de la Nouvelle Plateforme Digitale</h3>
+                    </div>
+                </div>
+                <div class="news-card">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop" alt="Innovation" class="news-card-image">
+                    <div class="news-card-content">
+                        <h3 class="news-card-title">Lancement d'une Nouvelle Identité Numérique</h3>
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+</section>
+        
 <!-- Services Catalog Section -->
 <section class="services-catalog-section" id="catalogue-services">
     <div class="services-catalog-container">
@@ -174,99 +269,7 @@
         </div>
     </div>
 </section>
-<!-- Section Dernières Actualités -->
-<section class="latest-news-section">
-    <div class="latest-news-container">
-        <div class="latest-news-header">
-            <h2>Dernières Actualités</h2>
-            <a href="/node/30" class="explore-more-news">
-                Voir Plus d'Actualités   <span>                       
-                    <img src="/themes/custom/egov_theme/icon/news.png" alt="Administrations" style="width: 48px; height: 48px;">
-                </span>
-            </a>
-        </div>
 
-        {# Images par défaut attrayantes #}
-        {% set default_images = [
-            'https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop',
-            'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=400&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1560523159-4a9692d222ef?w=400&h=300&fit=crop',
-            'https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop'
-        ] %}
-
-        <div class="latest-news-grid">
-            {% if actualites_homepage and actualites_homepage|length > 0 %}
-                {% for actualite in actualites_homepage %}
-
-                    {# Récupérer l'image - CORRECTION #}
-                    {% set image_url = null %}
-                    {% if actualite.field_image is not empty and actualite.field_image.entity %}
-                        {% set image_url = file_url(actualite.field_image.entity.uri.value) %}
-                    {% endif %}
-
-                    {# Si pas d'image, utiliser une image par défaut #}
-                    {% if not image_url %}
-                        {% set image_url = default_images[loop.index0] ?? default_images[0] %}
-                    {% endif %}
-
-                    {# Premier article = grand format #}
-                    {% if loop.first %}
-                        <a href="{{ path('entity.node.canonical', {'node': actualite.id}) }}" class="news-card news-card-large">
-                            <img src="{{ image_url }}" alt="{{ actualite.title.value }}" class="news-card-image" loading="lazy">
-                            <div class="news-card-content">
-                                <h3 class="news-card-title">{{ actualite.title.value }}</h3>
-                            </div>
-                        </a>
-                    {% else %}
-                        {# Articles suivants = petit format #}
-                        <a href="{{ path('entity.node.canonical', {'node': actualite.id}) }}" class="news-card">
-                            <img src="{{ image_url }}" alt="{{ actualite.title.value }}" class="news-card-image" loading="lazy">
-                            <div class="news-card-content">
-                                <h3 class="news-card-title">
-                                    {{ actualite.title.value|length > 70 ? actualite.title.value|slice(0, 70) ~ '...' : actualite.title.value }}
-                                </h3>
-                            </div>
-                        </a>
-                    {% endif %}
-
-                {% endfor %}
-            {% else %}
-                {# FALLBACK COMPLET si pas d'actualités #}
-                <div class="news-card news-card-large">
-                    <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&h=600&fit=crop" alt="MWC25" class="news-card-image">
-                    <div class="news-card-content">
-                        <h3 class="news-card-title">MCIT Signe un Mémorandum d'Entente avec Alchemist au MWC25 Doha</h3>
-                    </div>
-                </div>
-                <div class="news-card">
-                    <img src="https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=400&h=300&fit=crop" alt="Ministry of Justice" class="news-card-image">
-                    <div class="news-card-content">
-                        <h3 class="news-card-title">Ministère de la Justice Reçoit la Certification ISO 22301</h3>
-                    </div>
-                </div>
-                <div class="news-card">
-                    <img src="https://images.unsplash.com/photo-1587825140708-dfaf72ae4b04?w=400&h=300&fit=crop" alt="State Budget" class="news-card-image">
-                    <div class="news-card-content">
-                        <h3 class="news-card-title">Projet de Budget Général de l'État pour 2026 Approuvé</h3>
-                    </div>
-                </div>
-                <div class="news-card">
-                    <img src="https://images.unsplash.com/photo-1560523159-4a9692d222ef?w=400&h=300&fit=crop" alt="Event" class="news-card-image">
-                    <div class="news-card-content">
-                        <h3 class="news-card-title">Inauguration de la Nouvelle Plateforme Digitale</h3>
-                    </div>
-                </div>
-                <div class="news-card">
-                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop" alt="Innovation" class="news-card-image">
-                    <div class="news-card-content">
-                        <h3 class="news-card-title">Lancement d'une Nouvelle Identité Numérique</h3>
-                    </div>
-                </div>
-            {% endif %}
-        </div>
-    </div>
-</section>
 <section class="combined-section">
     <div class="combined-container">
         <!-- News Feed -->
@@ -502,12 +505,12 @@
     </p>
 
 
-    <a href="/contact" class="explore-more-news">
+    <a href="/enrolement" class="explore-more-news">
         <span>        
             <img src="/themes/custom/egov_theme/icon/telephone.png" alt="Administrations" style="width: 48px; height: 48px;">
 
         </span>
-        Nous Contactez
+        Enrôlement
 
     </a>
 </section>

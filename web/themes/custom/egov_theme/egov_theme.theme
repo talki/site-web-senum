@@ -39,6 +39,12 @@ function egov_theme_preprocess_page(&$variables) {
       $variables['#attached']['library'][] = 'egov_theme/contact-page';
     }
     
+    
+    // Page contact (node 28)
+    if ($node->id() == 71) {
+      $variables['#attached']['library'][] = 'egov_theme/contact-page';
+    }
+    
     // Page contact (node 28)
     if ($node->id() == 31) {
       $variables['#attached']['library'][] = 'egov_theme/publications-page';

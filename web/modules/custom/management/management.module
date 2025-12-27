@@ -1,21 +1,42 @@
 <?php
 
 /**
+ * @file
+ * Module management pour eGov Sénégal.
+ */
+
+/**
  * Implements hook_mail().
  */
 function management_mail($key, &$message, $params) {
-
   switch ($key) {
-
     case 'contact_form':
-      $message['subject'] = "Nouveau message - Formulaire de contact Jokko";
-
-      $message['body'][] =
-        "Vous avez reçu un nouveau message depuis le site Jokko :\n\n" .
-        "Nom : " . ($params['nom'] ?? '') . "\n" .
-        "Email : " . ($params['email'] ?? '') . "\n\n" .
-        "Message :\n" . ($params['message'] ?? '') . "\n";
-
+      $message['subject'] = 'Nouveau message de contact - eGov Sénégal';
+      $message['body'][] = "Nouveau message reçu :\n\n";
+      $message['body'][] = "Nom : " . $params['nom'];
+      $message['body'][] = "Email : " . $params['email'];
+      $message['body'][] = "Message : " . $params['message'];
+      break;
+      
+    case 'enrolement_form':
+      $message['subject'] = "Nouvelle demande d'enrôlement - eGov Sénégal";
+      $message['body'][] = "=== NOUVELLE DEMANDE D'ENRÔLEMENT ===\n\n";
+      $message['body'][] = "--- IDENTIFICATION DE LA STRUCTURE ---";
+      $message['body'][] = "Nom de la structure : " . $params['nom_structure'];
+      $message['body'][] = "Adresse : " . $params['adresse_structure'];
+      $message['body'][] = "Description : " . $params['description_structure'];
+      $message['body'][] = "Secteur d'activité : " . $params['secteur_activite'];
+      $message['body'][] = "Objet d'adhésion : " . $params['objet_adhesion'];
+      $message['body'][] = "Type de données : " . $params['type_donnees'];
+      $message['body'][] = "\n--- PERSONNE DE CONTACT ---";
+      $message['body'][] = "Civilité : " . $params['civilite'];
+      $message['body'][] = "Prénom : " . $params['prenom'];
+      $message['body'][] = "Nom : " . $params['nom'];
+      $message['body'][] = "Téléphone : " . $params['telephone'];
+      $message['body'][] = "Email : " . $params['email'];
+      $message['body'][] = "Fonction : " . $params['fonction'];
+      $message['body'][] = "\n--- MESSAGE ---";
+      $message['body'][] = $params['message'];
       break;
   }
 }

@@ -1095,7 +1095,7 @@ a.logo:hover {
 
 .latest-news-section {
     padding: 5rem 5%;
-    background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);
+    /*background: linear-gradient(135deg, #f1f5f9 0%, #e2e8f0 100%);*/
     position: relative;
 }
 
